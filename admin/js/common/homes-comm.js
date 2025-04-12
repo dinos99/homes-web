@@ -16,7 +16,7 @@ var navi = {
  * @param {*} cate 
  */
 var fn_create_header = ( cate, mcode ) => {
-    var container = $("#drpt-header") ; 
+    var container = $("#homes-header") ; 
     container.empty() ;
 
     var header = $("<header/>") ; 
@@ -30,17 +30,29 @@ var fn_create_header = ( cate, mcode ) => {
     alink.attr("href", "/") ; 
     alink.addClass("e-3 py-2 link-body-emphasis") ; 
     banner.append(alink) ; 
+	
+	var logoDiv = $("<div/>") ; 
+	logoDiv.addClass("header-logo") ; 
+	
+//	var homesLogo = $("<img/>") ; 
+//	homesLogo.attr("src", "/images/homes-logo.png") ; 
+	
 
     var title_01 = $("<span/>") ; 
     title_01.addClass("title-logo") ;
-    title_01.text("상민군의") ; 
+    title_01.text("리얼홈즈") ; 
 
     var title_02 = $("<span/>") ; 
     title_02.addClass("title-logo c-red") ;
-    title_02.text(" 새상나기") ; 
+    title_02.text(" 관리자") ; 
 
-    alink.append(title_01) ; 
-    alink.append(title_02) ; 
+	logoDiv.append(title_01) ; 
+	logoDiv.append(title_02) ; 
+	
+	
+	alink.append(logoDiv) ;
+//    alink.append(title_01) ; 
+//    alink.append(title_02) ; 
 
     var nav = $("<nav/>") ; 
     nav.addClass("d-inline-flex mt-2 mt-md-0 ms-md-auto") ; 
@@ -48,7 +60,7 @@ var fn_create_header = ( cate, mcode ) => {
     banner.append(nav) ;
     
     var base = "#" ; 
-//    var base = "/static/html/" + cate + "/" +  mcode + ".html"; 
+//    var base = "/html/" + cate + "/" +  mcode + ".html"; 
     navi.LIST.forEach(e => {
         var alink = $("<a/>") ; 
         alink.addClass("me-3 py-2 link-body-emphasis") ; 
@@ -56,12 +68,12 @@ var fn_create_header = ( cate, mcode ) => {
         alink.text(navi[e].title) ; 
         if ( navi[e].mcode == cate) {
             var mcd = mcode.toUpperCase() ; 
-            base = `/static/html/${cate}/${mcode}.html`  ; 
+            base = `/html/${cate}/${mcode}.html`  ; 
             alink.attr("href", base) ; 
             alink.addClass("c-red") ; 
         } else {
             var mcd = e.toLowerCase() ; 
-            base = `/static/html/${mcd}/${e.toUpperCase()}0101.html`  ; 
+            base = `/html/${mcd}/${e.toUpperCase()}0101.html`  ; 
             alink.attr("href", base) ; 
         }
 
@@ -81,7 +93,7 @@ var ol = $("#drpt-bread") ;
     li_02.addClass("breadcrumb-item") ; 
     var a_02 = $("<a/>") ; 
     a_02.addClass("link-body-emphasis fw-semibold") ;
-    var base = `/static/html/${cate}/${cate.toLowerCase()}0101.html`  ; 
+    var base = `/html/${cate}/${cate.toLowerCase()}0101.html`  ; 
     a_02.attr("href", base) ; 
     a_02.text(navi[cate].title) ; 
     li_02.append(a_02) ; 
