@@ -1,0 +1,77 @@
+.c-red { color: #ff6161 !important; }
+.navlink-active { color: #ff6161 !important; }
+
+p.page-title { font-size:1.5em; }
+
+dt.list-style-disc {
+    list-style: disc; 
+    padding: 3px;
+    text-indent: 5px;
+}
+
+/* BootStrap CSS */
+hr.dropdown-divider { display: inherit; }
+  
+.dropdown-item.active, .dropdown-item:active {
+  color: var(--bs-dropdown-link-active-color);
+  text-decoration: none;
+  background-color: var(--bs-dropdown-link-active-bg);
+}
+
+.container {
+  max-width: 960px;
+}
+
+.pricing-header {
+  max-width: 700px;
+}
+
+.bi {
+  vertical-align: -.125em ;
+  fill: currentColor ;
+
+}
+.bi-dark-fill {
+  vertical-align: -.125em ;
+  fill: currentColor ;
+}
+
+button svg.bi {
+  vertical-align: -.125em ;
+  fill: currentColor ;
+
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+}
+
+.border-top-primary {
+  --bs-border-opacity: 1;
+  border-top: 3px solid rgba(var(--bs-primary-rgb), var(--bs-border-opacity)) !important;
+}
+
+
+/* table grid */
+table.table th, table.table td {
+  border: inherit ;
+  border-bottom-width: 1px ;
+  padding: .5em ;
+  text-align:center ; 
+}
+
+table.table th.border-primary {
+  border: inherit ;;
+  border-top-width: 1px ;
+}
+
+/* width ( w-100은 있는데 나머지는 못찾겠다. ) */
+.w-90 { width: 90%; }
+.w-80 { width: 80%; }
+.w-70 { width: 70%; }
+.w-60 { width: 60%; }
+.w-50 { width: 50%; }
+.w-50 { width: 50%; }
+.w-40 { width: 40%; }
+.w-30 { width: 30%; }
+.w-20 { width: 20%; }
+.w-10 { width: 10%; }

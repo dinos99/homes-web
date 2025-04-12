@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ko" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#712cf9">
+    <title>상민군의 인생살아가기 - 관찰일지</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/custom.css">
+
+<!--     <script src="/static/js/common/color-modes.js"></script> -->
+
+  </head>
+  <body>
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+      <symbol id="house-door-fill" viewBox="0 0 16 16">
+        <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"></path>
+      </symbol>
+      <symbol id="pencil-square-fill" viewBox="0 0 16 16">
+        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+      </symbol>
+      <symbol id="calendar3" viewBox="0 0 16 16">
+        <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"></path>
+        <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
+      </symbol>
+      <symbol id="capsule"  viewBox="0 0 16 16">
+        <path d="M1.828 8.9 8.9 1.827a4 4 0 1 1 5.657 5.657l-7.07 7.071A4 4 0 1 1 1.827 8.9Zm9.128.771 2.893-2.893a3 3 0 1 0-4.243-4.242L6.713 5.429z"/>
+      </symbol>
+      <symbol id="capsule-pill"  viewBox="0 0 16 16">
+        <path d="M11.02 5.364a3 3 0 0 0-4.242-4.243L1.121 6.778a3 3 0 1 0 4.243 4.243l5.657-5.657Zm-6.413-.657 2.878-2.879a2 2 0 1 1 2.829 2.829L7.435 7.536zM12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8m-.5 1.042a3 3 0 0 0 0 5.917zm1 5.917a3 3 0 0 0 0-5.917z"/>
+      </symbol>
+    </svg>
+    <div class="container" id="drpt-header">
+	  </div>
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol id="drpt-bread" class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary">
+          <li class="breadcrumb-item">
+            <a class="link-body-emphasis fw-semibold" href="/">
+              <svg class="bi-dark-fill" width="16" height="16"><use xlink:href="#house-door-fill"></use></svg>
+              <span>&nbsp;HOME</span>
+              <!--
+              <li class="breadcrumb-item"><a class="link-body-emphasis fw-semibold" href="#">관찰일지</a></li>
+              <li class="breadcrumb-item active" aria-current="page">관찰일지 상세보기</li>
+              -->
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <div class="container">
+      <main>        
+      	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2 text-body-emphasis"></h1>
+          <div class="btn-toolbar link-body-emphasis mb-2 mb-md-0">
+            <button type="button" class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1">
+              <svg class="bi"><use xlink:href="#pencil-square-fill"></use></svg> 관찰일지 쓰기
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
+              <svg class="bi"><use xlink:href="#calendar3"></use></svg>7일간
+            </button>
+          </div>
+        </div>
+        <div class="row row-cols-1mb-3 text-center">
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm w-100">
+              <div class="card-header py-1">
+                <h4 class="my-0 py-2 fw-normal">관찰일지-체중변화</h4>
+              </div>
+              <div class="card-body">
+                <canvas class="my-4 w-100" id="chart-watch-report" height="200px"></canvas>
+              </div>
+            </div>
+			    </div>
+		    </div>
+      </main>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+            <h3 class="link-body-emphasis"> 투약 현황</h3>
+            <div class="table-responsive small">
+              <table class="table table-striped table-sm">
+                <thead>
+                  <tr>
+                    <th class="border-top-primary border-bottom" scope="col">일자</th>
+                    <th class="border-top-primary border-bottom" scope="col">아침-식전</th>
+                    <th class="border-top-primary border-bottom" scope="col">아침-식후</th>
+                    <th class="border-top-primary border-bottom" scope="col">점심-식후</th>
+                    <th class="border-top-primary border-bottom" scope="col">저녁-식전</th>
+                    <th class="border-top-primary border-bottom" scope="col">저녁-식후</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2025.01.07</td>
+                    <td>
+                      <button type="button" class="btn btn-primary">
+                        <svg class="bi"><use xlink:href="#capsule"></use></svg> 복용
+                      </button>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-outline-primary">
+                        <svg class="bi"><use xlink:href="#capsule"></use></svg> 미복용
+                      </button>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-sm">
+                        <svg class="bi"><use xlink:href="#capsule-pill"></use></svg> 미복용
+                      </button>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-sm">
+                        <svg class="bi"><use xlink:href="#capsule-pill"></use></svg> 미복용
+                      </button>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-sm">
+                        <svg class="bi"><use xlink:href="#capsule-pill"></use></svg> 미복용
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script>
+    <script src="/static/js/extern/jquery-3.7.1.min.js"></script>
+    <script src="/static/js/common/drpt-comm.js"></script>
+    <script src="/static/js/common/drpt-chart.js"></script>
+  </body>
+</html>
+
+<script type="text/javascript">
+  window.onload = () => {
+    fn_create_top("WRPT", "WRPT0101") ; 
+  } ; 
+</script>
+
+
+</html>
