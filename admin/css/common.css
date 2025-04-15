@@ -75,27 +75,4 @@ body,html {
   blockquote,q {
     quotes: none;
   }
-  
-  a {
-    text-decoration: none;
-    color: #000;
-  }
-  
-  input[type=text]::-ms-clear {
-    width: 36px;
-  }
-  
-  input[type=text]::placeholder {
-    color: #9c9c9c;
-  }
-  
-  input[type=password]::-ms-reveal {
-    width: 44px;
-  }
-  
-  input[type=checkbox],input[type=radio] {
-    display: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-  }
+ 

@@ -1,7 +1,3 @@
-.c-red { color: #ff6161 !important; }
-.c-text-gray { color: #999595 !important;}
-.c-gray { color: #495057 !important ; }
-
 .navlink-active { color: #ff6161 !important; }
 
 p.page-title { font-size:1.5em; }
@@ -67,6 +63,20 @@ table.table th.border-primary {
   border-top-width: 1px ;
 }
 
+.snippets {
+  padding: 0 ;
+  margin: 0 ; 
+}
+
+.cursor-hand {
+  cursor:pointer ; 
+}
+
+.justify-space-between {
+  display: flex; 
+  justify-content: space-between;
+}
+
 /* width ( w-100은 있는데 나머지는 못찾겠다. ) */
 .w-90 { width: 90%; }
 .w-80 { width: 80%; }
@@ -81,3 +91,10 @@ table.table th.border-primary {
 
 /* margin */
 .ml-10 { margin-left: 10px !important; }
+
+/* color */
+.c-dark { color: #2b3035 !important; }
+.c-white { color: #ffffff; }
+.c-red { color: #ff6161 !important; }
+.c-text-gray { color: #999595 !important;}
+.c-gray { color: #495057 !important ; }
