@@ -3,35 +3,11 @@ const homes_comm = {
         _API_BASE_URL : "http://127.0.0.1"
         , _API_BASE_PORT: 8090
         , _API_VERSION: "v1"
-        , _LOGIN_PAGE_URL: "/html/sign-in/sign-in.html"  
-        , _LOGIN_AFTER_PAGE_URL: "/html/system/SYST00010001.html"
         /* 프리패스 페이지 */ 
         , _NO_AUTH_PAGES: [
             "/html/sign-in/sign-in.html" /* 로그인 페이지 */
         ]
-    }
-    , admin_menu: {
-        LCD: [{
-            id: "SYST", nm: "시스템관리", link: "/html/system/SYST00010001.html" 
-            , MCD: [{
-                id: "0001", nm: "Publishing", link: "/html/system/SYST00010001.html", icon: "bi-pencil-square"
-                , SCD: [{ 
-                    id: "0001", nm: "공통화면 목록", link: "/html/system/SYST00010001.html" 
-                }, {
-                    id: "0002", nm: "버튼 & 그리드", link: "/html/system/SYST00010002.html" 
-                }]
-            }]
-        }, {
-            id: "PRJT", nm: "프로젝트관리", link: "/html/project/PRJT00010001.html" 
-            , MCD: [{
-                id: "0001", nm: "시스템관리", link: "/html/project/PRJT00010001.html", icon: "" 
-                , SCD: [{
-                    id: "0001", nm: "공통코드 관리", link: "/html/project/PRJT00010001.html" 
-                }]
-            }]
-        }]
-    }
-    , 
+    },
     store: {
         setItem: (key, code) => {
             localStorage.setItem(key, JSON.stringify(code))
@@ -49,34 +25,25 @@ const homes_comm = {
         }
         , init_token: (token, user) => {
             homes_comm.store.clear() ; 
-        
-            delete token.userno ; 
-            delete token.usernm ; 
+    
+            token.expiration = token.expdt ; 
+            token.issuedAt = token.issdt ; 
+    
+            delete token.userNo ; 
+            delete token.userNm ; 
             delete token.email ; 
+            delete token.expdt ; 
+            delete token.expdt ; 
     
             token["is_remember"] = user.is_remember ; 
             homes_comm.store.setItem("token", token) ; 
     
             user["is_remember"] = user.is_remember ; 
+            delete user.expdt ; 
+            delete user.issdt ; 
             delete user.issuedAt ; 
             delete user.expiration ; 
             homes_comm.store.setItem("user", user) ; 
-        }
-        , getArcodeList: (arcode) => {
-            /* store에 지역코드 목록이 존재하지 않는다면 조회하여 setting한다. */ 
-            var arList = homes_comm.store.getItem("arList") ;
-            return new Promise((resolve, reject) => {
-                if ( !!! arList ) {
-                    homes_comm.network.send("/common/arcode/select-arcode", {
-                        "arcode":  arcode
-                    }, (response) => {
-                        homes_comm.store.setItem("arList", response.data) ; 
-                        resolve(response.data) ; 
-                    }) ; 
-                } else {
-                    resolve(arList) ;
-                }
-            })
         }
     },
     validation: {
@@ -191,6 +158,9 @@ const homes_comm = {
             }
         }
         , create_select: (options) => {
+            var item_id = $("#" + options.item_id) ; 
+            debugger ;
+            item_id.removeClass("hidden") ; 
         }
         , progress: ( sh, fn_callback ) => {
 
@@ -363,17 +333,6 @@ const homes_comm = {
             }) ; 
         }
     }
-    , _fn_is_auth_url: () => {
-        var is_required_auth = true ; 
-        for ( var i in homes_comm.constants._NO_AUTH_PAGES) {
-            var no_auth = homes_comm.constants._NO_AUTH_PAGES[i] ; 
-            if ( no_auth == location.pathname ) {
-                is_required_auth = false ; 
-                break ; 
-            }
-        } 
-        return  is_required_auth ;
-    }
     , fn_get_base_url: () => {
         var api_base_url = homes_comm.constants._API_BASE_URL ; 
         api_base_url += homes_comm.constants._API_BASE_PORT === 443 ? "" : 
@@ -406,111 +365,33 @@ const homes_comm = {
         var def_options = {
             pop_id: "pop_arear"
             , arcode: 1111000000
-            , width: 800
-            , height: 300
         }
         /* option setting */ 
         var options = option || def_options ; 
         options.pop_id = option["pop_id"] || def_options.pop_id ; 
         options.arcode = option["arcode"] || def_options.arcode ; 
-        options.width = option["width"] || def_options.width ; 
-        options.height = option["height"] || def_options.height ; 
 
 
         var dimmed = $("<div class='dimmed'/>") ; 
-        var cont = $("<div class='pop-container shadow'/>") ;
+        var cont = $("<div class='pop-container'/>") ;
         
-        cont.load("/html/popup/pop-search-area.html", () => {
-            var arList = {}
-            homes_comm.store.getArcodeList(options.arcode)
-            .then(data => {
-                arList = data ; 
-                $("#select_sido").empty() ;
-                arList.arSidoList.forEach(arcode => {
-                    $("#select_sido").append("<option value='" + arcode.arcode + "' " + arcode.selected + ">" + arcode.arname + "</option>" ) ; 
-                }) ; 
-                $("#select_sgg").empty() ;
-                arList.arSggList.forEach(arcode => {
-                    $("#select_sgg").append("<option value='" + arcode.arcode + "' " + arcode.selected + ">" + arcode.arname + "</option>" ) ; 
-                }) ; 
-                arList.arEmdList.forEach(arcode => {
-                    $("#pop_btn_area").append("<button type='button' id='pop_btn_" + arcode.arcode + "' class='btn btn-outline-secondary'>" + arcode.arname + "</button>")
-                }) ; 
+        cont.load("/html/popup/search-area.html", () => {
+            debugger ;
+            $("#select_sido").click(function() {
+                homes_ui.create_select({
+                    item_id: "options_sido"
+                }) ;
             }) ; 
         }) ; 
 
-        cont.width( options.width ) ;
-        cont.height( options.height ) ;
-
+        $("body").append(cont)
         $("body").append(dimmed) ;
-        $("body").append(cont) ;
 
-        var dw = dimmed.width() ; 
-        var dh = dimmed.height() ;
-        var cw = cont.width() ;
-        var ch = cont.height() ; 
-        
-        cont.css("top" , Number((dh - ch)/2) + "px") ; 
-        cont.css("left", Number((dw - cw)/2) + "px") ; 
-        
-        dimmed.show();
-        $(".dimmed").click(function() {
-            $(".pop-container").remove() ;
-            $(".dimmed").remove() ; 
-        }) ; 
-
+        dimmed.show() ;
     }
 }
 
-var fn_slide_init = () => {
-    $("button[data-bs-target*=collapse]").click(function() {
-        var bs_target = $(this) ; 
-        console.log(bs_target) ; 
-        
-        $("button[data-bs-target*=collapse]").each(function() {
-            var id = $(this).attr("data-bs-target").substring(1) ; 
-            $(this).attr("aia-expanded", "false")
-            $("#" + id).removeClass("show") ; 
-        }) ; 
 
-        bs_target.attr("aria-expanded", "true") ;
-        var id_target = bs_target.attr("data-bs-target") ; 
-        $(id_target).addClass("show") ;
-    }) ; 
-}
-
-var fn_isLogin = () => {
-    var path = location.pathname ; 
-    if ( path == homes_comm.constants._LOGIN_PAGE_URL ) {
-        homes_comm.store.clear() ;
-    }
-
-    var is_required_auth = homes_comm._fn_is_auth_url() ;
-    var tokeninfo = store.getItem("token") ; 
-    if ( is_required_auth ) {
-        /* 로그인이 필요한 페이지 */
-        if (!!!tokeninfo || !!!tokeninfo["accessToken"]) {
-            /* 토큰정보가 없으면 로그인 페이지로 튕김 */ 
-            homes_message.alert("로그인이 필요한 페이지 입니다.", () => {
-                location.href = "/html/sign-in/sign-in.html" ;
-            }) ; 
-        } else {
-            /* ************************************************************
-             * 토큰이 있으면 정확한 토큰인지 검증해야 함 
-             * Api 호출시 Interceptor에서 체크한 이후 결과를 리턴한다.
-             * 여기서는 토큰의 존재여부만 체크한다. 
-             * *************************************************************/
-        }
-    } else {
-        /* 로그인이 필요하지 않은 페이지 */ 
-    }
-}
-
-var fn_homes_admin_init = () => {
-    fn_page_init() ;
-}
-
-/* token 유효성 검증 API */ 
 var fn_verify_token = (fn_callback) => {
     var token = homes_comm.store.getItem("token") 
     var is_remember = !!token["is_remember"] ? "Y" : "N" ; 
@@ -522,137 +403,11 @@ var fn_verify_token = (fn_callback) => {
     }) ; 
 } ; 
 
-var fn_homes_signin = (params, fn_callback) => {
-    homes_comm.network.simple_send("/auth/sign-in", {
-        "email": params.email
-        , "password": btoa(params.password)
-        ,"is_remember": params.is_remember
-    }, (response) => {
-        homes.store.init_token(response.token, response.data) ; 
-        fn_callback.apply( null, [ response ]) ;
-    }) ; 
-};
-
-/* popup result */ 
-var pop_close = ( pop_id, pop_data ) => {}
 var fn_comm_search = (path, params, fn_callback) => {
     homes_comm.ui.progress(true, () => {
         homes_comm.network.send(path, params, fn_callback) ; 
     }) ; 
 } 
-
-/* 페이지 초기화 */ 
-var fn_page_init = () => {
-    const user = homes_comm.store.getItem("user") ; 
-    /* 왜 그런지 모르겠는데 테마가 dark 에서 light로 자동바뀜(현재 로그인페이지만 그럼) */
-    $("html").attr("data-bs-theme", "dark") ; 
-    /* svg icon load */ 
-//    homes.fn_Loadsvg() ;
-    /* 상단 GNB 영역생성 */ 
-    fn_create_gnb() ; 
-    /* 좌측 LNB 영역 생성 */
-    fn_create_lnb() ; 
-
-    homes_comm.store.getArcodeList( user.arcode ) ;
-}
-
-var fn_get_menu = (cd) => {
-    if ( cd == "LCD" ) {
-        return homes_comm.admin_menu[cd] ; 
-    } else if ( cd == "MCD" ) {
-        return homes_comm.admin_menu.LCD ; 
-    }
-}
-var fn_create_gnb = () => {
-    var header_wrap = $("#homes_admin_gnb") ; 
-    header_wrap.load("/html/common/homes-admin-gnb.html", () => {
-        const user = store.getItem("user") ;
-        var usernm = user.usernm ; 
-        var userno = user.userno ; 
-        $("#profile_name").text(usernm) ; 
-        $("#gp_userno").val(userno) ;
-
-        const pageid = page.pageid ; 
-        const gnbcd = page.pageid.split("-").splice(0,1)[0].toLowerCase() 
-        
-        const menu = fn_get_menu("LCD") ; 
-        $(".header-gnb").empty() ; 
-        menu.forEach((m, i) => {
-            var btn_menu = $("<button type='button' class='btn-gnb' id='gnb_" + m.id.toLocaleLowerCase() + "'>" + m.nm + "</button>") ; 
-            $(".header-gnb").append(btn_menu) ; 
-            btn_menu.click(function() {
-                location.href = m.link ; 
-            }) ;
-        }) ; 
-         
-
-        $("#btn_homes").click(function() {
-            location.href = "/" ; 
-        }) ; 
-        $(".profile-name").click(function() {
-            var hasClass = $("#btn_profile").hasClass("hidden") ; 
-            if ( hasClass ) $("#btn_profile").removeClass("hidden") ;
-            else $("#btn_profile").addClass("hidden") ;
-        }) ;
-
-        $("button[id^=gnb_]").removeClass("on") ; 
-        $("#gnb_" + gnbcd).addClass("on")
-    }); 
-}
-
-var fn_create_lnb = () => {
-    var lnb_wrap = $("#homes_admin_lnb") ; 
-    lnb_wrap.load("/html/common/homes-admin-lnb.html", () => {
-        const menu   = fn_get_menu("MCD") ; 
-        menu.forEach((m, i) => {
-            const pageid = page.pageid ; 
-            const gnbcd = page.pageid.split("-").splice(0,1)[0].toLowerCase() ; 
-            if ( m.id == page.pageid.split("-").splice(0,1)[0] ) {
-                $("a[id^=a_" + gnbcd + "]").remove() ; 
-                m.MCD.forEach((mcd, i) => {
-                    $("svg[id^=svg_" + gnbcd + "_" + mcd.id + "]").removeClass("hidden") ; 
-                    $("#lnb_mcd").append("<span id='a_" + gnbcd + "_" + mcd.id + "' class='ml-10 fs-5 fw-semibold'>" + mcd.nm + "</span>") ; 
-                    $("#a_" + gnbcd + "_" + mcd.id).click(function(){
-                        location.href = mcd.link ; 
-                    }) ; 
-                    mcd.SCD.forEach((scd, i) => {
-                        const l_cd = page.pageid.split("-").splice(0,1)[0].toLowerCase() ;
-                        const m_cd = page.pageid.split("-").splice(1,1)[0] ; 
-                        const s_cd  = page.pageid.split("-").splice(2,1)[0] ; 
-                        var menucd = page.pageid.split("-").join("_").toLowerCase() ; 
-                        var li  = $("#li_lnb_hidden").clone() ; 
-                        li.each((i, l) => {
-                            $(l).attr("id", "li_lnb_" + scd.id)
-                            $(l).removeClass("hidden")  ; 
-                            var btn = l.children[0] ; 
-                            for ( var i = 0; i < btn.children.length; i ++ ) {
-                                var b = btn.children[i] ; 
-                                var menucd = page.pageid.split("-").join("_").toLowerCase() ; 
-                                if ( menucd == (l_cd + "_" + m_cd + "_" + scd.id)) {
-                                    $(btn.children[1]).removeClass("hidden") ; 
-                                } else {
-                                    $(btn.children[0]).removeClass("hidden") ; 
-                                    $(btn).click(function() {
-                                        location.href = scd.link ; 
-                                    }) ; 
-                                }
-                                if (i == 2 ) {
-                                    var lnb_menu = btn.children[i] ; 
-                                    $(lnb_menu).html(scd.nm)
-                                }
-                            }
-                            $("#li_lnb").append(l) ; 
-                        }) ; 
-                    }) ; 
-                }) ; 
-            }
-        }) ; 
-    }) ; 
-}
-
-var fn_setpage = (pageinfo) => {
-    page.pageid = pageinfo.pageid ; 
-}
 
 var homes = homes_comm ;
 var homes_ui = homes_comm.ui ; 
@@ -660,13 +415,3 @@ var network = homes_comm.network ;
 var popup_ui = homes_comm.ui.popup ; 
 var store = homes_comm.store ; 
 var homes_message = homes.message ; 
-
-var page = { pageid: "" }
-fn_isLogin() ;
-
-
-/* event */
-window.onload = () => {
-    fn_homes_admin_init() ; 
-    fn_page_onLoad() ;
-}

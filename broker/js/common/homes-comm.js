@@ -5,7 +5,9 @@ const homes_comm = {
         , _API_VERSION: "v1"
         , _LOGIN_PAGE_URL: "/html/sign-in/sign-in.html"  
         , _LOGIN_AFTER_PAGE_URL: "/html/system/SYST00010001.html"
+        , _KAKAO_LOGIN_REDIRECT_URL: "/html/auth/kakao_auth_redirect.html"
         /* 프리패스 페이지 */ 
+        , _HOMES_PRO_BASE_DOMAIN: "http://127.0.0.1:8081"
         , _NO_AUTH_PAGES: [
             "/html/sign-in/sign-in.html" /* 로그인 페이지 */
         ]
@@ -30,8 +32,7 @@ const homes_comm = {
                 }]
             }]
         }]
-    }
-    , 
+    }, 
     store: {
         setItem: (key, code) => {
             localStorage.setItem(key, JSON.stringify(code))
@@ -79,20 +80,69 @@ const homes_comm = {
             })
         }
     },
-    validation: {
+    validate: {
         fn_isValidemail: (email) => {
             var regexp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i ; 
             return regexp.test(email) ;
         }
+        , fn_isEmpty: (text) => {
+            return !!text ; 
+        }
+        , fn_isEqualVal: (t1, t2) => {
+            return t1 === t2 ; 
+        }
+        , fn_isPassPattern: (pass) => {
+            var regexp = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
+            return regexp.test(pass) ;
+        }
     }
     , message: {
-        alert: ( message, fn_callback ) => {
-            homes_comm._fn_create_modal( message )
-            .then((data) => {
-                if (fn_callback) {
-                    fn_callback.apply() ;
-                }
-            }) ; 
+        alert: ( message, options ) => {
+            return new Promise(resolve => {
+                var cont = $("<div id='pop_cont_alert' class='popup-container'/>") ; 
+                $("body").append(cont) ; 
+                var option = options || {} ;
+                option.title = option["title"] || "&nbsp;" ; 
+                option.message = message ; 
+                cont.load("/html/popup/popAlert.html", () => {
+                    $("#alert_title").html(option.title) ;
+                    $("#alert_cont").html(option.message) ;
+                    $(".btn-close").click(function() {
+                        resolve(true) ; 
+                        $("#pop_cont_alert").remove() ;
+                    })
+                    $("#btn_ok").click(function() {
+                        resolve(true) ; 
+                        $("#pop_cont_alert").remove() ;
+                    }) ; 
+                }) ;
+            }) ;
+        }
+        , confirm: (message, options ) => {
+            return new Promise((resolve, reject) => {
+                var cont = $("<div id='pop_cont_confirm' class='popup-container'/>") ; 
+                $("body").append(cont) ; 
+                var option = options || {} ;
+                option.title = option["title"] || "&nbsp;" ; 
+                option.message = message ; 
+                cont.load("/html/popup/popConfirm.html", (html) => {
+                    $("#alert_title").html(option.title) ;
+                    $("#alert_cont").html(option.message) ;
+                    $(".btn-close").click(function() {
+                        reject(true) ; 
+                        $("#pop_cont_confirm").remove() ;
+                    }) ;
+                    $("#btn_cancel").click(function() {
+                        reject(true) ; 
+                        $("#pop_cont_confirm").remove() ;
+                    }) ;
+                    $("#btn_ok").click(function() {
+                        resolve(true) ; 
+                        $("#pop_cont_confirm").remove() ;
+                    }) ; 
+                }) ;
+            }) ;
+
         }
     }
     , network: {
@@ -133,8 +183,49 @@ const homes_comm = {
                 fn_callback.apply( null, [ response ]) ; 
             }) ; 
         }
+        , send_api: (api_url, option, params, fn_callgack) => {
+            return new Promise((resolve, reject) => {
+                var def_option = {
+                    "method"        : option["method"] || "POST",
+                    "mode"          : option["mode"] || "cors", /* no-cors, cors, same-origin */
+                    "cache"         : option["cache"] || "no-cache", /* no-cache, reload, force-cache, only-if-cached */
+                    "credentials"   : option["credentials"] || "same-origin", /* include, same-origin, omit */
+                    "headers"       : option["headers"] || {
+                        "Content-Type": "application/json",
+//                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    "referrerPolicy": option["referrerPolicy"] || "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                    "body"          : option["body"] || JSON.stringify(params), // body의 데이터 유형은 반드시 "Content-Type" 헤더와 일치해야
+                    "redirect"      : option["redirect"] || "follow", /* follow, manual, error */
+                }
+                
+                /* Failed to execute 'fetch' on 'Window': Request with GET/HEAD method cannot have body. */
+                if ( def_option.method == "GET" || def_option.method == "HEAD" ) {
+                    delete def_option.body ; 
+                }
+                
+                console.log(def_option)
+
+                fetch( api_url, def_option).then( response => {
+                    if ( def_option.headers["Content-Type"] == "application/json" ) {
+                        return response.json() ;
+                    } else if ( def_option.headers["Content-Type"] || "application/x-www-form-urlencoded" ) {
+                        // return new URLSearchParams({ username: "example", password: "password" })
+                    }
+                    return response ; /* plain-text */ 
+                }).then( response => {
+                    var error = response.error ; 
+                    if ( error.httpSttusCd == 200 ) {
+                        resolve(response) ; 
+                    } else {
+                        reject(response.error) ; 
+                    }
+                }).catch( e => {
+                    reject(e) ;
+                })
+            })
+        }
         , simple_send: (url, params, fn_callback) => {
-            
             var api_base_url = homes_comm.fn_get_base_url() ; 
             const request = new Promise((resolve, reject) => {
                 fetch(api_base_url + url, {
@@ -193,7 +284,6 @@ const homes_comm = {
         , create_select: (options) => {
         }
         , progress: ( sh, fn_callback ) => {
-
             var dimmed = $("<div class='dimmed' id='dimmed-progress'/>") ; 
             var dim_loading = $("<div class='dimmed-loading'/>") ; 
             var i = new Date().getSeconds() % 3 ; 
@@ -229,138 +319,6 @@ const homes_comm = {
             pop_stack: []
             , pop_data: {}
             , param_data: {}
-            , pop_open: ( pop_id, option ) => {
-                return new Promise((resolve, reject) => {
-                    $("body").append("<div class='dimmed'/>") ; 
-
-                    /* title-bar 생성 */ 
-                    var pop_dimmed = $(`<div class='homes-popup-modal bg-primary' id='dimmed_${pop_id}'>`) ; 
-                    var pop_title_arear = $("<div class='homes-popup-title-wrap'></div>")
-
-                    var pop_title = $(`<div class='homes-popup-title'></div>`) ;
-
-                    var pop_title_div = $(`<div id='${pop_id}_title' class='homes-popup-title-text'></div>`) ; 
-                    var pop_btn_div = $(`<div class='homes-popup-title-button'></div>`)
-
-                    var pop_button = $(`<button id='btn_popup_close_${pop_id}' class='btn btn-secondary rounded-circle p-2 lh-1' type='button'></button>`) ; 
-                    pop_button.append(`<svg class="bi" width="16" height="16" aria-hidden="true"><use xlink:href="#x-lg"></use></svg>`) ; 
-                    pop_button.append(`<span class="visually-hidden">Dismiss</span>`) ; 
-                    pop_btn_div.append(pop_button) ;
-
-                    var pop_hidden = $(`<button type='button' id='pop_hddn_${pop_id}' class='pop_hidden_button'>popClose</div>`) ; 
-                    pop_btn_div.append(pop_hidden) ;
-
-                    var options = {
-                        "pop_id" : pop_id
-                        , "pop_title": "&nbsp;" 
-                        , "pop_width": 400 
-                        , "pop_height": 300
-                        , "param_data": {}
-                    }
-
-                    if (!! option && !!option["pop_title"]) options.pop_title = option.pop_title ; 
-                    if (!! option && !!option["pop_width"]) options.pop_width = option.pop_width ; 
-                    if (!! option && !!option["pop_height"]) options.pop_height = option.pop_height ; 
-
-                    if (!!option && !!option["pop_url"]) options.pop_url = option.pop_url ; 
-
-                    options.param_data = option["param_data"] || {} ; 
-
-                    pop_dimmed.css("width", options.pop_width + "px") ;
-
-                    var pop_cont = $(`<div id='${pop_id}_cont' class='homes-popup-cont'></div>`) ; 
-
-                    pop_cont.load(options.pop_url, {}, () => {
-                        popup_start() ; 
-                    }) ; 
-
-
-                    var pop_width = pop_dimmed.width() ; 
-                    pop_title_div.css("width", Number(pop_width - 90) + "px") ; 
-
-                    pop_title_div.html(options.pop_title) ; 
-
-                    pop_title.append(pop_title_div) ;
-                    pop_title.append(pop_btn_div) ;
-                    pop_title_arear.append(pop_title) ; 
-                    pop_dimmed.append(pop_title_arear) ; 
-                    pop_dimmed.append(pop_cont) ; 
-
-                    pop_x = ($(".dimmed").width() - options.pop_width) / 2; 
-                    pop_h = ($(".dimmed").height() - 50 - options.pop_height) / 2; 
-                    
-                    pop_dimmed.css("top", pop_h + "px") ; 
-                    pop_dimmed.css("left", pop_x + "px") ; 
-                    $("body").append(pop_dimmed) ; 
-
-                    var pop_data = homes_comm.ui.popup.pop_data[pop_id] ;
-                    
-                    homes_comm.ui.popup.pop_stack.push(pop_id) ; 
-//                    homes_comm.ui.popup.pop_data[pop_id] = {} ; 
-                    homes_comm.ui.popup.param_data[pop_id] = options.param_data ; 
-
-                    pop_button.click(() => {
-                        $(".dimmed").remove() ;
-                        $(".homes-popup-modal").remove() ; 
-                        var arr_index = homes_comm.ui.popup.pop_stack.indexOf(pop_id) ; 
-                        var pop_data  = homes_comm.ui.popup.pop_data[pop_id] ;
-                        if ( arr_index >= 0) {
-                            homes_comm.ui.popup.pop_stack.splice(arr_index, 1) ; 
-                            delete homes_comm.ui.popup.pop_data[pop_id] ; 
-                            delete homes_comm.ui.popup.param_data[pop_id] ; 
-                            delete homes_comm.ui.popup.pop_data[pop_id] ; ; 
-                        }
-                        resolve({
-                            "pop_id": pop_id,
-                            "pop_data": pop_data
-                        }) ;
-                    }) ; 
-
-                    pop_hidden.click(function() {
-                        $(".dimmed").remove() ;
-                        $(".homes-popup-modal").remove() ; 
-                        var arr_index = homes_comm.ui.popup.pop_stack.indexOf(pop_id) ; 
-                        var pop_data  = homes_comm.ui.popup.pop_data[pop_id] ;
-                        if ( arr_index >= 0) {
-                            homes_comm.ui.popup.pop_stack.splice(arr_index, 1) ; 
-                            delete homes_comm.ui.popup.pop_data[pop_id] ; 
-                            delete homes_comm.ui.popup.param_data[pop_id] ; 
-                            delete homes_comm.ui.popup.pop_data[pop_id] ; ; 
-                        }
-                        resolve({
-                            "pop_id": pop_id,
-                            "pop_data": pop_data
-                        }) ;
-                    })
-                })
-            }
-            , pop_close: (pop_id, pop_data) => {
-                homes_comm.ui.popup.pop_data[pop_id] = pop_data ; 
-                $("#pop_hddn_" + pop_id).click() ; 
-            }
-        }
-    }
-    , _fn_create_modal : (message) => {
-        if ( !!message) {
-            $("body").append("<div class='dimmed'/>")
-                     .append("<div class='homes-modal'/>") ; 
-            var dimmed = $(".dimmed") ; 
-            var modal = $(".homes-modal") ; 
-            return new Promise((resolve) => {
-                modal.append(`<div class='message c-dark'>${message}</div>`) ;
-                modal.append("<div class='buttons'><button type='button' class='btn btn-primary w-100' id='btn_alert_ok'>확인</button></div>") ;
-                var offset = 40 ; 
-                var w_dimmed = dimmed.width() ; 
-                var h_dimmed = dimmed.height() ; 
-                var top  = (h_dimmed - modal.height()) / 2 - offset; 
-                var left = (w_dimmed - modal.width()) / 2 ; 
-                modal.css("top", top + "px").css("left", left + "px") ; 
-                $("#btn_alert_ok").click(function() {
-                    $(".dimmed").remove() ;
-                    $(".homes-modal").remove() ; 
-                    resolve(true) ;
-                }) ; 
-            }) ; 
         }
     }
     , _fn_is_auth_url: () => {
@@ -390,16 +348,28 @@ const homes_comm = {
     }
     /* 로그인창 오픈 */
     , fn_popLogin: () => {
-        var dimmed = $(".dimmed") ; 
-        var modal = $(".homes-login-modal") ; 
-    
-        var x = ( dimmed.width() - 400 ) / 2 ; 
-        var y = ( dimmed.height() - 220 ) / 2 ; 
+        var cont = $("<div id='popLogin' class='popup-container'/>") ; 
+        $("body").append(cont) ; 
+        cont.load("/html/popup/popLogin.html", () => {
+            /* kakao 로그인버튼 클릭 */ 
+            $("#btn_kakaoLogin").click(function() {
+                /* window popup으로 교체할것(카카오 회원가입 및 계정선택때문) ********************************************/
+                var ifrm = document.getElementById("hddn_ifrm") ; 
+                ifrm.src = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${constants.kakao.restapi.appkey}&redirect_uri=${constants.kakao.restapi.redirect_url}` ; 
+            }) ;
+            /* 약관동의 */ 
+            $("#btn_agreement").click(function() {
+                var agcont = $("<div id='pop_agree_cont' class='popup-container'/>") ; 
+                $("body").append(agcont) ; 
+                agcont.load("/html/popup/popAgreement.html", () => {
+                    $("#btn_pop_close").click() ;
+                }) ;
+            }) ; 
 
-        modal.css("left", x + "px") ; 
-        modal.css("top", y + "px") ; 
-        dimmed.show() ;
-        modal.show() ; 
+            $("#btn_pop_close").click(function() {
+                $("#popLogin").remove() ;
+            }) ; 
+        }) ; 
     }
     /* 지역검색창 오픈 */ 
     , fn_popup_area: (option) => {
@@ -461,6 +431,23 @@ const homes_comm = {
 
     }
 }
+
+
+const constants = {
+    kakao: {
+        restapi: {
+            appkey      : "c79e2b359bcd1089980df40b215227fb", 
+            redirect_url: "http://127.0.0.1:8081/html/auth/kakao/kakao-login-redirect.html"
+        },
+        /* 리얼홈즈(사용자) 기준, 필요시 리얼홈즈 프로와 구분해야 함 */ 
+        app_key: {
+            "javascript": "3683e4f8faad0637b8a7db5fc23179bd",
+            "restapi"   : "c79e2b359bcd1089980df40b215227fb",
+            "native"    : "1679a3ca5c4a20799c6b0c22371933a2"
+        }
+    }
+}
+
 
 var fn_slide_init = () => {
     $("button[data-bs-target*=collapse]").click(function() {
@@ -654,6 +641,44 @@ var fn_setpage = (pageinfo) => {
     page.pageid = pageinfo.pageid ; 
 }
 
+/* kakao map load */
+var fn_kakaomap_Load = (option) => {
+    var container = document.getElementById(option.mapid); //지도를 담을 영역의 DOM 레퍼런스
+    var def_option = { //지도를 생성할 때 필요한 기본 옵션
+	    center: option["center"] || new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+	    level  : option["level"] ||  3 //지도의 레벨(확대, 축소 정도)
+    };
+    var map = new kakao.maps.Map(container, def_option); //지도 생성 및 객체 리턴
+
+    /* 화면에 마커 표시여부 */ 
+    if ( !!option["is_marker"]) {
+        var coords = def_option.center ;
+        var marker = new kakao.maps.Marker({
+            "map"     : map,
+            "position": coords
+        });
+
+        /* 인포윈도우로 장소에 대한 설명을 표시 */
+        /*
+        var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+        });
+        infowindow.open(map, marker);
+        */
+        /* 지도의 중심이동 */
+        map.setCenter(coords);
+    }
+}
+
+/* 주소검색창 오픈 */
+var fn_popAddress = ( option ) => {
+    var mcont = $("<div id='popAddress' class='popup-container'/>") ; 
+    $("body").append(mcont) ; 
+    mcont.load("/html/popup/popAddress.html", () => {   
+        fn_popLoadCompleted(option) ;
+    }) ;
+}
+
 var homes = homes_comm ;
 var homes_ui = homes_comm.ui ; 
 var network = homes_comm.network ; 
@@ -662,11 +687,10 @@ var store = homes_comm.store ;
 var homes_message = homes.message ; 
 
 var page = { pageid: "" }
-fn_isLogin() ;
+// fn_isLogin() ;
 
 
 /* event */
 window.onload = () => {
-    fn_homes_admin_init() ; 
     fn_page_onLoad() ;
 }

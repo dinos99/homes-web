@@ -3,6 +3,7 @@
 
 body,html {
     height: 100%;
+    overflow: auto; 
   }
   
   *,body,h1,h2,h3,h4,h5,h6,h7 {
@@ -79,3 +80,14 @@ body,html {
     quotes: none;
   }
  
+
+  /* 동기화 필요작업 2025.04.22 */ 
+  input,select,textarea {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none !important;
+  }
+  

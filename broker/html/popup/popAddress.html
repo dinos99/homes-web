@@ -1,0 +1,107 @@
+
+<div class="dimmed"></div>
+<div class="homes-modal">
+    <div class="modal-sheet bg-white rounded-4 shadow w-450px h-600px" tabindex="-1" role="dialog" id="popHomesLogin">
+        <div class="modal-header border-bottom p-4">
+            <button type="button" id="btn_post_close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-dialog w-450px mx-0">
+            <div class="modal-content">
+                <div id="postLayer">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var fn_popLoadCompleted =  option => {
+
+//        $("#region_name").val("") ;
+        var query = option["addr"] || "" ;
+        var mapid = option["mapid"] || "kakaomap" ;
+        var postLayer = document.getElementById("postLayer");
+        new daum.Postcode({
+            oncomplete: data => {
+                var addr     = "" ;
+                var ext_addr = "" ; 
+
+                var postno = data.zonecode ;
+                if (data.userSelectedType === 'R') { /* 도로명(R) */
+                    addr = data.roadAddress;
+                } else { /* 지번(J) */
+                    addr = data.jibunAddress;
+                }
+
+                /* 법정동명이 있을 경우 추가(법정리제외) */
+                /* 법정동은 "동/로/가"로 끝남 */
+                if(data.bname !== "" && /[동|로|가]$/g.test(data.bname)){
+                    ext_addr += data.bname;
+                }
+                /* 건물명이 있고, 공동주택일 경우 */
+                if(data.buildingName !== "" && data.apartment === "Y"){
+                    ext_addr += (ext_addr !== "" ? ", " + data.buildingName : data.buildingName);
+                }
+                if(ext_addr !== ""){
+                    ext_addr = " (" + ext_addr + ")" ;
+                }
+
+                /* 우편번호 */
+                $("#p_postno").text(postno) ;
+
+                /* 주소검색창은 도로명 기즌으로 표시 */
+                $("#p_offce_addr").val(data.roadAddress + " " + ext_addr) ;
+                /* 도로명 표시 */
+                $("#p_postr").text(data.roadAddress + " " + ext_addr) ; 
+
+                /* 지번이 여러개인경우 지번을 클릭해야지만 정확한 지번주소가 나옴 */ 
+                if ( data.jibunAddress !== "" ) {
+                    $("#p_postj").text(data.jibunAddress) ; 
+                } else {
+                    $("#p_postj").html("<span class='c-red'>지번주소가 다수 존재합니다.</span> 지번주소를 선택해주세요") ; 
+                }
+
+  
+                /* 부모창에 반드시 로드되어야 함 */ 
+                var geocoder = new daum.maps.services.Geocoder();
+                var mapContainer = document.getElementById(option.mapid); /* 지도를 담을 영역의 DOM 레퍼런스 */
+                var kakaomap = new daum.maps.Map(mapContainer, {
+                    center: new daum.maps.LatLng(37.537187, 127.005476), 
+                    level : 3 
+                });
+                var marker = new daum.maps.Marker({
+                    position: new daum.maps.LatLng(37.537187, 127.005476),
+                    map: kakaomap
+                });
+
+                geocoder.addressSearch(data.address, function(results, status) {
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
+
+                        var result = results[0]; //첫번째 결과의 값을 활용
+
+                        // 해당 주소에 대한 좌표를 받아서
+                        var coords = new daum.maps.LatLng(result.y, result.x);
+                        // 지도를 보여준다.
+//                        mapContainer.style.display = "block";
+                        kakaomap.relayout();
+                        // 지도 중심을 변경한다.
+                        kakaomap.setCenter(coords);
+                        // 마커를 결과값으로 받은 위치로 옮긴다.
+                        marker.setPosition(coords)
+                        fn_post_close() ;
+                    }
+                });        
+            },
+            width : "400px",
+            height: "500px"
+        }).embed(postLayer);
+    }
+    var fn_post_close = () => {
+        $("#popAddress").remove() ;
+    }
+    $(document).ready(function() {
+        $("#btn_post_close").click(function() {
+            fn_post_close() ;
+        }) ;
+    }) ;
+</script>

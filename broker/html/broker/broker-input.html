@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ko" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="theme-color" content="#712cf9">
+        <title>리얼홈즈 프로</title>
+
+        <!-- bootstrap 5.3.5 -->    
+        <script src="/js/extern/bootstrap-5.3.5/assets/js/color-modes.js"></script>
+        <link href="/js/extern/bootstrap-5.3.5/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="/css/bootstrap/modal.css">
+
+        <!-- KAKAo Login API -->
+        <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js" integrity="sha384-dok87au0gKqJdxs7msEdBPNnKSRT+/mhTVzq+qOhcL464zXwvcrpjeWvyj1kCdq6" crossorigin="anonymous"></script>
+
+        <!-- KAKAO MAP API -->
+        <!-- services,clusterer,drawing 라이브러리 불러오기 -->
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3683e4f8faad0637b8a7db5fc23179bd&libraries=services,clusterer,drawing"></script>
+
+        <!-- 다음 우편번호 검색 API -->
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        
+        <link rel="stylesheet" href="/css/common.css">
+        <link rel="stylesheet" href="/css/layout.css">
+        <link rel="stylesheet" href="/css/custom.css">
+
+    </head>
+    <body>
+        <div class="main-cont">
+            <button type="buttton" id="btn_home" class="btn btn-primary px-4">홈으로</button>
+        </div>
+        <div class="main-cont">
+            <div class="main-cont-body">
+                <div class="body-header">
+                    <h5>사업자 구분</h5>
+                </div>
+                <div class="grid-table">
+                    <div class="grid-row bg-gray">
+                        <div class="gd-col-group w-70">
+                            <div class="gd-col">
+                                <div class="label border-r dark required">사업자 구분 </div>
+                            </div>
+                            <div class="gd-col w-50">
+                                <select class="form-select px-2 w-150px" id="p_office_ty" >
+                                    <option value="BSN001">중개사무소</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="gd-col">
+                            <span>※ 중개사무소 등록요청은 <em class="c-red">대표 공인중개사</em>만 가능합니다.</span>
+                        </div>
+                    </div>
+                    <div class="grid-row bg-gray">
+                        <div class="gd-col-group">
+                            <div class="gd-col">
+                                <div class="label border-r dark c-red">안내</div>
+                            </div>
+                            <div class="gd-col">
+                                <strong>현재는 중개사무소만 등록할 수 있으며, 기타관련업체(건설사 및 분양사 등)등록은 2007년부터 추가될 예정입니다.</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="body-header mt-4">
+                    <h5>중개가능용도 선택</h5>
+                </div>
+                <div class="grid-table">
+                    <div class="grid-row bg-gray">
+                        <div class="gd-col-group">
+                            <div class="gd-col">
+                                <div class="label border-r dark">매매</div>
+                            </div>
+                            <div class="gd-col">
+                                <div class="btn-group" id="prs_001">
+                                    <button type="button" class="btn" id="btn_prs_001_med_001">주거용</button>
+                                    <button type="button" class="btn" id="btn_prs_001_med_002">사무용</button>
+                                    <button type="button" class="btn" id="btn_prs_001_med_003">상가용</button>
+                                    <button type="button" class="btn" id="btn_prs_001_med_004">창고용</button>
+                                    <button type="button" class="btn" id="btn_prs_001_med_005">공장용</button>
+                                    <button type="button" class="btn" id="btn_prs_001_med_006">토지</button>
+                                    <button type="button" class="btn" id="btn_prs_001_med_007">건물/주택</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-row bg-gray">
+                        <div class="gd-col-group">
+                            <div class="gd-col">
+                                <div class="label border-r dark">임대</div>
+                            </div>
+                            <div class="gd-col">
+                                <div class="btn-group" id="prs_002">
+                                    <button type="button" class="btn"  id="btn_prs_002_med_001">주거용</button>
+                                    <button type="button" class="btn"  id="btn_prs_002_med_002">사무용</button>
+                                    <button type="button" class="btn"  id="btn_prs_002_med_003">상가용</button>
+                                    <button type="button" class="btn"  id="btn_prs_002_med_004">창고용</button>
+                                    <button type="button" class="btn"  id="btn_prs_002_med_005">공장용</button>
+                                    <button type="button" class="btn"  id="btn_prs_002_med_006">토지</button>
+                                    <button type="button" class="btn"  id="btn_prs_002_med_007">건물/주택</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-row bg-gray h-100px">
+                        <div class="gd-col-group">
+                            <div class="gd-col">
+                                <div class="label border-r dark c-red">안내</div>
+                            </div>
+                            <div class="gd-col">
+                                <div class="p-2">
+                                    <p class="mb-0 lh-30">중개사무사가 <em class="c-red">중개가능한 용도</em>를 <em class="c-red">모두 선택</em>해 주세요</p>
+                                    <p class="mb-0 lh-30">선택되지 않은 용도는 <em class="c-red">온라인으로 매도/임대의뢰를 받을 수 없습니다.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="body-header d-flex justify-between align-center mt-4">
+                    <div class="cont-left">
+                        <h5>사업자정보</h5>
+                    </div>
+                    <div class="cont-right">
+                        <span><em class="c-red">*</em>필수사항</span>
+                    </div>
+                </div>
+                <div class="grid-table">
+                    <div class="grid-row bg-gray">
+                        <div class="gd-col-group w-50">
+                            <div class="gd-col">
+                                <div class="label border-r dark required">중개사무소 명</div>
+                            </div>
+                            <div class="gd-col">
+                                <input type="text" class="textbox rounded-2"  placeholder="중개사무소명 입력" value=""/>
+                            </div>
+                        </div>
+                        <div class="gd-col-group w-50">
+                            <div class="gd-col">
+                                <div class="label border-lr dark required">대표전화</div>
+                            </div>
+                            <div class="gd-col">
+                                <input type="text" class="textbox rounded-2 w-100px"  placeholder="국번입력" value=""/>
+                                <input type="text" class="textbox rounded-2 w-150px"  placeholder="숫자만입력" value=""/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-row bg-gray">
+                        <div class="gd-col-group w-50">
+                            <div class="gd-col">
+                                <div class="label border-r dark required">대표자 이름 </div>
+                            </div>
+                            <div class="gd-col">
+                                <input type="text" class="textbox rounded-2"  value="중개사01" disabled="disabled"/>
+                            </div>
+                        </div>
+                        <div class="gd-col-group w-50">
+                            <div class="gd-col">
+                                <div class="label border-lr dark required">대표자 휴대전화 </div>
+                            </div>
+                            <div class="gd-col">
+                                <input type="text" class="textbox rounded-2 w-250px" disabled="disabled" value="010-2421-6150"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-row bg-gray mb-0">
+                        <div class="gd-col-group w-50">
+                            <div class="gd-col">
+                                <div class="label border-r dark required">사업자 등록번호 </div>
+                            </div>
+                            <div class="gd-col">
+                                <input type="text" class="textbox rounded-2" placeholder="숫자만입력" maxlength="10" value="" />
+                                <button type="button" class="btn-white">파일첨부</button>
+                            </div>
+                        </div>
+                        <div class="gd-col-group w-50">
+                            <div class="gd-col">
+                                <div class="label border-lr dark px-3 required">개설 등록번호 </div>
+                            </div>
+                            <div class="gd-col">
+                                <input type="text" class="textbox rounded-2 w-250px" placeholder="개설등록번호 입력" value="" />
+                                <button type="button" class="btn-white">파일첨부</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-row bg-gray">
+                        <div class="gd-col-group w-50">
+                            <div class="gd-col"><div class="label"></div></div>
+                            <div class="gd-col">※ 사업자등록증 첨부필수</div>
+                        </div>
+                        <div class="gd-col-group w-50">
+                            <div class="gd-col"><div class="label"></div></div>
+                            <div class="gd-col">※ 개설등록증 첨부필수</div>
+                        </div>
+                    </div>
+                    <div class="grid-row px-0 mb-3 h-250px">
+                        <div class="gd-col-group d-block w-70">
+                            <div class="grid-row d-flex justify-start bg-gray w-100">
+                                <div class="gd-col"><div class="label  border-r dark required">주소검색</div></div>
+                                <div class="gd-col">
+                                    <input type="text" id="p_offce_addr" class="textbox rounded-2 w-450px" placeholder="예)잠실동 232-2, 건물명, 도로명주소 검색" value="" />
+                                    <button type="button" class="btn-green" id="btn_popAdress">주소검색</button>
+                                </div>
+                            </div>
+                            <div class="grid-row d-flex justify-start bg-gray w-100 h-100px">
+                                <div class="gd-col"><div class="label  border-r dark required">검색주소</div></div>
+                                <div class="gd-col gd-table"> 
+                                    <div class="d-flex p-1">
+                                        <div class="border-r dark w-100px">우편번호</div>
+                                        <div class="pl-10" id="p_postno"></div>
+                                    </div>
+                                    <div class="d-flex p-1">
+                                        <div class="border-r dark w-100px">지번</div>
+                                        <div class="pl-10" id="p_postj"></div>
+                                    </div>
+                                    <div class="d-flex p-1">
+                                        <div class="border-r dark w-100px">도로명</div>
+                                        <div class="pl-10" id="p_postr"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid-row d-flex justify-start bg-gray w-100">
+                                <div class="gd-col"><div class="label  border-r dark required">상세주소</div></div>
+                                <div class="gd-col">
+                                    <input type="text" class="textbox rounded-2 w-450px" placeholder="동호수를 입력하세요" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gd-col-group border d-block w-30 h-240px kakao-map-wrap">
+                            <div id="brk_addr_kakaomap" class="kakao-map sm">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+        <script src="/js/common/homes-comm.js"></script>
+    </body>
+    <script type="text/javascript">
+        var fn_page_onLoad = () => {
+            $("#btn_home").click(function() {
+                location.href = "/"
+            })
+
+            /* 주소검색 오픈 */
+            $("#btn_popAdress").click(function() {
+                var offce_addr = $("#p_offce_addr").val() ;
+                fn_popAddress({
+                    "mapid": "brk_addr_kakaomap",
+                    "addr": offce_addr
+                }) ; 
+            }) ;
+
+            $("button[id^=btn_prs_]").click(function() {
+                var seleccted = $(this).hasClass("selected") ;
+                if (seleccted) $(this).removeClass("selected") ; 
+                else $(this).addClass("selected") ;
+            }) ;
+
+            $("#p_offce_addr").keypress(function(e) {
+                if ( $("#p_offce_addr").val() !== "" && e.keyCode == 13 ) {
+                    $("#btn_popAdress").click() ; 
+                }
+            }) ;
+
+            fn_kakaomap_Load({
+                "mapid"    : "brk_addr_kakaomap",
+                "center"   : new kakao.maps.LatLng("37.6828551156733", "127.043097350175"),
+                "is_marker": true
+            }) ;
+        }
+    </script>
+</html>

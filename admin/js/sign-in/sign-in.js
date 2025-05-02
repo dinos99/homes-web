@@ -25,7 +25,7 @@ const fn_signin = () => {
             }, (response) => {
                 /* 로그인 후 메인페이지로 이동 */ 
 //                location.href = "/html/main.html"
-                location.href = "/html/L01M00S00/L01M01S00/L01M01S01D00.html" ; 
+                location.href = homes_comm.constants._LOGIN_AFTER_PAGE_URL; 
             }) ; 
         }
     }) ; 

@@ -1,0 +1,98 @@
+
+<div class="dimmed"></div>
+<div class="homes-modal">
+  <div class="modal-sheet" tabindex="-1" role="dialog" id="popHomesLogin">
+    <div class="modal-dialog">
+      <div class="modal-content rounded-4 border bg-body shadow">
+        <div class="modal-header px-2 py-4 pb-2 border-bottom-0">
+          <h3 class="w-100 tac">회원정보 입력</h3>
+        </div>
+        <div class="modal-body col px-2 py-0 ">
+            <div class="form-floating mb-3 w-100">
+                <input type="email" class="form-control rounded-3" id="p_email" placeholder="name@example.com" value="test01@homes.com">
+                <label for="p_email">이메일주소 입력</label>
+            </div>
+            <div class="form-floating mb-3 w-100">
+                <input type="text" class="form-control rounded-3" id="p_usernm" placeholder="이름(실명)입력" value="중개사01">
+                <label for="p_usernm">이름(실명)입력</label>
+            </div>
+            <div class="form-floating mb-3 w-100">
+                <input type="password" class="form-control rounded-3" id="p_password" placeholder="비밀번호입력(영문,숫자포함 8자리 이상)" value="test1234">
+                <label for="p_password">비밀번호입력(영문,숫자포함 8자리 이상)</label>
+            </div>
+            <div class="form-floating mb-3 w-100">
+                <input type="password" class="form-control rounded-3" id="p_password_conf" placeholder="비밀번호확인" value="test1234">
+                <label for="p_password_conf">비밀번호확인</label>
+            </div>
+        </div>
+
+        <div class="modal-border-bottom p-0"></div>
+        <div class="modal-footer w-100 p-2 gap-2 pb-3 border-top-0">
+            <button type="button" class="btn btn-secondary w-30" id="btn_cancel">취소</button>
+            <button type="button" class="btn btn-secondary w-70" id="btn_next" disabled>다음</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    var fn_next = () => {
+        var email = $("#p_email").val() ; 
+        var usernm = $("#p_usernm").val() ;
+        var pass = $("#p_password").val() ; 
+        var pass_conf = $("#p_password_conf").val() ; 
+        var is_valid_email = homes_comm.validate.fn_isValidemail(email) ;  ;
+        var is_valid_name = homes_comm.validate.fn_isEmpty(usernm) ; 
+        var is_valid_pass = homes_comm.validate.fn_isPassPattern(pass);
+        var is_equal_pass = homes_comm.validate.fn_isEqualVal(pass, pass_conf) ; 
+
+        /*
+        console.log("is_valid_email :", is_valid_email) ;
+        console.log("is_valid_name  :", is_valid_name) ;
+        console.log("is_valid_pass  :", is_valid_pass) ;
+        console.log("is_equal_pass  :", is_equal_pass) ;
+        */
+        if ( is_valid_email && is_valid_name && is_valid_pass && is_equal_pass ) {
+            $("#btn_next")
+                .removeClass("btn-secondary")
+                .removeClass("btn-danger")
+                .addClass("btn-danger")
+                .removeAttr("disabled") ; 
+        } else {
+            $("#btn_next")
+                .removeClass("btn-secondary")
+                .removeClass("btn-danger")
+                .addClass("btn-secondary")
+                .attr("disabled", "disabled") ; 
+        }
+        return is_valid_email && is_valid_name && is_valid_pass && is_equal_pass ; 
+    } ;
+    $("#p_email").blur(function() {
+        fn_next() ; 
+    }) ; 
+    $("#p_usernm").blur(function() {
+        fn_next() ; 
+    }) ;
+    $("#p_password").blur(function() {
+        fn_next() ; 
+    }) ;
+    $("#p_password_conf").blur(function() {
+        fn_next() ; 
+    }) ;
+
+
+    $(document).ready(function() {
+        $("#btn_next").click(function() {
+            var mcont = $("<div id='pop_member_cert' class='popup-container'/>") ; 
+            $("body").append(mcont) ; 
+            homes_comm.store.setItem("member", {
+                email: $("#p_email").val(),
+                usernm: $("#p_usernm").val(),
+                password: btoa($("#p_password").val())
+            }) ; 
+            mcont.load("/html/popup/popMobileCert.html", () => {       
+                $("#pop_member_input").remove() ;
+            }) ;
+        }) ;
+    }) ; 
+</script>
