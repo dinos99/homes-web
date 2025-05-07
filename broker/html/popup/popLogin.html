@@ -12,14 +12,14 @@
         <div class="modal-body px-2 pt-0 ">
           <form class="">
             <div class="form-floating mb-3">
-              <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com">
-              <label for="floatingInput">이메일주소 입력</label>
+              <input type="email" class="form-control rounded-3" id="p_email" placeholder="name@example.com" value="broker03@homes.co.kr">
+              <label for="p_email">이메일주소 입력</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password">
-              <label for="floatingPassword">비밀번호입력</label>
+              <input type="password" class="form-control rounded-3" id="p_password" placeholder="Password" value="homes1234">
+              <label for="p_password">비밀번호입력</label>
             </div>
-            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-secondary" type="button" disabled>Sign up</button>
+            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-secondary" type="button" id="btn_homes_Login">Sign up</button>
             <!-- <small class="text-body-secondary">By clicking Sign up, you agree to the terms of use.</small> -->
             <hr class="my-4">
             <!-- <h2 class="fs-5 fw-bold mb-3">Or use a third-party</h2> -->
@@ -36,4 +36,31 @@
     </div>
   </div>
   <iframe src="" width="0" height="0" name="hddn_ifrm" id="hddn_ifrm" class="hddn_ifrm"></iframe>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("#btn_homes_Login").click(function() {
+
+        network.send_api("/auth/homesLogin", {
+          is_auth: false 
+        }, {
+          email   : $("#p_email").val(),
+          password: btoa($("#p_password").val())
+        }).then(response => {
+          homes.store.init_token(response.token, response.data) ; 
+          var user = homes.store.getItem("user") ; 
+          message.alert(user.usernm + "님 로그인되었습니다.")
+          .then(data => {
+            /* 창닫기 시전 */
+            $("#btn_pop_close").click() ; 
+          }) ; 
+        }).catch(e => {
+          message.alert(e.errorMessage) ;
+        }) ;
+
+
+      }) ;
+    }) ;
+
+</script>
+  
 </div>

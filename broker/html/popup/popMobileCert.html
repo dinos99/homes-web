@@ -155,6 +155,7 @@
 
       /* 일단은 일반사용자 */
       member.userRole = "MBT001" ; /* 일반사용자 */
+      member.brokerty = "BRK001" ; /* 대표로 신청하였음 */ 
       /* 중개사(혹은 보조)이므로 승인대기 */
       member.userSttus = "CTF001" ; /* 승인대기 */ 
       member.agreYn = "Y" ; 
@@ -164,19 +165,20 @@
       var api_base_url = homes_comm.fn_get_base_url() ; 
       var api_url = api_base_url + "/api/v1/mber/add-member"
       
-      network.send_api(api_url, {}, member)
-        .then(response => {
+      network.send_api(api_url, {
+        is_auth: false
+      }, member).then(response => {
           homes_comm.store.setItem("member", {}) ; 
           homes_comm.store.setItem("agree" , {}) ; 
           var user = response.data ; 
           homes_comm.store.setItem("user", response.data) ; 
 
           /* 현재창 닫고 중개사 등록팝업 오픈 */ 
-            var mcont = $("<div id='pop_member_final' class='popup-container'/>") ; 
-            $("body").append(mcont) ; 
-            mcont.load("/html/popup/popMemberfin.html", () => {       
-                $("#pop_member_cert").remove() ;
-            }) ;
+          var mcont = $("<div id='pop_member_final' class='popup-container'/>") ; 
+          $("body").append(mcont) ; 
+          mcont.load("/html/popup/popMemberfin.html", () => {       
+              $("#pop_member_cert").remove() ;
+          }) ;
 
         }) ; 
 

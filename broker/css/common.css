@@ -22,6 +22,10 @@ body,html {
   button,img,input,select {
     vertical-align: middle;
   }
+
+  input[type=file] {
+    display:none;
+  }
   
   * {
     font-size: 15px;

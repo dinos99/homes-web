@@ -25,11 +25,39 @@
         <link rel="stylesheet" href="/css/common.css">
         <link rel="stylesheet" href="/css/layout.css">
         <link rel="stylesheet" href="/css/custom.css">
-
     </head>
     <body>
-        <div class="main-cont">
+        <div class="main-cont my-0 py-0 pr-0">
+            <div class="main-cont-header">
+                <div class="homes-logo pro">
+                    <h1 class="logo-text">홈즈
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                        </svg>
+                    </h1>
+                </div>
+                <p class="slogan">
+                    <span class="c-red">드디어 잡았다!!</span>
+                    <span>부동산</span>
+                    <span class="c-red">미끼매물</span> 
+                    <span class="checked"></span>
+                </p>
+                <div class="gnb-buttons">
+                    <button type="button" class="gnb-button active">마이홈</button>
+                    <button type="button" class="gnb-button">매물검색</button>
+                    <button type="button" class="gnb-button">나의매수/임차</button>
+                    <button type="button" class="gnb-button">나의부동산</button>
+                    <button type="button" class="gnb-button">관심목록</button>
+                    <button type="button" class="gnb-button">고객센터</button>
+                    <button type="button" id="btnLogin" class="gnb-button-login">로그인&#183;회원가입</button>
+                </div>
+                <div class="gnb-usertype">
+                    공인중개사 &gt;
+                </div>
+            </div>
+            <!--
             <button type="buttton" id="btn_home" class="btn btn-primary px-4">홈으로</button>
+            -->
         </div>
         <div class="main-cont">
             <div class="main-cont-body">
@@ -43,7 +71,7 @@
                                 <div class="label border-r dark required">사업자 구분 </div>
                             </div>
                             <div class="gd-col w-50">
-                                <select class="form-select px-2 w-150px" id="p_office_ty" >
+                                <select class="form-select px-2 w-150px" id="p_bsnsty" >
                                     <option value="BSN001">중개사무소</option>
                                 </select>
                             </div>
@@ -132,7 +160,7 @@
                                 <div class="label border-r dark required">중개사무소 명</div>
                             </div>
                             <div class="gd-col">
-                                <input type="text" class="textbox rounded-2"  placeholder="중개사무소명 입력" value=""/>
+                                <input type="text" id="p_officenm" class="textbox rounded-2"  placeholder="중개사무소명 입력" value="홈즈 중개사무소"/>
                             </div>
                         </div>
                         <div class="gd-col-group w-50">
@@ -140,8 +168,8 @@
                                 <div class="label border-lr dark required">대표전화</div>
                             </div>
                             <div class="gd-col">
-                                <input type="text" class="textbox rounded-2 w-100px"  placeholder="국번입력" value=""/>
-                                <input type="text" class="textbox rounded-2 w-150px"  placeholder="숫자만입력" value=""/>
+                                <input type="text" class="textbox rounded-2 w-100px"  id="p_telno_arno" placeholder="국번입력" maxlength="6" value="02"/>
+                                <input type="text" class="textbox rounded-2 w-150px"  id="p_telno" placeholder="숫자만입력" maxlength="8" value="03123693"/>
                             </div>
                         </div>
                     </div>
@@ -169,8 +197,9 @@
                                 <div class="label border-r dark required">사업자 등록번호 </div>
                             </div>
                             <div class="gd-col">
-                                <input type="text" class="textbox rounded-2" placeholder="숫자만입력" maxlength="10" value="" />
-                                <button type="button" class="btn-white">파일첨부</button>
+                                <input type="text" id="p_bizno" class="textbox rounded-2" placeholder="숫자만입력" maxlength="10" value="0010201234" />
+                                <input id="f_bizno" type="file" accept="image/*"/>
+                                <button type="button" class="btn-white" id="btn_bizno_file">파일첨부</button>
                             </div>
                         </div>
                         <div class="gd-col-group w-50">
@@ -178,19 +207,20 @@
                                 <div class="label border-lr dark px-3 required">개설 등록번호 </div>
                             </div>
                             <div class="gd-col">
-                                <input type="text" class="textbox rounded-2 w-250px" placeholder="개설등록번호 입력" value="" />
-                                <button type="button" class="btn-white">파일첨부</button>
+                                <input type="text" id="p_estregno" class="textbox rounded-2" placeholder="숫자만입력" value="2025-05-가-0001" />
+                                <input id="f_estregno" type="file" accept="image/*"/>
+                                <button type="button" class="btn-white" id="btn_est_regno_file">파일첨부</button>
                             </div>
                         </div>
                     </div>
                     <div class="grid-row bg-gray">
                         <div class="gd-col-group w-50">
                             <div class="gd-col"><div class="label"></div></div>
-                            <div class="gd-col">※ 사업자등록증 첨부필수</div>
+                            <div class="gd-col" id="f_bizno_filename">※ 사업자등록증 첨부필수</div>
                         </div>
                         <div class="gd-col-group w-50">
                             <div class="gd-col"><div class="label"></div></div>
-                            <div class="gd-col">※ 개설등록증 첨부필수</div>
+                            <div class="gd-col" id="f_estregno_filename">※ 개설등록증 첨부필수</div>
                         </div>
                     </div>
                     <div class="grid-row px-0 mb-3 h-250px">
@@ -198,7 +228,8 @@
                             <div class="grid-row d-flex justify-start bg-gray w-100">
                                 <div class="gd-col"><div class="label  border-r dark required">주소검색</div></div>
                                 <div class="gd-col">
-                                    <input type="text" id="p_offce_addr" class="textbox rounded-2 w-450px" placeholder="예)잠실동 232-2, 건물명, 도로명주소 검색" value="" />
+                                    <input type="text" id="p_office_addr" class="textbox rounded-2 w-450px" placeholder="예)잠실동 232-2, 건물명, 도로명주소 검색" readonly value=""/>
+                                    <input type="hidden" name="p_addr_sel" id="p_addr_sel" value="" />
                                     <button type="button" class="btn-green" id="btn_popAdress">주소검색</button>
                                 </div>
                             </div>
@@ -222,7 +253,7 @@
                             <div class="grid-row d-flex justify-start bg-gray w-100">
                                 <div class="gd-col"><div class="label  border-r dark required">상세주소</div></div>
                                 <div class="gd-col">
-                                    <input type="text" class="textbox rounded-2 w-450px" placeholder="동호수를 입력하세요" value="" />
+                                    <input type="text" id="p_office_addr_dtl" class="textbox rounded-2 w-450px" placeholder="동호수를 입력하세요" value="1502동 605호" />
                                 </div>
                             </div>
                         </div>
@@ -230,6 +261,16 @@
                             <div id="brk_addr_kakaomap" class="kakao-map sm">
 
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-table">
+                    <div class="grid-row px-0">
+                        <div class="gd-col px-0">
+                            <button type="button" class="btn btn-secondary px-4" id="btn_cancel_auth">취소</button>
+                        </div>
+                        <div class="gd-col px-0">
+                            <button type="button" class="btn btn-secondary px-4" id="btn_request_auth">승인요청</button>
                         </div>
                     </div>
                 </div>
@@ -248,11 +289,21 @@
 
             /* 주소검색 오픈 */
             $("#btn_popAdress").click(function() {
-                var offce_addr = $("#p_offce_addr").val() ;
+                var offce_addr = $("#p_office_addr").val() ;
                 fn_popAddress({
                     "mapid": "brk_addr_kakaomap",
                     "addr": offce_addr
-                }) ; 
+                }, (data) => {
+                    $("#p_postno").text(data.postno) ; /* 우편번호 */ 
+                    $("#p_addr_sel").val(data.addr_sel) ; /* 도로명/지번 사용자선택 */
+                    $("#p_postr").text(data.post_r) ;  /* 도로명 주소 */
+                    $("#p_postj").text(data.post_j) ;  /* 지번 주소 */ 
+                    if ( data.addr_sel == "R") {
+                        $("#p_office_addr").val(data.post_r) ;
+                    } else {
+                        $("#p_office_addr").val(data.post_j) ;
+                    }
+                }) ;
             }) ;
 
             $("button[id^=btn_prs_]").click(function() {
@@ -261,8 +312,8 @@
                 else $(this).addClass("selected") ;
             }) ;
 
-            $("#p_offce_addr").keypress(function(e) {
-                if ( $("#p_offce_addr").val() !== "" && e.keyCode == 13 ) {
+            $("#p_office_addr").keypress(function(e) {
+                if ( $("#p_office_addr").val() !== "" && e.keyCode == 13 ) {
                     $("#btn_popAdress").click() ; 
                 }
             }) ;
@@ -272,6 +323,178 @@
                 "center"   : new kakao.maps.LatLng("37.6828551156733", "127.043097350175"),
                 "is_marker": true
             }) ;
+
+            /* 사업자등록증 첨부 클릭 */
+            $("#btn_bizno_file").click(function() {
+                $("#f_bizno").click() ;
+            }) ;
+
+            /* 개설등록증 첨부 클릭 */
+            $("#btn_est_regno_file").click(function() {
+                $("#f_estregno").click() ; 
+            }) ;
+
+            $("#p_office_addr_dtl").change(function() {
+                var isValid = fn_isValidBroker() ;
+            }) ; 
+
+            /* 중개사 등록 Validation */
+            fn_isValidBroker = function() {
+                var valid_broker = {
+                    isbizno: !!$("#f_bizno")[0].files && $("#f_bizno")[0].files.length > 0 && !!$("#f_bizno")[0].files[0].name,
+                    isestno: !!$("#f_estregno")[0].files && $("#f_estregno")[0].files.length > 0 && !!$("#f_estregno")[0].files[0].name,
+                    isaddr : !!$("#p_office_addr_dtl").val() 
+                }
+                if ( valid_broker.isbizno && valid_broker.isestno && valid_broker.isaddr ) {
+                    $("#btn_request_auth").removeClass("btn-secondary").removeClass("btn-primary").addClass("btn-primary") ; 
+                    $("#btn_request_auth").removeAttr("disabled") ; 
+                } else {
+                    $("#btn_request_auth").removeClass("btn-secondary").removeClass("btn-primary").addClass("btn-primary") ; 
+                    $("#btn_request_auth").removeAttr("disabled") ; 
+                    /*
+                    $("#btn_request_auth").removeClass("btn-secondary").removeClass("btn-primary").addClass("btn-secondary") ; 
+                    $("#btn_request_auth").attr("disabled", "disabled") ; 
+                    */
+                }
+            }
+
+            /* 사업자등록증 선택완료(아직 업로드 X) */
+            $("#f_bizno").change(function() {
+                var svg = $("<img src='/images/file-earmark-image.svg' fill='currentColor' class='bi bi-file-earmark-image mr-10'/>") ;
+                var p = $("<p/>") ; 
+                p.append(svg) ; 
+                p.append($("#f_bizno")[0].files[0].name) ;
+                $("#f_bizno_filename").html(p) ;
+                fn_isValidBroker() ;
+            }) ; 
+
+            /* 개설등록증 선택완료(아직 업로드 X) */
+            $("#f_estregno").change(function() {
+                var svg = $("<img src='/images/file-earmark-image.svg' fill='currentColor' class='bi bi-file-earmark-image mr-10'/>") ;
+                var p = $("<p/>") ; 
+                p.append(svg) ; 
+                p.append($(this)[0].files[0].name) ;
+                $("#f_estregno_filename").html(p) ;
+                fn_isValidBroker() ;
+            }) ; 
+
+            /* 승인요청 클릭 */
+            $("#btn_request_auth").click(function() {
+                fn_formdata() ; 
+            }) ;
+
+            /* 로그인버튼 클릭 */     
+            $("#btnLogin").click(function() {
+                homes.fn_popLogin() ;
+            }) ; 
+        }
+
+
+
+        var fn_formdata = function() {
+            var formData = new FormData() ;
+            var user = homes_comm.store.getItem("user") ;
+            formData.append("userno"       , user.userno) ;
+            formData.append("officeNm"     , $("#p_officenm").val()) ; 
+            formData.append("bsnsTy"       , $("#p_bsnsty").val()) ; 
+            formData.append("repsntNm"     , user.usernm) ;
+            formData.append("telnoArno"    , $("#p_telno_arno").val()) ; 
+            formData.append("telno"        , $("#p_telno").val()) ; 
+            formData.append("bsnsno"       , $("#p_bizno").val()) ; 
+            formData.append("estRegNo"     , $("#p_estregno").val()) ; 
+            formData.append("addrSel"      , $("#p_addr_sel").val()) ;
+            formData.append("postno"       , $("#p_postno").text()) ;
+            formData.append("officeAddr"   , $("#p_office_addr").val()) ; 
+            formData.append("officeAddrJ"  , $("#p_postj").text()) ; 
+            formData.append("officeAddrR"  , $("#p_postr").text()) ; 
+            formData.append("officeAddrDtl", $("#p_office_addr_dtl").val())
+
+            if ( !! $("#f_bizno")[0].files &&  $("#f_bizno")[0].files.length > 0) {
+                formData.append("bizfile", $("#f_bizno")[0].files[0] , $("#f_bizno")[0].files[0].name) ; 
+            } else {
+                formData.append("bisfile", "") ; 
+            }
+            if ( !! $("#f_estregno")[0].files &&  $("#f_estregno")[0].files.length > 0) {
+                formData.append("estfile", $("#f_estregno")[0].files[0], $("#f_estregno")[0].files[0].name) ; 
+            } else {
+                formData.append("estfile", "") ; 
+            }
+           
+            /* 중개용도 매매 */
+            $("button[id^=btn_prs_001_med]").each(function(i, e) {
+                var idx = Number(i) + 1 ; 
+                var selected = $(this).hasClass("selected") ? "Y" : "N" ; 
+                formData.append("ppsBuy0" + idx, selected) ; 
+            }) ;
+            /* 중개용도 임대 */
+            $("button[id^=btn_prs_002_med]").each(function(i, e) {
+                var idx = Number(i) + 1 ; 
+                var selected = $(this).hasClass("selected") ? "Y" : "N" ; 
+                formData.append("ppsRnt0" + idx, selected) ; 
+            }) ;
+            
+            console.log("*** bizfile : {}", formData.get("bizfile")) ;
+            console.log("*** estfile : {}", formData.get("estfile")) ;
+            console.log("*** repsntNm: {}", formData.get("repsntNm")) ;
+            homes_comm.network.send_api("/api/v1/broker/uploadbizfile", {
+                "headers": {
+                    "Content-Type": "multipart/form-data"
+                },
+                "body": formData
+            }).then(response => {
+                var files = response.data ; 
+                if ( response.error.httpSttusCd == 200 ) {
+                    var bizfile = files.bizfile ; 
+                    var estfile = files.estfile ; 
+                    /* 파일정보로 다시 중개사무소를 등록하자 */ 
+                    return homes_comm.network.send_api("/api/v1/broker/registbroker", {
+                        "headers": {
+                            "Content-Type": "application/json"
+                        }
+                    }, {
+                        brokerno     : formData.get("userno"), 
+                        officenm     : formData.get("officeNm"), 
+                        bsnsty       : formData.get("bsnsTy"), 
+                        repsntnm     : formData.get("repsntNm"), 
+                        telnoarno    : formData.get("telnoArno"), 
+                        telno        : formData.get("telno"), 
+                        repcttpc     : formData.get("repCttpc01") + formData.get("repCttpc02") + formData.get("repCttpc03"),
+                        repcttpc01   : formData.get("repCttpc01"),
+                        repcttpc02   : formData.get("repCttpc02"),
+                        repcttpc03   : formData.get("repCttpc03"),
+                        bsnsno       : formData.get("bsnsno"), 
+                        estno        : formData.get("estRegNo"), 
+                        addrsel      : formData.get("addrSel"), 
+                        postno       : formData.get("postno"), 
+                        officeaddr   : formData.get("officeAddr"), 
+                        officeaddrr  : formData.get("officeAddrR"), 
+                        officeaddrj  : formData.get("officeAddrJ"), 
+                        officeaddrdtl: formData.get("officeAddrDtl"), 
+                        prsbuy01     : formData.get("ppsBuy01"), 
+                        prsbuy02     : formData.get("ppsBuy02"), 
+                        prsbuy03     : formData.get("ppsBuy03"), 
+                        prsbuy04     : formData.get("ppsBuy04"), 
+                        prsbuy05     : formData.get("ppsBuy05"), 
+                        prsbuy06     : formData.get("ppsBuy06"), 
+                        prsbuy07     : formData.get("ppsBuy07"), 
+                        prsrnt01     : formData.get("ppsRnt01"), 
+                        prsrnt02     : formData.get("ppsRnt02"), 
+                        prsrnt03     : formData.get("ppsRnt03"), 
+                        prsrnt04     : formData.get("ppsRnt04"), 
+                        prsrnt05     : formData.get("ppsRnt05"), 
+                        prsrnt06     : formData.get("ppsRnt06"), 
+                        prsrnt07     : formData.get("ppsRnt05"),
+                        bizfileno    : bizfile.fileno,
+                        estfileno    : estfile.fileno
+                    }) ; 
+                } else {
+                    message.alert(response.error.errorMessage).then(() => {
+
+                    }) ; 
+                }
+            }).then(response => {
+                debugger ;
+            }) ; 
         }
     </script>
 </html>

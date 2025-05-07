@@ -167,6 +167,7 @@ const homes_comm = {
             }) ; 
         }
     }
+    
     , ui: {
         datepicker: ( picker_id, button_id ) => {
             $( "#" + picker_id ).datepicker({

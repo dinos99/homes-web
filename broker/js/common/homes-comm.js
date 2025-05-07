@@ -63,6 +63,10 @@ const homes_comm = {
             delete user.expiration ; 
             homes_comm.store.setItem("user", user) ; 
         }
+        , getAccessToken: () => {
+            var token = homes_comm.store.getItem("token") ; 
+            return token["accessToken"] || "" ; 
+        }
         , getArcodeList: (arcode) => {
             /* store에 지역코드 목록이 존재하지 않는다면 조회하여 setting한다. */ 
             var arList = homes_comm.store.getItem("arList") ;
@@ -198,21 +202,38 @@ const homes_comm = {
                     "body"          : option["body"] || JSON.stringify(params), // body의 데이터 유형은 반드시 "Content-Type" 헤더와 일치해야
                     "redirect"      : option["redirect"] || "follow", /* follow, manual, error */
                 }
+
+                /* ****************************************************************
+                 * is_auth가 명시적으로 false로 들어온 경우만 인증안함 
+                 * - is_auth가 null이가나 'undefined'인경우 인증필요
+                 * ****************************************************************/ 
+                var is_auth = option["is_auth"] === false ? false : true  ;
+                if ( is_auth ) {
+                    def_option.headers["Authorization"] = "Bearer " + homes_comm.store.getAccessToken() ;
+                }
                 
                 /* Failed to execute 'fetch' on 'Window': Request with GET/HEAD method cannot have body. */
                 if ( def_option.method == "GET" || def_option.method == "HEAD" ) {
                     delete def_option.body ; 
                 }
+
+                /* multipart/form-data의 헤더는 자동으로 생성되며 --boundary가 추가된다 */ 
+                if ( def_option.headers["Content-Type"] == "multipart/form-data") {
+                    delete def_option.headers["Content-Type"] ; 
+                }
                 
                 console.log(def_option)
 
+                var api_base_url = homes_comm.fn_get_base_url() ; 
+                if ( api_url.indexOf("/api") === 0 || api_url.indexOf("/auth") === 0) {
+                    api_url = api_base_url + api_url ; 
+                }
                 fetch( api_url, def_option).then( response => {
-                    if ( def_option.headers["Content-Type"] == "application/json" ) {
-                        return response.json() ;
-                    } else if ( def_option.headers["Content-Type"] || "application/x-www-form-urlencoded" ) {
+                    if ( def_option.headers["Content-Type"] == "application/x-www-form-urlencoded" ) {
                         // return new URLSearchParams({ username: "example", password: "password" })
+//                        return response.json() ; 
                     }
-                    return response ; /* plain-text */ 
+                    return response.json() ; 
                 }).then( response => {
                     var error = response.error ; 
                     if ( error.httpSttusCd == 200 ) {
@@ -671,11 +692,11 @@ var fn_kakaomap_Load = (option) => {
 }
 
 /* 주소검색창 오픈 */
-var fn_popAddress = ( option ) => {
+var fn_popAddress = ( option, fn_callback ) => {
     var mcont = $("<div id='popAddress' class='popup-container'/>") ; 
     $("body").append(mcont) ; 
     mcont.load("/html/popup/popAddress.html", () => {   
-        fn_popLoadCompleted(option) ;
+        fn_popLoadCompleted(option, fn_callback) ;
     }) ;
 }
 
@@ -684,7 +705,7 @@ var homes_ui = homes_comm.ui ;
 var network = homes_comm.network ; 
 var popup_ui = homes_comm.ui.popup ; 
 var store = homes_comm.store ; 
-var homes_message = homes.message ; 
+var message = homes.message ; 
 
 var page = { pageid: "" }
 // fn_isLogin() ;

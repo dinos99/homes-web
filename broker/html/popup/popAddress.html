@@ -14,7 +14,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    var fn_popLoadCompleted =  option => {
+    var fn_popLoadCompleted =  (option, fn_callback) => {
 
 //        $("#region_name").val("") ;
         var query = option["addr"] || "" ;
@@ -25,7 +25,6 @@
                 var addr     = "" ;
                 var ext_addr = "" ; 
 
-                var postno = data.zonecode ;
                 if (data.userSelectedType === 'R') { /* 도로명(R) */
                     addr = data.roadAddress;
                 } else { /* 지번(J) */
@@ -46,21 +45,15 @@
                 }
 
                 /* 우편번호 */
-                $("#p_postno").text(postno) ;
-
-                /* 주소검색창은 도로명 기즌으로 표시 */
-                $("#p_offce_addr").val(data.roadAddress + " " + ext_addr) ;
-                /* 도로명 표시 */
-                $("#p_postr").text(data.roadAddress + " " + ext_addr) ; 
-
+                data.postno = data.zonecode ;
+                /* 도로명 */ 
+                data.post_r  = data.roadAddress + " " + ext_addr ; 
+                /* 지번주소 */ 
                 /* 지번이 여러개인경우 지번을 클릭해야지만 정확한 지번주소가 나옴 */ 
-                if ( data.jibunAddress !== "" ) {
-                    $("#p_postj").text(data.jibunAddress) ; 
-                } else {
-                    $("#p_postj").html("<span class='c-red'>지번주소가 다수 존재합니다.</span> 지번주소를 선택해주세요") ; 
-                }
+                data.post_j  = data.jibunAddress ;
+                /* 도로명/지번 사용자선택 */
+                data.addr_sel = data.userSelectedType ; 
 
-  
                 /* 부모창에 반드시 로드되어야 함 */ 
                 var geocoder = new daum.maps.services.Geocoder();
                 var mapContainer = document.getElementById(option.mapid); /* 지도를 담을 영역의 DOM 레퍼런스 */
@@ -88,9 +81,12 @@
                         kakaomap.setCenter(coords);
                         // 마커를 결과값으로 받은 위치로 옮긴다.
                         marker.setPosition(coords)
-                        fn_post_close() ;
                     }
-                });        
+                });
+                if ( $.isFunction(fn_callback)) {
+                    fn_callback.apply(null, [data]) ;
+                }
+                fn_post_close() ;
             },
             width : "400px",
             height: "500px"
