@@ -1,0 +1,235 @@
+<div class="dimmed"></div>
+<div class="homes-modal">
+  <div class="modal-sheet" tabindex="-1" role="dialog" id="pop_subscribe_03">
+    <div class="modal-dialog">
+      <div id="div_mbcert_01" class="modal-content rounded-4 border bg-body shadow">
+        <div class="modal-header px-2 py-4 pb-2 border-bottom-0">
+          <h3 class="w-100 tac">휴대전화 본인확인</h3>
+        </div>
+        <div class="modal-body col px-2 py-0 my-0">
+            <div class="form-floating mb-2 w-100">
+                <input type="text" class="textbox rounded-3 w-100" id="p_usernm_origin" placeholder="이름(실명) 입력" value="중개사01">
+            </div>
+        </div>
+        <div class="modal-body px-2 py-0 my-0">
+            <div class="form-floating mb-2 w-40 ">
+                <input type="text" class="textbox rounded-3 w-100" id="p_birth" placeholder="000101" value="790707">
+            </div>
+            <div class="form-floating mb-3 w-10 tac"> - </div>
+            <div class="form-floating mb-3 w-10">
+                <input type="text" class="textbox rounded-3 w-100" id="p_gender" placeholder="*" value="1">
+            </div>
+            <div class="form-floating mb-3 w-40 tal"> &nbsp; ****** </div>
+        </div>
+
+        <div class="list-group-wrap p-2 gap-4 py-0 my-3">
+          <div class="list-group w-100">
+            <label class="list-group-item d-flex gap-2 cursor-hand py-3" for="agreement_all">
+              <input class="form-check-input flex-shrink-0" type="checkbox" value="Y" id="agreement_all">
+              <span>전체동의 
+                <!-- <small class="d-block text-body-secondary">With support text underneath to add more detail</small> -->
+              </span>
+            </label>
+            <label class="list-group-item d-flex gap-2 cursor-hand py-2" for="agree_01">
+              <input class="form-check-input flex-shrink-0" type="checkbox" value="Y" id="agree_01">
+              <span>[필수]<a href="#">통신사 개인정보 수집/이용</a> 동의.</span>
+            </label>
+            <label class="list-group-item d-flex gap-2 cursor-hand py-2" for="agree_02">
+              <input class="form-check-input flex-shrink-0" type="checkbox" value="Y" id="agree_02">
+              <span>[필수]<a href="#">통신사 고유식별정보 처리</a> 동의 </span>
+            </label>
+            <label class="list-group-item d-flex gap-2 cursor-hand py-2" for="agree_03">
+              <input class="form-check-input flex-shrink-0" type="checkbox" value="Y" id="agree_03">
+              <span>[필수]<a href="#">통신사 이용약관</a>동의 </span>
+            </label>
+            <label class="list-group-item d-flex gap-2 cursor-hand py-2" for="agree_04">
+              <input class="form-check-input flex-shrink-0" type="checkbox" value="Y" id="agree_04">
+              <span>[필수]<a href="#">통신사 서비스 이용약관</a>동의 </span>
+            </label>
+            <label class="list-group-item d-flex gap-2 cursor-hand py-2" for="agree_05">
+              <input class="form-check-input flex-shrink-0" type="checkbox" value="Y" id="agree_05">
+              <span>[필수]<a href="#">통신사 개인정보 제3자 제공</a>동의 </span>
+            </label>
+          </div>
+      </div>
+        <div class="modal-border-bottom p-0"></div>
+        <div class="modal-footer w-100 p-2 gap-2 pb-3 border-top-0">
+            <button type="button" class="btn btn-secondary w-30" id="btn_subscribe_03_cancel_01">취소</button>
+            <button type="button" class="btn btn-danger w-70" id="btn_subscribe_03_next_01">다음</button>
+        </div>
+    </div>
+    <div id="div_mbcert_02" class="modal-content rounded-4 border bg-body shadow">
+      <div class="modal-header px-2 py-4 pb-2 border-bottom-0">
+        <h3 class="w-100 tac">휴대전화 본인확인</h3>
+      </div>
+      <div class="modal-body col px-2 py-0 my-0">
+          <div class="dropdown mb-2 w-100">
+              <select class="form-select py-2 w-100" id="p_ccbCd" >
+                <option value="">통신사 선택</option>
+                <option value="TCM001" selected>SK 텔레콤</option>
+                <option value="TCM002">KT</option>
+                <option value="TCM003">LG U+</option>
+                <option value="TCM004">선불폰</option>
+                <option value="TCM005">알뜰폰</option>
+              </select>
+          </div>
+      </div>
+      <div class="modal-body w-100 px-2 py-0 my-0">
+        <div class="input-style rounded-2 p-2 mb-2 w-100">
+            <input type="text" class="no-border w-60" id="p_cttpc" maxlength="11" value="01022334455">
+            <button type="button" id="btn_send_certno" class="btn btn-success btn-sm">인증번호 전송</button>
+        </div>
+      </div>
+      <div class="modal-body justify-start w-100 px-2 py-0 my-0">
+        <p>인증번호 입력</p>
+      </div>
+      <div class="modal-body w-100 px-2 py-0 my-0">
+        <div class="input-style rounded-2 p-2 mb-2 w-100">
+            <input type="text" class="no-border w-60" id="p_certno" maxlength="6" value="">
+        </div>
+      </div>
+      <div class="modal-border-bottom p-0"></div>
+      <div class="modal-footer w-100 p-2 gap-2 pb-3 border-top-0">
+          <button type="button" class="btn btn-secondary w-30" id="btn_subscribe_03_cancel_02">취소</button>
+          <button type="button" class="btn btn-danger w-70" id="btn_subscribe_03_next_02">다음</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+    var fn_isMobileUser = params => {
+        var mblecttpc = $("#p_cttpc").val() ; 
+        var cttpc = btoa(mblecttpc) ; 
+        return new Promise(( resolve, reject) => {
+            network.send_api(`/api/v1/mber/ismbuser/${cttpc}`, {
+                method : "GET",
+                is_auth: false
+            }).then(response => {
+                resolve(response.data) ; 
+            }).catch( e => {
+                message.alert(e.errorMessage) ; 
+                reject(e) ; 
+            }) ; 
+
+        }) ;  
+    }
+
+  $(document).ready(function() {
+
+    $("#div_mbcert_01").show() ;
+    $("#div_mbcert_02").hide() ;
+
+    $("#agreement_all").click(function() {
+      var b_checked = $(this).is(":checked") ; 
+      if ( b_checked ) {
+        $("input[id^=agree_]").attr("checked", "checked") ; 
+      } else {
+        $("input[id^=agree_]").removeAttr("checked") ; 
+      }
+    }) ; 
+
+    $("#btn_subscribe_03_next_01").click(function() {
+        _gv["subs_03"] = {
+            birth: $("#p_birth").val(), 
+            gndr : $("#p_gender").val(),
+            agree_01: $("#agree_01").is(":checked") ? "Y" : "N" ,
+            agree_02: $("#agree_02").is(":checked") ? "Y" : "N" ,
+            agree_03: $("#agree_03").is(":checked") ? "Y" : "N" ,
+            agree_04: $("#agree_04").is(":checked") ? "Y" : "N" ,
+            agree_05: $("#agree_05").is(":checked") ? "Y" : "N" ,
+        }; 
+      $("#div_mbcert_01").hide() ; 
+      $("#div_mbcert_02").show() ;
+      
+    }) ;
+
+    $("#btn_subscribe_03_next_02").click(function() {
+        _gv["subs_03"].ccbCd = $("#p_ccbCd").val() ;
+        _gv["subs_03"].mbleCttpc = $("#p_cttpc").val() ;
+        var cttpc = _gv["subs_03"].mbleCttpc ; 
+        var cttpc_01 = cttpc.substring(0, 3) ; 
+        var cttpc_02 = "" ; 
+        var cttpc_03 = "" ; 
+        var len = cttpc.length - 3 ; 
+        if ( len < 8 ) {
+          cttpc_02 = cttpc.substring(3, 6) ; 
+          cttpc_03 = cttpc.substring(6) ; 
+        } else {
+          cttpc_02 = cttpc.substring(3, 7) ; 
+          cttpc_03 = cttpc.substring(7) ; 
+        }
+        _gv["subs_03"].mbleCttpc   = btoa(cttpc) ; 
+        _gv["subs_03"].mbleCttpc01 = cttpc_01 ; 
+        _gv["subs_03"].mbleCttpc02 = cttpc_02 ; 
+        _gv["subs_03"].mbleCttpc03 = cttpc_03 ; 
+      
+        _gv["subs_03"].mbleCertno = $("#p_certno").val() ;
+
+        /* 일단은 일반사용자 */
+        _gv["subs_03"].userRole = "MBT001" ; /* 일반사용자 */
+        _gv["subs_03"].loginTy  = "LGT001" ; /* email로 로그인 */ 
+//        member.brokerty = "BRK001" ; /* 대표로 신청하였음 */ 
+        _gv["subs_03"].userSttus = "CTF003" ; /* 승인완료 */ 
+        _gv["subs_03"].agreYn =_gv["subs_03"].agree_01 == "Y" 
+                            && _gv["subs_03"].agree_02 == "Y" 
+                            && _gv["subs_03"].agree_03 == "Y" 
+                            && _gv["subs_03"].agree_04 == "Y" 
+                            && _gv["subs_03"].agree_05 == "Y" 
+                            ? "Y" : "N" ; 
+        _gv["subs_03"].gndr = ( Number($("#p_gender").val()) % 2 ) > 0 ? "M" : "F" ;
+      network.send_api("/api/v1/mber/add-member", {
+        is_auth: false
+      }, {
+        email      : _gv["subs_02"].email,
+        usernm     : _gv["subs_02"].usernm,
+        password   : _gv["subs_02"].password,
+        userRole   : _gv["subs_03"].userRole,
+        userSttus  : _gv["subs_03"].userSttus,
+        birth      : _gv["subs_03"].birth,
+        gndr       : _gv["subs_03"].gndr,
+        ccbCd      : _gv["subs_03"].ccbCd,
+        mbleCttpc  : _gv["subs_03"].mbleCttpc,
+        mbleCttpc01: _gv["subs_03"].mbleCttpc01,
+        mbleCttpc02: _gv["subs_03"].mbleCttpc02,
+        mbleCttpc03: _gv["subs_03"].mbleCttpc03,
+        mbleCertno : _gv["subs_03"].mbleCertno,
+        loginTy    : _gv["subs_03"].loginTy,
+        agreYn     : _gv["subs_03"].agreYn
+      }).then(response => {
+          delete _gv["subs_01"] ; 
+          delete _gv["subs_02"] ; 
+          delete _gv["subs_03"] ; 
+
+          _gv["user"] = response.data ; 
+          homes_comm.store.setItem("user", _gv["user"]) ; 
+          /* 현재창 닫고 중개사 등록팝업 오픈 */ 
+          var mcont = $("<div id='pop-subscribe-04' class='popup-container'/>") ; 
+          $("body").append(mcont) ; 
+          mcont.load("/html/popup/member/pop-subscribe-04.html", () => {       
+              $("#pop-subscribe-03").remove() ;
+          }) ;
+        }) ; 
+    }) ; 
+
+    $("#btn_send_certno").click(function() {
+        fn_isMobileUser({
+        }).then(data => {
+            if ( data.existYn == "N" ) {
+                $("#p_certno").val(Math.floor((Math.random() * 89999) + 10000)) ; 
+                _gv["subs_03"].mbleCttpc = $("#p_cttpc").val() ;
+            }
+        }).catch(e => {
+            $("#p_cttpc").val("") ;
+        })
+
+
+    }) ; 
+
+    $("button[id^=btn_subscribe_03_cancel_]").click(function() {
+        $("#pop-subscribe-03").remove() ;
+    }) ; 
+
+  }) ; 
+</script>

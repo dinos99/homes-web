@@ -380,9 +380,9 @@ const homes_comm = {
             }) ;
             /* 약관동의 */ 
             $("#btn_agreement").click(function() {
-                var agcont = $("<div id='pop_agree_cont' class='popup-container'/>") ; 
+                var agcont = $("<div id='pop-subscribe-01' class='popup-container'/>") ; 
                 $("body").append(agcont) ; 
-                agcont.load("/html/popup/popAgreement.html", () => {
+                agcont.load("/html/popup/member/pop-subscribe-01.html", () => {
                     $("#btn_pop_close").click() ;
                 }) ;
             }) ; 
@@ -707,10 +707,12 @@ var popup_ui = homes_comm.ui.popup ;
 var store = homes_comm.store ; 
 var message = homes.message ; 
 
-var page = { pageid: "" }
+var page = { pageid: "" } ; 
+
+/* 글로벌 변수 선언 */ 
+var _gv = {} ; 
+
 // fn_isLogin() ;
-
-
 /* event */
 window.onload = () => {
     fn_page_onLoad() ;

@@ -1,0 +1,128 @@
+
+<div class="dimmed"></div>
+<div class="homes-modal">
+  <div class="modal-sheet" tabindex="-1" role="dialog" id="pop_subscribe_02">
+    <div class="modal-dialog">
+      <div class="modal-content rounded-4 border bg-body shadow">
+        <div class="modal-header px-2 py-4 pb-2 border-bottom-0">
+          <h3 class="w-100 tac">회원정보 입력</h3>
+        </div>
+        <div class="modal-body col px-2 py-0 ">
+            <div class="form-floating mb-3 w-100">
+                <input type="email" class="form-control rounded-3" id="p_email" placeholder="name@example.com" value="broker05@homes.co.kr">
+                <label for="p_email">이메일주소 입력</label>
+            </div>
+            <div class="form-floating mb-3 w-100">
+                <input type="text" class="form-control rounded-3" id="p_usernm" placeholder="이름(실명)입력" value="중개사05">
+                <label for="p_usernm">이름(실명)입력</label>
+            </div>
+            <div class="form-floating mb-3 w-100">
+                <input type="password" class="form-control rounded-3" id="p_password" placeholder="비밀번호입력(영문,숫자포함 8자리 이상)" value="homes1234">
+                <label for="p_password">비밀번호입력(영문,숫자포함 8자리 이상)</label>
+            </div>
+            <div class="form-floating mb-3 w-100">
+                <input type="password" class="form-control rounded-3" id="p_password_conf" placeholder="비밀번호확인" value="homes1234">
+                <label for="p_password_conf">비밀번호확인</label>
+            </div>
+        </div>
+
+        <div class="modal-border-bottom p-0"></div>
+        <div class="modal-footer w-100 p-2 gap-2 pb-3 border-top-0">
+            <button type="button" class="btn btn-secondary w-30" id="btn_subcribe_02_cancel">취소</button>
+            <button type="button" class="btn btn-secondary w-70" id="btn_subcribe_02_next" disabled>다음</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    var fn_next = () => {
+        var email = $("#p_email").val() ; 
+        var usernm = $("#p_usernm").val() ;
+        var pass = $("#p_password").val() ; 
+        var pass_conf = $("#p_password_conf").val() ; 
+        var is_valid_email = homes_comm.validate.fn_isValidemail(email) ;  ;
+        var is_valid_name = homes_comm.validate.fn_isEmpty(usernm) ; 
+        var is_valid_pass = homes_comm.validate.fn_isPassPattern(pass);
+        var is_equal_pass = homes_comm.validate.fn_isEqualVal(pass, pass_conf) ; 
+
+        /*
+        console.log("is_valid_email :", is_valid_email) ;
+        console.log("is_valid_name  :", is_valid_name) ;
+        console.log("is_valid_pass  :", is_valid_pass) ;
+        console.log("is_equal_pass  :", is_equal_pass) ;
+        */
+        if ( is_valid_email && is_valid_name && is_valid_pass && is_equal_pass ) {
+            $("#btn_subcribe_02_next")
+                .removeClass("btn-secondary")
+                .removeClass("btn-danger")
+                .addClass("btn-danger")
+                .removeAttr("disabled") ; 
+        } else {
+            $("#btn_subcribe_02_next")
+                .removeClass("btn-secondary")
+                .removeClass("btn-danger")
+                .addClass("btn-secondary")
+                .attr("disabled", "disabled") ; 
+        }
+        return is_valid_email && is_valid_name && is_valid_pass && is_equal_pass ; 
+    } ;
+
+    var fn_isExistUser = param => {
+        var email = $("#p_email").val() ;
+        return new Promise(( resolve, reject) => {
+            network.send_api(`/api/v1/mber/isuser/${email}`, {
+                method : "GET",
+                is_auth: false
+            }).then(response => {
+                resolve(response.data) ; 
+            }).catch( e => {
+                message.alert(e.errorMessage) ; 
+                reject(e) ; 
+            }) ; 
+
+        }) ;  
+    }
+
+    $("#p_email").blur(function() {
+        fn_next() ; 
+    }) ; 
+    $("#p_usernm").blur(function() {
+        fn_next() ; 
+    }) ;
+    $("#p_password").blur(function() {
+        fn_next() ; 
+    }) ;
+    $("#p_password_conf").blur(function() {
+        fn_next() ; 
+    }) ;
+
+
+    $(document).ready(function() {
+        $("#btn_subcribe_02_next").click(function() {
+            fn_isExistUser({
+                "email": $("#p_email").val() 
+            }).then(data => {
+                _gv["subs_02"] = {}; 
+                _gv.subs_02 = {
+                    email: $("#p_email").val(),
+                    usernm: $("#p_usernm").val(),
+                    password: btoa($("#p_password").val())
+                }
+                var mcont = $("<div id='pop-subscribe-03' class='popup-container'/>") ; 
+                $("body").append(mcont) ; 
+                mcont.load("/html/popup/member/pop-subscribe-03.html", () => {       
+                    $("#pop-subscribe-02").remove() ;
+                }) ;
+            }).catch( e => {
+                /* 에러처리 */ 
+            }) ;
+
+            /*
+            */
+        }) ;
+        $("#btn_subcribe_02_cancel").click(function()  {
+            $("#pop-subscribe-02").remove() ; 
+        }) ;
+    }) ; 
+</script>
