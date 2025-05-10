@@ -233,7 +233,11 @@ a.ui-datepicker-prev-next {
 .w-400px { width: 400px !important ; }
 .w-450px { width: 450px !important ; }
 .w-500px { width: 500px !important ; }
+.w-600px { width: 600px !important ; }
+.w-700px { width: 700px !important ; }
+.w-800px { width: 800px !important ; }
 
+.h-45px { height: 45px !important ; }
 .h-80px { height: 80px !important ; }
 .h-100px { height: 100px !important ; }
 .h-240px { height: 240px !important ; }
@@ -241,6 +245,9 @@ a.ui-datepicker-prev-next {
 .h-250px { height: 250px !important ; }
 .h-600px { height: 600px !important ; }
 
+.no-width { width: unset !important; }
+
+/* line-height */
 .lh-20 { line-height: 20px !important;}
 .lh-30 { line-height: 30px !important;}
 
@@ -275,6 +282,7 @@ a.ui-datepicker-prev-next {
 .tar { text-align: right !important; }
 
 /* font-weight */
+.bold { font-weight: 600 !important; }
 .f-600 { font-weight: 600 !important; }
 
 /* link-style */

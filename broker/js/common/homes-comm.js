@@ -12,28 +12,7 @@ const homes_comm = {
             "/html/sign-in/sign-in.html" /* 로그인 페이지 */
         ]
     }
-    , admin_menu: {
-        LCD: [{
-            id: "SYST", nm: "시스템관리", link: "/html/system/SYST00010001.html" 
-            , MCD: [{
-                id: "0001", nm: "Publishing", link: "/html/system/SYST00010001.html", icon: "bi-pencil-square"
-                , SCD: [{ 
-                    id: "0001", nm: "공통화면 목록", link: "/html/system/SYST00010001.html" 
-                }, {
-                    id: "0002", nm: "버튼 & 그리드", link: "/html/system/SYST00010002.html" 
-                }]
-            }]
-        }, {
-            id: "PRJT", nm: "프로젝트관리", link: "/html/project/PRJT00010001.html" 
-            , MCD: [{
-                id: "0001", nm: "시스템관리", link: "/html/project/PRJT00010001.html", icon: "" 
-                , SCD: [{
-                    id: "0001", nm: "공통코드 관리", link: "/html/project/PRJT00010001.html" 
-                }]
-            }]
-        }]
-    }, 
-    store: {
+    , store: {
         setItem: (key, code) => {
             localStorage.setItem(key, JSON.stringify(code))
         }
@@ -336,10 +315,22 @@ const homes_comm = {
             }
 
         }
-        , popup: {
-            pop_stack: []
-            , pop_data: {}
-            , param_data: {}
+    }
+    , popup: {
+        pop_stack: []
+        , pop_data: {}
+        , param_data: {}
+        , popOpenEstate: () => {
+            var cont = $("<div id='pop-estate' class='popup-container'/>") ; 
+            $("body").append(cont) ;
+            cont.load("/html/popup/estate/popEstate.html", () => {
+                /* 창닫기 버튼 클릭 */ 
+                $("#popEstateClose").click(function() {
+                    $("#pop-estate").remove() ;
+                }) ; 
+                fn_popup_Load() ; 
+            }) ;
+
         }
     }
     , _fn_is_auth_url: () => {
@@ -487,7 +478,7 @@ var fn_slide_init = () => {
     }) ; 
 }
 
-var fn_isLogin = () => {
+var fn_isLoginRequired = () => {
     var path = location.pathname ; 
     if ( path == homes_comm.constants._LOGIN_PAGE_URL ) {
         homes_comm.store.clear() ;
@@ -700,12 +691,31 @@ var fn_popAddress = ( option, fn_callback ) => {
     }) ;
 }
 
+/* 단순 token존재여부와 유효기간만 판단함 */ 
+var fn_isLogin = () => {
+    var token = homes_comm.store.getItem("token") ; 
+    if ( !!!token ) {
+        message.alert("로그인이 필요합니다.") ; 
+        return false ; 
+    }
+
+    var today   = new Date() ;
+    var expdate = new Date(token.expiration) ; 
+    
+    if (( expdate - today ) < 0 ) {
+        message.alert("로그인이 필요합니다.") ; 
+        return false ; 
+    }
+    return true ;
+}
+
 var homes = homes_comm ;
-var homes_ui = homes_comm.ui ; 
-var network = homes_comm.network ; 
-var popup_ui = homes_comm.ui.popup ; 
-var store = homes_comm.store ; 
+var homes_ui = homes.ui ; 
+var network = homes.network ; 
+var popup_ui = homes.ui.popup ; 
+var store = homes.store ; 
 var message = homes.message ; 
+var popup = homes.popup ; 
 
 var page = { pageid: "" } ; 
 

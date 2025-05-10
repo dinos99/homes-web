@@ -1,0 +1,155 @@
+<div class="pop-cont">
+    <div class="pop-cont-body rounded-2 shadow">
+        <div class="pop-header">
+            <h3 class="bold mb-0">부동산 구분</h3>
+            <button type="button" id="popEstateClose" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="pop-body">
+            <div class="pop-table">
+                <table class="table-02">
+                    <tbody>
+                        <tr>
+                            <th rowspan="2">집합건물</th>
+                            <td>공동주택</td>
+                            <td class="last" id="td-btn-est-110">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>공동건물</td>
+                            <td class="last" id="td-btn-est-120">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th rowspan="2">단독건물</th>
+                            <td>일반주택</td>
+                            <td class="last" id="td-btn-est-210">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>일반건물</td>
+                            <td class="last" id="td-btn-est-220">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" class="tac">토지</th>
+                            <td class="last d-flex align-center">
+                                <button type="button" class="btn btn-white h-45px" id="btn_est_310">토지선택</button>
+                                <select class="form-select px-3 w-150px h-45px" id="sel_est_310">
+                                    <option value="">지목선택</option>
+                                    <option value="EST311">대</option>
+                                    <option value="EST312">산</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="last tac c-red" colspan="2">안내</th>
+                            <td class="last-col">
+                                건물유형 또는 지목을 선택 후 확인을 클릭하십시오
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="pop-footer">
+            <input type="hidden" id="p_estgbcd" value="" />
+            <button type="button" class="btn btn-secondary px-5 mx-1" id="btn_estate_close">취소</button>
+            <button type="button" class="btn btn-secondary px-5 mx-1" id="btn_estate_ok" diabled="disabled">확인</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var page = { id: "pop-estate"  }
+    var codeList = {
+        "110": [
+            { cd: 111, nm: "아파트"}
+            , { cd: 112, nm: "주상복합"}
+            , { cd: 113, nm: "오피스텔"}
+            , { cd: 114, nm: "빌라"}
+            , { cd: 115, nm: "연립"}
+            , { cd: 116, nm: "다세대"}
+            , { cd: 117, nm: "도시형생활주택"}
+            , { cd: 118, nm: "타운하우스"}
+            , { cd: 119, nm: "레지던스"}
+        ]
+        , "120": [
+            { cd: 121, nm: "오피스텔"}
+            , { cd: 122, nm: "상가건물"}
+            , { cd: 123, nm: "지식산업센터"}
+            , { cd: 124, nm: "빌딩"}
+            , { cd: 125, nm: "기타건물"}
+        ]
+        , "210": [
+            { cd: 211, nm: "단독주택" }
+            , { cd: 212, nm: "다가구주택" }
+            , { cd: 213, nm: "상가주택" }
+            , { cd: 214, nm: "전원주택" }
+            , { cd: 215, nm: "한옥주택" }
+        ]
+        , "220": [
+            { cd: 221, nm: "빌딩" }
+            , { cd: 222, nm: "상가건물" }
+            , { cd: 223, nm: "공장/창고" }
+            , { cd: 224, nm: "기타건물" }
+        ]
+        , "310": [
+            { cd: 311, nm: "대" }
+            , { cd: 312, nm: "산"}
+        ]} ; 
+
+    var fn_move_popup = () => {
+        var fw = $(".pop-cont").width() ;
+        var fh = $(".pop-cont").height() ; 
+
+        var pw = $(".pop-cont-body").width() ;
+        var ph = $(".pop-cont-body").height() ; 
+        var tp = Number((fh - ph) / 2) ;
+        var lf = Number((fw - pw ) / 2) ; 
+
+        $(".pop-cont-body").css("top", tp + "px") ;
+        $(".pop-cont-body").css("left", lf + "px") ;
+    }
+
+    var fn_create_buttons = () => {
+        var keys = [ "110", "120", "210", "220" ]
+        keys.forEach(key => {
+            codeList[key].forEach(code => {
+                var btnHtml = `<button type="button" class="btn btn-white" id="btn_est_${code.cd}">${code.nm}</button>` ;  
+                var button = $(btnHtml) ; 
+                $("#td-btn-est-" + key).append(button) ;
+            }) ;
+        }) ; 
+        $("#sel_est_310").hide() ;
+        $("button[id^=btn_est_]").click(function() {
+            $("button[id^=btn_est_]").removeClass("btn-white").removeClass("btn-green").addClass("btn-white") ; 
+            $(this).removeClass("btn-white").addClass("btn-green") ; 
+            var estcd = $(this).attr("id").split("_").splice(1,2).join("").toUpperCase() ;
+            if ($(this).attr("id") == "btn_est_310") {
+                $("#sel_est_310").show() ;
+                $("#p_estgbcd").val("") ; 
+            } else {
+                $("#sel_est_310").hide() ;
+                $("#p_estgbcd").val(estcd) ; 
+            }
+            $("#sel_est_310").val("") ;
+        }) ; 
+        $("#sel_est_310").change(function() {
+            $("#p_estgbcd").val($(this).val()) ; 
+        }) ; 
+        fn_move_popup() ;
+    }
+
+    var fn_popup_Load = () => {
+        fn_create_buttons() ; 
+        $("#popEstateClose").click(function() {
+            fn_popup_Close() ;
+        }) ; 
+        $("#btn_estate_close").click(function() {
+            fn_popup_Close() ;
+        }) ;
+    }
+
+    var fn_popup_Close = () => {
+        $("#" + page.id ).remove() ; 
+    }
+</script>

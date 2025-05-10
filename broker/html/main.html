@@ -15,6 +15,11 @@
     <!-- KAKAo Login API -->
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js" integrity="sha384-dok87au0gKqJdxs7msEdBPNnKSRT+/mhTVzq+qOhcL464zXwvcrpjeWvyj1kCdq6" crossorigin="anonymous"></script>
 
+    <!-- services,clusterer,drawing 라이브러리 불러오기 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3683e4f8faad0637b8a7db5fc23179bd&libraries=services,clusterer,drawing"></script>
+
+    <!-- 다음 우편번호 검색 API -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/custom.css">
@@ -25,6 +30,7 @@
       <button type="button" class="btn btn-primary" id="btn_homesLogin">홈즈프로 로그인</button>
       <button type="button" class="btn btn-success" id="btn_reg_broker">중개사무소 등록(대표)</button>
       <button type="button" class="btn btn-success" id="btn_reg_inbroker">직원 승인요청</button>
+      <button type="button" class="btn btn-secondary" id="btn_popEsate">부동산구분 팝업</button>
       <!--
       <button type="button" class="btn btn-secondary" id="btn_s_area">지역검색</button>
       -->
@@ -43,8 +49,22 @@
       }) ;
 
       $("#btn_reg_broker").click(function() {
-        location.href="/html/broker/broker-input.html"
+        var is_Login = fn_isLogin() ; 
+        if ( is_Login ) {
+          $("#pop-broker-input").remove() ; 
+          var mcont = $("<div id='pop-broker-input' class='popup-container'/>") ; 
+          $("body").append(mcont) ; 
+          mcont.load("/html/broker/broker-input.html", () => {   
+              fn_popLoadCompleted({
+                "brokerTy": "BRT001" /* 대표공인중개사 */ 
+              }) ;
+          }) ;
+        }
       }) ;
+
+      $("#btn_popEsate").click(function() {
+        popup.popOpenEstate() ;
+      }) ; 
     }
   </script>
 
