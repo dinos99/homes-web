@@ -25,19 +25,6 @@
 	box-shadow: none !important;
 	border: var(--bs-border-width) solid var(--bs-border-color);
 }
-.pop-container {
-	min-width: 400px; 
-	min-height: 300px; 
-	overflow: hidden ;
-	padding: 0 ; 
-	margin: 0 ; 
-	background-color: var(--bs-body-bg);
-	display: block;
-	position:absolute;
-	left: 20px; 
-	z-index: 1000;
-	border-radius: var(--bs-border-radius) !important;
-}
 
 .homes-logo {
     background-image: url(/images/icon-homes-pro.jpg);

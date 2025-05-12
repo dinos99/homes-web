@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>리얼홈즈 관리자 계정신청</title>
+
+    <!-- bootstrap 5.3.5 -->    
+    <script src="/js/extern/bootstrap-5.3.5/assets/js/color-modes.js"></script>
+    <link href="/js/extern/bootstrap-5.3.5/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="/css/bootstrap/modal.css" rel="stylesheet">
+
+    <!-- homes css -->
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/custom.css">
+
+    <meta name="theme-color" content="#712cf9">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/bootstrap/sign-in.css" rel="stylesheet">
+
+    <script type="text/javascript">
+//      alert($("html").attr("data-bs-theme"));
+    </script>
+
+  </head>
+  <body class="d-flex align-items-center py-4 bg-body-tertiary">
+    <div class="snippets">
+
+    </div>
+    <main class="form-signin w-100 m-auto">
+      <form>
+        <div class="btn-home mb-3">
+          <h1 class="h3 mb-3 fw-normal c-white">리얼홈즈 관리자</h1>
+        </div>
+        <div class="form-floating">
+          <input type="email" class="form-control" id="p_email" placeholder="name@example.com" value="homes.manager.04@homes.co.kr"/>
+          <label for="p_email">Email address</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="p_name" placeholder="이름(실명)입력" value="관리자04"/>
+          <label for="p_name">이름(실명)입력</label>
+        </div>
+        
+        <button class="btn btn-primary py-2 my-2 w-100" id="btn_signup" type="button">관리자계정 신청</button>
+        <p class="mt-5 mb-3 text-body-secondary">&nbsp;</p>
+      </form>
+    </main>
+
+    <script src="/js/extern/jquery-3.7.1.min.js"></script>
+    <script src="/js/common/homes-comm.js"></script>
+    <script type="text/javascript">
+
+        var fn_signup = () => {
+            network.send("/api/v1/manager/sign-up", {
+                is_auth: false
+            }, {
+                "email": $("#p_email").val(),
+                "managernm": $("#p_name").val() 
+            }).then(response => {
+                store.setItem("manager", response.data) ; 
+                var info = `[<span class='c-primary'>${response.data.managernm}</span>]님 등록되었습니다.` ; 
+                message.alert(info)
+                .then(data => {
+                    location.href = "/html/sign-in/sign-in.html"
+                }) ; 
+            }).catch(e => {
+                message.alert(e.errorMessage, {
+                    title: `<strong>[<span class='c-red'>Error-${e.httpSttusCd}</span>] 서버에러 </strong>`,
+                }) ;
+            }) ; 
+        }
+
+        var fn_page_onLoad = () => {
+            homes_comm.store.clear() ;
+            $("#btn_signup").click(function() {
+                fn_signup() ; 
+            }) ; 
+        }
+    </script>
+
+  </body>
+</html>

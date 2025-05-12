@@ -8,10 +8,24 @@ const homes_comm = {
         /* 프리패스 페이지 */ 
         , _NO_AUTH_PAGES: [
             "/html/sign-in/sign-in.html" /* 로그인 페이지 */
+            , "/html/sign-in/sign-up.html" /* 회원가입 */
         ]
     }
     , admin_menu: {
         LCD: [{
+            id: "PRJT", nm: "프로젝트관리", link: "/html/project/PRJT00010001.html" 
+            , MCD: [{
+                id: "0001", nm: "사용자관리", link: "/html/project/PRJT00010001.html", icon: "bi-h-circle-fill" 
+                , SCD: [{
+                    id: "0001", nm: "사용자관리", link: "/html/project/PRJT00010001.html" 
+                }]
+            }, {
+                id: "0002", nm: "중개사관리", link: "/html/project/PRJT00020001.html", icon: "bi-h-circle-fill" 
+                , SCD: [{
+                    id: "0001", nm: "중개사관리", link: "/html/project/PRJT00020001.html" 
+                }]
+            }]
+        }, {
             id: "SYST", nm: "시스템관리", link: "/html/system/SYST00010001.html" 
             , MCD: [{
                 id: "0001", nm: "Publishing", link: "/html/system/SYST00010001.html", icon: "bi-pencil-square"
@@ -19,14 +33,6 @@ const homes_comm = {
                     id: "0001", nm: "공통화면 목록", link: "/html/system/SYST00010001.html" 
                 }, {
                     id: "0002", nm: "버튼 & 그리드", link: "/html/system/SYST00010002.html" 
-                }]
-            }]
-        }, {
-            id: "PRJT", nm: "프로젝트관리", link: "/html/project/PRJT00010001.html" 
-            , MCD: [{
-                id: "0001", nm: "시스템관리", link: "/html/project/PRJT00010001.html", icon: "" 
-                , SCD: [{
-                    id: "0001", nm: "공통코드 관리", link: "/html/project/PRJT00010001.html" 
                 }]
             }]
         }]
@@ -62,6 +68,10 @@ const homes_comm = {
             delete user.expiration ; 
             homes_comm.store.setItem("user", user) ; 
         }
+        , getAccessToken: () => {
+            var token = homes_comm.store.getItem("token") ; 
+            return token["accessToken"] || "" ; 
+        }
         , getArcodeList: (arcode) => {
             /* store에 지역코드 목록이 존재하지 않는다면 조회하여 setting한다. */ 
             var arList = homes_comm.store.getItem("arList") ;
@@ -86,85 +96,112 @@ const homes_comm = {
         }
     }
     , message: {
-        alert: ( message, fn_callback ) => {
-            homes_comm._fn_create_modal( message )
-            .then((data) => {
-                if (fn_callback) {
-                    fn_callback.apply() ;
-                }
-            }) ; 
+        alert: ( message, options ) => {
+            return new Promise(resolve => {
+                var cont = $("<div id='pop_cont_alert' class='popup-container'/>") ; 
+                $("body").append(cont) ; 
+                var option = options || {} ;
+                option.title = option["title"] || "&nbsp;" ; 
+                option.message = message ; 
+                cont.load("/html/popup/popAlert.html", () => {
+                    $("#alert_title").html(option.title) ;
+                    $("#alert_cont").html(option.message) ;
+                    $(".btn-close").click(function() {
+                        resolve(true) ; 
+                        $("#pop_cont_alert").remove() ;
+                    })
+                    $("#btn_ok").click(function() {
+                        resolve(true) ; 
+                        $("#pop_cont_alert").remove() ;
+                    }) ; 
+                }) ;
+            }) ;
+        }
+        , confirm: (message, options ) => {
+            return new Promise((resolve, reject) => {
+                var cont = $("<div id='pop_cont_confirm' class='popup-container'/>") ; 
+                $("body").append(cont) ; 
+                var option = options || {} ;
+                option.title = option["title"] || "&nbsp;" ; 
+                option.message = message ; 
+                cont.load("/html/popup/popConfirm.html", (html) => {
+                    $("#alert_title").html(option.title) ;
+                    $("#alert_cont").html(option.message) ;
+                    $(".btn-close").click(function() {
+                        reject(true) ; 
+                        $("#pop_cont_confirm").remove() ;
+                    }) ;
+                    $("#btn_cancel").click(function() {
+                        reject(true) ; 
+                        $("#pop_cont_confirm").remove() ;
+                    }) ;
+                    $("#btn_ok").click(function() {
+                        resolve(true) ; 
+                        $("#pop_cont_confirm").remove() ;
+                    }) ; 
+                }) ;
+            }) ;
+
         }
     }
     , network: {
-        send: (url, params, fn_callback) => {
-            var api_url = homes_comm.fn_get_api_url(url) ; 
-            var token = homes_comm.store.getItem("token") ; 
-            var accessToken = token.accessToken ; 
-            const request = new Promise((resolve, reject) => {
-                fetch(api_url, {
-                    method: "POST",
-                    mode: "cors", 
-                    cache: "no-cache", 
-                    credentials: "same-origin", 
-                    headers: {
-                      "Content-Type": "application/json",
-                      "Authorization" : "Bearer " + accessToken
+        send: (api_url, option, params, fn_callgack) => {
+            return new Promise((resolve, reject) => {
+                var def_option = {
+                    "method"        : option["method"] || "POST",
+                    "mode"          : option["mode"] || "cors", /* no-cors, cors, same-origin */
+                    "cache"         : option["cache"] || "no-cache", /* no-cache, reload, force-cache, only-if-cached */
+                    "credentials"   : option["credentials"] || "same-origin", /* include, same-origin, omit */
+                    "headers"       : option["headers"] || {
+                        "Content-Type": "application/json",
+//                        'Content-Type': 'application/x-www-form-urlencoded',
                     },
-                    redirect: "follow", 
-                    referrerPolicy: "no-referrer", 
-                    body: JSON.stringify(params), // body의 데이터 유형은 반드시 "Content-Type" 헤더와 일치해야
-                }).then((response) => {
-                    homes_ui.progress(false) ; 
-                    return response.json() ;
-                }).then((response) => { 
-                    homes_ui.progress(false) ; 
-                    var errorCd = response.error.httpSttusCd ; 
-                    if ( errorCd === 200) {
-                        resolve(response) ; 
-                    } else  {
-                        homes_comm.message.alert(response.error.errorMessage) ; 
+                    "referrerPolicy": option["referrerPolicy"] || "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                    "body"          : option["body"] || JSON.stringify(params), // body의 데이터 유형은 반드시 "Content-Type" 헤더와 일치해야
+                    "redirect"      : option["redirect"] || "follow", /* follow, manual, error */
+                }
+
+                /* ****************************************************************
+                 * is_auth가 명시적으로 false로 들어온 경우만 인증안함 
+                 * - is_auth가 null이가나 'undefined'인경우 인증필요
+                 * ****************************************************************/ 
+                var is_auth = option["is_auth"] === false ? false : true  ;
+                if ( is_auth ) {
+                    def_option.headers["Authorization"] = "Bearer " + homes_comm.store.getAccessToken() ;
+                }
+                
+                /* Failed to execute 'fetch' on 'Window': Request with GET/HEAD method cannot have body. */
+                if ( def_option.method == "GET" || def_option.method == "HEAD" ) {
+                    delete def_option.body ; 
+                }
+
+                /* multipart/form-data의 헤더는 자동으로 생성되며 --boundary가 추가된다 */ 
+                if ( def_option.headers["Content-Type"] == "multipart/form-data") {
+                    delete def_option.headers["Content-Type"] ; 
+                }
+                
+//              console.log(def_option)
+                var api_base_url = homes_comm.fn_get_base_url() ; 
+                if ( api_url.indexOf("/api") === 0 || api_url.indexOf("/auth") === 0) {
+                    api_url = api_base_url + api_url ; 
+                }
+                fetch( api_url, def_option).then( response => {
+                    if ( def_option.headers["Content-Type"] == "application/x-www-form-urlencoded" ) {
+                        // return new URLSearchParams({ username: "example", password: "password" })
+//                        return response.json() ; 
                     }
-                }).catch((e) => {
-                    homes_ui.progress(false) ; 
-                    homes_comm.message.alert("네트워크 에러가 발생하였습니다.") ; 
-                    reject(e) ; 
-                }) ;
-            }).then((response) => {
-                fn_callback.apply( null, [ response ]) ; 
-            }) ; 
-        }
-        , simple_send: (url, params, fn_callback) => {
-            
-            var api_base_url = homes_comm.fn_get_base_url() ; 
-            const request = new Promise((resolve, reject) => {
-                fetch(api_base_url + url, {
-                    method: "POST", // *GET, POST, PUT, DELETE 등
-                    mode: "cors", // no-cors, *cors, same-origin
-                    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-                    credentials: "same-origin", // include, *same-origin, omit
-                    headers: {
-                      "Content-Type": "application/json",
-                      // 'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    redirect: "follow", // manual, *follow, error
-                    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                    body: JSON.stringify(params), // body의 데이터 유형은 반드시 "Content-Type" 헤더와 일치해야
-                }).then((response) => {
-                    return response.json() ;
-                }).then((response) => {
-                    var errorCd = response.error.httpSttusCd ; 
-                    if ( errorCd === 200) {
+                    return response.json() ; 
+                }).then( response => {
+                    var error = response.error ; 
+                    if ( error.httpSttusCd == 200 ) {
                         resolve(response) ; 
-                    } else  {
-                        homes_comm.message.alert(response.error.errorMessage) ; 
+                    } else {
+                        reject(response.error) ; 
                     }
-                }).catch((e) => {
-                    homes_comm.message.alert("네트워크 에러가 발생하였습니다.") ; 
-                    reject(e) ; 
-                }) ; 
-            }).then((response) => {
-                fn_callback.apply( null, [ response ]) ; 
-            }) ; 
+                }).catch( e => {
+                    reject(e) ;
+                })
+            })
         }
     }
     
@@ -481,20 +518,18 @@ var fn_slide_init = () => {
 }
 
 var fn_isLogin = () => {
-    var path = location.pathname ; 
-    if ( path == homes_comm.constants._LOGIN_PAGE_URL ) {
-        homes_comm.store.clear() ;
-    }
-
     var is_required_auth = homes_comm._fn_is_auth_url() ;
     var tokeninfo = store.getItem("token") ; 
     if ( is_required_auth ) {
         /* 로그인이 필요한 페이지 */
         if (!!!tokeninfo || !!!tokeninfo["accessToken"]) {
             /* 토큰정보가 없으면 로그인 페이지로 튕김 */ 
-            homes_message.alert("로그인이 필요한 페이지 입니다.", () => {
-                location.href = "/html/sign-in/sign-in.html" ;
-            }) ; 
+            message.alert("로그인이 필요한 페이지 입니다.", {
+                title: `<strong>[<span class='c-red'>Error-401</span>] 로그인에러 </strong>`
+            }).then(data => {
+                location.href = homes_comm.constants._LOGIN_PAGE_URL ; 
+            }) ;
+            return false ;
         } else {
             /* ************************************************************
              * 토큰이 있으면 정확한 토큰인지 검증해야 함 
@@ -505,6 +540,7 @@ var fn_isLogin = () => {
     } else {
         /* 로그인이 필요하지 않은 페이지 */ 
     }
+    return true ;
 }
 
 var fn_homes_admin_init = () => {
@@ -524,13 +560,19 @@ var fn_verify_token = (fn_callback) => {
 } ; 
 
 var fn_homes_signin = (params, fn_callback) => {
-    homes_comm.network.simple_send("/auth/sign-in", {
+    homes_comm.network.send("/auth/sign-in", {
+        is_auth: false
+    }, {
         "email": params.email
         , "password": btoa(params.password)
         ,"is_remember": params.is_remember
-    }, (response) => {
+    }).then(response => {
         homes.store.init_token(response.token, response.data) ; 
         fn_callback.apply( null, [ response ]) ;
+    }).catch( e => {
+        homes_comm.message.alert(e.errorMessage, {
+            title: `<strong>[<span class='c-red'>Error-${e.httpSttusCd}</span>] 서버에러 </strong>`,
+        }) ;
     }) ; 
 };
 
@@ -552,9 +594,9 @@ var fn_page_init = () => {
     /* 상단 GNB 영역생성 */ 
     fn_create_gnb() ; 
     /* 좌측 LNB 영역 생성 */
-    fn_create_lnb() ; 
+//    fn_create_lnb() ; 
 
-    homes_comm.store.getArcodeList( user.arcode ) ;
+//    homes_comm.store.getArcodeList( user.arcode ) ;
 }
 
 var fn_get_menu = (cd) => {
@@ -656,18 +698,14 @@ var fn_setpage = (pageinfo) => {
 }
 
 var homes = homes_comm ;
-var homes_ui = homes_comm.ui ; 
 var network = homes_comm.network ; 
-var popup_ui = homes_comm.ui.popup ; 
 var store = homes_comm.store ; 
-var homes_message = homes.message ; 
+var message = homes_comm.message ; 
 
 var page = { pageid: "" }
-fn_isLogin() ;
 
 
 /* event */
 window.onload = () => {
-    fn_homes_admin_init() ; 
     fn_page_onLoad() ;
 }

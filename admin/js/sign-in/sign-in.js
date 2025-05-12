@@ -32,7 +32,16 @@ const fn_signin = () => {
 
 
 }
-  
-$("#btn_signin").click(function() {
-    fn_signin() ;
-}) ; 
+
+
+var fn_page_onLoad = () => {
+    homes_comm.store.clear() ;
+    $("#btn_signin").click(function() {
+        fn_signin() ;
+    }) ; 
+
+    $("#btn_signup").click(function() {
+        location.href = "/html/sign-in/sign-up.html" ;
+    }) ;
+}
+ 

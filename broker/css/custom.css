@@ -285,6 +285,9 @@ a.ui-datepicker-prev-next {
 .bold { font-weight: 600 !important; }
 .f-600 { font-weight: 600 !important; }
 
+/* hidden */
+.hidden { display:none !important ; }
+
 /* link-style */
 a.link-style { text-decoration: none; }
 a.link-style:hover { color: #ff6161; text-decoration: underline ;}
@@ -372,8 +375,6 @@ a.link-style.bold { font-weight: 600; }
 }
 
 .dropdown-menu.items { display: block }
-.dropdown-menu.items.hidden { display:none !important ; }
-
 .dropdown-item {
   width: calc(100% - 30px) ; 
   min-width:80px;
@@ -455,4 +456,21 @@ button.btn-green {
   padding: 10px 20px; 
   margin: 0 5px;
   border-radius: var(--bs-border-radius) !important;
+}
+
+
+button.btn-naver {
+	background-color: #FFFFFF !important ;
+  color: #00C63B;
+  border: 1px solid #00C63B ;
+  padding: 10px 20px; 
+  margin: 0 5px;
+  border-radius: var(--bs-border-radius) !important;
+  font-weight: 600
+}
+
+.btn.no-effect:focus, .btn.no-effect:hover, .btn.no-effect:active {
+  outline: 0;
+  border: 0;
+  box-shadow: none;
 }

@@ -110,6 +110,17 @@
         $(".pop-cont-body").css("left", lf + "px") ;
     }
 
+    var fn_estate_confirm = () => {
+        var p_estgbcd = $("#p_estgbcd").val() ;
+        if (!!p_estgbcd) {
+            $("#btn_estate_ok").removeClass("btn-secondary").removeClass("btn-primary").addClass("btn-primary") ; 
+            $("#btn_estate_ok").removeAttr("disabled") ; 
+        } else {
+            $("#btn_estate_ok").removeClass("btn-secondary").removeClass("btn-primary").addClass("btn-secondary") ; 
+            $("#btn_estate_ok").attr("disabled", "disabled") ; 
+        }
+    }
+
     var fn_create_buttons = () => {
         var keys = [ "110", "120", "210", "220" ]
         keys.forEach(key => {
@@ -122,7 +133,7 @@
         $("#sel_est_310").hide() ;
         $("button[id^=btn_est_]").click(function() {
             $("button[id^=btn_est_]").removeClass("btn-white").removeClass("btn-green").addClass("btn-white") ; 
-            $(this).removeClass("btn-white").addClass("btn-green") ; 
+            $(this).removeClass("btn-white").removeClass("btn-green").addClass("btn-green") ; 
             var estcd = $(this).attr("id").split("_").splice(1,2).join("").toUpperCase() ;
             if ($(this).attr("id") == "btn_est_310") {
                 $("#sel_est_310").show() ;
@@ -132,9 +143,11 @@
                 $("#p_estgbcd").val(estcd) ; 
             }
             $("#sel_est_310").val("") ;
+            fn_estate_confirm() ;
         }) ; 
         $("#sel_est_310").change(function() {
             $("#p_estgbcd").val($(this).val()) ; 
+            fn_estate_confirm() ;
         }) ; 
         fn_move_popup() ;
     }

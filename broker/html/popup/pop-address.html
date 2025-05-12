@@ -1,0 +1,40 @@
+
+<div class="dimmed"></div>
+<div class="homes-modal">
+    <div class="modal-sheet bg-white rounded-4 shadow w-450px h-600px" tabindex="-1" role="dialog" id="popAddressSearch">
+        <div class="modal-header border-bottom p-4">
+            <h5> 도로명주소 검색 </h5>
+            <button type="button" id="pop_address_close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-dialog w-450px mx-0">
+            <div class="modal-content">
+                <div class="py-2 my-2 border-bottom d-flex justify-between">
+                    <input type="text" class="textbox border-0 w-80 " id="p_query" placeholder="예)잠실동 232-2, 건물명, 도로명주소 검색" value="도봉로 175길 6"/>
+                    <button type="button" id="btn_address_search" class="btn no-effect bi bi-search"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var fn_address_search = () => {
+        debugger ;
+        network.send_api(constants.naver.address.api_url, {
+            "method" : constants.naver.address.method,
+            "headers": {
+                "X-Naver-Client-Id"    : constants.naver.clientKey,
+                "X-Naver-Client-Secret": constants.naver.clientSecret,
+            },
+            is_auth: false
+        }, {
+            "query": encodeURIComponent($("#p_query").val())
+        }, () => {
+            debugger ; 
+        })
+    }
+    var fn_popup_Load = () => {
+        $("#btn_address_search").click(function() {
+            fn_address_search() ; 
+        }) ; 
+    }    
+</script>

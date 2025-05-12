@@ -330,7 +330,17 @@ const homes_comm = {
                 }) ; 
                 fn_popup_Load() ; 
             }) ;
-
+        }
+        , popOpenAddress: () => {
+            var cont = $("<div id='pop-address' class='popup-container'/>") ; 
+            $("body").append(cont) ;
+            cont.load("/html/popup/pop-address.html", () => {
+                /* 창닫기 버튼 클릭 */ 
+                $("#pop_address_close").click(function() {
+                    $("#pop-address").remove() ;
+                }) ; 
+                fn_popup_Load() ; 
+            }) ;
         }
     }
     , _fn_is_auth_url: () => {
@@ -457,6 +467,14 @@ const constants = {
             "restapi"   : "c79e2b359bcd1089980df40b215227fb",
             "native"    : "1679a3ca5c4a20799c6b0c22371933a2"
         }
+    },
+    naver: {
+        address: {
+            api_url     : "http://openapi.naver.com/v1/search/local.xml",
+            method      : "GET", /* https: POST, http: GETR , cors덕분에 GET으로 설정*/
+        },
+        clientKey   : "UzyPZe2RD_eiUNo0ArnT",
+        clientSecret: "RC9vNkO5pc"
     }
 }
 
@@ -686,7 +704,7 @@ var fn_kakaomap_Load = (option) => {
 var fn_popAddress = ( option, fn_callback ) => {
     var mcont = $("<div id='popAddress' class='popup-container'/>") ; 
     $("body").append(mcont) ; 
-    mcont.load("/html/popup/popAddress.html", () => {   
+    mcont.load("/html/popup/popAddressDaum.html", () => {   
         fn_popLoadCompleted(option, fn_callback) ;
     }) ;
 }
