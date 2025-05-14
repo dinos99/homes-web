@@ -40,7 +40,7 @@
                         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-5 fw-semibold" data-bs-toggle="collapse" data-bs-target="#lnb_0001_0001" aria-expanded="true">
                         사용자관리 
                         </button>
-                        <div class="collapse show" id="lnb_0001_0001">
+                        <div class="collapse" id="lnb_0001_0001">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                 <li>
                                     <a href="/html/project/PRJT00010001.html" class="lnb-sub-menu active">사용자회원관리</a>
@@ -63,7 +63,7 @@
                         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-5 fw-semibold" data-bs-toggle="collapse" data-bs-target="#lnb_0003_0001" aria-expanded="true">
                         물건관리 
                         </button>
-                        <div class="collapse" id="lnb_0003_0001">
+                        <div class="collapse show" id="lnb_0003_0001">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                 <li>
                                     <a href="/html/project/PRJT00030001.html" class="lnb-sub-menu active">건축물관리대장 DB관리</a>
@@ -80,25 +80,18 @@
 
             <main class="container full-width px-0">
                 <div class="mb-3 p-3 pl-30">
-                    <h5 class="page-title">사용자 회원관리</h5>
+                    <h5 class="page-title">건축물관리대장 DB관리</h5>
                     <div class="grid-search">
                         <div class="grid-result" id="grid_result"></div>
                         <div class="grid-action">
                             <div class=" w-150px">
-                                <select id="p_condi" class="form-control h-40px">
-                                    <option value="">검색조건 선택</option>
-                                    <option value="userTy">사용자 유형</option>
-                                    <option value="usernm">사용자 명</option>
+                                <select id="p_jobid" class="form-control h-40px">
+                                    <option value="BJT001">총괄표제부</option>
                                 </select>
                             </div>
                             <div>
-                                <input type="text" class="textbox" name="p_keyword" id="p_keyword"/>
-                                <input type="hidden" name="p_pgno" id="p_pgno" value="1" />
-                            </div>
-                            <div>
-                                <button type="button" class="btn btn-primary" id="btn_search">
-                                    <span class="bi bi-search"></span>
-                                    <span class="btn-text">검색</span>
+                                <button type="button" class="btn btn-info" id="btn_doExecute">
+                                    <span class="btn-text">Do Execute</span>
                                 </button>
                             </div>
                         </div>
@@ -143,7 +136,7 @@
 
     /* fn_page_onLoad 보다 먼저호출해야 함 */ 
     fn_setpage({
-          pageid: "PRJT-0001-0001"
+          pageid: "PRJT-0003-0001"
     }) ;
 
 
@@ -177,6 +170,23 @@
         }) ;
     }
 
+    var fn_open_uploadPop = () => {
+        popup.open_popup("pop_build_upload", "/html/popup/pop-buid-upload.html", {
+            title: "건축물관리대장DB UPLOAD"
+        }) ; 
+    } ;
+
+    var fn_doExecute = () => {
+        var jobid = $("#p_jobid").val() ; 
+        network.send("/api/v1/batch/" + jobid, {}, {
+            "jobid": jobid
+        }).then(response => {
+            debugger ; 
+        }).catch(e => {
+            message.alert(e.getMessage) ;
+        })
+    }
+
     /* 페이지 이번트 */
     var fn_page_onLoad = () => {
         fn_isLogin() ; /* 로그인여부판단 ( 토큰이 없으면 로그인페이지로 튕김 ) */ 
@@ -192,6 +202,14 @@
         $("#btn_search").click(function() {
             fn_userList() ; 
         }) ;
+
+        $("#btn_upload").click(function() {
+            fn_open_uploadPop() ; 
+        }) ;
+
+        $("#btn_doExecute").click(function() {
+            fn_doExecute() ; 
+        }) ; 
     }
 
   </script>

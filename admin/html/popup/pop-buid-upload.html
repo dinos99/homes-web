@@ -1,0 +1,81 @@
+<div class="dimmed"></div>
+<div class="homes-modal">
+    <div class="modal-sheet" tabindex="-1" role="dialog" id="pop_build_upload">
+        <div class="modal-dialog w-800px">
+            <div class="modal-content bg-white border rounded-2 shadow">
+                <div class="modal-header rounded-4">
+                    <h1 class="modal-title fs-5" id="pop_build_title">&nbsp;</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-border-bottom"></div>
+                <div class="modal-body justify-start">
+                    <div class="modal-cont" id="pop_build_cont">
+                        <div class="input-group cursor-hand">
+                            <span class="input-group-text border-info body-color bi bi-cloud-upload-fill" id="span_btn_build_upload"></span>
+                            <input type="text" id="btn_build_upload" class="fcoursor-hand orm-control border-info" placeholder="   건축물관리대장DB 업로드" ara-label="건축물관리대장DB 업로드" aria-describedby="btn_build_upload" readonly="readonly"/>
+                            <!--
+                            <button type="button" id="btn_build_upload" class="btn btn-outline-info body-colo msover-darkr">건축물관리대장DB 업로드</button>
+                            -->
+                            <input id="f_buildup" type="file" accept=".txt,.csv"/>
+                        </div>
+                        <div class="input-group mt-20 justify-between hidden" id="span_upload_target">
+                            <div class="file-list w-70">
+                                <div class="w-30px"><span class="bi bi-file-earmark-image"></span></div>
+                                <div class="mx-0"></div>
+                            </div>
+                            <div class="tar">
+                                <span></span>
+                                <span>/ 5.00 Mbytes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-border-bottom"></div>
+                <div class="modal-footer w-100 gap-2 pb-3 border-top-0">
+                    <button type="button" class="btn btn-primary" id="btn_ok">확인</button>
+                    <button type="button" class="btn btn-secondary" id="btn_cancel">취소</button>
+                </div>
+            </div>
+        </div>
+      </div>
+</div>
+
+<script type="text/javascript">
+    var popinfo = {} 
+    var fn_open_completed = ( option ) => {
+        popinfo = option || {
+            title: "팝업오픈"
+        }
+
+        $("#pop_build_title").text(popinfo.title) ; 
+
+        $(".btn-close").click(function() {
+            $("#" + popinfo.popid.split("_").join("-")).remove() ;
+        }) ; 
+
+        $("#btn_cancel").click(function() {
+            $("#" + popinfo.popid.split("_").join("-")).remove() ;
+        }) ; 
+
+        $("#btn_build_upload").click(function() {
+            $("#f_buildup").click() ; 
+        })
+        $("#span_btn_build_upload").click(function() {
+            $("#f_buildup").click() ; 
+        }) ;
+
+        $("#f_buildup").change(function() {
+            $("#span_upload_target").removeClass("hidden") ; 
+            var fsize = $(this)[0].files[0].size ; 
+            var lsize = 5 * 1024 * 1045 ; /* 5MB */
+            
+            if ( fsize > lsize ) {
+                $("#span_upload_target").children().eq(1).children().eq(0).addClass("c-red")    
+            }
+
+            var conv_size = util.fn_conv_filesize(fsize, { use_full_unit_size: true }) ;
+            $("#span_upload_target").children().eq(0).children().eq(1).text($(this)[0].files[0].name ) ;
+            $("#span_upload_target").children().eq(1).children().eq(0).text(conv_size) ;
+        }) ;
+    }
+</script>

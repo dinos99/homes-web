@@ -21,6 +21,17 @@ body,html {
   button,img,input,select {
     vertical-align: middle;
   }
+
+  input[type=file] {
+    display:none;
+  }
+
+  input:hover, input:focus, input:active
+  , select:hover, select:focus, select:active
+  , textarea:hover, textarea:focus, textarea:active {
+    outline: none ;
+    box-shadow: none;
+  }
   
   * {
     font-size: 15px;

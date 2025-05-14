@@ -51,13 +51,6 @@
 	
 }
 
-.header-user {
-	/*
-	width: 200px; 
-	text-align:center;
-	*/
-}
-
 .btn-user {
 	height: 80px; 
 	padding: 0;
@@ -68,6 +61,7 @@
     line-height: 80px; 
 	
 }
+
 .btn-home .title-logo {
 	font-size: 25px;
 	font-weight: 600 ;
@@ -170,6 +164,7 @@
 }
 
 .homes-modal {
+	width: 100% ;
 	padding: 20px ; 
 	padding-bottom: 5px; 
 	margin: 0; 
@@ -179,6 +174,10 @@
 	position: fixed ; 
 	justify-content: center ;
 	z-index:990;
+}
+
+.homes-modal .modal-sheet {
+	width: 100% ;
 }
 
 .pop_cont_wrap {
@@ -461,17 +460,9 @@ tr.tr-nodata.hidden { display:hidden ; }
 	color:#2b3035;
 	font-size: 16px;
 	font-weight: 600 ;
-}
-
-.div-table .table-list th .th-cell {
-	width: 100%;
-	padding: 0;
-	font-size: 16px;
-	font-weight: 600;
-	border: none;
 	border-right: 1px solid #2b3035;
 }
-
+.div-table .table-list th:last-child { border: 0 ; }
 
 .div-table .table-list td {
 	min-height: 40px;
@@ -479,6 +470,7 @@ tr.tr-nodata.hidden { display:hidden ; }
 	padding: 5px 10px; 
 	border-bottom: 1px solid var(--bs-body-color) ;
 }
+.div-table .table-list td { border-right: 0; }
 
 .div-grid-paging {
 	width: 100%;
@@ -486,22 +478,37 @@ tr.tr-nodata.hidden { display:hidden ; }
 	justify-content: center ;
 	align-items: center ;
 	padding: 5px 10px;
-	border: 1px solid var(--bs-border-color) ;
-	border-radius: var(--bs-border-radius);
+	margin: 10px 0;
 }
 .paging-button {
-	background-color: var(--bs-dark ) ;
-	padding: 10px;
+	border: 1px solid var(--bs-dark ) ;
+	background-color: #495057 ;
+	padding: 5px 10px;
 	margin: 0 2px;
-	border: 0 ;
-	min-width: 40px;
-	height: 40px;
+	min-width: 30px;
+	height: 30px;
+}
+
+.paging-button.curr-page {
+	border: 1px solid #495057 ;
+	background-color: var(--bs-dark) ;
 }
 
 .paging-button.first {
-	margin-right: 20px; 
+	margin-right: 10px; 
+	border: 1px solid #495057 ;
+	background-color: var(--bs-dark) ;
 }
 
 .paging-button.last {
-	margin-left: 20px; 
+	margin-left: 10px; 
+	border: 1px solid #495057 ;
+	background-color: var(--bs-dark) ;
+}
+
+.file-list {
+	display: flex ;
+	flex-wrap:nowrap;
+	justify-content: flex-start;
+	align-items: center ;
 }

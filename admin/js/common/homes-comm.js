@@ -13,7 +13,7 @@ const homes_comm = {
     }
     , admin_menu: {
         LCD: [{
-            id: "PRJT", nm: "프로젝트관리", link: "/html/project/PRJT00010001.html" 
+            id: "PRJT", nm: "Homes 관리", link: "/html/project/PRJT00010001.html" 
             , MCD: [{
                 id: "0001", nm: "사용자관리", link: "/html/project/PRJT00010001.html", icon: "bi-h-circle-fill" 
                 , SCD: [{
@@ -88,8 +88,31 @@ const homes_comm = {
                 }
             })
         }
-    },
-    validation: {
+    }
+    , util: {
+        /* file size 변환 */ 
+        fn_conv_filesize: (fsize, option) => {
+            const unit_shot = ["KB", "MB", "GB", "TB"];
+            const unit_full = ["Kbytes", "Mbytes", "Gbytes", "Tbytes"];
+            var def_option = option || {
+                use_full_unit_size: false 
+            } ; 
+            def_option["use_full_unit_size"] =  !!def_option["use_full_unit_size"] ; 
+            var useYn = def_option.use_full_unit_size ; 
+            for ( var i = 0; i < unit_shot.length; i++ ) {
+                fsize = Math.floor(fsize / 1024);
+                if (fsize < 1024) {
+                    var conv_size = fsize.toFixed(2) + " " ;
+                    if (useYn)  {
+                        return conv_size + unit_full[i]  ; 
+                    } else {
+                        return conv_size + unit_shot[i]  ; 
+                    }
+                }
+            }
+        }
+    }
+    , validation: {
         fn_isValidemail: (email) => {
             var regexp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i ; 
             return regexp.test(email) ;
@@ -101,8 +124,8 @@ const homes_comm = {
                 var cont = $("<div id='pop_cont_alert' class='popup-container'/>") ; 
                 $("body").append(cont) ; 
                 var option = options || {} ;
-                option.title = option["title"] || "&nbsp;" ; 
-                option.message = message ; 
+                option.title = option["title"] || `<strong>[<span class='c-red'>Error-400</span>] Bad Request</strong>` ;
+                option.message = message || "잘못된 요청입니다"; 
                 cont.load("/html/popup/popAlert.html", () => {
                     $("#alert_title").html(option.title) ;
                     $("#alert_cont").html(option.message) ;
@@ -261,12 +284,224 @@ const homes_comm = {
                     $(".dimmed-loading").remove() ; 
                 }) ;
             }
+        }
+        , grid: {
+            constVar: {
+                no_data_message: "검색된 데이터가 없습니다." 
+            }
+            , send_grid: (action_url, option, fn_callback) => {
+                var fetch_option = option["fetch_option"] || {} ; 
+                var params = option["param"] || {}
+                var grid = $("#" + option.grid.id) ;
+                return new Promise((resolve, reject) => {
+                    homes_comm.ui.grid.create_empty_row(grid) ; 
+                    homes_comm.network.send(action_url, fetch_option, params)
+                    .then(response => {
+                        return homes_comm.ui.grid.create_grid(grid, response.data, option.grid) ;
+                    }).then(result => {
+                        if ( !!option.grid["paging"] && !!option.grid.paging.useYn ) {
+                            homes_comm.ui.grid.create_paging(grid, result.result.data, option.grid, (pginfo) => {
+                                if ( option.param.pgno != pginfo.pgno ) {
+                                    option.param.pgno = pginfo.pgno ; 
+                                    homes_comm.ui.grid.send_grid(action_url, option, fn_callback) ; 
+                                }
+                            }) ;
+                        }
+                        resolve(result) ; 
+                    }).catch( e => {
+                        console.log(e) ;
+                        message.alert(e["errorMessage"] || "잘못된 요청입니다.", {
+                            title: `<strong>[<span class='c-red'>Error-${e["httpSttusCd"] ? e.httpSttusCd : 400}</span>] Bad Request</strong>`
+                        }) ; 
+                        reject(e) ; 
+                    })
+                }) ;
+            }
+            , get_cell_count: (grid) => {
+                return grid.children().eq(0).children().eq(0).children().length ; 
+            }
+            , init_grid: (option) => {
+                var grid = $("#" + option.gid) ;
+                homes_comm.ui.grid.create_div_result(option.rid) ; 
+                homes_comm.ui.grid.create_empty_row(grid) ;
+                homes_comm.ui.grid.create_paging(grid, {
+                    t_cnt: 0
+                    , pgno: 1
+                    , f_pageno: 1
+                    , f_lastpgno: 1
+                }, option)  ;
+            }
+            , create_div_result: (id, data) => {
+                var divResult = $("#" + id) ;
+                var pginfo = !!!data ? {
+                    t_cnt: 0
+                    , pgno: 1
+                    , l_pageno: 1
+                } : data ; 
 
+                divResult.empty() ;
+                var html = `<span class="mt-20"><em class='c-red'>*</em> 전체 <em class='c-red' id="em_t_cnt">${pginfo.t_cnt}</em>건 검색  </span>
+                            <span class="mt-20 mx-3"><em class='c-red' id="em_pgno">${pginfo.pgno}</em> / <em id="em_l_pageno">${pginfo.l_pageno}</em> pages </span>` ;
+                divResult.append(html) ;                            
+            }
+            , create_paging: (grid, data, option, fn_callback) => {
+                if ( !!!option["paging"]["useYn"] ) return false ;
+                var pid = option.paging.id ; 
+                var paging = $("#" + pid) ; 
+                if (paging.length == 0 ) {
+                    var div_paging = $("<div class='div-grid-paging' id='" + pid + "'/>") ; 
+                    grid.parent().append(div_paging) ; 
+                    paging = div_paging ; 
+                }
+                paging.empty() ; 
+                var btn_first = $("<button type='button' class='paging-button first'/>")
+                var btn_last = $("<button type='button' class='paging-button last'/>") ; 
+                var btn_prev = $("<button type='button' class='paging-button bi bi-caret-left-fill'></button>") ;
+                var btn_next = $("<button type='button' class='paging-button bi bi-caret-right-fill'></button>") ;
+                btn_first.text("First") ; 
+                btn_last.text("Last") ; 
+
+                var curr_pgno = data.pgno ; 
+                var pg_st = !!data["pg_st"] ? data.pg_st : 1 ;
+                var pg_ed = !!data["pg_ed"] ? data.pg_ed : 1 ; 
+                
+                // Math.ceil(data.f_lastpgno / 10).toFixed() * 10 
+                paging.append(btn_first) ;
+                if ( curr_pgno > 10) {
+                    paging.append(btn_prev) ;
+                }
+                
+                for ( var i = pg_st; i <= pg_ed; i ++ ) {
+                    var btn_pg = $("<button tyoe='button' class='paging-button'>" + i + "</button>") ; 
+                    if ( i == curr_pgno ) {
+                        btn_pg.addClass("curr-page") ; 
+                    }
+                    paging.append(btn_pg) ;
+                    if ( !!fn_callback && $.isFunction(fn_callback)) {
+                        btn_pg.click(function() {
+                            fn_callback.apply(null, [{ 
+                                pgno: $(this).text() 
+                            }]) ;
+                        }) ;
+                    }
+                }
+
+                /*
+                if ( curr_pgno > 10 && curr_pgno < pg_st ) {
+                    paging.append(btn_next)
+                }
+                */
+                paging.append(btn_last) ;
+                if ( !!fn_callback && $.isFunction(fn_callback)) {
+                    btn_first.click(function() {
+                        fn_callback.apply(null, [{ 
+                            pgno: 1 
+                        }]) ;
+                    }) ;
+                    btn_last.click(function() {
+                        fn_callback.apply(null, [{ 
+                            pgno: data.l_pageno
+                        }]) ;
+                    }) ; 
+                } 
+
+            }
+            , create_empty_row: (grid) => {
+                var gid = grid.attr("id") ; 
+                /* delete tbody  */
+                homes_comm.ui.grid.remove_empty_row(grid) ; 
+                var cell_count = homes_comm.ui.grid.get_cell_count(grid) ;  
+                var tbody = $("<tbody id='" + gid + "'/>") ; 
+                var tr = $("<tr/>") ; 
+                tr.attr("id", "row_nodata") ; 
+                var empty_cell = $("<td colspan='" + cell_count + "'>" + homes_comm.ui.grid.constVar.no_data_message + "</td>") ; 
+                tr.append(empty_cell) ; 
+                tbody.append(tr) ; 
+                grid.append(tbody) ; 
+            }
+            , remove_empty_row: grid => {
+                var gid = grid.attr("id") ;
+                grid.children().each(function(i, c) {
+                    if ( c.nodeName == "TBODY" ) {
+                        $(c).remove() ;
+                    }
+                }) ;
+            }
+            , create_grid: ( grid, data, option ) => {
+                return new Promise((resolve, reject) => {
+                    var gid = option.id; 
+                    var dataList = data["dataList"] || [] ; 
+                    if ( !!!dataList || dataList.length == 0 ) { 
+                        homes_comm.ui.grid.create_div_result(option.div_result) ; 
+                        homes_comm.ui.grid.create_empty_row(grid) ;
+                        resolve({
+                            "completed": "COMPLED",
+                            "result"   : "NO_DATA_FOUND"
+                        })
+                    }
+                    var headers = option["headers"] || [] ;
+                    if ( headers.length == 0 ) {
+                        reject({
+                            "completed": "COMPLED",
+                            "result"   : "NOT_SET_HEADER"
+                        })
+                    }
+                    var tbody = $("<tbody id='tbody_" + gid + "'/>") ;
+                    var _data = data ; 
+                    homes_comm.ui.grid.create_div_result(option.div_result, data) ; 
+                    homes_comm.ui.grid.remove_empty_row(grid) ; 
+                    var t_cnt = _data.t_cnt ;
+                    var order = !!_data["order"] ? _data.order : "DESC" ; 
+                    dataList.forEach((data, i) => {
+                        var r_idx = Number(((_data.pgno - 1 ) * 10 ) / 10) + 1 + i ; 
+                        var r_num = order == "DESC" ? t_cnt - i  : r_idx ;
+                        var trHtml = `<tr id="row_${r_num}"/>` ; 
+                        var tr = $(trHtml) ; 
+                        headers.forEach(h => {
+                            if ( h.id == "rnum" ) {
+                                var tdHtml = `<td id="cell_${r_num}">${r_num}</td>` ; 
+                                var td = $(tdHtml) ;
+                            } else {
+                                var tdVal = !!!data[h.id] ? "&nbsp;" : data[h.id] ; 
+                                if (!!h["defval"] || h.defval == "0") {
+                                    tdVal = !!!data[h.id] ? h.defval : data[h.id] ; 
+                                }
+                                var tdHtml = `<td id="cell_${h.id}">${tdVal}</td>` ; 
+                                var td = $(tdHtml) ;
+                            }
+                            var clsname = h["clsname"] || "" ; 
+                            td.addClass(clsname) ; 
+                            tr.append(td) ;
+                        }) ; 
+
+                        tbody.append(tr) ;
+                    }) ; 
+                    grid.append(tbody) ;
+                    resolve({
+                        "completed": "COMPLED",
+                        "result"   : {
+                            "grid"  : grid,
+                            "option": option, /* option.grid */ 
+                            "data"  : _data 
+                        }
+                    })
+                }) ; 
+            } 
         }
         , popup: {
             pop_stack: []
             , pop_data: {}
             , param_data: {}
+            , open_popup: (pop_id, url, option) => {
+                var contid = pop_id.split("_").join("-") ; 
+                var cont = $("<div id='" + contid + "' class='popup-container'/>") ; 
+                $("body").append(cont) ;
+                cont.load(url, () => {
+                    var pop_option = option || {} ; 
+                    pop_option.popid = pop_id ; 
+                    fn_open_completed( option ) ;
+                }) ;
+            }
             , pop_open: ( pop_id, option ) => {
                 return new Promise((resolve, reject) => {
                     $("body").append("<div class='dimmed'/>") ; 
@@ -698,9 +933,15 @@ var fn_setpage = (pageinfo) => {
 }
 
 var homes = homes_comm ;
+
+var homes_ui = homes_comm.ui ;
+var homes_grid = homes_comm.ui.grid ; 
+
 var network = homes_comm.network ; 
 var store = homes_comm.store ; 
 var message = homes_comm.message ; 
+var popup = homes_comm.ui.popup ; 
+var util = homes_comm.util ; 
 
 var page = { pageid: "" }
 
