@@ -212,6 +212,9 @@ a.ui-datepicker-prev-next {
   background-size: 100%;
 }
 
+/* positon */
+.pos-absolute { position: absolute !important; }
+
 /* width ( w-100은 있는데 나머지는 못찾겠다. ) */
 .w-90 { width: 90%; }
 .w-80 { width: 80%; }
@@ -224,6 +227,7 @@ a.ui-datepicker-prev-next {
 .w-20 { width: 20%; }
 .w-10 { width: 10%; }
 
+.w-60px { width: 60px !important; }
 .w-100px { width: 100px !important ; }
 .w-150px { width: 150px !important ; }
 .w-200px { width: 200px !important ; }
@@ -244,6 +248,8 @@ a.ui-datepicker-prev-next {
 .h-245px { height: 245px !important ; }
 .h-250px { height: 250px !important ; }
 .h-600px { height: 600px !important ; }
+
+.h-unset { height: unset !important; }
 
 .no-width { width: unset !important; }
 
@@ -274,7 +280,13 @@ a.ui-datepicker-prev-next {
 .c-gray { color: #495057 !important ; }
 
 /* background color */
-.bg-gray { background-color: var(--bs-gray-100 ) !important; }
+.bg-gray-100 { background-color: var(--bs-gray-100 ) !important; }
+.bg-gray-200 { background-color: var(--bs-gray-200 ) !important; }
+.bg-gray-300 { background-color: var(--bs-gray-300 ) !important; }
+.bg-gray-400 { background-color: var(--bs-gray-400 ) !important; }
+.bg-gray-500 { background-color: var(--bs-gray-500 ) !important; }
+.bg-gray-600 { background-color: var(--bs-gray-600 ) !important; }
+.bg-transparent { background-color: transparent !important; }
 
 /* text-align */
 .tac { text-align: center !important; }
@@ -441,6 +453,20 @@ button.btn-white {
   padding: 10px 20px; 
   margin: 0 5px;
   border-radius: var(--bs-border-radius) !important;
+}
+
+button.btn-white.select-box {
+  display:flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+}
+button.btn-white.select-box .text {
+  padding: 0 20px;
+  padding-left: 0;
+  text-align: left ;
 }
 
 .btn-group button {

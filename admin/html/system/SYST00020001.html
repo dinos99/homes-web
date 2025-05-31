@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="ko" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#712cf9">
+    <title>리얼홈즈 관리자</title>
+
+    <!--jQuery UI plugins -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+
+    <!-- bootstrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- bootstrap icon-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/bootstrap/modal.css">
+    <link rel="stylesheet" href="/css/bootstrap/sliderbar.css">
+
+    <!-- homes css -->
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/custom.css">
+        
+  </head>
+  <body>
+    <div class="homes-wrap">
+      <div class="header-wrap" id="homes_admin_gnb"></div>
+      <div class="cont-area-wrap">
+        <div class="nav-wrap" id="homes_admin_lnb">
+          <div class="flex-shrink-0 p-3" style="width: 280px;">
+              <a href="/html/system/SYST00010001.html" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                  <span class="fs-30px fw-semibold bi-gear-fill"></span>
+                  <span class="fs-20px fw-semibold ml-10"> System 관리 </span>
+              </a>
+              <ul class="list-unstyled ps-0">
+                <li class="mb-1">
+                  <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-5 fw-semibold" data-bs-toggle="collapse" data-bs-target="#lnb_0001_0001" aria-expanded="true">
+                  DB관리 
+                  </button>
+                  <div class="collapse" id="lnb_0001_0001">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      <li>
+                        <a href="/html/system/SYST00010001.html" class="lnb-sub-menu active">도메인관리</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="border-top my-3"></li>
+                <li class="mb-1">
+                  <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-5 fw-semibold" data-bs-toggle="collapse" data-bs-target="#lnb_0001_0001" aria-expanded="true">
+                  Batch Job 
+                  </button>
+                  <div class="collapse show" id="lnb_0001_0001">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      <li>
+                        <a href="/html/system/SYST00020001.html" class="lnb-sub-menu active">배치실행현황</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+          </div>
+        </div>
+
+        <div class="content-wrap">
+          <div class="cont-wrap mb-3">
+
+            <main class="container full-width px-0">
+              <div class="mb-3 p-0 pl-30">
+                  <h5 class="page-title">배치실행 현황</h5>
+                  <div class="grid-search">
+                    <div class="grid-result" id="grid_result"></div>
+                    <div class="grid-action">
+                      <div class="pl-30 w-100">
+                          <div class="input-group">
+                            <input type="text" class="form-control w-150px" id="p_btstDe" placeholder="YYYY.MM.DD" required="">
+                            <span class="input-group-text cursor-hand">
+                              <img src="/images/icon-dark-calendar.svg" width="16" height="16" class="bi bi-calendar3" id="btn_btstDe"/>
+                            </span>
+                            <div class="w-200px">
+                              <select id="p_batchTy" class="form-select">
+                                <option value="">배치유형 선택</option>
+                                <option value="BJT000">건축물대장파일 분할</option>
+                                <option value="BJT001">단지정보 등록</option>
+                                <option value="BLD002">총괄표제부 등록</option>
+                                <option value="BLD003">표제부 등록</option>
+                              </select>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-primary mx-1" id="btn_search">Search</button>
+                            <!-- <button type="button" class="btn btn-sm btn-success mx-1" id="btn_upload">Upload</button> -->
+                            <button type="button" class="btn btn-sm btn-danger mx-1" id="btn_doExecute">Execute</button>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="div-table">
+                    <table class="table-list" id="grid_btjobList">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>배치유형</th>
+                          <th>배치상태</th>
+                          <th>시작일시</th>
+                          <th>종료일시</th>
+                          <th>실행건수</th>
+                          <th>파일명</th>
+                          <th>에러내용</th>
+                        </tr>
+                      </thead>
+                    </table>
+                </div>
+              </div>
+              <div class="mb-3 pl-30">
+                <div class="grid-cell-area">
+                  <div class="div-table">
+                  </div>
+                </div>
+                <div class="tar">
+                </div>
+              </div>
+              <div class="mb-3 p-3 pl-30">
+              </div>
+            </main>
+          </div>
+        </div>
+      
+
+    </div>
+    <div class="bottom-area-wrap">
+    </div>
+    <div id="pop-upload-batchfile" class='popup-container hidden'>
+      <div class="dimmed" data-backdrop="static"></div>
+      <div class="homes-modal">
+        <div class="modal-sheet" tabindex="-1" id="pop_build_upload">
+          <div class="modal-dialog w-800px">
+            <div class="modal-content bg-white border rounded-2 shadow">
+              <div class="modal-header rounded-4">
+                <h5 class="modal-title fs-5" id="pop_build_title"></h5>
+                <button type="button" class="btn-close" data-bs-toggle="button" aria-label="Close"></button>
+              </div>
+              <div class="modal-border-bottom"></div>
+              <div class="modal-body justify-start">
+                <div class="modal-cont" id="pop_build_cont">
+                  <div class="input-group cursor-hand w-400px">
+                    <span class="input-group-text body-color bi bi-cloud-upload-fill" id="span_btn_build_upload"></span>
+                    <input type="text" id="btn_build_upload" class="fcoursor-hand form-control" value="" readonly="readonly"/>
+                    <input id="f_buildup" type="file" accept=".txt,.csv"/>
+                  </div>
+                  <div class="input-group mt-20 justify-between hidden" id="span_upload_target">
+                    <div class="file-list w-70">
+                      <div class="w-30px"><span class="bi bi-file-earmark-image"></span></div>
+                      <div class="mx-0"></div>
+                    </div>
+                    <div class="tar">
+                      <span></span>
+                      <span>/ 5.00 Mbytes</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-border-bottom"></div>
+              <div class="modal-footer w-100 gap-2 pb-3 border-top-0">
+                <button type="button" class="btn btn-sm btn-danger hidden" data-bs-toggle="button" id="btn_split">파일분할</button>
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="button" id="btn_cancel">취소</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script defer src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+  
+  <script src="/js/common/homes-comm.js"></script>
+  </body>
+
+  <script type="text/javascript">
+    var popinfo = {} 
+
+    var p_bjtList = {
+      "BJT000": { "nm": "파일분할" },
+      "BJT001": { "nm": "단지정보입력" },
+      "BLD001": { "nm": "기본개요" },
+      "BLD002": { "nm": "총괄표제부" },
+      "BLD003": { "nm": "표제부" },
+    }
+
+    var p_sttusList = {
+      "BTS000": { "nm": "작업대기" },
+      "BTS001": { "nm": "작업처리중" },
+      "BTS002": { "nm": "작업완료" },
+      "BTS999": { "nm": "작업에러" },
+    }
+
+    /* fn_page_onLoad 보다 먼저호출해야 함 */ 
+    fn_setpage({
+          pageid: "SYST-0002-0001"
+    }) ;
+
+    /* upload popup close */
+    fn_pop_close = ( popnm ) => {
+        $("#pop-upload-batchfile").removeClass("hidden").addClass("hidden") ; 
+    }
+
+    /* upload popup open */
+    fn_pop_open = ( popnm ) => {
+        $("#pop-upload-batchfile").removeClass("hidden") ;  
+        var batchTy = $("#p_batchTy").val() ; 
+        if ( !!!batchTy ) {
+          message.alert("배치유형을 선택하여 주세요") ; 
+          return false ; 
+        }
+        var pop_title = "" ; 
+        if ( batchTy == "BJT001") {
+          pop_title = "총괄표제부파일 업로드 "
+        }
+        $("#btn_build_upload").val(pop_title) ;
+        $("#pop_build_title").text(pop_title) ;
+
+    }
+
+    fn_get_message = ( jobid, exco ) => {
+      if ( jobid == "BJT000" ) {
+        if ( !!!exco || exco == 0 ) return "분할대상파일이 없습니다." ; 
+        else return homes_comm.util.fn_format_number(exco) + "건 분할완료" ;
+      } else if ( jobid == "BJT001") {
+        if ( !!!exco || exco == 0 ) return "신규등록할 단지정보가 없습니다." ; 
+        else return homes_comm.util.fn_format_number(exco) + "건 등록완료" ;
+      } else {
+        if ( !!!exco || exco == 0 ) return "작업대상파일이 없습니다." ; 
+        else return homes_comm.util.fn_format_number(response.data.exco) + "건 분할완료" ; 
+      }
+    }
+    fn_doExecute = () => {
+        var jobid = $("#p_batchTy").val() ; 
+        network.send("/api/v1/batch/execute", {}, {
+          "jobid"  : jobid,
+          "batchYn": "N"
+        }).then(response => {
+          console.log(response) ;
+          var res_message = fn_get_message(jobid, response.data.exco) ; 
+          message.alert(res_message).then(ok => {
+            fn_dosearch() ;
+          }) ;
+        }).catch( error => {
+          console.log(error) ; 
+          message.alert(error.errorMessage) ; 
+        }) ; 
+    }
+
+    fn_get_formdata = () => {
+        var formData = new FormData() ;
+        formData.append("batchType", "BJT001") ;
+        formData.append("buildfile", $("#f_buildup")[0].files[0] , $("#f_buildup")[0].files[0].name) ; 
+        return formData ; 
+    }
+
+    fn_doUpload = () => {
+      var formData = fn_get_formdata() ;
+      return new Promise((resolve, reject) => {
+          homes_comm.network.send("/api/v1/manager/batchUpload", {
+              "headers": {
+                  "Content-Type": "multipart/form-data"
+              }
+              , "body": formData
+          }).then(response => {
+            var data = response.data ; 
+            var up_co = data["upCo"] || 0 ; 
+            if ( up_co > 0 ) {
+              message.alert(up_co + "개의 파일로 분할되었습니다.", {
+                "title": "첨부파일 분할결과"
+              }).then(ok => {
+                fn_pop_close("build") ; 
+              }) ; 
+            }
+          }).catch(e => {
+          }) ; 
+
+      }) ; 
+    }
+
+    fn_dosearch = () => {
+      homes_grid.send_grid("/api/v1/batch/btjobList", {
+          grid: {
+              id: "grid_btjobList"
+                , headers: [   
+                    { id: "batchno"        , clsname: "tar" }
+                    , { id: "batchTy"      , clsname: "tac", code: p_bjtList }
+                    , { id: "btSttuscd"    , clsname: "tac", code: p_sttusList }
+                    , { id: "btstDt"       , clsname: "tac" }
+                    , { id: "btedDt"       , clsname: "tac" }
+                    , { id: "btExco"       , clsname: "tar", "format": util.fn_format_number }
+                    , { id: "btFilenm"     , clsname: "tal" }
+                    , { id: "btErrormsg"   , clsname: "tal" }
+                ]
+                , div_result : "grid_result"
+                , paging: {
+                    id: "grid_paging"
+                    , useYn: true
+                }
+            }
+            , param: {
+                "pgno": 1,
+                "btstDe": $("#p_btstDe").val().split(".").join("")
+            }
+        }).then(result => {
+        }).catch(error => {
+          message.alert(error.errorMessage) ; 
+        }) ; 
+    }
+
+    /* 페이지 이번트 */
+    var fn_page_onLoad = () => {
+        fn_isLogin() ; /* 로그인여부판단 ( 토큰이 없으면 로그인페이지로 튕김 ) */ 
+        fn_homes_admin_init() ; /* GNB, LNB 초기화 */ 
+        homes_grid.init_grid({
+            gid: "grid_btjobList" /* grid id */
+            , rid: "grid_result" /* grid result-set id */ 
+            , paging: {
+                id: "grid_paging"
+                , useYn: true
+            }
+        }) ;
+
+        $("#btn_upload").click(function() {
+          var batchTy = $("#p_batchTy").val() ; 
+          if ( !!!batchTy ) {
+            message.alert("배치유형을 선택하여 주세요") ; 
+            return false ; 
+          } else {
+            $("#pop-upload-batchfile").removeClass("hidden") ;  
+            fn_pop_open("build") ; 
+          }
+        }) ; 
+
+        $("#btn_doExecute").click(function() {
+          var batchTy = $("#p_batchTy").val() ; 
+          if ( !!!batchTy ) {
+            message.alert("배치유형을 선택하여 주세요") ; 
+            return false ; 
+          } else {
+            message.confirm("배치를 실행하시겠습니까?")
+            .then(confirm => {
+              fn_doExecute() ; 
+            }) ;
+          }
+        }) ; 
+
+        $(".btn-close").click(function() {
+          fn_pop_close("build") ; 
+        }) ; 
+
+        $("#btn_cancel").click(function() {
+          fn_pop_close("build") ; 
+        }) ; 
+
+        $("#btn_build_upload").click(function() {
+            $("#f_buildup").click() ; 
+        })
+        $("#span_btn_build_upload").click(function() {
+            $("#f_buildup").click() ; 
+        }) ;
+
+        $("#f_buildup").change(function() {
+            $("#span_upload_target").removeClass("hidden") ; 
+            var fsize = $(this)[0].files[0].size ; 
+            var lsize = 5 * 1024 * 1045 ; /* 5MB */
+            
+            var conv_size = util.fn_conv_filesize(fsize, { use_full_unit_size: true }) ;
+            $("#span_upload_target").children().eq(0).children().eq(1).text($(this)[0].files[0].name ) ;
+            $("#span_upload_target").children().eq(1).children().eq(0).text(conv_size) ;
+                  $("#btn_split").removeClass("hidden") ; 
+            if ( fsize > lsize ) {
+                $("#span_upload_target").children().eq(1).children().eq(0).addClass("c-red") ; 
+                message.confirm("대용량 파일을 선택하셨습니다. <br/> 파일을 분할하히겠습니까?")
+                .then(ok => {
+                }).catch( cancel => {
+                }) ; 
+            }
+
+        }) ;
+
+        $("#btn_split").click(function() {
+          fn_doUpload() ;
+        }) ; 
+
+        $("#btn_search").click(function() {
+          fn_dosearch() ; 
+        })
+
+        homes_ui.datepicker( "p_btstDe", "btn_btstDe" ) ; 
+        $("#p_btstDe").val(util.fn_get_today()) ;
+    }
+  </script>
+
+</html>

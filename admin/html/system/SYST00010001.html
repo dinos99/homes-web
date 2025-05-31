@@ -11,7 +11,11 @@
 
     <!-- bootstrap css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- bootstrap icon-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="/css/bootstrap/modal.css">
+    <link rel="stylesheet" href="/css/bootstrap/sliderbar.css">
 
     <!-- homes css -->
     <link rel="stylesheet" href="/css/common.css">
@@ -20,147 +24,322 @@
         
   </head>
   <body>
-    <div class="hidden">
-      <!-- popup close-->
-      <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
-        <symbol id="x-lg" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"></path>
-          <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"></path>
-        </symbol>
-      </svg>
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
-          <symbol id="bi-gear" viewBox="0 0 16 16">
-              <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
-              <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
-          </symbol>
-      </svg>
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-gear" viewBox="0 0 16 16">
-          <symbol id="bi-person-gear" viewBox="0 0 16 16">
-              <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1zm3.63-4.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382zM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"/>
-          </symbol>
-      </svg>
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-          <symbol id="bi-box-arrow-right" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
-              <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
-          </symbol>
-      </svg>
-    </div>
-
     <div class="homes-wrap">
       <div class="header-wrap" id="homes_admin_gnb">
         
       </div>
       <div class="cont-area-wrap">
         <div class="nav-wrap" id="homes_admin_lnb">
-
+            <div class="flex-shrink-0 p-3" style="width: 280px;">
+                <a href="/html/system/SYST00010001.html" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                    <span class="fs-30px fw-semibold bi-gear-fill"></span>
+                    <span class="fs-20px fw-semibold ml-10"> System 관리 </span>
+                </a>
+                <ul class="list-unstyled ps-0">
+                    <li class="mb-1">
+                        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-5 fw-semibold" data-bs-toggle="collapse" data-bs-target="#lnb_0001_0001" aria-expanded="true">
+                        DB관리 
+                        </button>
+                        <div class="collapse show" id="lnb_0001_0001">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li>
+                                    <a href="/html/system/SYST00010001.html" class="lnb-sub-menu active">도메인관리</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="border-top my-3"></li>
+                    <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-5 fw-semibold" data-bs-toggle="collapse" data-bs-target="#lnb_0001_0001" aria-expanded="true">
+                    Batch Job 
+                    </button>
+                    <div class="collapse" id="lnb_0001_0001">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li>
+                            <a href="/html/system/SYST00020001.html" class="lnb-sub-menu active">배치실행현황</a>
+                        </li>
+                        </ul>
+                    </div>
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <div class="content-wrap">
-          <div class="title-wrap">
-            <h4>공통화면 목록</h4>
-          </div>
           <div class="cont-wrap mb-3">
 
-
             <main class="container full-width px-0">
-            
-              <div class="mb-3 p-3 pl-30 bg-body rounded shadow-sm">
-                <h5 class="border-bottom pb-2 mb-0">로그인</h5>
-                <div class="d-flex text-body-secondary pt-3 pb-3 border-bottom">
-
-                  <div class="thumb-homes-common login bd-placeholder-img flex-shrink-0 me-2 rounded"></div>
-                  <div class="thumb-homes-common-link">
-                    <div class="thumb-homes-common-desc mb-1">
-                      <div class="thumb-homes-common-title text-white">화면 ID</div>
-                      <div class="thumb-homes-common-text"><a href="#" class="link-style lg-20 bold">@WBRK-COMM-LGN-001</a></div>
+                <div class="mb-3 p-3 pl-30">
+                    <h5 class="page-title">도메인 목록조회</h5>
+                    <div class="grid-search">
+                        <div class="grid-result" id="grid_result"></div>
+                        <div class="grid-action">
+                            <div class=" w-150px">
+                                <select id="p_condi" class="form-select h-40px">
+                                    <option value="">검색조건 선택</option>
+                                    <option value="userTy">컬럼명(논리)</option>
+                                    <option value="usernm">컬럼명(물리)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <input type="text" class="textbox" name="p_keyword" id="p_keyword"/>
+                                <input type="hidden" name="p_pgno" id="p_pgno" value="1" />
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-primary" id="btn_search">
+                                    <span class="bi bi-search"></span>
+                                    <span class="btn-text">검색</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="thumb-homes-common-desc mb-1">
-                      <div class="thumb-homes-common-title text-white">화면 명</div>
-                      <div class="thumb-homes-common-text">웹 &gt; 홈즈프로 &gt; 로그인 팝업</div>
-                  </div>
-                  <div class="thumb-homes-common-desc mb-1">
-                    <div class="thumb-homes-common-title text-white">화면 경로</div>
-                    <div class="thumb-homes-common-text">/html/popup/popLogin.html</div>
-                  </div>
-                  <div class="thumb-homes-common-desc mb-1">
-                    <div class="thumb-homes-common-title text-white">화면 설명</div>
-                    <div class="thumb-homes-common-text">홈즈프로 로그인 팝업창 입니다.</div>
-                  </div>
-                </div>
-                <!--
-                <small class="d-block text-end mt-3"><a href="#">All updates</a></small>
-                -->
-              </div>
-            </main>
-            <main class="container full-width px-0">
-              <div class="mb-3 p-3 pl-30 bg-body rounded shadow-sm">
-                <h5 class="border-bottom pb-2 mb-0">주소검색</h5>
-                <div class="d-flex text-body-secondary pt-3 pb-3 border-bottom">
-                  <div class="thumb-homes-common area-01 bd-placeholder-img flex-shrink-0 me-2 rounded"></div>
-                  <div class="thumb-homes-common-link">
-                    <div class="thumb-homes-common-desc mb-1">
-                      <div class="thumb-homes-common-title text-white">화면 ID</div>
-                      <div class="thumb-homes-common-text">
-                        <a href="#" class="link-style lg-20 bold" id="wbrk_comm_adr_001">@WBRK-COMM-ADR-001</a>
-                      </div>
+                    <div class="div-table">
+                        <table class="table-list" id="grid_domainList">
+                            <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>컬럼명(물리)</th>
+                                    <th>컬렴명(논리)</th>
+                                    <th>컬럼 사이즈</th>
+                                    <th>데이터 유형</th>
+                                    <th>데이터 사이즈</th>
+                                    <th>출처</th>
+                                    <th>생성일자</th>
+                                    <th>생성자 ID</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
-                    <div class="thumb-homes-common-desc mb-1">
-                      <div class="thumb-homes-common-title text-white">화면 명</div>
-                      <div class="thumb-homes-common-text">웹 &gt; 홈즈프로 &gt; 지역검색</div>
-                  </div>
-                  <div class="thumb-homes-common-desc mb-1">
-                    <div class="thumb-homes-common-title text-white">화면 경로</div>
-                    <div class="thumb-homes-common-text">/html/popup/search-arear.html</div>
-                  </div>
-                  <div class="thumb-homes-common-desc mb-1">
-                    <div class="thumb-homes-common-title text-white">화면 설명</div>
-                    <div class="thumb-homes-common-text">시도/시군구/읍면동 검색 (단일선택)</div>
-                  </div>
-                  </div>
+                    <div class="tar">
+                      <button type="button" id="btn_create" class="btn btn-primary">신규도메인 생성</button>
+                    </div>
                 </div>
-              </div>
             </main>
-            <main class="container full-width px-0">
-              <div class="mb-3 p-3 pl-30 bg-body rounded shadow-sm">
-                <h5 class="border-bottom pb-2 mb-0">Alert & Confirm</h5>
-              </div>
-            </main>
-
-
           </div>
         </div>
       </div>
-      <div class="bottom-area-wrap">
 
-      </div>
+
+    <div id="pop-regist-collums" class='popup-container hidden'>
+        <div class="dimmed"></div>
+            <div class="homes-modal">
+                <div class="modal-sheet" tabindex="-1" role="dialog" id="pop_domain_colclose">
+                    <div class="modal-dialog w-800px">
+                        <div class="modal-content bg-white border rounded-2 shadow">
+                            <div class="modal-header rounded-4">
+                                <h1 class="modal-title fs-5" id="pop_domain_title">도메인 등록</h1>
+                                <button type="button" class="btn-close" id="btn_domain_colclose" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-border-bottom"></div>
+                            <div class="modal-body">
+                                <div class="modal-cont">
+                                    <div class="div-table">
+                                        <table class="table-list">
+                                            <colgroup>
+                                                <col width="25%"></cols>
+                                                <col width="*"></cols>
+                                            </colgroup>
+                                            <tbody>
+                                                <tr>
+                                                    <th class="tal px-3"><label class="form-label mb-0 pre-required"><strong class="fs-18px">컬럼 명(물리)</strong></label></th>
+                                                    <td class="tal px-3" id="td_colnm"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="tal px-3"><label class="form-label mb-0 pre-required"><strong class="fs-18px">컬럼 명(논리)</strong></label></th>
+                                                    <td class="tal px-3" id="td_colcomment">
+                                                        <input type="textbox" class="form-control w-200px" id="p_colcomment" value="" />
+                                                        <input type="hidden" id="p_ismodify" value=""/>
+                                                        <input type="hidden" id="p_row" value="" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="tal px-3"><label class="form-label mb-0 pre-required"><strong class="fs-18px">컬럼 크기</strong></label></th>
+                                                    <td class="tal px-3" id="td_colsize"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="tal px-3"><label class="form-label mb-0"><strong class="fs-18px">컬럼 대이터 유형</strong></label></th>
+                                                    <td class="tal px-3" id="td_dataTy">
+                                                        <select id="p_dataTy" class="form-select w-200px">
+                                                            <option value="VARCHAR">VARCHAR</option>
+                                                            <option value="CHAR">CHAR</option>
+                                                            <option value="INT">INT</option>
+                                                            <option value="FLOAT">FLOAT</option>
+                                                            <option value="DATETIME">DATETIME</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="tal px-3"><label class="form-label mb-0"><strong class="fs-18px">컬럼 대이터 사이즈</strong></label></th>
+                                                    <td class="tal px-3" id="td_dataSize">
+                                                        <div class="input-group w-200px">
+                                                            <input type="textbox" class="form-control" id="p_dataSize" value="" />
+                                                            <button type="button" class="btn btn-sm btn-info" id="btn_conf_colsize">확인</button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="tal px-3"><label class="form-label mb-0"><strong class="fs-18px">출처</strong></label></th>
+                                                    <td class="tal px-3" id="td_source">
+                                                        <select class="form-select w-200px" id="p_source">
+                                                            <option value="01">자체등록</option>
+                                                            <option value="02">행안부 표준용어사전</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-border-bottom"></div>
+                            <div class="modal-footer gap-2 pb-3 border-top-0">
+                                <button type="button" class="btn btn-primary" id="btn_domainok">확인</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn_domain_cancel">취소</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-area-wrap"></div>
     </div>
     <script defer src="/assets/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+    
     <script src="/js/system/SYST00010001.js"></script>
     <script src="/js/common/homes-comm.js"></script>
   </body>
 
   <script type="text/javascript">
 
+    var _dataList = [] ; 
+
     /* fn_page_onLoad 보다 먼저호출해야 함 */ 
     fn_setpage({
           pageid: "SYST-0001-0001"
     }) ;
 
+    fn_open_regcols = ( row, data ) => {
+        $("#pop-regist-collums").removeClass("hidden") ;
+        $("#pop_domain_title").text("도메인 수정") ;
+        $("#td_colnm").text(data.colnm) ; 
+        $("#td_colsize").text(data.colsize) ;
+        $("#p_colcomment").val(data.colcomment) ; 
+        $("#p_ismodify").val("Y") ; 
+
+        if ( !!data["coldataTy"] ) {
+            $("#p_dataTy").val(data["coldataTy"]) ; 
+        }
+        if ( !!data["coldataSize"] ) {
+            $("#p_dataSize").val(data["coldataSize"]) ; 
+        }
+        $("#p_row").val(row) ;
+    }
+
+    fn_modify_column= () => {
+      var is_modify = "Y" ;
+      var sourcecd  = $("#p_source").val() ; 
+      var sourcenm  = sourcecd == "01" ? "자체등록" : "행안부 표준용어사전" ;
+      network.send("/api/v1/system/modifydomain", {}, {
+        "ismodify"      : is_modify
+        , "colnm"       : $("#td_colnm").text()
+        , "colcomment"  : $("#p_colcomment").val() 
+        , "coldataTy"   : $("#p_dataTy").val()
+        , "coldataSize" : $("#p_dataSize").val()
+        , "colsize"     : $("#td_colsize").text()
+        , "sourcecd"    : sourcecd
+        , "sourcenm"    : sourcenm
+        , "creatid"     : "brotherda9"
+      }).then(response => {
+        var row = $("#p_row").val() ;
+        debugger ;
+      }) ; 
+    }
+
+    fn_domainList = () => {
+        homes_grid.send_grid("/api/v1/system/domainList", {
+            grid: {
+                id: "grid_domainList"
+                , headers: [   
+                    { id: "rnum"           , clsname: "tar" }
+                    , { id: "colnm"        , clsname: "tal", "fn_link_click": fn_open_regcols }
+                    , { id: "colcomment"   , clsname: "tal" }
+                    , { id: "colsize"      , clsname: "tal" }
+                    , { id: "coldataTy"    , clsname: "tac" }
+                    , { id: "coldataSize"  , clsname: "tac" }
+                    , { id: "sourcenm"     , clsname: "tac" }
+                    , { id: "creatde"      , clsname: "tac" }
+                    , { id: "creatid"      , clsname: "tac" }
+                ]
+                , div_result : "grid_result"
+                , paging: {
+                    id: "grid_paging"
+                    , useYn: true
+                }
+            }
+            , param: {
+                "pgno": 1
+            }
+        }).then(result => {
+            var _dataList = result.dataList ;
+            $("a[id$=colnm]").click(function() {
+                var id = $(this).attr("id") ; 
+                var row = $(this).attr("id").split("_").splice(1, 1)[0] ; 
+                fn_open_regcols.apply(null, [row, _dataList[row]]) ; 
+            }) ; 
+        }) ;
+    }
+
+    
+    fn_pop_colclose = (button) => {
+        $("#pop-regist-collums").removeClass("hidden").addClass("hidden") ;
+    } ;
+
     /* 페이지 이번트 */
     var fn_page_onLoad = () => {
-      fn_isLogin() ; /* 로그인여부판단 ( 토큰이 없으면 로그인페이지로 튕김 ) */ 
-      fn_homes_admin_init() ; /* GNB, LNB 초기화 */ 
-
-      $("#wbrk_comm_adr_001").click(function() {
-        var user = homes.store.getItem("user") ; 
-        homes.fn_popup_area({
-          pop_id: "pop_s_area"
-          , arcode: user.arcode
+        fn_isLogin() ; /* 로그인여부판단 ( 토큰이 없으면 로그인페이지로 튕김 ) */ 
+        fn_homes_admin_init() ; /* GNB, LNB 초기화 */ 
+        homes_grid.init_grid({
+            gid: "grid_domainList" /* grid id */
+            , rid: "grid_result" /* grid result-set id */ 
+            , paging: {
+                id: "grid_paging"
+                , useYn: true
+            }
         }) ;
-      }) ; 
+        $("#btn_search").click(function() {
+            fn_domainList() ; 
+        }) ;
+
+        $("#btn_create").click(function() {
+          location.href="/html/system/SYST00010002.html" ;
+        }) ; 
+
+        $("#btn_domain_colclose").click(function() {
+          fn_pop_colclose("domain") ; 
+        }) ; 
+
+        $("#btn_domain_cancel").click(function() {
+          fn_pop_colclose("domain") ; 
+        }) ; 
+        $("#btn_domainok").click(function() {
+          fn_modify_column() ;
+        }) ; 
+        
+        $("#btn_conf_colsize").click(function() {
+          var p_datasize = $("#p_dataSize").val() ;
+          if ( !!!p_datasize ) {
+            message.alert("컬럼 데이터크기를 입력해 주세요") ; 
+            return false ;
+          }
+          var dataTy = $("#p_dataTy").val() ;
+          if ( dataTy == "DATETIME") {
+            $("#td_colsize").text(dataTy) ;
+          } else {
+            $("#td_colsize").text(dataTy + "("  + p_datasize + ")") ; 
+          }
+        }) ; 
     }
 
   </script>

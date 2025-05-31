@@ -461,6 +461,7 @@ tr.tr-nodata.hidden { display:hidden ; }
 	font-size: 16px;
 	font-weight: 600 ;
 	border-right: 1px solid #2b3035;
+	max-width: 200px;
 }
 .div-table .table-list th:last-child { border: 0 ; }
 
@@ -469,8 +470,12 @@ tr.tr-nodata.hidden { display:hidden ; }
 	text-align: center ;
 	padding: 5px 10px; 
 	border-bottom: 1px solid var(--bs-body-color) ;
+	border-right: 0;
+	max-width: 200px ;
+	overflow: hidden ;
+	text-overflow: ellipsis; 
+	white-space: nowrap ; 
 }
-.div-table .table-list td { border-right: 0; }
 
 .div-grid-paging {
 	width: 100%;
@@ -483,27 +488,35 @@ tr.tr-nodata.hidden { display:hidden ; }
 .paging-button {
 	border: 1px solid var(--bs-dark ) ;
 	background-color: #495057 ;
-	padding: 5px 10px;
+	padding: 5px 1px;
 	margin: 0 2px;
 	min-width: 30px;
 	height: 30px;
+	padding: 5px;
 }
 
 .paging-button.curr-page {
-	border: 1px solid #495057 ;
+	border: 1px solid var(--bs-dark) ; 
 	background-color: var(--bs-dark) ;
+	color: #ff6161;
 }
 
 .paging-button.first {
-	margin-right: 10px; 
-	border: 1px solid #495057 ;
-	background-color: var(--bs-dark) ;
+	margin-right: 1px; 
+	border: 1px solid var(--bs-dark) ; 
+	background-color: var(--bs-body-bg) ;
+	padding: 5px 20px;
+	border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .paging-button.last {
-	margin-left: 10px; 
-	border: 1px solid #495057 ;
-	background-color: var(--bs-dark) ;
+	margin-left: 1px; 
+	border: 1px solid var(--bs-dark) ; 
+	background-color: var(--bs-body-bg) ;
+	padding: 5px 20px;
+	border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .file-list {
@@ -511,4 +524,24 @@ tr.tr-nodata.hidden { display:hidden ; }
 	flex-wrap:nowrap;
 	justify-content: flex-start;
 	align-items: center ;
+}
+
+.grid-cell-area {
+	display: flex;
+	flex-wrap:nowrap;
+	flex-direction: row;
+	align-items: center ;
+	justify-content: space-between;
+	margin-top: 5px; 
+}
+.grid-cell-area .gd-cell {
+	border: 1px solid #6c6c6c; 
+	border-radius: 5px; 
+	min-width: 200px;
+	min-height: 400px;
+	max-height: 600px; 
+	padding: 5px; 
+	overflow: hidden ; 
+	overflow-y: auto;
+
 }

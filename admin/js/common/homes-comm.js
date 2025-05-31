@@ -111,6 +111,35 @@ const homes_comm = {
                 }
             }
         }
+        /* format string */ 
+        , fn_format_number: ( num ) => {
+            if(!!!num) return 0;
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        , fn_format_date: ( str_date ) => {
+            if ( !!!str_date ) return "" ; 
+            var yyyymmdd = [] ; 
+            yyyymmdd.push(str_date.substring(0, 4)) ; 
+            yyyymmdd.push(str_date.substring(4, 6)) ; 
+            yyyymmdd.push(str_date.substring(6, 8)) ; 
+
+            return yyyymmdd.join(".") ;
+        }
+        , fn_get_today: () => {
+            var today = new Date() ; 
+            var yyyy = today.getFullYear() ; 
+            var mm   = today.getMonth() + 1 ; 
+            var dd   = today.getDate() ; 
+            
+            mm = mm < 10 ? "0" + mm : mm ; 
+            dd = dd < 10 ? "0" + dd : dd ; 
+            var date = [] ; 
+            date.push(yyyy) ;
+            date.push(mm) ; 
+            date.push(dd) ; 
+            return date.join(".") ; 
+        }
+
     }
     , validation: {
         fn_isValidemail: (email) => {
@@ -124,7 +153,7 @@ const homes_comm = {
                 var cont = $("<div id='pop_cont_alert' class='popup-container'/>") ; 
                 $("body").append(cont) ; 
                 var option = options || {} ;
-                option.title = option["title"] || `<strong>[<span class='c-red'>Error-400</span>] Bad Request</strong>` ;
+                option.title = option["title"] || `<strong>[ <span class='c-red'>Homes Error</span> ] Homes 관리자 오류</strong>` ;
                 option.message = message || "잘못된 요청입니다"; 
                 cont.load("/html/popup/popAlert.html", () => {
                     $("#alert_title").html(option.title) ;
@@ -145,20 +174,20 @@ const homes_comm = {
                 var cont = $("<div id='pop_cont_confirm' class='popup-container'/>") ; 
                 $("body").append(cont) ; 
                 var option = options || {} ;
-                option.title = option["title"] || "&nbsp;" ; 
+                option.title = option["title"] || "<span><em class='c-red'>Homes</em> manager confirm</span" ; 
                 option.message = message ; 
                 cont.load("/html/popup/popConfirm.html", (html) => {
-                    $("#alert_title").html(option.title) ;
-                    $("#alert_cont").html(option.message) ;
+                    $("#confirm_title").html(option.title) ;
+                    $("#confirm_cont").html(option.message) ;
                     $(".btn-close").click(function() {
                         reject(true) ; 
                         $("#pop_cont_confirm").remove() ;
                     }) ;
-                    $("#btn_cancel").click(function() {
+                    $("#btn_confirm_cancel").click(function() {
                         reject(true) ; 
                         $("#pop_cont_confirm").remove() ;
                     }) ;
-                    $("#btn_ok").click(function() {
+                    $("#btn_confirm_ok").click(function() {
                         resolve(true) ; 
                         $("#pop_cont_confirm").remove() ;
                     }) ; 
@@ -170,6 +199,7 @@ const homes_comm = {
     , network: {
         send: (api_url, option, params, fn_callgack) => {
             return new Promise((resolve, reject) => {
+                homes_comm.ui.progress(true) ; 
                 var def_option = {
                     "method"        : option["method"] || "POST",
                     "mode"          : option["mode"] || "cors", /* no-cors, cors, same-origin */
@@ -215,14 +245,17 @@ const homes_comm = {
                     }
                     return response.json() ; 
                 }).then( response => {
-                    var error = response.error ; 
-                    if ( error.httpSttusCd == 200 ) {
-                        resolve(response) ; 
-                    } else {
-                        reject(response.error) ; 
-                    }
+                    homes_comm.ui.progress(false).then(ok => {
+                        if ( response.error.httpSttusCd == 200 ) {
+                            resolve(response) ; 
+                        } else {
+                            reject(response.error) ; 
+                        }
+                    }) ;
                 }).catch( e => {
-                    reject(e) ;
+                    homes_comm.ui.progress(false).then(ok => {
+                        reject(e) ;
+                    }) 
                 })
             })
         }
@@ -251,39 +284,42 @@ const homes_comm = {
                 }) ; 
             }
         }
-        , create_select: (options) => {
+        , adjust_scroll_height: () => {
+            $(".content-wrap").css("height", Number($(".container").height() + 80) + "px") ; 
         }
-        , progress: ( sh, fn_callback ) => {
+        , progress: ( sh ) => {
+            return new Promise((resolve, reject) => {
+                var dimmed = $("<div class='dimmed' id='dimmed-progress'/>") ; 
+                var dim_loading = $("<div class='dimmed-loading'/>") ; 
+                var i = new Date().getSeconds() % 3 ; 
+                var w = 90 ; 
+                var h = 90 ; 
+                if ( i == 0 ) {
+                    w = 30 ; 
+                    h = 30 ; 
+                }
+                var img_loading = $(`<img src="/images/loading/loading-0${i}.gif" width="${w}" height="${h}" alt="잠시만 기다려 주세요" />`) ; 
+                var top  = ( document.getElementsByTagName("body")[0].clientHeight  - h ) / 2 ;
+                var left = ( document.getElementsByTagName("body")[0].clientWidth - w ) / 2 ; 
 
-            var dimmed = $("<div class='dimmed' id='dimmed-progress'/>") ; 
-            var dim_loading = $("<div class='dimmed-loading'/>") ; 
-            var i = new Date().getSeconds() % 3 ; 
-            var w = 90 ; 
-            var h = 90 ; 
-            if ( i == 0 ) {
-                w = 30 ; 
-                h = 30 ; 
-            }
-            var img_loading = $(`<img src="/images/loading/loading-0${i}.gif" width="${w}" height="${h}" alt="잠시만 기다려 주세요" />`) ; 
-            var top  = ( document.getElementsByTagName("body")[0].clientHeight  - h ) / 2 ;
-            var left = ( document.getElementsByTagName("body")[0].clientWidth - w ) / 2 ; 
-
-            dim_loading.css("top" , top  + "px") ; 
-            dim_loading.css("left", left + "px") ; 
-            dim_loading.append(img_loading) ; 
-            if ( !!sh ) {
-                $("body").append(dimmed) ; 
-                $("body").append(dim_loading) ; 
-                dim_loading.show("200", function(){
-                    fn_callback.apply(null, []) ; 
-                }) ; 
-            } else {
-                $("#dimmed-progress").hide() ; 
-                $(".dimmed-loading").hide(500, () => { 
-                    $("#dimmed-progress").remove() ;
-                    $(".dimmed-loading").remove() ; 
-                }) ;
-            }
+                dim_loading.css("top" , top  + "px") ; 
+                dim_loading.css("left", left + "px") ; 
+                dim_loading.append(img_loading) ; 
+                if ( !!sh ) {
+                    $("body").append(dimmed) ; 
+                    $("body").append(dim_loading) ; 
+                    dim_loading.show("200", () => {
+                        resolve(true) ; 
+                    }) ; 
+                } else {
+                    $("#dimmed-progress").hide() ; 
+                    $(".dimmed-loading").hide(500, () => { 
+                        $("#dimmed-progress").remove() ;
+                        $(".dimmed-loading").remove() ;
+                        resolve(true) ;
+                    }) ;
+                }
+            }) ; 
         }
         , grid: {
             constVar: {
@@ -301,13 +337,11 @@ const homes_comm = {
                     }).then(result => {
                         if ( !!option.grid["paging"] && !!option.grid.paging.useYn ) {
                             homes_comm.ui.grid.create_paging(grid, result.result.data, option.grid, (pginfo) => {
-                                if ( option.param.pgno != pginfo.pgno ) {
-                                    option.param.pgno = pginfo.pgno ; 
-                                    homes_comm.ui.grid.send_grid(action_url, option, fn_callback) ; 
-                                }
+                                option.param.pgno = pginfo.pgno ; 
+                                homes_comm.ui.grid.send_grid(action_url, option, fn_callback) ; 
                             }) ;
                         }
-                        resolve(result) ; 
+                        resolve(result.result.data) ; 
                     }).catch( e => {
                         console.log(e) ;
                         message.alert(e["errorMessage"] || "잘못된 요청입니다.", {
@@ -354,8 +388,8 @@ const homes_comm = {
                     paging = div_paging ; 
                 }
                 paging.empty() ; 
-                var btn_first = $("<button type='button' class='paging-button first'/>")
-                var btn_last = $("<button type='button' class='paging-button last'/>") ; 
+                var btn_first = $("<button type='button' class='paging-button first' id='btn_paging_firlst_1'/>")
+                var btn_last = $("<button type='button' class='paging-button last' id='btn_paging_last_" + data.l_pageno + "'/>") ; 
                 var btn_prev = $("<button type='button' class='paging-button bi bi-caret-left-fill'></button>") ;
                 var btn_next = $("<button type='button' class='paging-button bi bi-caret-right-fill'></button>") ;
                 btn_first.text("First") ; 
@@ -365,11 +399,10 @@ const homes_comm = {
                 var pg_st = !!data["pg_st"] ? data.pg_st : 1 ;
                 var pg_ed = !!data["pg_ed"] ? data.pg_ed : 1 ; 
                 
+                console.log("*** pg_st: ", pg_st, ", pg_ed: ", pg_ed, ", pg_last: ", data.l_pageno) ; 
                 // Math.ceil(data.f_lastpgno / 10).toFixed() * 10 
                 paging.append(btn_first) ;
-                if ( curr_pgno > 10) {
-                    paging.append(btn_prev) ;
-                }
+                if ( curr_pgno > 10) paging.append(btn_prev) ;
                 
                 for ( var i = pg_st; i <= pg_ed; i ++ ) {
                     var btn_pg = $("<button tyoe='button' class='paging-button'>" + i + "</button>") ; 
@@ -386,11 +419,11 @@ const homes_comm = {
                     }
                 }
 
-                /*
-                if ( curr_pgno > 10 && curr_pgno < pg_st ) {
+                /* 다음페이지가 존재하면 btn_next 삽입 */ 
+                if ( data.l_pageno > 10 && curr_pgno < data.l_pageno && pg_ed < data.l_pageno) {
                     paging.append(btn_next)
                 }
-                */
+                
                 paging.append(btn_last) ;
                 if ( !!fn_callback && $.isFunction(fn_callback)) {
                     btn_first.click(function() {
@@ -401,6 +434,16 @@ const homes_comm = {
                     btn_last.click(function() {
                         fn_callback.apply(null, [{ 
                             pgno: data.l_pageno
+                        }]) ;
+                    }) ; 
+                    btn_prev.click(function() {
+                        fn_callback.apply(null, [{ 
+                            pgno: pg_st - 1
+                        }]) ;
+                    }) ; 
+                    btn_next.click(function() {
+                        fn_callback.apply(null, [{ 
+                            pgno: Number(pg_ed) + 1
                         }]) ;
                     }) ; 
                 } 
@@ -454,18 +497,35 @@ const homes_comm = {
                     var order = !!_data["order"] ? _data.order : "DESC" ; 
                     dataList.forEach((data, i) => {
                         var r_idx = Number(((_data.pgno - 1 ) * 10 ) / 10) + 1 + i ; 
-                        var r_num = order == "DESC" ? t_cnt - i  : r_idx ;
+                        var r_num = order == "DESC" ? (t_cnt - ((_data.pgno - 1) * 10)) - i  : r_idx ;
                         var trHtml = `<tr id="row_${r_num}"/>` ; 
                         var tr = $(trHtml) ; 
-                        headers.forEach(h => {
+                        headers.forEach((h, r) => {
+                            var is_format = !!h["format"] ; 
                             if ( h.id == "rnum" ) {
+                                if ( is_format ) {
+                                    r_num = h.format.apply(null, [r_num])
+                                }
                                 var tdHtml = `<td id="cell_${r_num}">${r_num}</td>` ; 
                                 var td = $(tdHtml) ;
                             } else {
+
                                 var tdVal = !!!data[h.id] ? "&nbsp;" : data[h.id] ; 
+
+                                if ( is_format ) {
+                                    tdVal = h.format.apply(null, [tdVal])
+                                }
+
                                 if (!!h["defval"] || h.defval == "0") {
                                     tdVal = !!!data[h.id] ? h.defval : data[h.id] ; 
                                 }
+
+                                if ( !!h["code"] ) tdVal = h.code[tdVal].nm ; 
+
+                                if ( !!h["fn_link_click"] && $.isFunction(h.fn_link_click)) {
+                                    tdVal= `<a href="#" class="link-style" id="a_${i}_${h.id}">${tdVal}</a>` ;
+                                }
+
                                 var tdHtml = `<td id="cell_${h.id}">${tdVal}</td>` ; 
                                 var td = $(tdHtml) ;
                             }
@@ -502,110 +562,15 @@ const homes_comm = {
                     fn_open_completed( option ) ;
                 }) ;
             }
-            , pop_open: ( pop_id, option ) => {
-                return new Promise((resolve, reject) => {
-                    $("body").append("<div class='dimmed'/>") ; 
-
-                    /* title-bar 생성 */ 
-                    var pop_dimmed = $(`<div class='homes-popup-modal bg-primary' id='dimmed_${pop_id}'>`) ; 
-                    var pop_title_arear = $("<div class='homes-popup-title-wrap'></div>")
-
-                    var pop_title = $(`<div class='homes-popup-title'></div>`) ;
-
-                    var pop_title_div = $(`<div id='${pop_id}_title' class='homes-popup-title-text'></div>`) ; 
-                    var pop_btn_div = $(`<div class='homes-popup-title-button'></div>`)
-
-                    var pop_button = $(`<button id='btn_popup_close_${pop_id}' class='btn btn-secondary rounded-circle p-2 lh-1' type='button'></button>`) ; 
-                    pop_button.append(`<svg class="bi" width="16" height="16" aria-hidden="true"><use xlink:href="#x-lg"></use></svg>`) ; 
-                    pop_button.append(`<span class="visually-hidden">Dismiss</span>`) ; 
-                    pop_btn_div.append(pop_button) ;
-
-                    var pop_hidden = $(`<button type='button' id='pop_hddn_${pop_id}' class='pop_hidden_button'>popClose</div>`) ; 
-                    pop_btn_div.append(pop_hidden) ;
-
-                    var options = {
-                        "pop_id" : pop_id
-                        , "pop_title": "&nbsp;" 
-                        , "pop_width": 400 
-                        , "pop_height": 300
-                        , "param_data": {}
-                    }
-
-                    if (!! option && !!option["pop_title"]) options.pop_title = option.pop_title ; 
-                    if (!! option && !!option["pop_width"]) options.pop_width = option.pop_width ; 
-                    if (!! option && !!option["pop_height"]) options.pop_height = option.pop_height ; 
-
-                    if (!!option && !!option["pop_url"]) options.pop_url = option.pop_url ; 
-
-                    options.param_data = option["param_data"] || {} ; 
-
-                    pop_dimmed.css("width", options.pop_width + "px") ;
-
-                    var pop_cont = $(`<div id='${pop_id}_cont' class='homes-popup-cont'></div>`) ; 
-
-                    pop_cont.load(options.pop_url, {}, () => {
-                        popup_start() ; 
-                    }) ; 
-
-
-                    var pop_width = pop_dimmed.width() ; 
-                    pop_title_div.css("width", Number(pop_width - 90) + "px") ; 
-
-                    pop_title_div.html(options.pop_title) ; 
-
-                    pop_title.append(pop_title_div) ;
-                    pop_title.append(pop_btn_div) ;
-                    pop_title_arear.append(pop_title) ; 
-                    pop_dimmed.append(pop_title_arear) ; 
-                    pop_dimmed.append(pop_cont) ; 
-
-                    pop_x = ($(".dimmed").width() - options.pop_width) / 2; 
-                    pop_h = ($(".dimmed").height() - 50 - options.pop_height) / 2; 
-                    
-                    pop_dimmed.css("top", pop_h + "px") ; 
-                    pop_dimmed.css("left", pop_x + "px") ; 
-                    $("body").append(pop_dimmed) ; 
-
-                    var pop_data = homes_comm.ui.popup.pop_data[pop_id] ;
-                    
-                    homes_comm.ui.popup.pop_stack.push(pop_id) ; 
-//                    homes_comm.ui.popup.pop_data[pop_id] = {} ; 
-                    homes_comm.ui.popup.param_data[pop_id] = options.param_data ; 
-
-                    pop_button.click(() => {
-                        $(".dimmed").remove() ;
-                        $(".homes-popup-modal").remove() ; 
-                        var arr_index = homes_comm.ui.popup.pop_stack.indexOf(pop_id) ; 
-                        var pop_data  = homes_comm.ui.popup.pop_data[pop_id] ;
-                        if ( arr_index >= 0) {
-                            homes_comm.ui.popup.pop_stack.splice(arr_index, 1) ; 
-                            delete homes_comm.ui.popup.pop_data[pop_id] ; 
-                            delete homes_comm.ui.popup.param_data[pop_id] ; 
-                            delete homes_comm.ui.popup.pop_data[pop_id] ; ; 
-                        }
-                        resolve({
-                            "pop_id": pop_id,
-                            "pop_data": pop_data
-                        }) ;
-                    }) ; 
-
-                    pop_hidden.click(function() {
-                        $(".dimmed").remove() ;
-                        $(".homes-popup-modal").remove() ; 
-                        var arr_index = homes_comm.ui.popup.pop_stack.indexOf(pop_id) ; 
-                        var pop_data  = homes_comm.ui.popup.pop_data[pop_id] ;
-                        if ( arr_index >= 0) {
-                            homes_comm.ui.popup.pop_stack.splice(arr_index, 1) ; 
-                            delete homes_comm.ui.popup.pop_data[pop_id] ; 
-                            delete homes_comm.ui.popup.param_data[pop_id] ; 
-                            delete homes_comm.ui.popup.pop_data[pop_id] ; ; 
-                        }
-                        resolve({
-                            "pop_id": pop_id,
-                            "pop_data": pop_data
-                        }) ;
-                    })
-                })
+            , pop_open: ( url, option ) => {
+                var contid = option.popid ;
+                var cont = $("<div id='" + contid + "' class='popup-container'/>") ; 
+                $("body").append(cont) ;
+                /*
+                cont.load(url, () => {
+                    fn_open_completed( option ) ;
+                }) ;
+                 */
             }
             , pop_close: (pop_id, pop_data) => {
                 homes_comm.ui.popup.pop_data[pop_id] = pop_data ; 
@@ -806,7 +771,7 @@ var fn_homes_signin = (params, fn_callback) => {
         fn_callback.apply( null, [ response ]) ;
     }).catch( e => {
         homes_comm.message.alert(e.errorMessage, {
-            title: `<strong>[<span class='c-red'>Error-${e.httpSttusCd}</span>] 서버에러 </strong>`,
+            title: `<strong>[<span class='c-red'>Error-${e.httpSttusCd}</span>] 로그인에러 </strong>`,
         }) ;
     }) ; 
 };

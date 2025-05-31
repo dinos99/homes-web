@@ -9,10 +9,33 @@ dt.list-style-disc {
 }
 
 /* BootStrap CSS */
+main.container {
+  max-height:unset ;
+}
+
 button.btn {
   min-width: 80px;
   font-weight: 400 !important;
 }
+
+button.btn.btn-sm {
+  min-width: unset;
+}
+
+.input-group .form-label{
+  margin-bottom: 0;
+  line-height: 35px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.input-group .form-control {
+  /* --bs-modal-header-border-color: #dee2e6; */
+  border: 1px solid var(--bs-border-color) ; 
+}
+
+
+/* custom bootstrap css end */
 
 button.btn.msover-dark:hover {
   color: var(--bs-dark) ;
@@ -94,7 +117,13 @@ table.table th.border-primary {
 .form-label.required::after {
   content: " *";
   color:#ff6161 ;
-  font-weight: 900 ;
+  font-weight: 600 ;
+}
+
+.form-label.pre-required::before {
+  content: "* ";
+  color:#ff6161 ;
+  font-weight: 600 ;
 }
 
 .form-control:focus {
@@ -238,15 +267,25 @@ a.ui-datepicker-prev-next {
 
 .w-30px { width: 30px !important; }
 .w-150px { width: 150px !important; }
+.w-200px { width: 200px !important; }
+.w-250px { width: 250px !important; }
+.w-300px { width: 300px !important; }
+.w-400px { width: 400px !important; }
+.w-600px { width: 600px !important; }
 .w-800px { width: 800px !important; }
 
+.h-30px { height: 30px !important; }
 .h-40px { height: 40px !important; }
 
 .full-width { width: 100% !important; }
 
 /* margins */
 .ml-10 { margin-left: 10px !important; }
+.ml-20 { margin-left: 20px !important; }
 .mt-20 { margin-top: 20px !important; }
+
+.mt-100 { margin-top: 100px !important; }
+
 /* paddings */
 .pl-10 { padding-left: 10px !important; }
 .pl-20 { padding-left: 20px !important; }
@@ -269,6 +308,7 @@ a.ui-datepicker-prev-next {
 .f-600 { font-weight: 600 !important; }
 
 /* font-size */
+.fs-18px { font-size: 18px !important; }
 .fs-20px { font-size: 20px !important; }
 .fs-30px { font-size: 30px !important; }
 

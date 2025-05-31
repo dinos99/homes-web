@@ -1,0 +1,195 @@
+<div class="pop-main bg-transparent">
+    <div class="pop-cont rounded-4 shadow bg-white">
+        <div class="pop-cont-body p-4">
+            <div class="pop-cont px-2">
+                <div class="pop-cont-box w-800px border-bottom">
+                    <div class="arear-text-btns mb-10">
+                        <button type="button" class="btn-white bold" id="btn_sido_label"></button>
+                        <div class="arrow hidden"></div>
+                        <button type="button" class="btn-white bold hidden" id="btn_sgg_label"></button>
+                    </div>
+                </div>
+                <div class="pop-cont-box align-start my-2 w-800px h-250px">
+                    <div class="btn-group" id="btn_emd_groups">
+                <!--
+                        <button type="button" class="btn-white">종로구</button>
+                        <button type="button" class="btn-white">종로구</button>
+                        <button type="button" class="btn-white">종로구</button>
+                        <button type="button" class="btn-white">종로구</button>
+                        <button type="button" class="btn-white">종로구</button>
+                        <button type="button" class="btn-white">종로구</button>
+                -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var p_arcode = {
+        sdcd: { arcode: "", arname: "" },
+        sggcd: { arcode: "", arname: "" },
+        edmcd: { arcode: "", arname: "" }
+    }
+    var fn_get_emdcode = (arcode) => {
+        $("#btn_emd_groups").empty() ;
+        $("#btn_sgg_label").text(arcode.arname) ; 
+        homes_comm.network.send("/common/arcode/select-emdList", {
+            "arcode":  arcode.arcode
+        }, (response) => {
+            p_arcode.sggcd.arcode = arcode.emdcd ;
+            p_arcode.sggcd.arname = arcode.arname ;
+            fn_set_emdcode(response.data) ; 
+        }) ; 
+    }
+    var fn_set_emdcode = ( emdList ) => {
+        var btn_group = $("#btn_emd_groups") ; 
+        emdList.forEach(arcode => {
+            var ar_button = $("<button type='button' class='btn-white' id='btn_arcode_" + arcode.emdcd + "'>" + arcode.arname + "</button>") ; 
+            btn_group.append(ar_button) ;
+            ar_button.click(function() {
+                debugger ;
+            }) ;
+        }) ; 
+    }
+    var fn_set_sggcode = (sggList) => {
+        $(".arear-text-btns > .arrow").removeClass("hidden") ; 
+        $("#btn_sgg_label").removeClass("hidden") ; 
+        $("#btn_emd_groups").empty() ;
+        var sggcdList = sggList ; 
+        sggcdList[0].selected = "selected" ; 
+        p_arcode.sggcd.arcode = sggcdList[0].sdsggcd ;
+        p_arcode.sggcd.arname = sggcdList[0].arname ; 
+        $("#btn_sgg_label").text(p_arcode.sggcd.arname) ; 
+        $("#btn_sgg_label").removeClass("hidden") ; 
+        
+        sggcdList.forEach(arcode => {
+            var arcd = arcode.sdsggcd ; 
+            var arnm = arcode.arname ; 
+            console.log("p_arcode.sdcd.arcode: ", arcode.sdsggcd) ; 
+            console.log("p_arcode.sdcd.arcode: ", arcode.arname) ; 
+            var btn_group = $("#btn_emd_groups") ; 
+            var ar_button = $("<button type='button' class='btn-white' id='btn_arcode_" + arcd + "'>" + arnm + "</button>") ; 
+            btn_group.append(ar_button) ; 
+            if ( p_arcode.sggcd.arcode == arcd ) {
+                ar_button.addClass("selected") ;
+            }
+            ar_button.click(function() {
+                fn_get_emdcode(arcd) ; 
+            }) ; 
+        }) ;
+    }
+    var fn_get_sggcode = () => {
+        var arcode = p_arcode.sggcd.arcode ; 
+        var arname = p_arcode.sggcd.arname ; 
+        homes_comm.network.send("/common/arcode/select-sggList", {
+            "arcode":  arcode
+        }, (response) => {
+            p_arcode.sdcd.arcode = arcode ;
+            p_arcode.sdcd.arname = arname ;
+            $("#btn_sido_label").text(arname) ;
+            fn_set_sggcode(response.data) ; 
+        }) ; 
+    }
+    var fn_get_sidocode = () => {
+        $(".arear-text-btns > .arrow").removeClass("hidden").addClass("hidden") ; 
+        $("#btn_sgg_label").removeClass("hidden").addClass("hidden") ; 
+        $("#btn_emd_groups").empty() ;
+        var sidoList = homes_comm.store.getItem("arList")["arSidoList"] ; 
+        sidoList.forEach(arcode => {
+            var arcd = arcode.arcode.substring(0, 5) ; 
+            var arnm = arcode.arname ; 
+            var btn_group = $("#btn_emd_groups") ; 
+            var ar_button = $("<button type='button' class='btn-white' id='btn_arcode_" + arcd + "'>" + arnm + "</button>") ; 
+            btn_group.append(ar_button) ; 
+            if ( p_arcode.sdcd.arcode == arcd ) {
+                ar_button.addClass("selected") ;
+            }
+            ar_button.click(function() {
+                var arcd = $(this).attr("id").split("_").splice(2, 1).toString() ; 
+                var arnm = $(this).text() ; 
+                homes_comm.network.send("/common/arcode/select-sggList", {
+                    "arcode":  arcd
+                }, (response) => {
+                    p_arcode.sdcd.arcode = arcd ;
+                    p_arcode.sdcd.arname = arnm ;
+                    $("#btn_sido_label").text(arnm) ;
+                    fn_set_sggcode(response.data) ; 
+                }) ; 
+            }) ; 
+        }) ;
+    }
+    var fn_set_arcode = () => {
+        var sidoList = homes_comm.store.getItem("arList")["arSidoList"] ; 
+        var sggList  = homes_comm.store.getItem("arList")["arSggList"] ; 
+        var emdList  = homes_comm.store.getItem("arList")["arEmdList"] ; 
+        sidoList.filter(arcode => (arcode.selected == "selected")).forEach(arcode => {
+            p_arcode.sdcd.arcode = arcode.arcode.substring(0, 5) ;
+            p_arcode.sdcd.arname = arcode.arname ; 
+            $("#btn_sido_label").text(p_arcode.sdcd.arname) ;
+        }) ;
+        var is_sggList = false ; 
+        sggList.filter(arcode => (arcode.selected == "selected")).forEach(arcode => {
+            is_sggList = true ; 
+        }) ; 
+        if ( !is_sggList ) {
+            sggList[0].selected = "selected" ; 
+        }
+        sggList.filter(arcode => (arcode.selected == "selected")).forEach(arcode => {
+            p_arcode.sggcd.arcode = arcode.arcode.substring(0, 5) ;
+            p_arcode.sggcd.arname = arcode.arname ; 
+            console.log("p_arcode.sdcd.arcode: ", p_arcode.sggcd.arcode) ; 
+            console.log("p_arcode.sdcd.arcode: ", p_arcode.sggcd.arname) ; 
+            $(".arear-text-btns > .arrow").removeClass("hidden") ; 
+            $("#btn_sgg_label").removeClass("hidden") ; 
+            $("#btn_sgg_label").text(p_arcode.sggcd.arname) ;
+        }) ;
+        if ( !emdList || emdList.length == 0) {
+            homes_comm.network.send("/common/arcode/select-emdList", {
+                "arcode":  p_arcode.sggcd.arcode
+            }, (response) => {
+                emdList = response.data ; 
+                emdList.forEach((arcode, i) => {
+                    var arcd = arcode.emdcd ; 
+                    var arnm = arcode.arname ; 
+                    var btn_group = $("#btn_emd_groups") ; 
+                    var ar_button = $("<button type='button' class='btn-white' id='btn_arcode_" + arcd + "'>" + arnm + "</button>") ; 
+                    btn_group.append(ar_button) ; 
+                }) ; 
+            }) ; 
+        } else {
+            emdList.forEach((arcode, i) => {
+                var arcd = arcode.arcode.substring(0, 5) ; 
+                var arnm = arcode.arname ; 
+                var btn_group = $("#btn_emd_groups") ; 
+                var ar_button = $("<button type='button' class='btn-white' id='btn_arcode_" + arcd + "'>" + arnm + "</button>") ; 
+                btn_group.append(ar_button) ; 
+            }) ; 
+        }
+    }
+    var fn_get_arcodeList = (arcode) => {
+        homes_comm.store.getArcodeList(arcode)
+        .then(response => {
+            fn_set_arcode() ; 
+        }).catch(err => {
+            homes_comm.message.alert(err.errorMessage) ; 
+        }) ; 
+    }
+    var fn_open_completed = ( pop_params ) => {
+        fn_get_arcodeList(pop_params.arcd) ; 
+
+        $(".dimmed").click(function() {
+            $("#popup-area").remove() ;
+            $(this).remove() ;
+        }) ;
+
+        $("#btn_sido_label").click(function() {            
+            fn_get_sidocode() ; 
+        }) ; 
+        
+        $("#btn_sgg_label").click(function() { 
+            fn_get_sggcode() ; 
+        }) ; 
+
+    } ; 
+</script>

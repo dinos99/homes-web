@@ -1,0 +1,80 @@
+<main class="pop-main full-size">
+    <div class="pop-cont">
+        <div class="pop-cont-header">
+            <div class="pop-header">
+                <div class="pop-title">
+                    <h3>물건등록</h3>
+                </div>
+                <div class="">
+                    <button type="button" class="btn-green bi-play-circle">
+                        <span>도움말</span>
+                    </button>
+                </div>
+            </div>
+            <div class="pop-close">
+                <button type="button" id="btn_pop_complex_close" class="btn-close btn-pop-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="pop-cont-body">
+            <div class="pop-cont-tab">
+                <div class="tab-item active"> 단지물건 </div>
+                <div class="tab-item"> 단지외 물건 </div>
+            </div>
+            <div class="pop-cont">
+                <div class="pop-cont-label">
+                    <h4>지역선택</h4>
+                </div>
+                <div class="pop-cont-box bg-gray-100">
+                    <div class="box-label bdr"> 지역 </div>
+                    <div class="box-cont">
+                        <button type="button" class="btn-white select-box" id="btn_popup_area">
+                            <div class="text">지역선택</div>
+                            <div class="arrow"><img src="/images/arrow-down.svg" width="16" height="16" /></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="pop-cont-box bg-gray-100">
+                    <div class="box-label bdr"> 안내 </div>
+                    <div class="box-cont bold">
+                        <span>단지 등록 후, <em class="c-red">해당 단지정보에서 보유한 호실(물건)을 추가</em>하고, 이를 매물로 등록 할 수 있습니다.</span>
+                        <span>( 단지내에서는 <em class="c-red"></em>상가등록도 가능</em>합니다. )</span>
+                    </div>
+                </div>
+            </div>
+            <div class="pop-cont">
+                <div class="pop-cont-label">
+                    <h4>단지선택</h4>
+                </div>
+                <div class="pop-cont-box bg-gray-100">
+                    <div class="box-cont w-100 tac">
+                        <span> 해당지역에 등록된 단지가 없습니다.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script type="text/javascript">
+    var fn_open_complex_area = (arcd) => {
+        var user = homes_comm.store.getItem("user") || { arcode: "11110" }; 
+        user.arcode = !!user.arcode ? user.arcode : "11110" ; 
+        var arcode = arcd || user.arcode ; 
+        console.log("user arcode: ", arcode) ;
+        homes_comm.popup.fn_comm_popopen_area({
+            "cid": ''
+            , "arcd": arcode
+            , "legcd": '00000'
+        })
+    }
+    var fn_open_completed = ( pop_option ) => {
+        $("#btn_pop_complex_close").click(function() {
+            popup.pop_close(pop_option) ;
+        }) ;
+
+        $("#btn_popup_area").click(function() {
+            fn_open_complex_area() ;
+        }) ; 
+    }
+
+    
+</script>

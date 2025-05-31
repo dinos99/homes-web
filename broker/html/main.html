@@ -25,21 +25,44 @@
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/variables.css">
 
   </head>
   <body>
     <div class="p-3">
-      <button type="button" class="btn btn-primary" id="btn_homesLogin">홈즈프로 로그인</button>
-      <button type="button" class="btn btn-success" id="btn_reg_broker">중개사무소 등록(대표)</button>
-      <button type="button" class="btn btn-success" id="btn_reg_inbroker">직원 승인요청</button>
-      <button type="button" class="btn btn-secondary" id="btn_popEsate">부동산구분 팝업</button>
-      <button type="button" class="btn-naver" id="btn_search_adress">
-        <strong class="bi bi-search">&nbsp;&nbsp;&nbsp;네이버 주소검색 API</strong>
-      </button>
-      <!--
-      <button type="button" class="btn btn-secondary" id="btn_s_area">지역검색</button>
-      -->
+      <div class="table-cell">
+        <table class="table-02">
+          <colgroup>
+            <col width="10%"/>
+            <col width="15%"/>
+            <col width="15%"/>
+            <col width="*"/>
+            <col width="15%"/>
+          </colgroup>
+          <tbody>
+            <tr>
+              <th class="last">403_1_a</th>
+              <th class="last">pop-area</th>
+              <td class="border-b">지역검색(공통)</td>
+              <td class="border-b">
+                <a href="#" id="btn_comm_pop_area" class="link-style">/html/popup/pop-area.html</a>
+              </td>
+              <td class="last-col tac">팝업(공통)</td>
+            </tr>
+            <tr>
+              <th class="last">403a</th>
+              <th class="last">coplex-reg-001</th>
+              <td class="border-b">단지물건(물건등록)</td>
+              <td class="border-b">
+                <a href="#" id="btn_reg_group_001" class="link-style">/html/complex/coplex-reg-001.html</a>
+              </td>
+              <td class="last-col tac">팝업</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -48,32 +71,24 @@
   </body>
 
   <script type="text/javascript">
+    var pop_open_group_001 = () => {
+        popup.pop_open( "/complex/coplex-reg-001.html", {
+          popid: "brk-web-reg-group-001"
+        }) ; 
+    }
     var fn_page_onLoad = () => {
-      $("#btn_homesLogin").click(function() {
-        homes.fn_popLogin() ;
-      }) ;
-
-      $("#btn_reg_broker").click(function() {
-        var is_Login = fn_isLogin() ; 
-        if ( is_Login ) {
-          $("#pop-broker-input").remove() ; 
-          var mcont = $("<div id='pop-broker-input' class='popup-container'/>") ; 
-          $("body").append(mcont) ; 
-          mcont.load("/html/broker/broker-input.html", () => {   
-              fn_popLoadCompleted({
-                "brokerTy": "BRT001" /* 대표공인중개사 */ 
-              }) ;
-          }) ;
-        }
-      }) ;
-
-      $("#btn_popEsate").click(function() {
-        popup.popOpenEstate() ;
+      $("#btn_reg_group_001").click(function() {
+        /* 단지내 물건등록 */ 
+        pop_open_group_001() ;
       }) ; 
 
-      $("#btn_search_adress").click(function() {
-        popup.popOpenAddress() ;
-      }) ;
+      $("#btn_comm_pop_area").click(function() {
+        homes_comm.popup.fn_comm_popopen_area({
+            "cid": ''
+            , "arcd": "11000"
+            , "legcd": '00000'
+        })
+      }) ; 
     }
   </script>
 

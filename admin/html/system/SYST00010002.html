@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="ko" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#712cf9">
+    <title>리얼홈즈 관리자</title>
+
+    <!--jQuery UI plugins -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+
+    <!-- bootstrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- bootstrap icon-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/bootstrap/modal.css">
+    <link rel="stylesheet" href="/css/bootstrap/sliderbar.css">
+
+    <!-- homes css -->
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/custom.css">
+        
+  </head>
+  <body>
+    <div class="homes-wrap">
+      <div class="header-wrap" id="homes_admin_gnb"></div>
+      <div class="cont-area-wrap">
+        <div class="nav-wrap" id="homes_admin_lnb">
+          <div class="flex-shrink-0 p-3" style="width: 280px;">
+              <a href="/html/system/SYST00010001.html" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                  <span class="fs-30px fw-semibold bi-gear-fill"></span>
+                  <span class="fs-20px fw-semibold ml-10"> System 관리 </span>
+              </a>
+              <ul class="list-unstyled ps-0">
+                <li class="mb-1">
+                  <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-5 fw-semibold" data-bs-toggle="collapse" data-bs-target="#lnb_0001_0001" aria-expanded="true">
+                  DB관리 
+                  </button>
+                  <div class="collapse show" id="lnb_0001_0001">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      <li>
+                        <a href="/html/system/SYST00010001.html" class="lnb-sub-menu active">도메인관리</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="border-top my-3"></li>
+                <li class="mb-1">
+                  <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-5 fw-semibold" data-bs-toggle="collapse" data-bs-target="#lnb_0001_0001" aria-expanded="true">
+                  Batch Job 
+                  </button>
+                  <div class="collapse" id="lnb_0001_0001">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      <li>
+                        <a href="/html/system/SYST00020001.html" class="lnb-sub-menu active">배치실행현황</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+          </div>
+        </div>
+
+        <div class="content-wrap">
+          <div class="cont-wrap mb-3">
+
+            <main class="container full-width px-0">
+              <div class="mb-3 p-0 pl-30">
+                  <h5 class="page-title">신규도메인 생성</h5>
+              </div>
+              <div class="mb-3 pl-30 w-100">
+                  <div class="input-group w-400px">
+                    <label for="p_tablename" class="form-label pre-required">테이블 명</label>
+                    <input type="text" class="form-control w-150px ml-10" id="p_tablename" placeholder="TB_BD_BASESUMMRY" value="TB_BD_BASESUMMRY"/>
+                    <button type="button" class="btn btn-sm btn-secondary" id="btn_check_columns">컬럼명 확인</button>
+                  </div>
+              </div>
+              <div class="mb-3 pl-30">
+                <div class="grid-cell-area">
+                  <div class="div-table">
+                    <table class="table-list">
+                      <thead>
+                        <tr>
+                          <th>번호</th>
+                          <th>컬럼명(물리)</th>
+                          <th>컬렴명(논리)</th>
+                          <th>컬럼 사이즈</th>
+                          <th>데이터 유형</th>
+                          <th>데이터 사이즈</th>
+                          <th>출처</th>
+                          <th>생성일자</th>
+                          <th>생성자 ID</th>
+                          <th>생성여부</th>
+                          <th>확인</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tbody_textcol_List">
+                      <tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="tar">
+                  <button type="button" id="btn_generate" class="btn btn-primary">Generate DDL</button>
+                  <button type="button" id="btn_goList" class="btn btn-secondary">Go List</button>
+                </div>
+              </div>
+              <div class="mb-3 p-3 pl-30">
+              </div>
+            </main>
+          </div>
+        </div>
+      
+
+    </div>
+    <div class="bottom-area-wrap"></div>
+
+    <div id="pop-text-collums" class='popup-container hidden'>
+      <div class="dimmed"></div>
+      <div class="homes-modal">
+        <div class="modal-sheet" tabindex="-1" role="dialog" id="pop_text_columns">
+          <div class="modal-dialog w-800px">
+          <div class="modal-content bg-white border rounded-2 shadow">
+            <div class="modal-header rounded-4">
+              <h1 class="modal-title fs-5" id="pop_build_title">컬럼 텍스트 입력</h1>
+              <button type="button" class="btn-close" id="btn_colclose" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+              <div class="modal-border-bottom"></div>
+              <div class="modal-body">
+                <div class="modal-cont d-flex justify-between">
+                  <div>
+                    <textarea class="form-control" cols="35" rows="10" id="txt_colnmList"></textarea>
+                  </div>
+                  <div>
+                    <textarea class="form-control" cols="35" rows="10" id="txt_colcommentList"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-border-bottom"></div>
+              <div class="modal-footer gap-2 pb-3 border-top-0">
+                <button type="button" class="btn btn-primary" id="btn_colok">확인</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn_col_cancel">취소</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div id="pop-regist-collums" class='popup-container hidden'>
+      <div class="dimmed"></div>
+      <div class="homes-modal">
+        <div class="modal-sheet" tabindex="-1" role="dialog" id="pop_domain_colclose">
+          <div class="modal-dialog w-800px">
+          <div class="modal-content bg-white border rounded-2 shadow">
+            <div class="modal-header rounded-4">
+              <h1 class="modal-title fs-5" id="pop_domain_title">도메인 등록</h1>
+              <button type="button" class="btn-close" id="btn_domain_colclose" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+              <div class="modal-border-bottom"></div>
+              <div class="modal-body">
+                <div class="modal-cont">
+                  <div class="div-table">
+                    <table class="table-list">
+                      <colgroup>
+                        <col width="25%"></cols>
+                        <col width="*"></cols>
+                      </colgroup>
+                      <tbody>
+                        <tr>
+                          <th class="tal px-3"><label class="form-label mb-0 pre-required"><strong class="fs-18px">컬럼 명(물리)</strong></label></th>
+                          <td class="tal px-3" id="td_colnm">
+                          </td>
+                        </tr>
+                        <tr>
+                          <th class="tal px-3"><label class="form-label mb-0 pre-required"><strong class="fs-18px">컬럼 명(논리)</strong></label></th>
+                          <td class="tal px-3" id="td_colcomment">
+                            <input type="textbox" class="form-control w-200px" id="p_colcomment" value="" />
+                            <input type="hidden" id="p_ismodify" value=""/>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th class="tal px-3"><label class="form-label mb-0 pre-required"><strong class="fs-18px">컬럼 크기</strong></label></th>
+                          <td class="tal px-3" id="td_colsize">
+                          </td>
+                        </tr>
+                        <tr>
+                          <th class="tal px-3"><label class="form-label mb-0"><strong class="fs-18px">컬럼 대이터 유형</strong></label></th>
+                          <td class="tal px-3" id="td_dataTy">
+                            <select id="p_dataTy" class="form-select w-200px">
+                              <option value="VARCHAR">VARCHAR</option>
+                              <option value="CHAR">CHAR</option>
+                              <option value="INT">INT</option>
+                              <option value="FLOAT">FLOAT</option>
+                              <option value="DATETIME">DATETIME</option>
+                            </select>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th class="tal px-3"><label class="form-label mb-0"><strong class="fs-18px">컬럼 대이터 사이즈</strong></label></th>
+                          <td class="tal px-3" id="td_dataSize">
+                            <div class="input-group w-200px">
+                              <input type="textbox" class="form-control" id="p_dataSize" value="" />
+                              <button type="button" class="btn btn-sm btn-info" id="btn_conf_colsize">확인</button>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th class="tal px-3"><label class="form-label mb-0"><strong class="fs-18px">출처</strong></label></th>
+                          <td class="tal px-3" id="td_source">
+                            <select class="form-select w-200px" id="p_source">
+                              <option value="01">자체등록</option>
+                              <option value="02">행안부 표준용어사전</option>
+                            </select>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-border-bottom"></div>
+              <div class="modal-footer gap-2 pb-3 border-top-0">
+                <button type="button" class="btn btn-primary" id="btn_domainok">확인</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn_domain_cancel">취소</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script defer src="/assets/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+  
+  <script src="/js/system/SYST00010001.js"></script>
+  <script src="/js/common/homes-comm.js"></script>
+  </body>
+
+  <script type="text/javascript">
+    var coldata = []
+    /* fn_page_onLoad 보다 먼저호출해야 함 */ 
+    fn_setpage({
+          pageid: "SYST-0001-0002"
+    }) ;
+
+    fn_pop_colclose = (button) => {
+      if ( button == "col" ) {
+        $("#pop-text-collums").removeClass("hidden").addClass("hidden") ;
+      } else {
+        $("#pop-regist-collums").removeClass("hidden").addClass("hidden") ;
+      }
+
+    } ;
+
+    fn_check_columns = () => {
+      $("#pop-text-collums").removeClass("hidden") ;
+    }
+
+    fn_open_regcols = ( row ) => {
+      $("#pop-regist-collums").removeClass("hidden") ;
+      var existsYn = row.existsYn ; 
+      if ( existsYn == "Y" ) {
+        $("#pop_domain_title").text("도메인 수정") ;
+        $("#td_colnm").text(row.colnm) ; 
+        $("#td_colsize").text(row.colsize) ;
+        $("#p_colcomment").val(row.colcomment) ; 
+
+        $("#p_ismodify").val("Y") ; 
+      } else {
+        $("#pop_domain_title").text("도메인 등록") ;
+        $("#td_colnm").text(row.colnm) ; 
+        $("#td_colsize").text("") ;
+        $("#p_colcomment").val(row.colcomment) ; 
+        $("#p_ismodify").val("N") ; 
+      }
+
+    }
+
+    fn_modify_column= () => {
+      var is_modify = $("#p_ismodify").val() ;
+      var sourcecd  = $("#p_source").val() ; 
+      var sourcenm  = sourcecd == "01" ? "자체등록" : "행안부 표준용어사전" ;
+      network.send("/api/v1/system/modifydomain", {}, {
+        "ismodify"      : is_modify
+        , "colnm"       : $("#td_colnm").text()
+        , "colcomment"  : $("#p_colcomment").val() 
+        , "coldataTy"   : $("#p_dataTy").val()
+        , "coldataSize" : $("#p_dataSize").val()
+        , "colsize"     : $("#td_colsize").text()
+        , "sourcecd"    : sourcecd
+        , "sourcenm"    : sourcenm
+        , "creatid"     : "brotherda9"
+      }).then(response => {
+      }) ; 
+    }
+
+    fn_get_defaultVal = (i, row) => {
+      /* 첫행은 반드시 PK로입력 */ 
+      if ( i == 0 ) return "NOT NULL "
+
+      var colsize = "_" + row.colsize ; 
+      /* int 혹은 float은 default 0 추가 */
+      if ( colsize.indexOf("INT") > 0 || colsize.indexOf("FLOAT") > 0) {
+        return 'DEFAULT 0 ' ; 
+      }
+      /* 컬럼명 default value */ 
+      if ( row.colnm == "BATCH_YN") return "DEFAULT \'Y\' "  ;
+      else if ( row.colnm == "FST_UPLOAD_DT") return "DEFAULT NOW() " ; 
+      else if ( row.colnm == "LST_CHNG_DT")   return "DEFAULT NOW() " ; 
+      else if ( row.colnm == "CREAT_DT")      return "DEFAULT NOW() " ; 
+      else if ( row.colnm == "UPDT_DT")       return "DEFAULT NOW() " ; 
+      else return "NULL " ;
+    }
+    fn_ddl_generate = () => {
+      var tblname = $("#p_tablename").val() ;
+      if ( !!!tblname ) {
+        message.alert("테이블명을 입력해 주세요") ; 
+        return false ;
+      }
+
+      if ( !coldata || coldata.length == 0 ) {
+        message.alert("컬럼명확인을 먼저 실행해 주세요") ; 
+        return false ;
+      }
+
+      tblname = tblname.toUpperCase() ;
+      var ddl = "CREATE TABLE " + tblname + " (\r\n" ; 
+      for ( var i = 0; i < coldata.length; i ++ ) {
+        var row = coldata[i] ; 
+        if ( i == 0 ) {
+          ddl += "\t\t" + row.colnm  + " " + row.colsize + " " + fn_get_defaultVal(i, row) + " COMMENT '"  + row.colcomment + "' \r\n";
+        } else {
+          ddl += "\t\t, " + row.colnm  + " " + row.colsize + " " + fn_get_defaultVal(i, row) + " COMMENT '"  + row.colcomment + "' \r\n";
+        }
+      }
+      ddl += ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;"
+      $("#txt_colnmList").val(ddl) ;
+      $("#btn_colok").removeClass("hidden").addClass("hidden") ; 
+      fn_check_columns() ;
+    }
+
+    fn_create_row = ( data ) => {
+      coldata = [] ; 
+      $("#tbody_textcol_List").empty() ; 
+      data.forEach((row, i) => {
+        var tr = $("<tr/>") ; 
+
+        var rownum = Number(i) + 1 ; 
+        row.rownum = rownum ; 
+        var td_rnum = `<td class="tar">${rownum}</td>` ; 
+        tr.append($(td_rnum)) ; 
+
+        var cred = "" ; 
+        if (row.existsYn != "Y") cred = "c-red" ;
+        var td_colnm = `<td class="tal"><span class='${cred}'>${row.colnm}</span></td>` ; 
+        tr.append($(td_colnm)) ; 
+
+        if (row.existsYn != "Y") cred = "c-red" ;
+        var colcomment = !!row.colcomment ? row.colcomment : "" ; 
+        var td_comment = `<td class="tal"><span class='${cred}'>${colcomment}</span></td>` ; 
+        tr.append($(td_comment)) ; 
+
+        var colsize = !!row.colsize ? row.colsize : "" ; 
+        var td_colsize = `<td class="tal">${colsize}</td>` ; 
+        tr.append($(td_colsize)) ; 
+        
+        var dataTy = !!row.coldataTy ? row.coldataTy : "-" 
+        var td_coldataTy = `<td class="tac">${dataTy}</td>` ; 
+        tr.append($(td_coldataTy)) ; 
+        
+        var dataSize = !!row.coldataSize ? row.coldataSize : "-" 
+        var td_coldataSize = `<td class="tac">${dataSize}</td>` ; 
+        tr.append($(td_coldataSize)) ; 
+        
+        var sourcenm = !!row.sourcenm ? row.sourcenm : "-" 
+        var td_sourcenm = `<td class="tac">${sourcenm}</td>` ; 
+        tr.append($(td_sourcenm)) ; 
+        
+        var crde = util.fn_format_date( row.creatde ) ; 
+        var td_creatde = `<td class="tac">${crde}</td>` ; 
+        row.crde = crde ; 
+        tr.append($(td_creatde)) ; 
+        
+        var creatid = !!row.creatid ? row.creatid : "-"
+        var td_creatid = `<td class="tac">${creatid}</td>` ; 
+        tr.append($(td_creatid)) ; 
+
+        if (row.existsYn != "Y") cred = "c-red" ;
+        var td_existsYn = `<td class="tac"><span class='${cred}'>${row.existsYn}</span></td>` ; 
+        tr.append($(td_existsYn)) ; 
+
+        var button = $("<button type='button' class='btn btn-sm bi-check-circle-fill' />") ; 
+        if ( row.existsYn == "Y") {
+          button.addClass("btn-success") ; 
+        } else {
+          button.addClass("btn-primary") ; 
+        }
+        button.click(function() {
+          fn_open_regcols(row) ;
+        }) ;
+        var td_button = $("<td class='tac' />") ;
+        td_button.append(button) ;
+        tr.append($(td_button)) ; 
+
+        $("#tbody_textcol_List").append(tr) ; 
+        coldata.push(row) ;
+      }) ; 
+    }
+
+
+    fn_textcols = (cols, colcmmnts) => {
+      fn_pop_colclose("col") ;
+      var columns = [] ; 
+      cols.forEach((col, i)  => {
+        if ( !!col ) {
+          var coldata = {
+            colnm: col
+            , colcomment: colcmmnts[i]
+          }
+          columns.push(coldata) ;
+        }
+      }) ; 
+
+      network.send("/api/v1/system/exdomainList", {}, {
+        "domainList": columns
+      }).then(response => {
+        fn_create_row(response.data) ; 
+      }) ;
+    } ;
+
+    /* 페이지 이번트 */
+    var fn_page_onLoad = () => {
+        fn_isLogin() ; /* 로그인여부판단 ( 토큰이 없으면 로그인페이지로 튕김 ) */ 
+        fn_homes_admin_init() ; /* GNB, LNB 초기화 */ 
+
+        $("#btn_goList").click(function() {
+            message.confirm("목록페이지로 이동하시겠습니까?")
+            .then(ok => {
+              location.href="/html/system/SYST00010001.html"
+            }) ; 
+        }) ;
+
+        $("#btn_colclose").click(function() {
+          fn_pop_colclose("col") ; 
+        }) ;
+
+        $("#btn_domain_colclose").click(function() {
+          fn_pop_colclose("domain") ; 
+        }) ; 
+
+        $("#btn_check_columns").click(function() {
+          $("#btn_colok").removeClass("hidden") ; 
+//          $("#txt_colnmList").val("") ;
+//          $("#txt_colcommentList").val("") ;
+          fn_check_columns() ;
+        }) ;
+
+        $("#btn_col_cancel").click(function() {
+          fn_pop_colclose("col") ; 
+        }) ;
+
+        $("#btn_domain_cancel").click(function() {
+          fn_pop_colclose("domain") ; 
+        }) ; 
+
+        $("#btn_colok").click(function() {
+          var colsList = $("#txt_colnmList").val().split("\n") ; 
+          var colcmmntList = $("#txt_colcommentList").val().split("\n") ; 
+          fn_textcols ( colsList, colcmmntList ) ; 
+        })
+
+        $("#btn_generate").click(function() {
+          fn_ddl_generate() ;
+        }) ;
+
+        $("#btn_conf_colsize").click(function() {
+          var p_datasize = $("#p_dataSize").val() ;
+          if ( !!!p_datasize ) {
+            message.alert("컬럼 데이터크기를 입력해 주세요") ; 
+            return false ;
+          }
+          var dataTy = $("#p_dataTy").val() ;
+          if ( dataTy == "DATETIME") {
+            $("#td_colsize").text(dataTy) ;
+          } else {
+            $("#td_colsize").text(dataTy + "("  + p_datasize + ")") ; 
+          }
+        }) ; 
+
+        $("#p_dataTy").change(function() {
+          var dataTy = $(this).val() ; 
+          if ( dataTy == "DATETIME") {
+            $("#p_dataSize").val("") ;
+            $("#p_dataSize").attr("disabled", "disabled") ; 
+            $("#btn_conf_colsize").attr("diabled", "disabled") ; 
+          } else {
+            $("#p_dataSize").val("") ;
+            $("#p_dataSize").removeAttr("disabled") ; 
+            $("#btn_conf_colsize").removeAttr("disabled") ; 
+          }
+        }) ; 
+        $("#btn_domainok").click(function() {
+          fn_modify_column() ;
+        }) ; 
+    }
+  </script>
+
+</html>

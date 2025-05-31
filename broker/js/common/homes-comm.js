@@ -62,8 +62,8 @@ const homes_comm = {
                 }
             })
         }
-    },
-    validate: {
+    }
+    , alidate: {
         fn_isValidemail: (email) => {
             var regexp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i ; 
             return regexp.test(email) ;
@@ -147,10 +147,10 @@ const homes_comm = {
                     referrerPolicy: "no-referrer", 
                     body: JSON.stringify(params), // body의 데이터 유형은 반드시 "Content-Type" 헤더와 일치해야
                 }).then((response) => {
-                    homes_ui.progress(false) ; 
+//                    homes_ui.progress(false) ; 
                     return response.json() ;
                 }).then((response) => { 
-                    homes_ui.progress(false) ; 
+//                    homes_ui.progress(false) ; 
                     var errorCd = response.error.httpSttusCd ; 
                     if ( errorCd === 200) {
                         resolve(response) ; 
@@ -320,6 +320,37 @@ const homes_comm = {
         pop_stack: []
         , pop_data: {}
         , param_data: {}
+        , pop_open: ( url, option ) => {
+            var contid = option.popid ;
+            var cont = $("<div id='" + contid + "' class='popup-container'/>") ; 
+            $("body").append(cont) ;
+            cont.load("/html" + url, () => {
+                fn_open_completed( option ) ;
+            }) ;
+        }
+        , pop_close: ( pop_option ) => {
+            $("#" + pop_option.popid).remove() ;
+        }
+        , pop_movewindow: (el, pop_option) => {
+            var pid = pop_option.pid ; 
+            var container = $("#" + pid) ; 
+            container.addClass("pos-absolute") ; 
+            container.css("left", "-9999px") ; 
+            container.css("top", "-9999px") ; 
+            var fw = $(".dimmed").width() ;
+            var fh = $(".dimmed").height() ;
+            var pw = (container.children().eq(0).width() / 2).toFixed(0) + "px"; 
+            var ph = (container.children().eq(0).height() / 2).toFixed(0) + "px" ; 
+            container.css("left", pw) ; 
+            container.css("top", ph) ; 
+            container.hide() ;
+            return new Promise(resolve => {
+                container.show(100, (pop_option) => {
+                    resolve(pop_option) ; 
+                })
+            }) ; 
+            
+        }
         , popOpenEstate: () => {
             var cont = $("<div id='pop-estate' class='popup-container'/>") ; 
             $("body").append(cont) ;
@@ -340,6 +371,20 @@ const homes_comm = {
                     $("#pop-address").remove() ;
                 }) ; 
                 fn_popup_Load() ; 
+            }) ;
+        }
+        , fn_comm_popopen_area: pop_params => {
+            var cont = $("<div id='popup-area' class='popup-container'/>") ; 
+            var dimmed = $("<div class='dimmed'/>") ; 
+            $("body").append(dimmed) ; 
+            $("body").append(cont) ; 
+            cont.load("/html/popup/pop-area.html", (el) => {
+                fn_open_completed( pop_params ) ;
+                homes_comm.popup.pop_movewindow(el, {
+                    "pid": "popup-area"
+                }).then(popup => {
+                    
+                }) ; 
             }) ;
         }
     }
@@ -728,12 +773,12 @@ var fn_isLogin = () => {
 }
 
 var homes = homes_comm ;
-var homes_ui = homes.ui ; 
-var network = homes.network ; 
-var popup_ui = homes.ui.popup ; 
-var store = homes.store ; 
-var message = homes.message ; 
-var popup = homes.popup ; 
+var homes_ui = homes_comm.ui ; 
+var network  = homes_comm.network ; 
+var popup    = homes_comm.popup ; 
+var store    = homes_comm.store ; 
+var message  = homes_comm.message ; 
+var popup    = homes_comm.popup ; 
 
 var page = { pageid: "" } ; 
 
