@@ -50,6 +50,15 @@
               <td class="last-col tac">팝업(공통)</td>
             </tr>
             <tr>
+              <th class="last">403_2_a</th>
+              <th class="last">pop-estate-0200</th>
+              <td class="border-b">부동산구분(공동주택)</td>
+              <td class="border-b">
+                <a href="#" id="btn_comm_pop_estate" class="link-style">/html/popup/estate/pop-estate-0200.html</a>
+              </td>
+              <td class="last-col tac">팝업(공통)</td>
+            </tr>
+            <tr>
               <th class="last">403a</th>
               <th class="last">coplex-reg-001</th>
               <td class="border-b">단지물건(물건등록)</td>
@@ -76,19 +85,30 @@
           popid: "brk-web-reg-group-001"
         }) ; 
     }
+
+    var pop_open_estate = () => {
+        popup.fn_comm_open( "/popup/estate/pop-estate-0200.html", {
+          popid: "pop-estategb"
+        }) ; 
+    }
     var fn_page_onLoad = () => {
       $("#btn_reg_group_001").click(function() {
         /* 단지내 물건등록 */ 
         pop_open_group_001() ;
       }) ; 
 
+      $("#btn_comm_pop_estate").click(function() {
+        /* 단지내-부동산구분 설정 */ 
+        pop_open_estate() ; 
+      }) ; 
+
       $("#btn_comm_pop_area").click(function() {
         homes_comm.popup.fn_comm_popopen_area({
             "cid": ''
-            , "arcd": "11000"
+            , "arcd": "11110"
             , "legcd": '00000'
-        })
-      }) ; 
+        }, ( data ) => {}) ; 
+      })
     }
   </script>
 

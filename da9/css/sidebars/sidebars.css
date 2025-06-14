@@ -1,10 +1,11 @@
+html {
+  height: -webkit-fill-available;
+}
+
 body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
-}
-
-html {
-  height: -webkit-fill-available;
+  overflow: hidden;
 }
 
 main {
@@ -13,6 +14,8 @@ main {
   max-height: 100vh;
   overflow-x: auto;
   overflow-y: hidden;
+  background-color:var(--bs-white) ;
+  overflow: hidden;
 }
 
 .dropdown-toggle { outline: 0; }
@@ -51,7 +54,7 @@ main {
 .btn-toggle-nav a {
   padding: .1875rem .5rem;
   margin-top: .125rem;
-  margin-left: 1.7rem;
+  margin-left: 1.25rem;
 }
 .btn-toggle-nav a:hover,
 .btn-toggle-nav a:focus {
@@ -60,14 +63,4 @@ main {
 
 .scrollarea {
   overflow-y: auto;
-}
-
-.lnb-sub-menu {
-    display: inline-flex !important ; 
-    text-decoration: none !important ;
-    font-size: 16px; 
-    color: var(--bs-white); 
-}
-.lnb-sub-menu.active {
-    color: #ff6161;
 }

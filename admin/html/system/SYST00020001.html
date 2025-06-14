@@ -59,6 +59,28 @@
                     </ul>
                   </div>
                 </li>
+                <li class="border-top my-3"></li>
+                <li class="mb-1">
+                  <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-5 fw-semibold" data-bs-toggle="collapse" data-bs-target="#lnb_0003_0001" aria-expanded="true">
+                    건축물 관리대장
+                  </button>
+                  <div class="collapse" id="lnb_0003_0001">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      <li>
+                        <a href="/html/system/SYST00030021.html" class="lnb-sub-menu">총괄표제부</a>
+                      </li>
+                      <li>
+                        <a href="/html/system/SYST00030031.html" class="lnb-sub-menu">표제부</a>
+                      </li>
+                      <li>
+                        <a href="/html/system/SYST00030051.html" class="lnb-sub-menu">부속지번</a>
+                      </li>
+                      <li>
+                        <a href="/html/system/SYST00030091.html" class="lnb-sub-menu">전유부</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
               </ul>
           </div>
         </div>
@@ -67,7 +89,7 @@
           <div class="cont-wrap mb-3">
 
             <main class="container full-width px-0">
-              <div class="mb-3 p-0 pl-30">
+              <div class="mb-3 p-3 pl-30">
                   <h5 class="page-title">배치실행 현황</h5>
                   <div class="grid-search">
                     <div class="grid-result" id="grid_result"></div>
@@ -81,10 +103,15 @@
                             <div class="w-200px">
                               <select id="p_batchTy" class="form-select">
                                 <option value="">배치유형 선택</option>
-                                <option value="BJT000">건축물대장파일 분할</option>
-                                <option value="BJT001">단지정보 등록</option>
+                                <option value="BDT000">원시데이터등록</option>
+                                <!--
+                                <option value="BJT002">기본개요 시도분할</option>
+                                <option value="BJT003">기본개요 시군구분할</option>
+                                <option value="BLD001">기본개요 등록</option>
                                 <option value="BLD002">총괄표제부 등록</option>
                                 <option value="BLD003">표제부 등록</option>
+                                <option value="BLD009">전유부 등록</option>
+                                -->
                               </select>
                             </div>
                             <button type="button" class="btn btn-sm btn-primary mx-1" id="btn_search">Search</button>
@@ -182,11 +209,15 @@
     var popinfo = {} 
 
     var p_bjtList = {
+      "BDT000": { "nm": "원시데이터 등록"}, 
       "BJT000": { "nm": "파일분할" },
       "BJT001": { "nm": "단지정보입력" },
+      "BJT002": { "nm": "기본개요-시도분할" },
+      "BJT003": { "nm": "기본개요-시군구분할" },
       "BLD001": { "nm": "기본개요" },
       "BLD002": { "nm": "총괄표제부" },
       "BLD003": { "nm": "표제부" },
+      "BLD004": { "nm": "전유부" },
     }
 
     var p_sttusList = {
@@ -242,7 +273,7 @@
           "batchYn": "N"
         }).then(response => {
           console.log(response) ;
-          var res_message = fn_get_message(jobid, response.data.exco) ; 
+          var res_message = response.data.message ; 
           message.alert(res_message).then(ok => {
             fn_dosearch() ;
           }) ;

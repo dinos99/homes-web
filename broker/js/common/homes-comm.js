@@ -63,7 +63,7 @@ const homes_comm = {
             })
         }
     }
-    , alidate: {
+    , validate: {
         fn_isValidemail: (email) => {
             var regexp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i ; 
             return regexp.test(email) ;
@@ -77,6 +77,57 @@ const homes_comm = {
         , fn_isPassPattern: (pass) => {
             var regexp = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
             return regexp.test(pass) ;
+        }
+    }
+    , util: {
+        /* file size 변환 */ 
+        fn_conv_filesize: (fsize, option) => {
+            const unit_shot = ["KB", "MB", "GB", "TB"];
+            const unit_full = ["Kbytes", "Mbytes", "Gbytes", "Tbytes"];
+            var def_option = option || {
+                use_full_unit_size: false 
+            } ; 
+            def_option["use_full_unit_size"] =  !!def_option["use_full_unit_size"] ; 
+            var useYn = def_option.use_full_unit_size ; 
+            for ( var i = 0; i < unit_shot.length; i++ ) {
+                fsize = Math.floor(fsize / 1024);
+                if (fsize < 1024) {
+                    var conv_size = fsize.toFixed(2) + " " ;
+                    if (useYn)  {
+                        return conv_size + unit_full[i]  ; 
+                    } else {
+                        return conv_size + unit_shot[i]  ; 
+                    }
+                }
+            }
+        }
+        /* format string */ 
+        , fn_format_number: ( num ) => {
+            if(!!!num) return 0;
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        , fn_format_date: ( str_date ) => {
+            if ( !!!str_date ) return "" ; 
+            var yyyymmdd = [] ; 
+            yyyymmdd.push(str_date.substring(0, 4)) ; 
+            yyyymmdd.push(str_date.substring(4, 6)) ; 
+            yyyymmdd.push(str_date.substring(6, 8)) ; 
+
+            return yyyymmdd.join(".") ;
+        }
+        , fn_get_today: () => {
+            var today = new Date() ; 
+            var yyyy = today.getFullYear() ; 
+            var mm   = today.getMonth() + 1 ; 
+            var dd   = today.getDate() ; 
+            
+            mm = mm < 10 ? "0" + mm : mm ; 
+            dd = dd < 10 ? "0" + dd : dd ; 
+            var date = [] ; 
+            date.push(yyyy) ;
+            date.push(mm) ; 
+            date.push(dd) ; 
+            return date.join(".") ; 
         }
     }
     , message: {
@@ -373,13 +424,36 @@ const homes_comm = {
                 fn_popup_Load() ; 
             }) ;
         }
-        , fn_comm_popopen_area: pop_params => {
+        , fn_comm_open: (popurl, pop_params, fn_callback) => {
+            var popid = pop_params.popid ; 
+            var cont = $("<div id='" + popid + "' class='popup-container'/>") ; 
+            var dimmed = $("<div class='dimmed' id='dimmed_" + popid + "'/>") ; 
+            $("body").append(dimmed) ; 
+            $("body").append(cont) ; 
+            /*
+            dimmed.click(function() {
+                $("#" + popid).remove() ;
+                $(this).remove() ;
+            }) ;
+             */
+            cont.load("/html" + popurl, (el) => {
+                fn_open_completed( pop_params, fn_callback ) ;
+                homes_comm.popup.pop_movewindow(el, {
+                    "pid": popid
+                }); 
+            }) ;
+        }
+        , fn_comm_popopen_area: ( pop_params, fn_callback ) => {
             var cont = $("<div id='popup-area' class='popup-container'/>") ; 
             var dimmed = $("<div class='dimmed'/>") ; 
             $("body").append(dimmed) ; 
             $("body").append(cont) ; 
+            dimmed.click(function() {
+                $("#popup-area").remove() ;
+                $(this).remove() ;
+            }) ;
             cont.load("/html/popup/pop-area.html", (el) => {
-                fn_open_completed( pop_params ) ;
+                fn_open_completed( pop_params, fn_callback ) ;
                 homes_comm.popup.pop_movewindow(el, {
                     "pid": "popup-area"
                 }).then(popup => {
@@ -450,7 +524,7 @@ const homes_comm = {
         var options = option || def_options ; 
         options.pop_id = option["pop_id"] || def_options.pop_id ; 
         options.arcode = option["arcode"] || def_options.arcode ; 
-        options.width = option["width"] || def_options.width ; 
+        options.width  = option["width"]  || def_options.width ; 
         options.height = option["height"] || def_options.height ; 
 
 

@@ -253,9 +253,9 @@ const homes_comm = {
                         }
                     }) ;
                 }).catch( e => {
-                    homes_comm.ui.progress(false).then(ok => {
-                        reject(e) ;
-                    }) 
+                    homes_comm.ui.progress(false, true) ;
+                    reject(e) ;
+
                 })
             })
         }
@@ -287,7 +287,7 @@ const homes_comm = {
         , adjust_scroll_height: () => {
             $(".content-wrap").css("height", Number($(".container").height() + 80) + "px") ; 
         }
-        , progress: ( sh ) => {
+        , progress: ( sh, bforce ) => {
             return new Promise((resolve, reject) => {
                 var dimmed = $("<div class='dimmed' id='dimmed-progress'/>") ; 
                 var dim_loading = $("<div class='dimmed-loading'/>") ; 
@@ -305,19 +305,31 @@ const homes_comm = {
                 dim_loading.css("top" , top  + "px") ; 
                 dim_loading.css("left", left + "px") ; 
                 dim_loading.append(img_loading) ; 
+                
                 if ( !!sh ) {
                     $("body").append(dimmed) ; 
                     $("body").append(dim_loading) ; 
-                    dim_loading.show("200", () => {
+                    if ( !!bforce ) {
+                        dim_loading.show();
                         resolve(true) ; 
-                    }) ; 
+                    } else {
+                        dim_loading.show("200", () => {
+                            resolve(true) ; 
+                        }) ;
+                    } 
                 } else {
                     $("#dimmed-progress").hide() ; 
-                    $(".dimmed-loading").hide(500, () => { 
+                    if ( !!bforce ) {
                         $("#dimmed-progress").remove() ;
                         $(".dimmed-loading").remove() ;
                         resolve(true) ;
-                    }) ;
+                    } else {
+                        $(".dimmed-loading").hide(500, () => { 
+                            $("#dimmed-progress").remove() ;
+                            $(".dimmed-loading").remove() ;
+                            resolve(true) ;
+                        }) ;
+                    }
                 }
             }) ; 
         }
@@ -344,10 +356,18 @@ const homes_comm = {
                         resolve(result.result.data) ; 
                     }).catch( e => {
                         console.log(e) ;
+                        if ( e["name"] && e["name"] == "TypeError") {
+                            if ( e["message"] == "Failed to fetch") {
+                                e.httpSttusCd = 400 ; 
+                                e.errorMessage = `<p>네트워크에러가 발생하였습니다.</p><p>네트워크 상태를 확인해 주세요` ; 
+                            } else {
+                                e.httpSttusCd = 400 ; 
+                                e.errorMessage = `<p>오류가 발생하였습니다.</p>` ; 
+                            }
+                        }
                         message.alert(e["errorMessage"] || "잘못된 요청입니다.", {
                             title: `<strong>[<span class='c-red'>Error-${e["httpSttusCd"] ? e.httpSttusCd : 400}</span>] Bad Request</strong>`
                         }) ; 
-                        reject(e) ; 
                     })
                 }) ;
             }
@@ -372,10 +392,12 @@ const homes_comm = {
                     , pgno: 1
                     , l_pageno: 1
                 } : data ; 
-
+                const t_cnt = homes_comm.util.fn_format_number(pginfo.t_cnt) ; 
+                const pgno  = homes_comm.util.fn_format_number(pginfo.pgno) ; 
+                const last  = homes_comm.util.fn_format_number(pginfo.l_pageno) ; 
                 divResult.empty() ;
-                var html = `<span class="mt-20"><em class='c-red'>*</em> 전체 <em class='c-red' id="em_t_cnt">${pginfo.t_cnt}</em>건 검색  </span>
-                            <span class="mt-20 mx-3"><em class='c-red' id="em_pgno">${pginfo.pgno}</em> / <em id="em_l_pageno">${pginfo.l_pageno}</em> pages </span>` ;
+                var html = `<span class="mt-20"><em class='c-red'>*</em> 전체 <em class='c-red' id="em_t_cnt">${t_cnt}</em>건 검색  </span>
+                            <span class="mt-20 mx-3"><em class='c-red' id="em_pgno">${pgno}</em> / <em id="em_l_pageno">${last}</em> pages </span>` ;
                 divResult.append(html) ;                            
             }
             , create_paging: (grid, data, option, fn_callback) => {
@@ -388,6 +410,16 @@ const homes_comm = {
                     paging = div_paging ; 
                 }
                 paging.empty() ; 
+                if ( !!!data ) {
+                    data  = { pg_st: 1, pg_ed: 1, l_pageno: 1, pgno: 1}
+                    homes_comm.ui.grid.create_empty_row(grid) ; 
+                } 
+                var curr_pgno = data.pgno ; 
+                var pg_st    = !!data["pg_st"]    ? data.pg_st    : 1 ;
+                var pg_ed    = !!data["pg_ed"]    ? data.pg_ed    : 1 ; 
+                var pg_last  = !!data["l_pageno"] ? data.l_pageno : 1 ; 
+                console.log("*** pg_st: ", pg_st, ", pg_ed: ", pg_ed, ", pg_last: ", pg_last) ; 
+
                 var btn_first = $("<button type='button' class='paging-button first' id='btn_paging_firlst_1'/>")
                 var btn_last = $("<button type='button' class='paging-button last' id='btn_paging_last_" + data.l_pageno + "'/>") ; 
                 var btn_prev = $("<button type='button' class='paging-button bi bi-caret-left-fill'></button>") ;
@@ -395,11 +427,6 @@ const homes_comm = {
                 btn_first.text("First") ; 
                 btn_last.text("Last") ; 
 
-                var curr_pgno = data.pgno ; 
-                var pg_st = !!data["pg_st"] ? data.pg_st : 1 ;
-                var pg_ed = !!data["pg_ed"] ? data.pg_ed : 1 ; 
-                
-                console.log("*** pg_st: ", pg_st, ", pg_ed: ", pg_ed, ", pg_last: ", data.l_pageno) ; 
                 // Math.ceil(data.f_lastpgno / 10).toFixed() * 10 
                 paging.append(btn_first) ;
                 if ( curr_pgno > 10) paging.append(btn_prev) ;

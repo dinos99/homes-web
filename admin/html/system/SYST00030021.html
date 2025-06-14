@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ko" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="16x16"  href="/images/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#712cf9">
+    <title>리얼홈즈 관리자</title>
+
+    <!--jQuery UI plugins -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+
+    <!-- bootstrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- bootstrap icon-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/bootstrap/modal.css">
+    <link rel="stylesheet" href="/css/bootstrap/sliderbar.css">
+
+    <!-- homes css -->
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/custom.css">
+        
+  </head>
+  <body>
+    <div class="homes-wrap">
+      <div class="header-wrap" id="homes_admin_gnb"></div>
+      <div class="cont-area-wrap">
+        <div class="nav-wrap" id="homes_admin_lnb">
+          <div class="flex-shrink-0 p-3" style="width: 280px;">
+              <a href="/html/system/SYST00010001.html" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                  <span class="fs-30px fw-semibold bi-gear-fill"></span>
+                  <span class="fs-20px fw-semibold ml-10"> System 관리 </span>
+              </a>
+              <ul class="list-unstyled ps-0">
+                <li class="mb-1">
+                  <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-5 fw-semibold" data-bs-toggle="collapse" data-bs-target="#lnb_0001_0001" aria-expanded="true">
+                  DB관리 
+                  </button>
+                  <div class="collapse" id="lnb_0001_0001">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      <li>
+                        <a href="/html/system/SYST00010001.html" class="lnb-sub-menu active">도메인관리</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="border-top my-3"></li>
+                <li class="mb-1">
+                  <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-5 fw-semibold" data-bs-toggle="collapse" data-bs-target="#lnb_0001_0001" aria-expanded="true">
+                  Batch Job 
+                  </button>
+                  <div class="collapse" id="lnb_0001_0001">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      <li>
+                        <a href="/html/system/SYST00020001.html" class="lnb-sub-menu">배치실행현황</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="border-top my-3"></li>
+                <li class="mb-1">
+                  <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-5 fw-semibold" data-bs-toggle="collapse" data-bs-target="#lnb_0003_0001" aria-expanded="true">
+                    건축물 관리대장
+                  </button>
+                  <div class="collapse show" id="lnb_0003_0001">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      <li>
+                        <a href="/html/system/SYST00030021.html" class="lnb-sub-menu active">총괄표제부</a>
+                      </li>
+                      <li>
+                        <a href="/html/system/SYST00030031.html" class="lnb-sub-menu">표제부</a>
+                      </li>
+                      <li>
+                        <a href="/html/system/SYST00030051.html" class="lnb-sub-menu">부속지번</a>
+                      </li>
+                      <li>
+                        <a href="/html/system/SYST00030091.html" class="lnb-sub-menu">전유부</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+          </div>
+        </div>
+
+        <div class="content-wrap">
+          <div class="cont-wrap mb-3">
+
+            <main class="container full-width px-0">
+              <div class="mb-3 p-3 pl-30">
+                  <h5 class="page-title">건축물관리대장-총괄표제부</h5>
+                  <div class="grid-search">
+                    <div class="grid-result" id="grid_result"></div>
+                    <div class="grid-action">
+                      <div class="pl-30 w-100">
+                          <div class="input-group">
+                            <input type="text" class="form-control w-150px" id="p_btstDe" placeholder="YYYY.MM.DD" required="">
+                            <span class="input-group-text cursor-hand">
+                              <img src="/images/icon-dark-calendar.svg" width="16" height="16" class="bi bi-calendar3" id="btn_btstDe"/>
+                            </span>
+                            <div class="w-200px">
+                              <select id="p_batchTy" class="form-select">
+                                <option value="">배치유형 선택</option>
+                                <option value="BJT000">건축물대장파일 분할</option>
+                                <option value="BJT001">단지정보 등록</option>
+                                <option value="BLD002">총괄표제부 등록</option>
+                                <option value="BLD003">표제부 등록</option>
+                                <option value="BLD009">전유부 등록</option>
+                              </select>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-primary mx-1" id="btn_search">Search</button>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="div-table">
+                    <table class="table-list" id="grid_total_Ledgr">
+                      <thead>
+                        <tr>
+                          <th>건축물관리대장 PK</th>
+                          <th>대장구분</th>
+                          <th>신/구대장</th>
+                          <th>건물명</th>
+                          <th>주용도</th>
+                          <th>기타용도</th>
+                          <th>세대수</th>
+                          <th>가구수</th>
+                          <th>생성일자</th>
+                          <th>등록일자</th>
+                        </tr>
+                      </thead>
+                    </table>
+                </div>
+              </div>
+              <div class="mb-3 pl-30">
+                <div class="grid-cell-area">
+                  <div class="div-table">
+                  </div>
+                </div>
+                <div class="tar">
+                </div>
+              </div>
+              <div class="mb-3 p-3 pl-30">
+              </div>
+            </main>
+          </div>
+        </div>
+    </div>
+    <div class="bottom-area-wrap">
+    </div>
+  </div>
+
+  <script defer src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+  
+  <script src="/js/common/homes-comm.js"></script>
+  </body>
+
+  <script type="text/javascript">
+    /* fn_page_onLoad 보다 먼저호출해야 함 */ 
+    fn_setpage({
+          pageid: "SYST-0003-002"
+    }) ;
+    /*
+
+        <th>기타용도</th>
+        <th>세대수</th>
+        <th>가구수</th>
+        <th>생성일자</th>
+        <th>등록일자</th>
+    */
+    fn_dosearch = () => {
+      homes_grid.send_grid("/api/v1/system/totalLedger", {
+          grid: {
+              id: "grid_total_Ledgr"
+                , headers: [   
+                    { id: "regstrpk"     , clsname: "tal" }
+                    , { id: "regstrgbnm" , clsname: "tac" }
+                    , { id: "nwodgbnm"   , clsname: "tac" }                    
+                    , { id: "buldnm"     , clsname: "tal" }
+                    , { id: "mppsnm"     , clsname: "tal" }
+                    , { id: "etcpps"     , clsname: "tal" }
+                    , { id: "hshldco"    , clsname: "tar", "format": util.fn_format_number }
+                    , { id: "fmlyco"     , clsname: "tar", "format": util.fn_format_number }
+                    , { id: "creatde"    , clsname: "tac", "format": util.fn_format_date }
+                    , { id: "regstrde"   , clsname: "tac" }
+                ]
+                , div_result : "grid_result"
+                , paging: {
+                    id: "grid_paging"
+                    , useYn: true
+                }
+            }
+            , param: {
+                "pgno": 1,
+                "btstDe": $("#p_btstDe").val().split(".").join("")
+            }
+        }).then(result => {
+        }).catch(error => {
+          message.alert(error.errorMessage) ; 
+        }) ; 
+    }
+
+    /* 페이지 이번트 */
+    var fn_page_onLoad = () => {
+        fn_isLogin() ; /* 로그인여부판단 ( 토큰이 없으면 로그인페이지로 튕김 ) */ 
+        fn_homes_admin_init() ; /* GNB, LNB 초기화 */ 
+        homes_grid.init_grid({
+            gid: "grid_total_Ledgr" /* grid id */
+            , rid: "grid_result" /* grid result-set id */ 
+            , paging: {
+                id: "grid_paging"
+                , useYn: true
+            }
+        }) ;
+
+        $("#btn_search").click(function() {
+          fn_dosearch() ; 
+        })
+
+        homes_ui.datepicker( "p_btstDe", "btn_btstDe" ) ; 
+        $("#p_btstDe").val(util.fn_get_today()) ;
+    }
+  </script>
+
+</html>
