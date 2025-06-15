@@ -641,6 +641,9 @@ const homes_comm = {
     }
     , fn_get_base_url: () => {
         var api_base_url = homes_comm.constants._API_BASE_URL ; 
+        if ( location.host.indexOf("34.64.63.95") == 0) {
+            api_base_url = "http://34.64.63.95"
+        }
         api_base_url += homes_comm.constants._API_BASE_PORT === 443 ? "" : 
                         homes_comm.constants._API_BASE_PORT === 80 ? ""
                         : ":" + homes_comm.constants._API_BASE_PORT ; 
