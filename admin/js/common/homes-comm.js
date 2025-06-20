@@ -153,7 +153,7 @@ const homes_comm = {
                 var cont = $("<div id='pop_cont_alert' class='popup-container'/>") ; 
                 $("body").append(cont) ; 
                 var option = options || {} ;
-                option.title = option["title"] || `<strong>[ <span class='c-red'>Homes Error</span> ] Homes 관리자 오류</strong>` ;
+                option.title = option["title"] || `<strong>[ <span class='c-red'>Homes 관리자</span> ] Homes 관리자 알림</strong>` ;
                 option.message = message || "잘못된 요청입니다"; 
                 cont.load("/html/popup/popAlert.html", () => {
                     $("#alert_title").html(option.title) ;

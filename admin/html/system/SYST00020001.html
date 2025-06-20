@@ -105,18 +105,14 @@
                                 <option value="">배치유형 선택</option>
                                 <option value="BDT000">기본개요 파일분할</option>
                                 <option value="BDT001">기본개요 등록</option>
-                                <!--
-                                <option value="BJT002">기본개요 시도분할</option>
-                                <option value="BJT003">기본개요 시군구분할</option>
-                                <option value="BLD001">기본개요 등록</option>
-                                <option value="BLD002">총괄표제부 등록</option>
-                                <option value="BLD003">표제부 등록</option>
-                                <option value="BLD009">전유부 등록</option>
-                                -->
+                                <option value="BDT021">총괄표제부 등록</option>
+                                <option value="BDT030">표제부 파일분할</option>
+                                <option value="BDT031">표제부 등록</option>
+                                <option value="BDT040">전유부 시도별분할</option>
+                                <option value="BDT041">전유부 등록</option>
                               </select>
                             </div>
                             <button type="button" class="btn btn-sm btn-primary mx-1" id="btn_search">Search</button>
-                            <!-- <button type="button" class="btn btn-sm btn-success mx-1" id="btn_upload">Upload</button> -->
                             <button type="button" class="btn btn-sm btn-danger mx-1" id="btn_doExecute">Execute</button>
                           </div>
                       </div>
@@ -127,6 +123,7 @@
                       <thead>
                         <tr>
                           <th>No</th>
+                          <th>UUID</th>
                           <th>배치유형</th>
                           <th>배치상태</th>
                           <th>시작일시</th>
@@ -211,14 +208,11 @@
     var p_bjtList = {
       "BDT000": { "nm": "기본개요 파일분할"}, 
       "BDT001": { "nm": "기본개요 등록"}, 
-      "BJT000": { "nm": "파일분할" },
-      "BJT001": { "nm": "단지정보입력" },
-      "BJT002": { "nm": "기본개요-시도분할" },
-      "BJT003": { "nm": "기본개요-시군구분할" },
-      "BLD001": { "nm": "기본개요" },
-      "BLD002": { "nm": "총괄표제부" },
-      "BLD003": { "nm": "표제부" },
-      "BLD004": { "nm": "전유부" },
+      "BDT021": { "nm": "총괄표제부 등록"},
+      "BDT030": { "nm": "표제부 파일분할"},
+      "BDT031": { "nm": "표제부 등록"},
+      "BDT040": { "nm": "전유부 시도별분할"}, 
+      "BDT041": { "nm": "전유부 등록"}, 
     }
 
     var p_sttusList = {
@@ -321,6 +315,7 @@
               id: "grid_btjobList"
                 , headers: [   
                     { id: "batchno"        , clsname: "tar" }
+                    , { id: "uuid"         , clsname: "tac" }
                     , { id: "batchTy"      , clsname: "tac", code: p_bjtList }
                     , { id: "btSttuscd"    , clsname: "tac", code: p_sttusList }
                     , { id: "btstDt"       , clsname: "tac" }
