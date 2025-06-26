@@ -21,7 +21,64 @@ input, select, textarea,
 }
 .form-check-input, .form-check-label { margin-top: 3px; cursor:pointer; }
 .form-check-label { margin-top: 3px; }
+
+.modal-close {
+  border: 0 ;
+  background-color: transparent;
+  color: var(--bs-gray-500);
+}
+
+.modal-header { padding: 0.5rem 0.5rem 0.5rem 1rem !important;  }
+.modal-title { line-height: normal; }
+.modal-body { font-size: 0.875rem; }
+
+.modal-footer {
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+}
+
+.dropdown.rounded {
+  border: 1px solid var(--bs-border-color)!important;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+.dropdown.static {
+  position:static;
+  display:block;
+}
+
+.dropdown-item {
+  color: var(--bs-dark) ;
+}
+
+.dropdown-item:hover, .dropdown-item:active {
+  color: var(--bs-white ) ;
+  background-color:var(--bs-primary);
+}
+
+.dropdown-item:hover a, .dropdown-item:active a {
+  color: var(--bs-white ) ;
+}
+
+.dropdown-item.active {
+  color: var(--bs-white ) ;
+}
+
+.dropdown-item.active a {
+  color: var(--bs-white ) ;
+}
 /*** bootstrap custom finished */
+
+.feeling_set .active {
+  color: var(--bs-yellow) !important;
+}
+
+.form-control.invalid {
+  border: 1px solid var(--bs-form-invalid-border-color) ; 
+}
+.invalid-feedback.invalid {
+  display:block ;
+}
 
 /*** jQuery-UI custom started */
 .ui-icon {
@@ -147,14 +204,29 @@ a.ui-datepicker-prev-next-hover {
   border-bottom-right-radius: 0.375rem !important;
 }
 
+.border-left-radius-0 { 
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+
+.border-right-radius-0 { 
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 /* border */
 .no-border { border: 0 !important; }
 
 /* font-color */
+.c-red { color: #ff6161; }
 .text-primary { color: var(--bs-primary); }
 .text-gray { color: var(--bs-gray-500); }
 .text-orange { color: var(--bs-orange); }
 .text-yellow { color: var(--bs-yellow); }
+
+/* font-weight */
+.bold { font-weight: 600 }
 
 /* cursor */
 .cur-hand { cursor: pointer; }

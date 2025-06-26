@@ -20,6 +20,10 @@
         <link href="/css/da9-style.css" rel="stylesheet">
 
         <script src="/js/assets/js/color-modes.js"></script>
+
+        <!-- Include Quill stylesheet -->
+        <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+        <link href="/css/quill/quill-custom.css" rel="stylesheet" />
     </head>
     <body>
         <main class="main">
@@ -34,6 +38,7 @@
                         </div>
                         <div class="title-action me-2">
                             <button type="button" class="btn btn-primary mx-1" id="btn_save">작성하기</button>
+                            <button type="button" class="btn btn-success mx-1" id="btn_temp_save">임시저장</button>
                             <button type="button" class="btn btn-outline-secondary" id="btn_List">목록으로</button>
                         </div>
                     </div>
@@ -48,37 +53,33 @@
                             <span class="required">작성일자</span>
                         </div>
                         <div class="grid-cell input-group unset-width has-validation">
-                            <input type="text" class="form-control w-150px" placeholder="yyyy.mm.dd" id="p_diary_de" required/>
+                            <input type="text" class="form-control border-right-radius-0 w-150px" placeholder="yyyy.mm.dd" id="p_diary_de" readonly required/>
                             <span class="input-group-text cur-hand" id="btn_diary_de">
                                 <i class="bi bi-calendar-week"></i>
                             </span>
-                            <div class="invalid-feedback">일기작성 일자를 입력해 주세요</div>
                         </div>
                     </div>
                     <div class="container grid-table">
                         <div class="grid-cell label">
                             <span>공휴일 등록</span>
                         </div>
-                        <div class="grid-cell input-group unset-width has-validation">
+                        <div class="grid-cell input-group unset-width" id="badge_holiday">
                             <input type="text" class="form-control w-150px" placeholder="공휴일명 입력" id="p_holiday"/>
-                            <span class="badge red mx-2">현충일</span>
                         </div>
                     </div>
                     <div class="container grid-table">
                         <div class="grid-cell label">
                             <span>기념일 등록</span>
                         </div>
-                        <div class="grid-cell input-group unset-width has-validation">
+                        <div class="grid-cell input-group unset-width" id="badge_anniversary">
                             <input type="text" class="form-control w-150px" placeholder="기념일 입력" id="p_anniversary"/>
-                            <span class="badge info mx-2">대선이 생일</span>
-                            <span class="badge info mx-2">우리모임(1회차)</span>
                         </div>
                     </div>
                     <div class="container grid-table">
                         <div class="grid-cell label">
                             <span>Tag 등록</span>
                         </div>
-                        <div class="grid-cell input-group unset-width has-validation">
+                        <div class="grid-cell input-group unset-width" id="input_tag">
                             <input type="text" class="form-control w-150px" placeholder="Tag 입력" id="p_tag"/>
                         </div>
                     </div>
@@ -87,14 +88,55 @@
                             <span>오늘 날씨</span>
                         </div>
                         <div class="grid-cell">
-                            <button class="btn btn-outline-info rounded-circle p-2 lh-1" type="button"><i class="bi bi-sun-fill text-orange"></i></button>
-                            <button class="btn btn-outline-info rounded-circle p-2 lh-1" type="button"><i class="bi bi-cloud-sun-fill text-secondary"></i></button>
-                            <button class="btn btn-outline-info rounded-circle p-2 lh-1" type="button"><i class="bi bi-cloudy-fill text-secondary"></i></button>
-                            <button class="btn btn-outline-info rounded-circle p-2 lh-1" type="button"><i class="bi bi-clouds-fill text-secondary"></i></button>
-                            <button class="btn btn-outline-info rounded-circle p-2 lh-1" type="button"><i class="bi bi-cloud-rain-fill text-secondary"></i></button>
-                            <button class="btn btn-outline-info rounded-circle p-2 lh-1" type="button"><i class="bi bi-cloud-rain-heavy-fill text-secondary"></i></button>
-                            <button class="btn btn-outline-info rounded-circle p-2 lh-1" type="button"><i class="bi bi-cloud-sleet-fill text-secondary"></i></button>
-                            <button class="btn btn-outline-info rounded-circle p-2 lh-1" type="button"><i class="bi bi-cloud-snow-fill text-secondary"></i></button>
+                            <div id="sel_weather" class="dropdown rounded">
+                                <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle">
+                                    <div class="cur-hand mx-1 p-2 bi bi-sun-fill text-orange">
+                                        <span class="text-body mx-2">햇볕은 쨍쨍</span>
+                                    </div>                
+                                </a>
+                            </div>
+                            <ul id="option_weather" class="dropdown-menu static text-small">
+                                <li class="px-1">
+                                    <div id="btn_weather_00_01" class="dropdown-item rounded-2 py-2 bi bi-sun-fill">
+                                        <a href="#" class="mx-2 text-decoration-none">햇볕은 쨍쨍</a> 
+                                    </div>
+                                </li>
+                                <li class="px-1">
+                                    <div id="btn_weather_00_02" class="dropdown-item rounded-2 py-2 bi bi-cloud-sun-fill">
+                                        <a href="#" class="mx-2 text-decoration-none">구름 조금</a>
+                                    </div>
+                                </li>
+                                <li class="px-1">
+                                    <div id="btn_weather_00_03" class="dropdown-item rounded-2 py-2 bi bi-cloudy-fill">
+                                        <a href="#" class="mx-2 text-decoration-none">흐림</a>
+                                    </div>
+                                </li>
+                                <li class="px-1">
+                                    <div id="btn_weather_00_04" class="dropdown-item rounded-2 py-2 bi bi-clouds-fill">
+                                        <a href="#" class="mx-2 text-decoration-none">곧 비올듯</a>
+                                    </div>
+                                </li>
+                                <li class="px-1">
+                                    <div id="btn_weather_00_05" class="dropdown-item rounded-2 py-2 bi bi-cloud-rain-fill">
+                                        <a href="#" class="mx-2 text-decoration-none">어라? 비가 내리네?</a>
+                                    </div>
+                                </li>
+                                <li class="px-1">
+                                    <div id="btn_weather_00_06" class="dropdown-item rounded-2 py-2 bi bi-cloud-rain-heavy-fill">
+                                        <a href="#" class="mx-2 text-decoration-none">비가 퍼붓는데?</a>
+                                    </div>
+                                </li>
+                                <li class="px-1">
+                                    <div id="btn_weather_00_07" class="dropdown-item rounded-2 py-2 bi bi-cloud-sleet-fill">
+                                        <a href="#" class="mx-2 text-decoration-none">비도오고 눈도오고</a>
+                                    </div>
+                                </li>
+                                <li class="px-1">
+                                    <div id="btn_weather_00_08" class="dropdown-item rounded-2 py-2 bi bi-cloud-snow-fill">
+                                        <a href="#" class="mx-2 text-decoration-none">눈이내린다!</a>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="container grid-table last">
@@ -102,22 +144,22 @@
                             <span>오늘 기분</span>
                         </div>
                         <div class="grid-cell">
-                            <div class="d-flex flex-nowrap">
-                                <div class="fs-2 mx-1 bi bi-emoji-heart-eyes text-secondary"></div>
-                                <div class="fs-2 mx-1 bi bi-emoji-grin text-secondary"></div>
-                                <div class="fs-2 mx-1 bi bi-emoji-kiss text-secondary"></div>
-                                <div class="fs-2 mx-1 bi bi-emoji-laughing text-secondary"></div>
-                                <div class="fs-2 mx-1 bi bi-emoji-smile text-secondary"></div>
-                                <div class="fs-2 mx-1 bi bi-emoji-sunglasses text-secondary"></div>
-                                <div class="fs-2 mx-1 bi bi-emoji-neutral text-secondary"></div>
-                                <div class="fs-2 mx-1 bi bi-emoji-surprise text-secondary"></div>
-                                <div class="fs-2 mx-1 bi bi-emoji-expressionless text-secondary"></div>
-                                <div class="fs-2 mx-1 bi bi-emoji-tear text-secondary"></div>
-                                <div class="fs-2 mx-1 bi bi-emoji-frown text-secondary"></div>
-                                <div class="fs-2 mx-1 bi bi-emoji-astonished text-secondary"></div>
-                                <div class="fs-2 mx-1 bi bi-emoji-dizzy text-secondary"></div>
-                                <div class="fs-2 mx-1 bi bi-emoji-angry text-secondary"></div>
-                                <div class="fs-2 mx-1 bi bi-emoji-grinace text-secondary"></div>
+                            <div class="d-flex flex-nowrap feeling_set">
+                                <div class="cur-hand fs-2 mx-1 bi bi-emoji-heart-eyes-fill text-secondary"></div>
+                                <div class="cur-hand fs-2 mx-1 bi bi-emoji-grin-fill text-secondary"></div>
+                                <div class="cur-hand fs-2 mx-1 bi bi-emoji-kiss-fill text-secondary"></div>
+                                <div class="cur-hand fs-2 mx-1 bi bi-emoji-laughing-fill text-secondary"></div>
+                                <div class="cur-hand fs-2 mx-1 bi bi-emoji-smile-fill text-secondary"></div>
+                                <div class="cur-hand fs-2 mx-1 bi bi-emoji-sunglasses-fill text-secondary"></div>
+                                <div class="cur-hand fs-2 mx-1 bi bi-emoji-neutral-fill text-secondary"></div>
+                                <div class="cur-hand fs-2 mx-1 bi bi-emoji-surprise-fill text-secondary"></div>
+                                <div class="cur-hand fs-2 mx-1 bi bi-emoji-expressionless-fill text-secondary"></div>
+                                <div class="cur-hand fs-2 mx-1 bi bi-emoji-tear-fill text-secondary"></div>
+                                <div class="cur-hand fs-2 mx-1 bi bi-emoji-frown-fill text-secondary"></div>
+                                <div class="cur-hand fs-2 mx-1 bi bi-emoji-astonished-fill text-secondary"></div>
+                                <div class="cur-hand fs-2 mx-1 bi bi-emoji-dizzy-fill text-secondary"></div>
+                                <div class="cur-hand fs-2 mx-1 bi bi-emoji-angry-fill text-secondary"></div>
+                                <div class="cur-hand fs-2 mx-1 bi bi-emoji-grinace-fill text-secondary"></div>
                             </div>
                         </div>
                     </div>
@@ -134,9 +176,10 @@
                         <div class="grid-cell label">
                             <span class="required">일기 내용</span>
                         </div>
-                        <div class="grid-cell field input-group unset-width has-validation">
-                            <textarea rows="20" class="form-control" id="p_diary_cont"></textarea>
-                            <div class="invalid-feedback">일기내용을 입력해 주세요</div>
+                        <div class="grid-cell field">
+                            <div class="textarea-style" id="p_diary_cont">
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -148,29 +191,13 @@
         <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
         <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
 
+        <!-- Include the Quill library -->
+        <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+
         <script src="/js/common/da9-comm.js"></script>
+        <script src="/js/common/quill-custom.js"></script>
+        <script src="/js/diary/diary-write.js"></script>
 
-        <script type="text/javascript">
-            $(document).ready(function() {
-                fn_set_Layout("Diary") ;
-      
-                /* 로드 후 페이지 event */
-                $("#btn_List").click(function() {
-                    location.href="/html/diary/diary-List.html"
-                }) ; 
-                da9.ui.datepicker( "p_diary_de", "btn_diary_de" ) ; 
 
-                /* scroll moving event */
-                $(".top-cont-body").scroll(function() {
-                    /* 현재 스크롤 위치 얻기 */
-                    let sc_pos = $(this).scrollTop() ;
-                    if (sc_pos > 0) {
-//                        $("#sub_title").removeClass("shadow").addClass("shadow") ; 
-                    } else {
-//                        $("#sub_title").removeClass("shadow") ; 
-                    }
-                }) ; 
-            }) ; 
-        </script>
     </body>
 </html>

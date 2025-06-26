@@ -46,7 +46,7 @@ const homes_comm = {
             return JSON.parse(localStorage.getItem(key)) ; 
         }
         , clearItem: (key, clearKey) => {
-            var jsoObj = JSON.parse(localStorage.getItem(key)) ; 
+            var jsonObj = JSON.parse(localStorage.getItem(key)) ; 
             delete jsonObj[clearKey] ; 
             localStorage.setItem(key, JSON.stringify(jsonObj)) ; 
         }

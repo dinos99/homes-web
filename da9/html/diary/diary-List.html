@@ -41,7 +41,7 @@
             </div>
         </main>
         
-        <main>
+        <main id="cont-bydo">
             <!--
             <div class="container main-list border-bottom">
                 <div class="list-cont">
@@ -183,7 +183,9 @@
 
         <script type="text/javascript">
             $(document).ready(function() {
-                fn_set_Layout("Diary") ;
+                fn_init_page("Diray", {
+                    "sc_container": "#cont-body"
+                }) ;
 
                 $("#btn_write").click(function() {
                     location.href="/html/diary/diary-write.html"
