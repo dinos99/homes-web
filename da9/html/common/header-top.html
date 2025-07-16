@@ -1,13 +1,51 @@
-                <div class="div-header-top">
-                    <div class="container">
-                        <div class="nav-gnb justify-content-lg-start">
-                            <ul id="gnb-headers" class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                                <li><button type="button" class="btn-da9" id="btn-da9"><span>@Da-9</span></button></li>
-                            </ul>
-                            <div class="col-md-3 text-end">
-                                <button type="button" class="btn btn-outline-primary me-2">Log-in</button>
-                                <!--<button type="button" class="btn btn-primary">Sign-up</button>-->
-                            </div>
-                        </div>
+            <!-- Fixed navbar -->
+             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/" id="btn_Logo"></a>
+                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nvCollapse" aria-controls="nvCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse" id="nvCollapse">
+                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                            <li class="nav-item"><a id="nav_Home" class="nav-link" href="/">Home</a></li>
+                            <li class="nav-item"><a id="nav_Schedule" class="nav-link" href="#">Schedule</a></li>
+                            <li class="nav-item"><a id="nav_Diary" class="nav-link" href="/html/diary/diary-List.html">Diary</a></li>
+                            <li class="nav-item"><a id="nav_Photos" class="nav-link" href="#">Photos</a></li>
+                            <!--
+                            <li class="nav-item"><a class="nav-link disabled" aria-disabled="true">Disabled</a></li>
+                            -->
+                        </ul>
                     </div>
                 </div>
+            </nav>
+            <div class="nav-sub">
+                <div class="d-profile">
+                    <div class="dropdown rounded">
+                        <a id="d_profile" href="#" class="dropdown-sel dropdown-toggle">
+                            @Brother da-9
+                        </a>
+                    </div>
+                </div>
+                <div class="d-profile-menu">
+                    <div class="d-profile-setup">
+                        <ul class="dropdown-menu static shadow" data-bs-theme="light">
+                            <li>
+                                <a class="dropdown-item link text-secondary bi bi-person-circle" href="#">
+                                    <span class="text-body ml-10px">Login info.</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item link text-secondary bi bi-gear" href="#">
+                                    <span class="text-body ml-10px">Setup</span>
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-secondary link bi bi-arrow-left-square-fill" href="#">
+                                    <span class="text-body ml-10px">Log out</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>

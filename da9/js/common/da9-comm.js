@@ -1,3 +1,32 @@
+const w_set = [
+    { icon: "", text: "" },
+    { icon: "bi-sun-fill", text: "햇볕은 쨍쨍" },
+    { icon: "bi-cloud-sun-fill", text: "구름 조금" },
+    { icon: "bi-cloudy-fill", text: "흐림" },
+    { icon: "bi-clouds-fill", text: "곧 비올듯" },
+    { icon: "bi-cloud-rain-fill", text: "어라? 비가 내리네?" },
+    { icon: "bi-cloud-rain-heavy-fill", text: "비가 퍼붓는데?" },
+    { icon: "bi-cloud-sleet-fill", text: "비도오고 눈도오고" },
+    { icon: "bi-cloud-snow-fill" ,text: "눈이내린다!" }
+] ;
+const f_set = [
+    { icon: "", text: "" },
+    { icon: "bi-emoji-heart-eyes-fill", text: "" },
+    { icon: "bi-emoji-grin-fill"      , text: "" },
+    { icon: "bi-emoji-kiss-fill"      , text: "" },
+    { icon: "bi-emoji-laughing-fill"  , text: "" },
+    { icon: "bi-emoji-smile-fill"     , text: "" },
+    { icon: "bi-emoji-sunglasses-fill", text: "" },
+    { icon: "bi-emoji-neutral-fill"   , text: "" },
+    { icon: "bi-emoji-surprise-fill"  , text: "" },
+    { icon: "bi-emoji-tear-fill"      , text: "" },
+    { icon: "bi-emoji-frown-fill"     , text: "" },
+    { icon: "bi-emoji-astonished-fill", text: "" },
+    { icon: "bi-emoji-dizzy-fill"     , text: "" },
+    { icon: "bi-emoji-angry-fill"     , text: "" },
+    { icon: "bi-emoji-grimace-fill"   , text: "" },
+] ;
+
 var da9const = {
     profile: "LOCAL",
     _LOGIN_PATH_: "/html/auth/sign-in.html",
@@ -22,40 +51,19 @@ const da9message = {
 
 const da9comm = {
     menu: {
-        Header: {
-            title: ["Home", "Schedule", "Diary", "Photos"]
-            , Home    : { link: "/"                         , title: "Home" }
-            , Schedule: { link: "#"                         , title: "Schedule" } 
-            , Diary   : { link: "/html/diary/diary-List.html", title: "Diary" } 
-            , Photos  : { link: "#"                         , title: "Photos" } 
-        }
-        , Left: {
-            title: ["Home", "Schedule", "Diary", "Photos"]
-            , Home    : { link: "/"                         , title: "Home"    , icon: "bi-house-door-fill"}
-            , Schedule: { link: "#"                         , title: "Schedule", icon: "bi-table" } 
-            , Diary   : { link: "html/diary/diary-List.html", title: "Diary"   , icon: "bi-card-list"} 
-            , Photos  : { link: "#"                         , title: "Photos"  , icon: "bi-image-fill"} 
-        }
-        , fn_create_header: (menu) => {
-            var header = $("#top-header") ; 
+        fn_create_header: menu => {
+            var header = $("#d_header") ; 
             header.load("/html/common/header-top.html", () => {
-                $("#btn-da9").click(function() {
-                    location.href = "/index.html" ;
+                $("#btn_Logo").text("@Brother da-9") ;
+                $("a[id^=nav_]").removeClass("active") ;
+                $("a[id^=nav_]").removeAttr("aria-current") ;
+
+                $("#nav_" + menu).addClass("active") ;
+                $("#nav_" + menu).attr("aria-current", "page") ;
+
+                $("#d_profile").click(function() {
+                    $(".d-profile-menu").toggle() ;
                 }) ;
-                var ul = $("#gnb-headers") ; 
-                da9comm.menu.Header.title.forEach(title => {
-                    const gnb = da9comm.menu.Header[title]  ; 
-                    var li   = $("<li/>") ;
-                    var aTag = `<a href="${gnb.link}" class="nav-link ${menu == title ? "active": ""}" title="${title}">${title}</a>`
-                    var a    = $(aTag) ; 
-                    li.append(a) ; 
-                    ul.append(li) ;
-                }) ; 
-            }) ; 
-        }
-        , fn_create_lnb: () => {
-            var Leftnavi = $("#left-navi") ; 
-            Leftnavi.load("/html/common/left-navi.html", () => {
             }) ; 
         }
     }, 
@@ -77,6 +85,21 @@ const da9comm = {
         , init_token: (token, user) => {
             var rememberMe = da9comm.store.getItem("rememberMe") ; 
             da9comm.store.clear() ; 
+
+            user.role = token.role ; 
+            delete user.accessToken ;
+            delete user.rememberMe ; 
+            delete user.verifyCd ;
+            delete user.verifyMsg ;
+
+            delete token.userid;
+            delete token.usernm;
+            delete token.role ; 
+            delete token.nick ; 
+            delete token.email ; 
+            delete token.refreshToken ; 
+            delete token.rememberMe ;
+
             da9comm.store.setItem("token", token) ; 
             da9comm.store.setItem("user", user) ; 
             da9comm.store.setItem("rememberMe", rememberMe) ;
@@ -85,8 +108,21 @@ const da9comm = {
             var token = da9comm.store.getItem("token") || { "accessToken": "" }; 
             return token["accessToken"] || "" ; 
         }
+        , getRefreshToken: () => {
+            var token = da9comm.store.getItem("token") || { "refreshToken": "" }; 
+            return token["refreshToken"] || "" ; 
+        }
+        , getUser: () => {
+            return da9comm.store.getItem("user") ;
+        }
+        , getUserno: () => {
+            var user = da9comm.store.getItem("user") ;
+            return user.userno ;
+        }
     },
     util: {        
+        is_empty: ( data ) => { return !(!!data) ;  },
+        is_not_empty: ( data ) => { return !da9comm.util.is_empty(data) ; },
         /* file size 변환 */ 
         fn_conv_filesize: (fsize, option) => {
             const unit_shot = ["KB", "MB", "GB", "TB"];
@@ -142,9 +178,9 @@ const da9comm = {
             var elmnt = $(selector) ; 
             if ( elmnt.length == 0) return false ; 
             var el = elmnt[0] ; 
-            if ( el.nodeName == "INPUT" || el.nodeName == "SELECT" ) {
+            if ( el.nodeName == "INPUT" || el.nodeName == "SELECT" || el.nodeName == "PASSWORD") {
                 var inVal = elmnt.val() ; 
-                return !!!inVal || inVal.length == 0 ; 
+                return !(!!inVal && inVal.length > 0)  ; 
             }
         }
     },
@@ -160,6 +196,30 @@ const da9comm = {
 
             return da9const[profile].API_BASE_URL ; 
         },
+        post: (api_url, params, fn_callgack) => {
+            var api_base_url = da9comm.network.fn_get_base_url() ; 
+            var verify_url = "/api/v1/auth/verify-token"
+            if ( api_url.indexOf("/api") === 0 || api_url.indexOf("/auth") === 0) {
+                verify_url = api_base_url + verify_url ; 
+            }
+            return new Promise(resolve => {
+                da9comm.ui.progress(true) ; 
+                da9comm.network.send(verify_url, {
+                    method: "POST",
+                    is_auth: false
+                }, {
+                    accessToken: da9comm.store.getAccessToken()
+                }).then(response => {
+                    store.init_token(response.token, response.data) ; 
+                    da9comm.network.send(api_url, {
+                        method: "POST"
+                    }, params).then(response => {
+                        da9comm.ui.progress(false) ;
+                        resolve(response.data) ; 
+                    }) ; 
+                }) ;
+            }) ; 
+        }, 
         send: (api_url, option, params, fn_callgack) => {
             return new Promise((resolve, reject) => {
                 var def_option = {
@@ -181,6 +241,11 @@ const da9comm = {
                  * - is_auth가 null이가나 'undefined'인경우 인증필요
                  * ****************************************************************/ 
                 var is_auth = option["is_auth"] === false ? false : true  ;
+                var param   = JSON.parse(def_option.body) ;
+                param.refreshToken = da9comm.store.getRefreshToken() ;
+                param.rememberMe   = da9comm.store.getItem("rememberMe") ;
+                def_option.body = JSON.stringify(param) ;
+
                 if ( is_auth ) {
                     def_option.headers["Authorization"] = "Bearer " + da9comm.store.getAccessToken() ;
                 }
@@ -200,18 +265,17 @@ const da9comm = {
                 if ( api_url.indexOf("/api") === 0 || api_url.indexOf("/auth") === 0) {
                     api_url = api_base_url + api_url ; 
                 }
-
                 fetch( api_url, def_option).then( response => {
                     var httpSttus = response.status ;
                     if ( httpSttus == 404 ) {
-                        return new Promise( (resolve, reject) => {
+                        return new Promise((resolve, reject) => {
                             reject({
-                                httpSttusCd : 404,
+                                httpSttusCd : response.status,
                                 httpSttusText: "API Not Found",
                                 errorMessage: `<p class='mb-2'>네트워크에러가 발생하였습니다.</p><p>네트워크 상태를 확인해 주세요` 
                             }) ;
                         }) ;
-                    }
+                    } 
                     return response.json() ; 
                 }).then( response => {
                     if ( response.error.httpSttusCd == 200 ) {
@@ -233,7 +297,12 @@ const da9comm = {
                             remove: true,
                             title: `[<span class='c-red'>HTTP-${status}</span>] ${statusText}`,
                             message: e.errorMessage
-
+                        }
+                        if ( status == 101 || status == 102 ) {
+                            da9comm.alert(opt).then(ok => {
+                                da9comm.store.clear() ;
+                                location.href = da9const._LOGIN_PATH_ ;
+                            }) ;
                         }
                     } else {
                         opt = {
@@ -241,8 +310,8 @@ const da9comm = {
                             title: `[<span class='c-red'>HTTP-400</span>] Bad Request`,
                             message: `<p class='mb-2'>잘못된 요청입니다.</p>`
                         }
+                        da9comm.alert(opt).then(ok => { reject(e); }) ;
                     }
-                    da9comm.alert(opt).then(ok => { reject(e); }) ;
                 })
             })
         }
@@ -274,15 +343,29 @@ const da9comm = {
             } else {
                 picker.val(def.default) ;
 
-            if ( !!button_id ) {
-                $( "#" + button_id ).click(function() {
-                    picker.datepicker("show") ; 
-                }) ; 
-            }
+                if ( !!button_id ) {
+                    $( "#" + button_id ).click(function() {
+                        picker.datepicker("show") ; 
+                    }) ; 
+                }
 
-            /* 안되면 말고 */
-            $("#ui-datepicker-div").addClass("border").addClass("shadow") ; 
-        }
+                /* 안되면 말고 */
+                $("#ui-datepicker-div").addClass("border").addClass("shadow") ; 
+            }
+        },
+        progress: ( bshow ) => {
+            if ( bshow ) {
+                $("#da9-progress").remove() ; 
+                var div = $("<div class='progress-dimmed' id='da9-progress' />") ; 
+                var progress = $("<div class='progress'/>") ;
+                div.append(progress) ;
+                $("body").append(div) ; 
+                div.show() ; 
+            } else {
+                $(".progress-dimmed").fadeOut(300, function() {
+                    $(".progress-dimmed").remove() ;
+                }) ;
+            }
         }
     },
     auth: {
@@ -358,15 +441,20 @@ const da9comm = {
 
 var fn_set_Layout = menu => {
     da9comm.menu.fn_create_header(menu) ;
-    da9comm.menu.fn_create_lnb(menu) ;
 } ; 
 
 var fn_set_Event = selector => {
+    /* height를 계산하여 scroll을 만든다 */ 
+    var fh = $(".flex-shrink-0").height() ;
+    var offset = 161 ;
+
+    $("#cont_body").height(Number(fh - 161)) ;
+
     /* scroll moving event */
     $(selector).scroll(function() {
         /* 현재 스크롤 위치 얻기 */
         let sc_pos = $(this).scrollTop() ;
-        if (sc_pos > 0) {
+        if (sc_pos > 160) {
 //            $("#sub_title").removeClass("shadow").addClass("shadow") ; 
         } else {
 //            $("#sub_title").removeClass("shadow") ; 
@@ -380,10 +468,12 @@ var fn_init_page = ( menu, option ) => {
     fn_set_Event(option["sc_container"]) ;
     var is_auth = option["is_auth"] ; 
     if ( is_auth !== false ) {
-        da9comm.auth.fn_checkLogin() ;
+//        da9comm.auth.fn_checkLogin() ;
     }
 }
 
 var da9 = da9comm ; 
+var ui = da9comm.ui ;
 var network = da9comm.network ;
 var store = da9comm.store ;
+var util = da9comm.util ;

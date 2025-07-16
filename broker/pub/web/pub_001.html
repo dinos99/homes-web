@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="ko" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈즈 홈페이지 아이콘</title>
+
+    <link rel="stylesheet" href="/css/homes.broker.style.css">
+    <!-- bootstrap 5.3.5 -->    
+    <script src="/js/extern/bootstrap-5.3.5/assets/js/color-modes.js"></script>
+    <link href="/js/extern/bootstrap-5.3.5/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/bootstrap/modal.css">
+
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/variables.css">
+
+    <style>
+        .box-wrap { 
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column ;
+            justify-content: center ;
+            align-items: center;
+            width: 120px;
+            padding: 10px;
+        }
+        .box-wrap div { text-align: center ; padding: 5px; }
+        .box-wrap div.box-sm {
+            width: 30px;
+            height: 30px;
+        }
+        p.xz, div.xz { 
+            width: 180px; 
+            border-right: 1px solid var(--bs-border-color);
+            margin-right: 10px;
+        }
+        .go-list {
+            position:fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 50px;
+            height: 50px;
+        }
+        .go-list button {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            font-size: 30px;
+            background-color: var(--bs-primary);
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="p-5">
+        <h1> base-color </h1>
+        <div class="flex-between border rounded p-3 my-5">
+            <div class="box-wrap xz">
+                <div>폰트예시</div>
+                <div>색상</div>
+                <div>( 코드 )</div>
+                <div>주 사용부분</div>
+            </div>
+            <div class="box-wrap">
+                <div class="bold">중개매물</div>
+                <div class="box-sm bg-373737"></div>
+                <div>( #373737 )</div>
+                <div>중개사 상단</div>
+            </div>
+            <div class="box-wrap">
+                <div class="bold">매도통계</div>
+                <div class="box-sm bg-464646"></div>
+                <div>( #464646 )</div>
+                <div>타이틀</div>
+            </div>
+            <div class="box-wrap">
+                <div class="bold">기본폰트</div>
+                <div class="box-sm bg-5f5f5f"></div>
+                <div>( #5f5f5f )</div>
+                <div>기본폰트색상</div>
+            </div>
+            <div class="box-wrap">
+                <div class="bold">의뢰인</div>
+                <div class="box-sm bg-9c9c9c"></div>
+                <div>( #9c9c9c )</div>
+                <div>구분</div>
+            </div>
+            <div class="box-wrap bg-dark">
+                <div class="bold c-white">의뢰인</div>
+                <div class="box-sm bg-white"></div>
+                <div class="c-white">( #ffffff )</div>
+                <div class="c-white">버튼/아아콘</div>
+            </div>
+            <div class="box-wrap">
+                <div class="bold">텍스트강조</div>
+                <div class="box-sm bg-378cff"></div>
+                <div>( #378cff )</div>
+                <div>텍스트강조</div>
+            </div>
+            <div class="box-wrap">
+                <div class="bold">텍스트강조</div>
+                <div class="box-sm bg-ff5050"></div>
+                <div>( #ff5050 )</div>
+                <div>텍스트강조</div>
+            </div>
+            <div class="box-wrap">
+                <div class="bold">텍스트강조</div>
+                <div class="box-sm bg-f7941d"></div>
+                <div>( #f7941d )</div>
+                <div>텍스트강조</div>
+            </div>
+            <div class="box-wrap">
+                <div class="bold">텍스트강조</div>
+                <div class="box-sm bg-0ec4bf"></div>
+                <div>( #0ec4bf )</div>
+                <div>텍스트강조</div>
+            </div>
+            <div class="box-wrap">
+                <div class="bold">텍스트강조</div>
+                <div class="box-sm bg-92d050"></div>
+                <div>( #92d050 )</div>
+                <div>텍스트강조</div>
+            </div>
+            <div class="box-wrap">
+                <div class="bold">이용약관</div>
+                <div class="box-sm bg-646f7c"></div>
+                <div>( #646f7c )</div>
+                <div>footer</div>
+            </div>
+            <div class="box-wrap">
+                <div class="bold">네이버광고</div>
+                <div class="box-sm bg-3ec729"></div>
+                <div>( #3ec729 )</div>
+                <div>네이버 부동산</div>
+            </div>
+        </div>
+        <h1> font-style </h1>
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">폰트 </div>
+            <div class="flex-start">
+                <p class="c-373737 p-3 my-3">중개매물</p>
+                <p class="c-464646 p-3 my-3">매도 통계</p>
+                <p class="c-5f5f5f p-3 my-3">기본폰트</p>
+                <p class="c-9c9c9c p-3 my-3">의뢰인</p>
+                <p class="bg-dark c-white p-3 my-3">흰글씨</p>
+                <p class="c-378cff p-3 my-3">텍스트 강조</p>
+                <p class="c-ff5050 p-3 my-3">텍스트 강조</p>
+                <p class="c-f7941d p-3 my-3">텍스트 강조</p>
+                <p class="c-0ec4bf p-3 my-3">텍스트 강조</p>
+                <p class="c-92d050 p-3 my-3">텍스트 강조</p>
+                <p class="c-646f7c p-3 my-3">이용약관</p>
+                <p class="c-3ec729 p-3 my-3">네이버 부동산</p>
+            </div>
+        </div>
+        
+        <h1> button-style </h1>
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">button normal</div>
+            <div class="flex-start">
+                <button class="mx-1 hs-button btn-white">계약처리</button>
+                <button class="mx-1 hs-button btn-cancel">취소</button>
+                <button class="mx-1 hs-button" disabled >비활성화</button>
+                <button class="mx-1 hs-button btn-blue">계약처리</button>
+                <button class="mx-1 hs-button btn-red">계약처리</button>
+                <button class="mx-1 hs-button btn-cyan">계약처리</button>
+                <button class="mx-1 hs-button btn-orange">계약처리</button>
+                <button class="mx-1 hs-button btn-lime">계약처리</button>
+                <button class="mx-1 hs-button btn-lime play">도움말</button>
+            </div>
+        </div>
+        
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">button-small </div>
+            <div class="flex-start">
+                <button class="mx-1 hs-button-sm btn-white">계약처리</button>
+                <button class="mx-1 hs-button-sm btn-cancel">취소</button>
+                <button class="mx-1 hs-button-sm" disabled >비활성화</button>
+                <button class="mx-1 hs-button-sm btn-blue">계약처리</button>
+                <button class="mx-1 hs-button-sm btn-red">계약처리</button>
+                <button class="mx-1 hs-button-sm btn-cyan">계약처리</button>
+                <button class="mx-1 hs-button-sm btn-orange">계약처리</button>
+                <button class="mx-1 hs-button-sm btn-lime">계약처리</button>
+            </div>
+        </div>
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">button big-size</div>
+            <button class="hs-button-big-size btn-cancel">취소</button>
+            <button class="hs-button-big-size btn-red">확인</button>
+        </div>
+        
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">button no-size</div>
+            <button class="hs-button-nosize btn-lime">인증번호 전송</button>
+            <button disabled class="hs-button-nosize">재전송</button>
+            <button class="hs-button-nosize btn-lime">재전송</button>
+        </div>
+        <h1> icon-button </h1>
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">icon-button</div>
+            <button class="btn-arrow gray-filter up active"></button>
+            <button class="btn-arrow gray-filter down"></button>
+            <button class="btn-arrow gray-filter delete"></button>
+            <button class="btn-lock gray-filter bi bi-lock-fill mx-2"></button>
+            <button class="btn-lock gray-filter active bi bi-lock-fill mx-2"></button>
+
+            <button class="btn-img edit ml-20"></button>
+            <button class="btn-img more"></button>
+            <button class="btn-img help"></button>
+            <button class="btn-img check-round"></button>
+            <button class="btn-img box-x-sm"></button>
+            <button class="btn-img plus"></button>
+            <button class="btn-img minus"></button>
+            <button class="btn-img eye-closed"></button>
+            <button class="btn-img eye-open"></button>
+            <button class="btn-img gray-filter box-x-sm"></button>
+            <button class="btn-img magnifier"></button>
+            
+            <button class="btn-img empty-heart ml-20"></button>
+            <button class="btn-img red-heart"></button>
+            <button class="btn-img gray-heart"></button>
+            <button class="btn-img circle share"></button>
+            <button class="btn-img circle empty-heart"></button>
+            <button class="btn-img circle cogwheel"></button>
+            <button class="btn-img red-star"></button>
+            <button class="btn-img gray-star"></button>
+        </div>
+         
+        <h1> form-fields </h1>
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">input, textarea </div>
+            <div class="flex-between">
+                <input type="text" name="p_name" id="p_name" class="mx-2 ml-0" placeholder="성명"/>
+                <label for="p_num"><input type="number" name="p_num" id="p_num" placeholder="0" class="mx-2"> ㎡</label>
+                <textarea name="p_text" id="p_text" placeholder="내용을 입력하시오." class="mx-2"></textarea>
+            </div>
+        </div>
+        
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">select-box</div>
+            <select class="form-select w-150px mr-10" name="p_select_01">
+                <option value="0" selected>층 선택</option>
+                <option value="1">1층</option>
+                <option value="2">2층</option>
+                <option value="3">3층</option>
+                <option value="4">4층</option>
+                <option value="5">5층</option>
+                <option value="6">6층</option>
+                <option value="7">7층</option>
+            </select>
+
+            <select class="form-select w-150px mr-10" name="p_select_02" disabled>
+                <option value="0">층 선택</option>
+                <option value="1" selected>1층</option>
+                <option value="2">2층</option>
+                <option value="3">3층</option>
+                <option value="4">4층</option>
+                <option value="5">5층</option>
+                <option value="6">6층</option>
+                <option value="7">7층</option>
+            </select>
+
+            <select class="form-select w-150px mr-10 c-378cff" name="p_select_03" >
+                <option value="0">층 선택</option>
+                <option value="1">80 ~ 123㎡</option>
+                <option value="2" selected>280 ~ 123㎡</option>
+                <option value="3">380 ~ 123㎡</option>
+                <option value="4">480 ~ 123㎡</option>
+                <option value="5">580 ~ 123㎡</option>
+                <option value="6">680 ~ 123㎡</option>
+                <option value="7">780 ~ 123㎡</option>
+            </select>
+            <select class="form-select telecom" name="p_select_04">
+                <option value="0" selected>통신사 선택</option>
+                <option value="1">SKT</option>
+                <option value="2">KT</option>
+                <option value="3">LG U+</option>
+                <option value="4">알뜰 SKT</option>
+                <option value="5">알뜰 KT</option>
+                <option value="6">알뜰 LG U+</option>
+            </select>
+
+        </div>
+        
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">check-box</div>
+            <div class="checkbox-container mr-10">
+                <input type="checkbox" id="checkbox1" class="custom-checkbox">
+                <label for="checkbox1" class="checkbox-label">
+                    <span class="checkbox-icon"></span>
+                    <span class="checkbox-text">미선택</span>
+                </label>
+            </div>
+            <div class="checkbox-container mr-10">
+                <input type="checkbox" id="checkbox2" class="custom-checkbox" checked>
+                <label for="checkbox2" class="checkbox-label">
+                    <span class="checkbox-icon"></span>
+                    <span class="checkbox-text">선택</span>
+                </label>
+            </div>
+            <div class="checkbox-container mr-10">
+                <input type="checkbox" id="checkbox3" class="custom-checkbox" checked disabled>
+                <label for="checkbox3" class="checkbox-label">
+                    <span class="checkbox-icon"></span>
+                    <span class="checkbox-text">선택 비활성화</span>
+                </label>
+            </div>
+            <div class="checkbox-container mr-10">
+                <input type="checkbox" id="checkbox4" class="custom-checkbox" disabled>
+                <label for="checkbox4" class="checkbox-label">
+                    <span class="checkbox-icon"></span>
+                    <span class="checkbox-text">미선택 비활성화</span>
+                </label>
+            </div>
+        </div>
+
+        <h1> badge </h1>
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">부동산 구분</div>
+            <span class="mx-1 text-bg skyblue-bg">빌딩</span>
+            <span class="mx-1 text-bg brown-bg">대</span>
+            <span class="mx-1 text-bg blue-bg">단독주택</span>
+            <span class="mx-1 text-bg cyan-bg">오피스텔</span>
+            <span class="mx-1 text-bg darkblue-bg">주상복합</span>
+            <span class="mx-1 text-bg seablue-bg">단지내 상가</span>
+        </div>
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">용도</div>
+            <span class="mx-1 text-bg bg-a1">주거용</span>
+            <span class="mx-1 text-bg bg-a2">사무용</span>
+            <span class="mx-1 text-bg bg-a3">상가용</span>
+            <span class="mx-1 text-bg bg-a4">공장용</span>
+            <span class="mx-1 text-bg bg-a5">창고용</span>
+            <span class="mx-1 text-bg bg-a6">토지</span>
+            <span class="mx-1 text-bg bg-a7">건물</span>
+        </div>
+        
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">기타</div>
+            <span class="mx-1 text-bg bg-b1">급매</span>
+            <span class="mx-1 text-bg bg-b2">풀옵션</span>
+            <span class="mx-1 text-bg bg-b3">재건축</span>
+            <span class="mx-1 text-bg bg-b4">계약</span>
+            <span class="mx-1 text-bg bg-b5">종료</span>
+            <span class="mx-1 text-bg bg-b6">토지</span>
+            <span class="mx-1 text-bg bg-b7">건물</span>
+        </div>
+        
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">부동산 구분 대</div>
+            <span class="mx-1 text-bg2 darkblue-bg">아파트</span>
+            <span class="mx-1 text-bg2 blue-bg">단독주택</span>
+            <span class="mx-1 text-bg2 cyan-bg">오피스텔</span>
+            <span class="mx-1 text-bg2 skyblue-bg">빌딩</span>
+            <span class="mx-1 text-bg2 brown-bg">대</span>
+            <span class="mx-1 text-bg2 seablue-bg">빌딩형건물</span>
+        </div>
+        
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">매물 리스트</div>
+            <span class="mx-1 text-bg3 bg-c1">SEEN</span>
+            <span class="mx-1 text-bg3 bg-c2">방문</span>
+            <span class="mx-1 text-bg3 bg-c3">My</span>
+            <span class="mx-1 text-bg3 bg-c3">취소</span>
+            <span class="mx-1 text-bg3 bg-c4">요청</span>
+        </div>
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">badge-rounded</div>
+            <span class="mx-1 notice-white">공지</span>
+            <span class="mx-1 notice-red">필독</span>
+            <span class="mx-1 notice-orange">점검</span>
+        </div>
+        
+        <h1> icon set </h1>
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">방문 순서</div>
+            <div class="mx-1 house house-type1">
+                <p></p>
+            </div>
+            <div class="mx-1 house house-type2">
+                <p></p>
+            </div>
+            <div class="mx-1 house house-type3">
+                <p>2</p>
+            </div>
+            <div class="mx-1 house house-type4">
+                <p>8</p>
+            </div>
+        </div>
+        
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">방문요청</div>
+            <div class="flex-between">
+                <div class="mx-1 visit bg-d1">추천 매물</div>
+                <div class="mx-1 visit bg-d2">방문요청 매물</div>
+                <div class="mx-1 visit bg-d3">방문완료 매물</div>
+                <div class="mx-1 visit bg-d4">검증요청 매물</div>
+                <div class="mx-1 visit bg-d5">계약예정 매물</div>
+                <div class="mx-1 visit bg-d6">계약완료 매물</div>
+                <div class="mx-1 visit bg-d7">방문취소 매물</div>
+            </div>
+        </div>
+        
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">내 매물 상태</div>
+            <div class="flex-between">
+                <div class="mx-1 listings bg-d1">미등록</div>
+                <div class="mx-1 listings bg-d5">등록매물</div>
+                <div class="mx-1 listings bg-d2">계약</div>
+                <div class="mx-1 listings bg-d8">매물종료</div>
+                <div class="mx-1 listings-mini bg-d5">단지</div>
+                <div class="mx-1 listings-mini bg-d4">단지</div>
+            </div>
+        </div>
+        
+        <h1> 지도버튼 &amp; 아이콘 </h1>
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">지도 버튼 및 아이콘 </div>
+            <div class="flex-between">
+                <button class="mx-2 map-num-btn-mini">3</button>
+                <button class="mx-2 map-num-btn-middle">가</button>
+                <button class="mx-2 map-num-btn-middle">가변</button>
+                <button class="mx-2 map-num-btn-middle">가변형2</button>
+                <button class="mx-2 map-num-btn-middle">가변형23</button>
+                <button class="mx-2 map-num-btn-middle">가변형234</button>
+                <button class="mx-2 map-num-btn-big">3,233</button>
+                <button class="mx-2 map-home-btn"><img src="/images/home-red.png" alt=""></button>
+                <button class="mx-2 map-location-btn"><img src="/images/location-red.png" alt=""></button>
+                <button class="mx-2 map-location-sign"><img src="/images/location-sign.png" alt=""></button>
+            </div>
+        </div>
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">지도 버튼 및 아이콘 </div>
+            <div class="flex-between">
+                <div class="region-wrapper">
+                    <div class="region-img"><img src="/images/location-blue.png" alt=""> 서울시</div>
+                    <div class="region-img">송파구</div>
+                    <div class="region-text">잠실동</div>
+                    <div class="listings-mini bg-d5">단지</div>
+                </div>
+                <div class="region-wrapper region-type2">
+                    <div class="region-img"><img src="/images/location-blue.png" alt=""> 충청북도</div>
+                    <div class="region-img">고양시 일산동구</div>
+                    <div class="region-text">서완산동 2가</div>
+                    <div class="listings-mini bg-d4">단지</div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">지도 버튼 및 아이콘 </div>
+            <div class="flex-between w-20">
+                <div class="sb-mini sb-orange">
+                    <span class="sb-text">0</span>
+                    <div class="sb-inner">
+                        <div class="title">
+                            <span class="text-bg darkblue-bg">주상복합</span> 잠실주공1단지 <span class="text-bg bg-b3">분양권</span>
+                        </div>
+                        <div class="blue">매매 10.5억(1)</div>
+                        <div class="blue">매매 10.5억(1)</div>
+                        <div class="blue">매매 10.5억(1)</div>
+                        <div class="blue">매매 10.5억(1)</div>
+                        <div class="btn-wrapper">
+                            <button>단지정보</button>
+                            <button>시세/실거래가</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="sb-mini sb-navy">
+                    <span class="sb-text">0</span>
+                    <div class="sb-inner">
+                        <div class="title">
+                            <span class="text-bg darkblue-bg">주상복합</span> 잠실주공1단지 <span class="text-bg bg-b3">분양권</span>
+                        </div>
+                        <div class="btn-wrapper">
+                            <button>단지정보</button>
+                            <button>시세/실거래가</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="sb-mini sb-blue">
+                    <span class="sb-text">0</span>
+                    <div class="sb-inner">
+                        <div class="title">
+                            <span class="text-bg darkblue-bg">주상복합</span> 잠실주공1단지 <span class="text-bg bg-b3">분양권</span>
+                        </div>
+                        <div class="blue">매매 10.5억(1)</div>
+                        <div class="blue">매매 10.5억(1)</div>
+                        <div class="blue">매매 10.5억(1)</div>
+                        <div class="blue">매매 10.5억(1)</div>
+                        <div class="btn-wrapper">
+                            <button>단지정보</button>
+                            <button>시세/실거래가</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="sb-mini sb-cyan">
+                    <span class="sb-text">0</span>
+                    <div class="sb-inner">
+                        <div class="title">
+                            <span class="text-bg darkblue-bg">주상복합</span> 잠실주공1단지 <span class="text-bg bg-b3">분양권</span>
+                        </div>
+                        <div class="blue">매매 10.5억(1)</div>
+                        <div class="blue">매매 10.5억(1)</div>
+                        <div class="btn-wrapper">
+                            <button>단지정보</button>
+                            <button>시세/실거래가</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="sb-mini sb-skyblue">
+                    <span class="sb-text">0</span>
+                    <div class="sb-inner">
+                        <div class="title">
+                            <span class="text-bg darkblue-bg">주상복합</span> 잠실주공1단지 <span class="text-bg bg-b3">분양권</span>
+                        </div>
+                        <div class="blue">매매 10.5억(1)</div>
+                        <div class="btn-wrapper">
+                            <button>단지정보</button>
+                            <button>시세/실거래가</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="sb-mini sb-brown">
+                    <span class="sb-text">0</span>
+                    <div class="sb-inner">
+                        <div class="title">
+                            <span class="text-bg darkblue-bg">주상복합</span> 잠실주공1단지 <span class="text-bg bg-b3">분양권</span>
+                        </div>
+                        <div class="btn-wrapper">
+                            <button>단지정보</button>
+                            <button>시세/실거래가</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="sb-big sb-red"><span class="sb-text">200</span>
+                    <div class="sb-inner">
+                        <div class="title">
+                            <span class="text-bg darkblue-bg">주상복합</span> 잠실주공1단지 <span class="text-bg bg-b3">분양권</span>
+                        </div>
+                        <div class="blue">매매 10.5억(1)</div>
+                        <div class="blue">매매 10.5억(1)</div>
+                        <div class="btn-wrapper">
+                            <button>단지정보</button>
+                            <button>시세/실거래가</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="sb-home sb-red"><img src="/images/home-white.png" alt="">
+                    <div class="sb-inner">
+                        <div class="title">
+                            은성공인중개사사무소
+                        </div>
+                        <div class="text">대표 홍길동</div>
+                        <div class="text">02-000-0000/010-0000-0000</div>
+                        <div class="text">서울시 송파구 잠실동 21-1/102호</div>
+                        <div class="bg-blacklist">블랙리스트</div>
+                    </div>
+                </div>
+                <div class="sb-home sb-blue"><img src="/images/home-white.png" alt="">
+                    <div class="sb-inner">
+                        <div class="title">
+                            <span class="text-bg darkblue-bg">주상복합</span> 잠실주공1단지 <span class="text-bg bg-b3">분양권</span>
+                        </div>
+                        <div class="blue">매매 10.5억(1)</div>
+                        <div class="btn-wrapper">
+                            <button>단지정보</button>
+                            <button>시세/실거래가</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">지도 버튼 및 아이콘 </div>
+            <div class="flex-between">
+                <div class="realtor mr-10"><img src="/images/home-black.png" alt="">
+                    <div class="left-bubble">중개사무소</div>
+                </div>
+                <div class="eye-hide mr-10"><img src="/images/eye-hide.png" alt="">
+                    <div class="left-bubble">매물 없는 단지 숨김</div>
+                </div>
+                <div class="hori-btn-plusminus">
+                    <button><img src="/images/plus-dark.png" alt=""></button>
+                    <button><img src="/images/minus-dark.png" alt=""></button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">지도 버튼 및 아이콘 </div>
+            <div class="flex-between">
+                <div class="radius300">
+                    <div class="flex">반경 300m 위치 <img src="/images/check-round.png" alt=""></div>
+                    <div class="hide">
+                        <p>중개사의 매물보호를 위해 매물의 정확한 위치는 <span class="red">반경 300m 내에 존재</span>합니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">지도 버튼 및 아이콘 </div>
+            <div class="flex-between">
+                <div class="mx-2 ml-0 sb-double">
+                    <div class="top">송파구</div>
+                    <div class="bottom">21,200</div>
+                </div>
+                <div class="mx-2 sb-double sb-red">
+                    <div class="top">송파구</div>
+                    <div class="bottom">21,200</div>
+                </div>
+                <div class="mx-2 sb-double sb-blue">
+                    <div class="top">송파구</div>
+                    <div class="bottom">21,200</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="go-list">
+        <button id="btn_goList" class="bi bi-card-list"></button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#btn_goList").click(function() {
+                location.href="/pub"
+            }) ;
+        }) ;
+    </script>
+</body>
+</html>

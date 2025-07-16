@@ -18,20 +18,18 @@
 
         <script src="/js/assets/js/color-modes.js"></script>
     </head>
-    <body>
-        <main class="d-flex flex-nowrap">
-            <header class="top-header" id="top-header" class="p-3 mb-3 border-bottom"></header>
-        </main>
-        <main>
-            <div class="container main-title border-bottom">
+    <body class="body-class">
+        <header id="d_header"></header>
+        <main class="flex-shrink-0">
+            <div id="sub_title" class="container main-title bg-white border-bottom">
                 <div class="title-left">
                     <h5 class="my-0">나의 일기보기</h5>
                 </div>
                 <div class="title-action me-2">
                     <div class="input-group">
                         <button type="button" class="btn-icon" id="btn_write"><img src="/images/pencil-square.svg" width="30" height="30"/></button>
-                        <button type="button" class="btn-icon" id="btn_view_List"><img src="/images/list-task.svg" width="30" height="30"/></button>
-                        <button type="button" class="btn-icon" id="btn_view_calendar"><img src="/images/grid-3x3-gap-fill.svg" width="30" height="30"/></button>
+                        <button type="button" class="btn-icon" id="btn_view_List"><img src="/images/list-task-primary.svg" width="30" height="30"/></button>
+                        <button type="button" class="btn-icon" id="btn_view_calendar"><img src="/images/grid-3x3-gap-fill.svg" width="30" height="30"/>
                         <!--
                         <input type="text" class="form-control w-150px ml-5px border-left-radius" id="keyword" placeholder="제목/본문검색" required=""/>
                         <span class="input-group-text bi bi-search border-right-radius"></span><div class="invalid-feedback">
@@ -39,138 +37,26 @@
                     </div>
                 </div>
             </div>
-        </main>
-        
-        <main id="cont-bydo">
-            <!--
-            <div class="container main-list border-bottom">
-                <div class="list-cont">
-                    <div class="cont-title">작성된 일기가 없습니다.</div>
-                    <div class="cont-body">
-                        <p>작성된 일기가 없습니다. 새로운 나의 일기를 작성해 보아요</p>
+            
+            <div class="container body">
+                <div id="diaryList" class="my-3 p-3 bg-body rounded shadow-sm">
+                    <div class="border-bottom pb-2 mb-0 input-group">
+                        <select class="form-select w=100" id="p_interval">
+                            <option value="07D">최근 1주</option>
+                            <option value="14D">최근 2주</option>
+                            <option value="01M" selected>최근 1달</option>
+                            <option value="06M">최근 6달</option>
+                            <option value="01Y">최근 1년</option>
+                        </select>
                     </div>
-                </div>
-            </div>
-            -->
-            <div class="container main-list border-bottom">
-                <div class="list-calendar">
-                    <div class="day-yyyymm holiday">2025.06</div>
-                    <div class="days holiday">05</div>
-                    <div class="day-weekly holiday">목요일</div>
-                </div>
-                <div class="list-cont">
-                    <div class="cont-title">
-                        <span class="cont-text">오늘은 21대 대통령선거날</span>
-                        <span class="badge red">21대 대통령선거</span>
-                        <span class="badge info">대선이 생일</span>
-                    </div>
-                    <div class="cont-body">
-                        <p><span>오늘은 21대 대통령선거날, 그런데 투표하긴 싫다. 야레야레~</span><p>
-                            <span class="badge primary">Tag</span>
-                            <a href="#">#대통령선거</a>
-                            <a href="#">#어대명</a>
-                            <a href="#">#투표해야지</a>
-                        </p>
-                        <p class="text-gray">
-                            <i class="bi bi-pencil-square text-dark"></i>
-                            <span class="text-gray">2025.06.05</span>
-                            <i class="bi bi-sun-fill text-orange"></i>
-                            <i class="bi bi-emoji-laughing-fill text-yellow"></i>
-                            <i class="bi bi-file-image text-primary no-margin-r"></i>
-                            <span class="text-dark no-margin-l">0</span>
-                            <i class="bi bi-chat-text text-dark no-margin-r"></i>
-                            <span class="text-dark no-margin-l">0</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="container main-list border-bottom">
-                <div class="list-calendar">
-                    <div class="day-yyyymm holiday">2025.06</div>
-                    <div class="days holiday">06</div>
-                    <div class="day-weekly holiday">금요일</div>
-                </div>
-                <div class="list-cont">
-                    <div class="cont-title">
-                        <span class="cont-text">오늘은 현충일 어제부터 연휴다</span>
-                        <span class="badge red">현충일</span>
-                    </div>
-                    <div class="cont-body">
-                        <p>요즘같은 날씨에는 진짜 후 아진짜 너무하지않아 날씨가 미쳤나 어찌이래 ....</p>
-                        <p>
-                            <span class="badge primary">Tag</span>
-                            <a href="#">#미친날씨</a>
-                            <a href="#">#덥다더워</a>
-                            <a href="#">#아이스크림이 땡기는날</a>
-                        </p>
-                        <p class="text-gray">
-                            <i class="bi bi-pencil-square text-dark"></i>
-                            <span class="text-gray">2025.06.12</span>
-                            <i class="bi bi-sun-fill text-orange"></i>
-                            <i class="bi bi-emoji-laughing-fill text-yellow"></i>
-                            <i class="bi bi-file-image text-primary no-margin-r"></i>
-                            <span class="text-dark no-margin-l">0</span>
-                            <i class="bi bi-chat-text text-dark no-margin-r"></i>
-                            <span class="text-dark no-margin-l">0</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="container main-list border-bottom">
-                <div class="list-calendar">
-                    <div class="day-yyyymm saturday">2025.06</div>
-                    <div class="days saturday">07</div>
-                    <div class="day-weekly saturday">토요일</div>
-                </div>
-                <div class="list-cont">
-                    <div class="cont-title">오늘은 토요일, 토요일이라네. 근데 기분이가 더럽다.</div>
-                    <div class="cont-body">
-                        <p>오늘은 토요일, 토요일이라네. 근데 기분이가 더럽다. 전장 나 뭐하는거지 왜그럴까?</p>
-                        <p>
-                            <span class="badge primary">Tag</span>
-                            <a href="#">#우울모드</a>
-                        </p>
-                        <p class="text-gray">
-                            <i class="bi bi-pencil-square text-dark"></i>
-                            <span class="text-gray">2025.06.12</span>
-                            <i class="bi bi-sun-fill text-orange"></i>
-                            <i class="bi bi-emoji-laughing-fill text-yellow"></i>
-                            <i class="bi bi-file-image text-primary no-margin-r"></i>
-                            <span class="text-dark no-margin-l">0</span>
-                            <i class="bi bi-chat-text text-dark no-margin-r"></i>
-                            <span class="text-dark no-margin-l">0</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="container main-list border-bottom">
-                <div class="list-calendar">
-                    <div class="day-yyyymm">2025.06</div>
-                    <div class="days">12</div>
-                    <div class="day-weekly">목요일</div>
-                </div>
-                <div class="list-cont">
-                    <div class="cont-title">우당당탕 왁자지껄 아수라장 혼비백산</div>
-                    <div class="cont-body">
-                        <p>내가 뭐하는짓인지 이리갔다 저리갔다 물어보고 돌아다니고 엎어지고 넘어지고 쓰러지고 멘탈나갈것 같은 하루</p>
-                        <p>
-                            <span class="badge primary">Tag</span>
-                            <a href="#">#우당탕탕</a>
-                            <a href="#">#왁자지껄</a>
-                            <a href="#">#시끌벅적</a>
-                            <a href="#">#아수라장</a>
-                            <a href="#">#혼비백산</a>
-                        </p>
-                        <p class="text-gray">
-                            <i class="bi bi-pencil-square text-dark"></i>
-                            <span class="text-gray">2025.06.12</span>
-                            <i class="bi bi-cloud-sun-fill text-orange"></i>
-                            <i class="bi bi-emoji-smile-fill text-yellow"></i>
-                            <i class="bi bi-file-image text-primary no-margin-r"></i>
-                            <span class="text-dark no-margin-l">0</span>
-                            <i class="bi bi-chat-text text-dark no-margin-r"></i>
-                            <span class="text-dark no-margin-l">0</span>
-                        </p>
+                    <div id="no_diary" class='d-flex text-body-secondary pt-3 hidden'>                    
+                        <div class="list-cont">
+                            <h3 class="cont-title bold text-dark">작성된 일기가 없습니다.</h3>
+                            <div class="cont-body text-dark">
+                                <p>작성된 일기가 없습니다.</p>
+                                <p>새로운 나의 일기를 작성해 보아요</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -180,17 +66,6 @@
         <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
         
         <script src="/js/common/da9-comm.js"></script>
-
-        <script type="text/javascript">
-            $(document).ready(function() {
-                fn_init_page("Diray", {
-                    "sc_container": "#cont-body"
-                }) ;
-
-                $("#btn_write").click(function() {
-                    location.href="/html/diary/diary-write.html"
-                }) ; 
-            }) ; 
-        </script>
+        <script src="/js/diary/diary-List.js"></script>
     </body>
 </html>

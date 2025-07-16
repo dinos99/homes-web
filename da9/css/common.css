@@ -19,6 +19,12 @@ input, select, textarea,
   outline:0;
   box-shadow:none !important;
 }
+
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+  color: #ff6161;
+}
+
+
 .form-check-input, .form-check-label { margin-top: 3px; cursor:pointer; }
 .form-check-label { margin-top: 3px; }
 
@@ -30,7 +36,7 @@ input, select, textarea,
 
 .modal-header { padding: 0.5rem 0.5rem 0.5rem 1rem !important;  }
 .modal-title { line-height: normal; }
-.modal-body { font-size: 0.875rem; }
+.modal-body { font-size: 1.1rem; }
 
 .modal-footer {
   padding-top: 0.3rem;
@@ -46,27 +52,85 @@ input, select, textarea,
   position:static;
   display:block;
 }
-
+.dropdown-menu.static {
+  display: block;
+  position: static ;
+  margin-left: 0;
+  margin-right: 0;
+}
 .dropdown-item {
   color: var(--bs-dark) ;
 }
 
-.dropdown-item:hover, .dropdown-item:active {
-  color: var(--bs-white ) ;
-  background-color:var(--bs-primary);
+.dropdown-item:hover, .dropdown-item:active 
+, .dropdown-item:hover.link, .dropdown-item.link:active {
+  color: var(--bs-white ) !important;
+  background-color:var(--bs-primary) !important;
 }
 
-.dropdown-item:hover a, .dropdown-item:active a {
-  color: var(--bs-white ) ;
+.dropdown-item:hover a, .dropdown-item:active a 
+, .dropdown-item.link:hover a, .dropdown-item.link:active a 
+, .dropdown-item.link:hover a span, .dropdown-item.link:active a span {
+  color: var(--bs-white ) !important;
 }
 
-.dropdown-item.active {
-  color: var(--bs-white ) ;
+.dropdown-item.active, .dropdown-item.active {
+  color: var(--bs-white ) !important;
 }
 
 .dropdown-item.active a {
-  color: var(--bs-white ) ;
+  color: var(--bs-white ) !important;
 }
+
+.dropdown-item.link {
+  display: flex;
+  align-items: center;
+  width:130px;
+  justify-content: flex-start;
+  margin: 0 14px;
+  border-radius: var(--bs-border-radius) ;
+  padding-left: 10px;
+}
+
+/*
+.badge {
+    height: 26px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center ;
+    margin-left: 0.5rem !important;
+    padding: 1rem 0.5rem;
+    border-radius: var(--bs-border-radius-pill) !important;
+}
+*/
+.badge.primary {
+    background-color: var(--bs-primary-bg-subtle) !important;
+    border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+    border-color: var(--bs-primary-border-subtle) !important;
+    border-radius: var(--bs-border-radius-pill) !important;
+    color: var(--bs-primary-text-emphasis) !important;
+}
+
+.badge.red {
+    background-color: var(--bs-danger-bg-subtle) !important;
+    border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+    border-color: var(--bs-danger-border-subtle) !important;
+    border-radius: var(--bs-border-radius-pill) !important;
+    color: var(--bs-danger-text-emphasis) !important;
+}
+
+.badge.info {
+    background-color: var(--bs-info-bg-subtle) !important;
+    border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+    border-color: var(--bs-info-border-subtle) !important;
+    border-radius: var(--bs-border-radius-pill) !important;
+    color: var(--bs-info-text-emphasis) !important;
+}
+
+.container.body {
+  overflow: auto; 
+}
+
 /*** bootstrap custom finished */
 
 .feeling_set .active {
@@ -187,12 +251,19 @@ a.ui-datepicker-prev-next-hover {
 /* margin */
 .ml-1rem { margin-left: 1rem !important; }
 .ml-5px { margin-left: 5px !important; }
+.ml-10px { margin-left: 10px !important; }
+
+.mr-5px { margin-right: 5px !important; }
+
 .no-margin { margin: 0 !important;}
 .no-margin-l { margin-left: 0 !important; }
 .no-margin-r { margin-right: 0 !important; }
 .no-margin-t { margin-top: 0 !important; }
 .no-margin-b { margin-bottom: 0 !important}
 .no-margin-bottom { margin-bottom: 0 !important}
+
+/* padding */
+.no-padding-l { padding-left: 0 !important; }
 
 /* border-radius */
 .border-left-radius { 
@@ -231,6 +302,8 @@ a.ui-datepicker-prev-next-hover {
 /* cursor */
 .cur-hand { cursor: pointer; }
 
+/* display */
+.hidden { display: none !important;  }
 
 button.btn-icon {
   padding: 0;

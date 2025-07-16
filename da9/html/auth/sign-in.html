@@ -55,7 +55,7 @@
             var fn_doValidate = () => {
                 var is_Loginid = da9comm.validator.is_Empty("#p_Loginid") ;
                 var is_password = da9comm.validator.is_Empty("#p_password") ;
-                if ( !is_Loginid ) {
+                if ( is_Loginid ) {
                     da9comm.alert({
                         title: "입력오류",
                         message: da9message.fn_get_message(da9message.validator.REQUIRED_INPUT, "로그인 ID는")
@@ -65,7 +65,7 @@
                     return false ;
 
                 }
-                if ( !is_password ) {
+                if ( is_password ) {
                     da9comm.alert({
                         title: "입력오류",
                         message: da9message.fn_get_message(da9message.validator.REQUIRED_INPUT, "비밀번호는")
@@ -74,19 +74,19 @@
                     }) ;
                     return false ;
                 }
-                return is_Loginid && is_password ;
+                return !(is_Loginid || is_password) ;
             }
 
             var fn_Login = () => {
                 var doValid = fn_doValidate() ;
                 var is_checked = $("#p_remember_me").eq(0).is(":checked") ? "Y" : "N" ; 
                 store.setItem("rememberMe", is_checked) ;
-                if ( doValid ) {
-                    var p_remember_me = is_checked ;
-                    var p_Loginid     = $("#p_Loginid").val() ;
-                    var p_password    = btoa($("#p_password").val()) ;
-                }
+                
+                if ( !doValid ) return false ; 
 
+                var p_remember_me = is_checked ;
+                var p_Loginid     = $("#p_Loginid").val() ;
+                var p_password    = btoa($("#p_password").val()) ;
                 network.send("/api/v1/auth/sign-in", {
                     is_auth: false
                 }, {

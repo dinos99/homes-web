@@ -1,4 +1,10 @@
 .textarea-style {
     width: 100% ;
-    min-height: 300px;
+}
+
+.ql-editor {
+    color: var(--bs-dark) ;
+}
+.ql-editor p {
+    line-height: 2 !important;
 }

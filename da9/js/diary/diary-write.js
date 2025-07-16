@@ -1,22 +1,9 @@
-const w_set = [
-    { icon: "", text: "" },
-    { icon: "bi-sun-fill", text: "햇볕은 쨍쨍" },
-    { icon: "bi-cloud-sun-fill", text: "구름 조금" },
-    { icon: "bi-cloudy-fill", text: "흐림" },
-    { icon: "bi-clouds-fill", text: "곧 비올듯" },
-    { icon: "bi-cloud-rain-fill", text: "어라? 비가 내리네?" },
-    { icon: "bi-cloud-rain-heavy-fill", text: "비가 퍼붓는데?" },
-    { icon: "bi-cloud-sleet-fill", text: "비도오고 눈도오고" },
-    { icon: "bi-cloud-snow-fill" ,text: "눈이내린다!" }
-]
-
-
-
-
+const qEdit = quillEditor.fn_get_editor("#p_diary_cont", {
+    placeHolder: "오늘하루 어떠셨나요? 당신의 오늘 하루를 알려주세요 😀"
+}) ;
 
 $(document).ready(function() {
-    fn_init_page("Diray", {
-        "sc_container": ".top-cont-body"
+    fn_init_page("Diary", {
     }) ;
 
     /* 로드 후 페이지 event */
@@ -31,11 +18,19 @@ $(document).ready(function() {
         var holiday = $("#p_holiday").val() ;
         if ( !!holiday && e.keyCode == 13) {
             $("#p_holiday").val("") ; 
-            var badge = $("<span class='badge red mx-2 cur-hand' />") ; 
-            badge.text(holiday) ; 
+            var badge   = $("<span class='badge red'/>") ; 
+            var bg_text = $("<span class='px-1'/>") ; 
+            var a_Tag   = $("<a href='#'/>") ;
+            var btn_del = $("<span class='bi bi-x-circle-fill ms-2 text-danger'/>") ;
+            bg_text.text(holiday) ; 
+            a_Tag.append(btn_del) ; 
+
+            badge.append(bg_text) ;
+            badge.append(a_Tag) ;
+
             $("#badge_holiday").append(badge) ; 
-            badge.click(function() {
-                $(this).remove() ; 
+            a_Tag.click(function() {
+                badge.remove() ; 
             }) ;
         }
     });
@@ -43,11 +38,20 @@ $(document).ready(function() {
         var anniversary = $("#p_anniversary").val() ;
         if ( !!anniversary && e.keyCode == 13) {
             $("#p_anniversary").val("") ; 
-            var badge = $("<span class='badge info mx-2 cur-hand' />") ; 
-            badge.text(anniversary) ; 
+
+            var badge   = $("<span class='badge info'/>") ; 
+            var bg_text = $("<span class='px-1'/>") ; 
+            var a_Tag   = $("<a href='#'/>") ;
+            var btn_del = $("<span class='bi bi-x-circle-fill ms-2 text-danger'/>") ;
+            bg_text.text(anniversary) ; 
+            a_Tag.append(btn_del) ; 
+
+            badge.append(bg_text) ;
+            badge.append(a_Tag) ;
+
             $("#badge_anniversary").append(badge) ; 
-            badge.click(function() {
-                $(this).remove() ; 
+            a_Tag.click(function() {
+                badge.remove() ; 
             }) ;
         }
     });
@@ -80,6 +84,9 @@ $(document).ready(function() {
         $("#sel_weather").children(0).children(0).children(0).text(icons.text) ;
 
         $("#option_weather").hide() ;
+
+        $("#p_weather").val(idx) ; 
+
     }) ;
 
     $(".feeling_set").children().each(function() {
@@ -97,6 +104,8 @@ $(document).ready(function() {
     $(".feeling_set").children().click(function() {
         $(".feeling_set").children().removeClass("active") ; 
         $(this).addClass("active") ;
+
+        $("#p_feeling").val($(this).index() + 1) ;
     }) ;
 
     $("#btn_temp_save").click(function() {
@@ -106,6 +115,7 @@ $(document).ready(function() {
             $("#p_diary_title").parent().children(1).removeClass("invalid").addClass("invalid") ;
             return false ; 
         }
+        fn_save("SAV000") ; 
     }) ;
     $("#btn_save").click(function() {
         var is_empty = da9comm.validator.is_Empty("#p_diary_title") ;
@@ -114,9 +124,92 @@ $(document).ready(function() {
             $("#p_diary_title").parent().children(1).removeClass("invalid").addClass("invalid") ;
             return false ; 
         }
+        fn_save("SAV001") ; 
     }) ;
 
 }) ; 
-const qEdit = quillEditor.fn_get_editor("#p_diary_cont", {
-    placeHolder: "오늘하루 어떠셨나요? 당신의 오늘 하루를 알려주세요 😀"
-}) ;
+
+var fn_get_save_data = (sttus) => {
+
+    var p_diary_de = $("#p_diary_de").val().split(".").join("") ; 
+    var p_weather  = $("#p_weather").val() ;
+    var p_feeling  = $("#p_feeling").val() ;
+    var p_title    = $("#p_diary_title").val() ;
+    var p_cont     = JSON.stringify(qEdit.getContents().ops) ; 
+
+    p_feeling = p_feeling < 10 ? "0" + p_feeling : p_feeling ; 
+    var p_diary_sttus = sttus ; 
+
+    /* 공휴일 배지 */ 
+    var h_idx = 1 ; 
+    var p_holiday = [] ; 
+    $("#badge_holiday").find(".badge").each(function() {
+        p_holiday.push({
+            holdySeq: h_idx,
+            holdyDe : p_diary_de,
+            holdyNm : $(this).text()
+        })
+        h_idx ++ ; 
+    }) ;
+
+    /* 기념일 배지 */ 
+    var a_idx = 1 ; 
+    var p_anniversary = [] ; 
+    $("#badge_anniversary").find(".badge").each(function() {
+        p_anniversary.push({
+            annivsarySeq: a_idx,
+            annivsaryDe : p_diary_de,
+            annivsaryNm : $(this).text()
+        })
+        a_idx ++ ; 
+    }) ;
+
+    /* Tag */
+    var t_idx = 1 ; 
+    var p_Tags = [] ;
+    $("#input_tag").find("span") .each(function() {
+        p_Tags.push({
+            tagno: t_idx,
+            tagnm : $(this).text()
+        })
+        t_idx ++ ; 
+    }) ;
+
+    return {
+        "p_diary_de": p_diary_de,
+        "p_weather" : p_weather,
+        "p_feeling" : p_feeling,
+        "p_title"   : p_title,
+        "p_cont"    : p_cont,
+        "p_sttus"   : p_diary_sttus,
+        "hdyList"   : p_holiday,
+        "anvList"   : p_anniversary,
+        "tagList"   : p_Tags,
+    }
+
+}
+
+var fn_save = ( sttus ) => {
+    var p_svData = fn_get_save_data( sttus ) ; 
+    network.send("/api/v1/diary/diary-write", {
+        is_auth: true /* 생략가능 */ 
+    }, {
+        diryDe      : p_svData.p_diary_de,
+        dirySttus   : p_svData.p_sttus,
+        todayWthr   : p_svData.p_weather,
+        todayFellng : p_svData.p_feeling,
+        diryTitle   : p_svData.p_title,
+        diryCont    : p_svData.p_cont,
+        hdyList     : p_svData.hdyList,
+        anvList     : p_svData.anvList,
+        tagList     : p_svData.tagList
+    }).then(response => {
+        da9comm.alert({
+            remove: true,
+            title: `[<span class='c-red'>나의일기</span>]일기 등록`,
+            message: "<strong>[" + $("#p_diary_de").val() + "]</strong>" + " 일기가 등록되었습니다."
+        }).then(ok => {
+            location.href = "/html/diary/diary-List.html" ;
+        }) ;
+    }) ;
+}

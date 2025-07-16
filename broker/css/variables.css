@@ -1,3 +1,16 @@
 [data-bs-theme=light] {
-    --bs-border-color: #c6c6c6 ;
+    --hs-border-color: #919191 ;
+    --hs-color-ffffff: #ffffff;
+    --hs-color-efefef: #efefef;
+    --hs-color-373737: #373737;
+    --hs-color-464646: #464646;
+    --hs-color-5f5f5f: #5f5f5f;
+    --hs-color-9c9c9c: #9c9c9c;
+    --hs-color-378cff: #378cff;
+    --hs-color-ff5050: #ff5050;
+    --hs-color-f7941d: #f7941d;
+    --hs-color-0ec4bf: #0ec4bf;
+    --hs-color-92d050: #92d050;
+    --hs-color-646f7c: #646f7c;
+    --hs-color-3ec729: #3ec729;
 }
