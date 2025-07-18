@@ -338,6 +338,9 @@ a.ui-datepicker-prev-next {
 .bold { font-weight: 600 !important; }
 .f-600 { font-weight: 600 !important; }
 
+/* font-size */
+.fs-13 { font-size: 13px;}
+
 /* hidden */
 .hidden { display:none !important ; }
 
