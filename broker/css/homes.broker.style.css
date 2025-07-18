@@ -25,8 +25,6 @@ section {
 }
 button {
   cursor: pointer;
-  color: #5f5f5f;
-  font-weight: 500;
   border: none;
 }
 
@@ -143,7 +141,8 @@ div.aicenter {
   border-radius: var(--bs-border-radius) ;
   border: 1px solid var(--bs-border-color) ;
   padding: 3px 5px ; 
-  font-size: 14px;
+  font-size: var(--hs-button-fs-13);
+  font-weight: var(--hs-button-fw-500) ;
   min-width: 70px;
   height: 35px;
 }
@@ -152,18 +151,18 @@ div.aicenter {
   border-radius: var(--bs-border-radius);
   border: 1px solid var(--bs-border-color);
   padding: 3px 5px;
-  font-size: 17px;
+  font-size: var(--hs-button-fs-17);
+  font-weight: var(--hs-button-fw-500) ;
   height: 60px;
-  font-weight: 600;
   margin: 3px 5px;
 }
 .hs-button-nosize {
   border-radius: var(--bs-border-radius);
   border: 1px solid var(--bs-border-color);
-  font-size: 15px;
+  font-size: var(--hs-button-fs-12);
+  font-weight: var(--hs-button-fw-500) ;
   padding: 5px 15px !important;
   margin: 0 5px;
-  font-weight: 600;
 }
 .hs-button-big-size.btn-cancel {
   min-width: 100px;
@@ -177,7 +176,8 @@ div.aicenter {
   border-radius: var(--bs-border-radius) ;
   border: 1px solid var(--bs-border-color) ;
   padding: 3px 5px ; 
-  font-size: 14px;
+  font-size: var(--hs-button-fs-12);
+  font-weight: var(--hs-button-fw-500) ;
   min-width: 66px;
   height: 30px;
 }
@@ -258,7 +258,7 @@ div.aicenter {
   border: none;
 }
 
-.exception-btn{
+.btn-exception {
   background-color: #fff2e3;
   color: #676767;
   border: 1px solid #e6e6e6;
@@ -287,7 +287,7 @@ button.btn-icon {
   min-width: 44px;
   padding: 0 5px;
   height: 22px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   color: #ffffff;
   border-radius: 2px;
@@ -421,7 +421,6 @@ button.btn-icon {
   font-size: 14px;
   margin-top: 10px;
   line-height: 14px;
-  margin-left: -2px;
   font-weight: 500;
 }
 .house.house-type1 {
@@ -436,7 +435,8 @@ button.btn-icon {
 .house.house-type4 {
   background-image: url(/images/house-4.png);
 }
-.notice-white {
+
+.notice {
   width: 49px;
   height: 20px;
   border-radius: 40px;
@@ -449,31 +449,18 @@ button.btn-icon {
   align-content: center;
   display: inline-block;
 }
-.notice-red {
-  width: 49px;
-  height: 20px;
-  border-radius: 40px;
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: 500;
-  border: none;
-  background-color: #ff5050;
-  text-align: center;
-  align-content: center;
-  display: inline-block;
+
+.notice.white {
+  color: #5f5f5f;
+  background-color: #ffffff;
 }
-.notice-orange {
-  width: 49px;
-  height: 20px;
-  border-radius: 40px;
+.notice.red {
   color: #ffffff;
-  font-size: 12px;
-  font-weight: 500;
-  border: none;
+  background-color: #ff5050;
+}
+.notice.orange {
+  color: #ffffff;
   background-color: #f7941d;
-  text-align: center;
-  align-content: center;
-  display: inline-block;
 }
 
 .visit {
@@ -547,31 +534,21 @@ button.btn-icon {
   display: flex;
   flex-direction: column;
 }
+
 input[type="text"]::placeholder {
   color: #9c9c9c;
 }
+
 input[type="text"] {
   color: #5f5f5f;
-  font-size: 13px;
+  font-size: var(--hs-fs-13);
+  font-weight: var(--hs-fw-500) ;
   padding: 0 10px;
   height: 36px;
   border: 1px solid #e6e6e6;
   border-radius: 3px;
-  width: 100px;
 }
-input[type="number"]::placeholder {
-  color: #9c9c9c;
-}
-input[type="number"] {
-  color: #5f5f5f;
-  font-size: 13px;
-  padding: 0 10px;
-  height: 36px;
-  border: 1px solid #e6e6e6;
-  border-radius: 3px;
-  width: 100px;
-  text-align: right;
-}
+
 label {
   color: #9c9c9c;
 }
@@ -579,7 +556,8 @@ label.inputted {
   color: #5f5f5f;
 }
 textarea {
-  font-size: 14px;
+  font-size: var(--hs-fs-14);
+  font-weight: var(--hs-fw-500) ;
   color: #5f5f5f;
   padding: 10px;
   width: 290px;
@@ -798,7 +776,7 @@ select:disabled::picker-icon {
   height: 30px;
   background-position: 50%;
   border: 0;
-  color: var(--bs-yellow);
+  cursor: unset !important;
 }
 
 
@@ -920,10 +898,14 @@ select:disabled::picker-icon {
 .btn-img.red-star {
   background-image: url("/images/red-star.png") ; 
   background-repeat: no-repeat;
+  width: 25px; 
+  height: 25px;
 }
 .btn-img.gray-star {
   background-image: url("/images/gray-star.png") ; 
   background-repeat: no-repeat;
+  width: 25px; 
+  height: 25px;
 }
 
 .btn-img.circle {
@@ -976,17 +958,18 @@ button.map-num-btn-mini:hover {
   border: 2px solid #378cff;
   color: #378cff;
 }
-button.map-home-btn {
+.map-home-btn {
   width: 34px;
   height: 34px;
   border-radius: 50%;
   background: #ffffff;
   border: 2px solid #ff5050;
+  background:transparent url(/images/home-red.png) no-repeat center ;
 }
-button.map-location-btn {
+.map-location-btn {
   background-color: transparent;
 }
-button.map-location-sign {
+.map-location-sign {
   background-color: transparent;
 }
 
@@ -1429,7 +1412,7 @@ div.sb-inner .text {
   line-height:1.1;
 }
 .radius300:hover {
-  height: 150px;
+  height: 110px;
 }
 .radius300:hover .hide {
   padding: 0 16px 14px 16px;
@@ -1442,7 +1425,8 @@ div.sb-inner .text {
 select.telecom {
   width: 468px;
   height: 60px;
-  font-size: 15px;
+  font-size: var(--hs-fs-13);
+  font-weight: var(--hs-fw-500) ;
   align-items: center;
 }
 .line-through {
@@ -2084,6 +2068,8 @@ button.square-btn {
     border-radius: 3px 3px 0 0 ;
     padding: 0 20px;
     color: #acacac ;
+    font-size: var(--hs-fs-13) ;
+    font-weight: var(--hs-fw-500) ;
 }
 .sb-double.sb-blue .top{
     color: #378cff;
@@ -2102,6 +2088,8 @@ button.square-btn {
     border-radius: 0 0 3px 0;
     padding: 0 5px;
     background-color: #acacac;
+    font-size: var(--hs-fs-14) ;
+    font-weight: var(--hs-fw-600) ;
 }
 .sb-double.sb-blue .bottom{
     background-color: #378cff;

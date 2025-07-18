@@ -13,4 +13,39 @@
     --hs-color-92d050: #92d050;
     --hs-color-646f7c: #646f7c;
     --hs-color-3ec729: #3ec729;
+
+    /* font-size */
+    --hs-fs-12: 12px;
+    --hs-fs-13: 13px;
+    --hs-fs-14: 14px;
+    --hs-fs-15: 15px;
+    --hs-fs-16: 16px;
+    --hs-fs-17: 17px;
+
+    --hs-fw-100: 100;
+    --hs-fw-200: 200;
+    --hs-fw-300: 300;
+    --hs-fw-400: 400;
+    --hs-fw-500: 500;
+    --hs-fw-600: 600;
+
+    /* button styling */
+    --hs-button-fs-12: 12px ;
+    --hs-button-fs-13: 13px ;
+    --hs-button-fs-17: 17px ;
+    --hs-button-fw-500: 500;
 }
+
+.fs-12 { font-size: var(--hs-fs-12) !important; }
+.fs-13 { font-size: var(--hs-fs-13) !important; }
+.fs-14 { font-size: var(--hs-fs-14) !important; }
+.fs-15 { font-size: var(--hs-fs-15) !important; }
+.fs-16 { font-size: var(--hs-fs-16) !important; }
+.fs-17 { font-size: var(--hs-fs-17) !important; }
+
+.fw-100 { font-weight: var(--hs-fw-100) !important; }
+.fw-200 { font-weight: var(--hs-fw-200) !important; }
+.fw-300 { font-weight: var(--hs-fw-300) !important; }
+.fw-400 { font-weight: var(--hs-fw-400) !important; }
+.fw-500 { font-weight: var(--hs-fw-500) !important; }
+.fw-600 { font-weight: var(--hs-fw-600) !important; }

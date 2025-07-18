@@ -18,7 +18,8 @@
 
 /* 동기화 필요작업 2025.04.22 */ 
 .form-select {
-	font-size: 16px;
+	font-size: var(--hs-fs-13);
+	font-weight: var(--hs-fw-500);
 	border: var(--bs-border-width) solid var(--bs-border-color);
 }
 .form-select:focus {

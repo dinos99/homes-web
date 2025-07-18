@@ -200,8 +200,7 @@
             <button class="btn-arrow gray-filter up active"></button>
             <button class="btn-arrow gray-filter down"></button>
             <button class="btn-arrow gray-filter delete"></button>
-            <button class="btn-lock gray-filter bi bi-lock-fill mx-2"></button>
-            <button class="btn-lock gray-filter active bi bi-lock-fill mx-2"></button>
+            <button class="btn-lock mx-2"></button>
 
             <button class="btn-img edit ml-20"></button>
             <button class="btn-img more"></button>
@@ -229,14 +228,16 @@
         <div class="d-flex vc border rounded p-3 my-5">
             <div class="blue xz p-3 my-3">input, textarea </div>
             <div class="flex-between">
-                <input type="text" name="p_name" id="p_name" class="mx-2 ml-0" placeholder="성명"/>
-                <label for="p_num"><input type="number" name="p_num" id="p_num" placeholder="0" class="mx-2"> ㎡</label>
+                <input type="text" name="p_name" id="p_name" class="w-150px mx-2 ml-0" placeholder="성명"/>
+                <input type="text" name="p_num" id="p_num" placeholder="0" class="w-150px mx-2"><label for="p_num" class="fs-14">㎡</label>
                 <textarea name="p_text" id="p_text" placeholder="내용을 입력하시오." class="mx-2"></textarea>
             </div>
         </div>
         
         <div class="d-flex vc border rounded p-3 my-5">
-            <div class="blue xz p-3 my-3">select-box</div>
+            <div class="blue xz p-3 my-3">
+                <p>select-box</p>
+            </div>
             <select class="form-select w-150px mr-10" name="p_select_01">
                 <option value="0" selected>층 선택</option>
                 <option value="1">1층</option>
@@ -269,6 +270,25 @@
                 <option value="6">680 ~ 123㎡</option>
                 <option value="7">780 ~ 123㎡</option>
             </select>
+            <select class="form-select w-150px mr-10" id="sel_fs_update">
+                <option value="13" selected>font-size (13px) </option>
+                <option value="14">font-size (14px) </option>
+                <option value="15">font-size (15px) </option>
+            </select>
+            <select class="form-select w-150px mr-10" id="sel_fw_update">
+                <option value="100">font-weight (100) </option>
+                <option value="200">font-weight (200) </option>
+                <option value="300">font-weight (300) </option>
+                <option value="400">font-weight (400)</option>
+                <option value="500" selected>font-weight (500) </option>
+                <option value="600">font-weight (600) </option>
+            </select>
+        </div>
+        
+        <div class="d-flex vc border rounded p-3 my-5">
+            <div class="blue xz p-3 my-3">
+                <p>select-box big-size</p>
+            </div>
             <select class="form-select telecom" name="p_select_04">
                 <option value="0" selected>통신사 선택</option>
                 <option value="1">SKT</option>
@@ -280,7 +300,6 @@
             </select>
 
         </div>
-        
         <div class="d-flex vc border rounded p-3 my-5">
             <div class="blue xz p-3 my-3">check-box</div>
             <div class="checkbox-container mr-10">
@@ -365,9 +384,9 @@
         </div>
         <div class="d-flex vc border rounded p-3 my-5">
             <div class="blue xz p-3 my-3">badge-rounded</div>
-            <span class="mx-1 notice-white">공지</span>
-            <span class="mx-1 notice-red">필독</span>
-            <span class="mx-1 notice-orange">점검</span>
+            <span class="mx-1 notice white">공지</span>
+            <span class="mx-1 notice red">필독</span>
+            <span class="mx-1 notice orange">점검</span>
         </div>
         
         <h1> icon set </h1>
@@ -423,9 +442,9 @@
                 <button class="mx-2 map-num-btn-middle">가변형23</button>
                 <button class="mx-2 map-num-btn-middle">가변형234</button>
                 <button class="mx-2 map-num-btn-big">3,233</button>
-                <button class="mx-2 map-home-btn"><img src="/images/home-red.png" alt=""></button>
-                <button class="mx-2 map-location-btn"><img src="/images/location-red.png" alt=""></button>
-                <button class="mx-2 map-location-sign"><img src="/images/location-sign.png" alt=""></button>
+                <div class="mx-2 map-home-btn"></div>
+                <div class="mx-2 map-location-btn"><img src="/images/location-red.png" alt=""></div>
+                <div class="mx-2 map-location-sign"><img src="/images/location-sign.png" alt=""></div>
             </div>
         </div>
         <div class="d-flex vc border rounded p-3 my-5">
@@ -626,6 +645,16 @@
         $(document).ready(function() {
             $("#btn_goList").click(function() {
                 location.href="/pub"
+            }) ;
+
+            $("#sel_fs_update").change(function() {
+                var fs = $(this).val() ;
+                $(".form-select").not(".form-select.telecom").css("font-size", $(this).val() + "px") ; 
+            }) ;
+
+            $("#sel_fw_update").change(function() {
+                var fw = $(this).val() ;
+                $(".form-select").not(".form-select.telecom").css("font-weight", $(this).val()) ; 
             }) ;
         }) ;
     </script>
