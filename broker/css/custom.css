@@ -329,6 +329,10 @@ a.ui-datepicker-prev-next {
 
 .bg-transparent { background-color: transparent !important; }
 
+.no-scroll {
+  overflow: hidden !important;
+}
+
 /* text-align */
 .tac { text-align: center !important; }
 .tal { text-align: left !important; }
