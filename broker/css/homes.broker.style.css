@@ -25,6 +25,9 @@ section {
 }
 button {
   cursor: pointer;
+  color: #5f5f5f;
+  border-radius: 3px;
+  font-weight: 500;
   border: none;
 }
 
@@ -251,6 +254,15 @@ div.aicenter {
   background-repeat: no-repeat;
   background-position: 15px 50%;
   padding:3px 15px 3px 35px;
+}
+
+button.img-btn {
+  background-color: transparent;
+  border: none;
+}
+button.img-btn img {
+  width: fit-content;
+  height: fit-content;
 }
 
 .btn-image {
@@ -1383,8 +1395,8 @@ div.sb-inner .text {
 .radius300 {
   display: flex;
   flex-direction: column;
-  width: 175px; 
-  height: 46px;
+  width: 180px; 
+  height: 110px;
   font-weight: 400;
   background-color: #ffffff;
   box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.1);
@@ -1397,6 +1409,7 @@ div.sb-inner .text {
   gap: 8px;
   width: 100%;
   padding: 13px 16px;
+  text-align: center ;
 }
 .radius300 .flex img {
   width: 17px;
@@ -1405,12 +1418,11 @@ div.sb-inner .text {
 }
 .radius300 .hide {
   padding: 0 16px 14px 16px;
-  transform: scale(0);
-  overflow: hidden;
-  opacity: 0;
-  position: absolute;
+  height: 60px;
+  word-break: break-all;
   line-height:1.1;
 }
+/*
 .radius300:hover {
   height: 110px;
 }
@@ -1422,6 +1434,7 @@ div.sb-inner .text {
   opacity: 1;
   position: relative;
 }
+*/
 select.telecom {
   width: 468px;
   height: 60px;
@@ -1640,12 +1653,20 @@ header .right-menu .account-box .bottom a {
   font-weight: 500;
 }
 
+.cont-area {
+  position: fixed;
+  top: 40px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto; 
+}
+
 /* main */
 .container {
   width: 100%;
   display: flex;
   flex-direction: column;
-  min-height: 1000px;
   align-items: center;
 }
 .container .inner {
@@ -1749,6 +1770,7 @@ footer .inner .bottom .right .f6 {
   max-width: 1920px;
   margin: 0 auto;
   border-right: 1px solid #e6e6e6;
+  padding-right: 10px;
 }
 .top-bar .left {
   padding-left: 21px;
@@ -2742,8 +2764,8 @@ section.right-settings  div.hr{
 .go-list {
     z-index:1100;
     position:fixed;
-    bottom: 10px;
-    right: 10px;
+    bottom: 20px;
+    right: 20px;
     width: 50px;
     height: 50px;
 }

@@ -21,6 +21,7 @@
     --hs-fs-15: 15px;
     --hs-fs-16: 16px;
     --hs-fs-17: 17px;
+    --hs-fs-18: 18px;
 
     --hs-fw-100: 100;
     --hs-fw-200: 200;
@@ -30,6 +31,7 @@
     --hs-fw-600: 600;
 
     /* button styling */
+    --hs-button-border-color: #e6e6e6;
     --hs-button-fs-12: 12px ;
     --hs-button-fs-13: 13px ;
     --hs-button-fs-17: 17px ;
@@ -42,6 +44,7 @@
 .fs-15 { font-size: var(--hs-fs-15) !important; }
 .fs-16 { font-size: var(--hs-fs-16) !important; }
 .fs-17 { font-size: var(--hs-fs-17) !important; }
+.fs-18 { font-size: var(--hs-fs-18) !important; }
 
 .fw-100 { font-weight: var(--hs-fw-100) !important; }
 .fw-200 { font-weight: var(--hs-fw-200) !important; }
