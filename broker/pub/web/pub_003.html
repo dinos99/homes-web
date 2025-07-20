@@ -87,45 +87,31 @@
         <div class="left">
             <p class="title">설정</p>
             <div class="top-search-wrapper">
-                <div>
-                    <button type="button" class="btn-select">
-                        <div> 매물 구분 매물 구분</div>
-                        <div> 매물 구분 매물 구분</div>
-                    </button>
+                <div id="btn_setup_01" class="btn-select">
+                    <div class="btn-select-text">매물 구분</div>
+                    <div class="btn-select-arrow"><img src="/images/V.png" alt="" /></div>
                 </div>
-                <select>
-                    <option value="0" selected="">매물구분</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                </select>
-                <select>
-                    <option value="0" selected="">금액</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                </select>
-                <select>
-                    <option value="0" selected="">면적</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                </select>
-                <select>
-                    <option value="0" selected="">필터</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                </select>
-                <select>
-                    <option value="0" selected="">업종</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                </select>
-                <button class="square-btn"><img src="/images/rotate.png" alt="">
-
-                </button>
-                <select>
-                    <option value="0" selected="">전체매물</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                </select>
+                <div id="btn_setup_02" class="btn-select">
+                    <div class="btn-select-text">금액</div>
+                    <div class="btn-select-arrow"><img src="/images/V.png" alt="" /></div>
+                </div>
+                <div id="btn_setup_03" class="btn-select">
+                    <div class="btn-select-text">면적</div>
+                    <div class="btn-select-arrow"><img src="/images/V.png" alt="" /></div>
+                </div>
+                <div id="btn_setup_04" class="btn-select">
+                    <div class="btn-select-text">필터</div>
+                    <div class="btn-select-arrow"><img src="/images/V.png" alt="" /></div>
+                </div>
+                <div id="btn_setup_05" class="btn-select">
+                    <div class="btn-select-text">업종</div>
+                    <div class="btn-select-arrow"><img src="/images/V.png" alt="" /></div>
+                </div>
+                <button class="square-btn"><img src="/images/rotate.png" alt=""></button>
+                <div id="btn_setup_06" class="btn-select">
+                    <div class="btn-select-text">전체매물</div>
+                    <div class="btn-select-arrow"><img src="/images/V.png" alt="" /></div>
+                </div>
                 <div class="search-input">
                     <input type="text" placeholder="검색">
                     <button class="img-btn">
@@ -146,7 +132,10 @@
             <div class="radius300">
                 <div class="flex">반경 300m 위치 <img src="/images/check-round.png" alt=""></div>
                 <div class="hide">
-                    <p>중개사의 매물보호를 위해 매물의 정확한 위치는 <span class="red">반경 300m 내에 존재</span>합니다.</p>
+                    <p>중개사의 매물보호를</p>
+                    <p>위해 매물의 정확한 </p>
+                    <p>위치는 <span class="red">반경 300m</span></p>
+                    <p> <span class="red">내에 존재</span>합니다.</p>
                 </div>
             </div>
             <div class="region-wrapper">
@@ -346,7 +335,7 @@
             </div>
             <div class="info-wrapper">
                 <section class="sc1">
-                    <div class="img-wrapper lighgray-bg bd-top5">
+                    <div class="img-wrapper white-bg bd-top5">
                         <div class="img-box">
                             <img src="/images/sample-home.png" alt="">
                         </div>
@@ -1182,6 +1171,13 @@
         $(document).ready(function() {
             $("#btn_goList").click(function() {
                 location.href="/pub"
+            }) ;
+
+            $("div[id^=btn_setup_]").click(function() {
+                $("div[id^=btn_setup_]").each(function() {
+                    $(this).children(1).removeClass("active") ;
+                }) ;
+                $(this).children(1).toggleClass("active") ;
             }) ;
         }) ;
     </script>

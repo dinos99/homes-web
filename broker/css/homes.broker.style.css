@@ -31,17 +31,9 @@ button {
   border: none;
 }
 
-button:active {
-  filter: brightness(0.8);
-}
-
-a {
-  color: #5f5f5f;
-}
-
-.d-flex.vc {
-  align-items: center;
-}
+/* button:active { filter: brightness(0.8); } */
+a { color: #5f5f5f; }
+.d-flex.vc { align-items: center; }
 
 
 div.gap4 {
@@ -65,6 +57,7 @@ div.aicenter {
   color: #464646;
   font-size: 16px;
   font-weight: 600;
+  margin-bottom: 8px; 
 }
 .title2 {
   color: #464646;
@@ -705,7 +698,7 @@ select:disabled::picker-icon {
   display: flex;
   align-items: center;
   margin: 10px 0;
-  user-select: none;
+  /* user-select: none; */
 }
 
 /* 라벨 스타일 */
@@ -754,6 +747,7 @@ select:disabled::picker-icon {
   border: solid white;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+  box-sizing: content-box;
 }
 
 /* 비활성화 상태 스타일 */
@@ -1111,7 +1105,7 @@ div.sb-inner::after {
   content: url("/images/x1.png");
   position: absolute;
   bottom: -15px;
-  left: -2px;
+  left: -1px;
 }
 div.sb-inner .title {
   font-size: 14px;
@@ -1395,8 +1389,8 @@ div.sb-inner .text {
 .radius300 {
   display: flex;
   flex-direction: column;
-  width: 180px; 
-  height: 110px;
+  /* width: 180px; */
+  height: 46px;
   font-weight: 400;
   background-color: #ffffff;
   box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.1);
@@ -1404,27 +1398,31 @@ div.sb-inner .text {
   font-size: 13px;
   border-radius: 5px;
   transition: 0.3s;
+  z-index: 1010;
 }
 .radius300 .flex {
   gap: 8px;
   width: 100%;
-  padding: 13px 16px;
-  text-align: center ;
+  padding: 13px 17px;
+  /* text-align: center ; */
 }
 .radius300 .flex img {
   width: 17px;
   height: 17px;
-  margin-left: 10px
+  margin-left: 5px
 }
 .radius300 .hide {
-  padding: 0 16px 14px 16px;
-  height: 60px;
+  padding: 0 17px 14px 17px;
+  height: 90px;
+  transform: scale(0);
+  opacity: 0;
   word-break: break-all;
   line-height:1.1;
 }
-/*
+.radius300 .hide p { margin-bottom: 5px;}
+
 .radius300:hover {
-  height: 110px;
+  height: 156px;
 }
 .radius300:hover .hide {
   padding: 0 16px 14px 16px;
@@ -1434,7 +1432,7 @@ div.sb-inner .text {
   opacity: 1;
   position: relative;
 }
-*/
+
 select.telecom {
   width: 468px;
   height: 60px;
@@ -1451,10 +1449,12 @@ header {
   display: flex;
   justify-content: center;
   border-bottom: 1px solid #e6e6e6;
+  /*
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  */
 }
 header .inner {
   display: flex;
@@ -1915,7 +1915,7 @@ button.square-btn {
 
 
 .container2 .right-bar .info-wrapper {
-  background-color: #fff;
+  background-color: #ededed;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -1941,6 +1941,11 @@ button.square-btn {
   padding: 11px;
   padding-right: 3px;
   gap: 11px;
+  border: 1px solid var(--hs-border-color) ; 
+}
+
+.container2 .right-bar .info-wrapper section .img-wrapper:hover {
+  background-color: #e8f4ff;
 }
 
 .container2 .right-bar .info-wrapper section .img-wrapper .img-box {
@@ -2160,7 +2165,7 @@ button.square-btn {
   width: 220px;
   position: relative;
   font-family: inherit;
-  user-select: none;
+  /* user-select: none; */
   flex: 1;
 }
 .selected-value {
@@ -2181,7 +2186,7 @@ button.square-btn {
   right: 10px;
   pointer-events: none;
   transition: 0.3s;
-  transform: rotate(180deg);  
+  transform: rotate(0deg);  
 }
 .option-list {
   margin: 0;
