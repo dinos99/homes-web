@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="ko" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈즈프로 중개매물</title>
+
+    <!-- bootstrap 5.3.5 -->    
+    <script src="/js/extern/bootstrap-5.3.5/assets/js/color-modes.js"></script>
+    <link href="/js/extern/bootstrap-5.3.5/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/variables.css">
+
+    <link rel="stylesheet" href="/css/homes.broker.style.css">
+    
+</head>
+<body class="no-scroll">
+    <!-------------------------------------------- header------------------------------------- -->
+    <header>
+        <div class="inner">
+            <div class="left-menu">
+                <a href="./pub_002.html">마이홈 <span>2</span></a>
+                <a href="./pub_003.html">중개매물</a>
+                <a class="active" href="./pub_005.html">나의 물건</a>
+                <a href="#">나의 매수/임차</a>
+                <a href="#">네이버 광고</a>
+                <a href="#">고객관리</a>
+                <a href="#">일정관리 <span>3</span></a>
+                <a href="#">관심목록</a>
+                <a href="#">고객센터 <span>1</span></a>
+            </div><div class="right-menu">
+                <button class="notice-btn">알림 <span>2</span></button>
+                <button class="unit-btn"><img src="/images/rotate.png" alt="">
+                    <span class="type1">평</span>
+                    <span class="type2">㎡</span>
+                </button>
+                <div class="account">
+                    <div class="profile-img">
+                        <img src="/images/sample1.png" alt="">
+                    </div>
+                    홍길동
+                    <button class="btn-image"><img src="/images/V2.png" alt=""></button>
+                </div>
+                <div class="account-box">
+                    <div class="inner">
+                        <div class="info-box">
+                            <div class="profile-img">
+                                <img src="/images/sample1.png" alt="">
+                            </div>
+                            <div class="profile-text">
+                                <p class="name">홍길동</p>
+                                <p class="mail">your@email.com</p>
+                            </div>
+                        </div>
+                        <div class="justify-between">
+                            <p>온라인 중개의뢰</p>
+                            <p><span class="fs-13 red">2</span>건</p>
+                        </div>
+                        <div class="justify-between">
+                            <p>홈즈번호</p>
+                            <p><span class="fs-13 red">123</span>번</p>
+                        </div>
+                        <div class="justify-between">
+                            <p>홈즈평점</p>
+                            <p><span class="fs-13 red">1,043</span>점</p>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <a href="#">로그아웃</a>
+                        <a href="#">계정관리</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-------------------------------------------- header------------------------------------- -->
+
+    <!-------------------------------------------- main------------------------------------- -->
+    <div class="top-bar">
+        <div class="left">
+            <p class="title">설정</p>
+            <div class="top-search-wrapper">
+                <button id="btn_stuff_manage" class="hs-button btn-lime">
+                    <span>물건관리</span><span class="mx-2">1,024</span>
+                </button>
+
+                <button class="hs-button btn-white">
+                    <span>물건관리</span><span class="mx-2 c-red">612</span>
+                </button>
+                <button class="hs-button btn-white"><span>중개사무소</span></button>
+                <button class="hs-button btn-white"><span>계약매물</span></button>
+                <button class="hs-button btn-white"><span>종료매물</span></button>
+
+                <div id="btn_setup_01" class="btn-select">
+                    <div class="btn-select-text">물건 구분</div>
+                    <div class="btn-select-arrow"><img src="/images/V.png" alt="" /></div>
+                </div>
+                <div class="search-input">
+                    <input type="text" placeholder="검색" class="w-80px">
+                    <button class="img-btn">
+                        <img src="/images/magnifier.png" alt="">
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <button class="hs-button btn-blue check-round-white">물건등록</button>
+            <button class="hs-button btn-lime play">도움말</button>
+        </div>
+    </div>
+    <div class="container2">
+
+        <div class="map-container">
+            <img src="/images/sample-map.png" alt="">
+            <div class="radius300">
+                <div class="flex">반경 300m 위치 <img src="/images/check-round.png" alt=""></div>
+                <div class="hide">
+                    <p>중개사의 매물보호를</p>
+                    <p>위해 매물의 정확한 </p>
+                    <p>위치는 <span class="red">반경 300m</span></p>
+                    <p> <span class="red">내에 존재</span>합니다.</p>
+                </div>
+            </div>
+            <div class="region-wrapper">
+                <div class="region-img"><img src="/images/location-blue.png" alt=""> 서울시</div>
+                <div class="region-img">송파구</div>
+                <div class="region-text">잠실동</div>
+                <div class="listings-mini bg-d5">단지</div>
+            </div>
+            <div class="realtor"><img src="/images/home-black.png" alt="">
+                <div class="left-bubble">중개사무소</div>
+            </div>
+            <div class="hori-btn-plusminus">
+                <button><img src="/images/plus-dark.png" alt=""></button>
+                <button><img src="/images/minus-dark.png" alt=""></button>
+            </div>
+            <div class="eye-hide"><img src="/images/eye-hide.png" alt="">
+                <div class="left-bubble">매물 없는 단지 숨김</div>
+            </div>
+            <div class="unit-hide">물건
+                <div class="left-bubble">물건댠위 표기</div>
+            </div>
+            <button style="top: 145px; left: 25px;" class="map-num-btn-mini">3</button>
+            <button style="top: 145px; left: 75px;" class="map-num-btn-middle active">34</button>
+            <button style="top: 145px; left: 135px;" class="map-num-btn-middle">345</button>
+            <button style="top: 145px; left: 205px;" class="map-num-btn-middle active">3456</button>
+            <button style="top: 145px; left: 295px;" class="map-num-btn-big">3,233</button>
+            <div class="sb-mini sb-skyblue active" style="top: 290px;left:25px;">
+                <span class="sb-text">0</span>
+                <div class="sb-inner">
+                    <div class="title">
+                        <span class="hs-badge sm darkblue-bg">주상복합</span> 잠실주공1단지 <span class="hs-badge bg-b3">분양권</span>
+                    </div>
+                    <div class="blue">매매 10.5억(1)</div>
+                    <div class="btn-wrapper">
+                        <button>단지정보</button>
+                        <button>시세/실거래가</button>
+                    </div>
+                </div>
+            </div>
+            <div class="sb-mini sb-skyblue" style="top: 350px;left:25px;">
+                <span class="sb-text">0</span>
+                <div class="sb-inner">
+                    <div class="title">
+                        <span class="hs-badge sm darkblue-bg">주상복합</span> 잠실주공1단지 <span class="hs-badge sm bg-b3">분양권</span>
+                    </div>
+                    <div class="blue">매매 10.5억(1)</div>
+                    <div class="btn-wrapper">
+                        <button>단지정보</button>
+                        <button>시세/실거래가</button>
+                    </div>
+                </div>
+            </div>
+            <div class="sb-mini sb-orange" style="top: 350px;left:65px;">
+                <span class="sb-text">0</span>
+                <div class="sb-inner">
+                    <div class="title">
+                        <span class="hs-badge sm darkblue-bg">주상복합</span> 잠실주공1단지 <span class="hs-badge sm bg-b3">분양권</span>
+                    </div>
+                    <div class="blue">매매 10.5억(1)</div>
+                    <div class="blue">매매 10.5억(1)</div>
+                    <div class="blue">매매 10.5억(1)</div>
+                    <div class="blue">매매 10.5억(1)</div>
+                    <div class="btn-wrapper">
+                        <button>단지정보</button>
+                        <button>시세/실거래가</button>
+                    </div>
+                </div>
+            </div>
+            <div class="sb-mini sb-navy" style="top: 350px;left:105px;">
+                <span class="sb-text">0</span>
+                <div class="sb-inner">
+                    <div class="title">
+                        <span class="hs-badge sm darkblue-bg">주상복합</span> 잠실주공1단지 <span class="hs-badge sm bg-b3">분양권</span>
+                    </div>
+                    <div class="btn-wrapper">
+                        <button>단지정보</button>
+                        <button>시세/실거래가</button>
+                    </div>
+                </div>
+            </div>
+            <div class="sb-mini sb-blue" style="top: 350px;left:145px;">
+                <span class="sb-text">0</span>
+                <div class="sb-inner">
+                    <div class="title">
+                        <span class="hs-badge sm darkblue-bg">주상복합</span> 잠실주공1단지 <span class="hs-badge sm bg-b3">분양권</span>
+                    </div>
+                    <div class="blue">매매 10.5억(1)</div>
+                    <div class="blue">매매 10.5억(1)</div>
+                    <div class="blue">매매 10.5억(1)</div>
+                    <div class="blue">매매 10.5억(1)</div>
+                    <div class="btn-wrapper">
+                        <button>단지정보</button>
+                        <button>시세/실거래가</button>
+                    </div>
+                </div>
+            </div>
+            <div class="sb-mini sb-cyan" style="top: 350px;left:185px;">
+                <span class="sb-text">0</span>
+                <div class="sb-inner">
+                    <div class="title">
+                        <span class="hs-badge sm darkblue-bg">주상복합</span> 잠실주공1단지 <span class="hs-badge sm bg-b3">분양권</span>
+                    </div>
+                    <div class="blue">매매 10.5억(1)</div>
+                    <div class="blue">매매 10.5억(1)</div>
+                    <div class="btn-wrapper">
+                        <button>단지정보</button>
+                        <button>시세/실거래가</button>
+                    </div>
+                </div>
+            </div>
+            <div class="sb-mini sb-skyblue" style="top: 350px;left:225px;">
+                <span class="sb-text">0</span>
+                <div class="sb-inner">
+                    <div class="title">
+                        <span class="hs-badge sm darkblue-bg">주상복합</span> 잠실주공1단지 <span class="hs-badge sm bg-b3">분양권</span>
+                    </div>
+                    <div class="blue">매매 10.5억(1)</div>
+                    <div class="btn-wrapper">
+                        <button>단지정보</button>
+                        <button>시세/실거래가</button>
+                    </div>
+                </div>
+            </div>
+            <div class="sb-mini sb-brown" style="top: 350px;left:265px;">
+                <span class="sb-text">0</span>
+                <div class="sb-inner">
+                    <div class="title">
+                        <span class="hs-badge sm darkblue-bg">주상복합</span> 잠실주공1단지 <span class="hs-badge sm bg-b3">분양권</span>
+                    </div>
+                    <div class="btn-wrapper">
+                        <button>단지정보</button>
+                        <button>시세/실거래가</button>
+                    </div>
+                </div>
+            </div>
+            <div class="sb-big sb-red" style="top: 350px;left:305px;"><span class="sb-text">200</span>
+                <div class="sb-inner">
+                    <div class="title">
+                        <span class="hs-badge sm darkblue-bg">주상복합</span> 잠실주공1단지 <span class="hs-badge sm bg-b3">분양권</span>
+                    </div>
+                    <div class="blue">매매 10.5억(1)</div>
+                    <div class="blue">매매 10.5억(1)</div>
+                    <div class="btn-wrapper">
+                        <button>단지정보</button>
+                        <button>시세/실거래가</button>
+                    </div>
+                </div>
+            </div>
+            <div class="sb-home sb-red" style="top: 350px;left:345px;"><img src="/images/home-white.png" alt="">
+                <div class="sb-inner">
+                    <div class="title">
+                        은성공인중개사사무소
+                    </div>
+                    <p>대표 홍길동</p>
+                    <p>02-000-0000/010-0000-0000</p>
+                    <p>서울시 송파구 잠실동 21-1/102호</p>
+                    <div class="bg-blacklist">블랙리스트</div>
+                </div>
+            </div>
+            <div class="sb-home sb-blue" style="top: 350px;left:385px;"><img src="/images/home-white.png" alt="">
+                <div class="sb-inner">
+                    <div class="title">
+                        <span class="hs-badge sm darkblue-bg">주상복합</span> 잠실주공1단지 <span class="hs-badge sm bg-b3">분양권</span>
+                    </div>
+                    <div class="blue">매매 10.5억(1)</div>
+                    <div class="btn-wrapper">
+                        <button>단지정보</button>
+                        <button>시세/실거래가</button>
+                    </div>
+                </div>
+            </div>
+            <button style="top: 400px; left: 25px;" class="map-home-btn"><img src="/images/home-red.png" alt=""></button>
+
+            <div class="sb-double" style="top: 460px; left: 25px;">
+                <div class="top">송파구</div>
+                <div class="bottom">21,200</div>
+            </div>
+            <div class="sb-double sb-red" style="top: 460px; left:95px;">
+                <div class="top">송파구</div>
+                <div class="bottom">21,200</div>
+            </div>
+            <div class="sb-double sb-blue" style="top: 460px; left: 165px;">
+                <div class="top">송파구</div>
+                <div class="bottom">21,200</div>
+            </div>
+            <div class="sb-double sb-red" style="top: 460px; left:235px;">
+                <div class="top">송파구123</div>
+                <div class="bottom">21,200123123</div>
+            </div>
+            <!------------- map------ -->
+        </div>
+        <!--  -->
+        <div class="right-bar">
+            <div class="top">
+                <p>전체 매물(24/1,203)</p>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="p_chk_except_map" class="custom-checkbox">
+                    <label for="p_chk_except_map" class="checkbox-label">
+                    <span class="checkbox-icon"></span>
+                    <span class="checkbox-text c-white">지도 외 선택</span>
+                </label>
+                </div>
+            </div>
+            <div class="info-wrapper">
+                <section class="sc1">
+                </section>
+                <section class="sc2">
+                    <div class="vertical-wrapper white-bg bd-5">
+                        <div class="justify-between">
+                            <p class="title2 fs-14 fw-600">
+                                <span class="hs-badge sm darkblue-bg">아파트</span> 가락쌍용2차(가락동)
+                                <span class="hs-badge sm bg-b3">분양권</span> <span class="hs-badge sm bg-b3">재건축</span>
+                            </p>
+                            <div class="img-box">
+                                <img src="/images/lock.png" alt="">
+                            </div>
+                        </div>
+                        <div>
+                            <span class="gray fs-13 fw-600">
+                                세대/호실
+                            </span> 160/6
+                            <span class="gray">• 단지동/상가동</span> 2/1
+                        </div>
+                        <div class="xxz mb4">
+                            <div class="left">
+                                <p>등록 물건 <span class="red">3</span></p>
+                                <p>등록 매물 <span class="red">1</span></p>
+                                <p class="last">계약 만료 <span class="red">2</span></p>
+                                <div class="custom-select">
+                                    <div class="selected-value">
+                                        <img src="/images/V.png" class="arrow" alt="v">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="sc3">
+                    <div class="vertical-wrapper active rounded-5">
+                        <div class="justify-between">
+                            <p class="title2 fs-14 fw-600">
+                                <span class="hs-badge sm blue-bg">상가주택</span> 서울시 송파구 잠실동 <span class="red">231-4</span>
+                                <span class="hs-badge sm bg-b3">신축</span>
+                            </p>
+                            <div class="img-box">
+                                <img src="/images/lock.png" alt="">
+                            </div>
+                        </div>
+                        <div class="justify-between">
+                            <div>
+                                <span class="gray fs-13 fw-600">
+                                    가구/호실
+                                </span> 1/12
+                                <span class="gray fs-13 fw-600">• 단지동/상가동</span> 5/1
+                            </div>
+                            <p class="ft14">홍길동 010-0000-0000</p>
+                        </div>
+                        <div class="xxx">
+                            <div class="xxz">
+                                <p>매물 <span class="red">1</span></p>
+                                <p class="last">계약 만료 <span class="red">2</span></p>
+                                <div class="custom-select">
+                                    <div class="selected-value">
+                                        <img src="/images/V.png" class="arrow" alt="v">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="xxy">
+                                <div class="btn-updown">상단</div>
+                                <div class="btn-updown">하단</div>
+                            </div>
+                        </div>
+                        <div class="zzx">
+                            <div class="hs-slide-bar">
+                                <div class="d-block">
+                                    <div id="slide_01" class="slide-title bg-yellow-100">
+                                        <div class="slide-text"><span class="fs-13 fw-600">등록매물</span> <span class="red fs-13 fw-600">2</span></div>
+                                        <div class="slide-arrow"><img src="/images/V.png" class="arrow" alt="v" class="arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="d-block">
+                                    <div class="slide-list" id="slide_List_01">
+                                        <div class="slide-item justify-between">
+                                            <p class="title2">
+                                                <span class="">건물</span>
+                                                <span class="hs-badge sm bg-red-500">독채</span>
+                                                <span class="hs-badge sm bg-orange">주거용</span>
+                                            </p>
+                                            <p class="fs-12"><span class="gray">등록일</span> 22.12.23</p>
+                                        </div>
+                                        <div class="slide-item fs-13 text-cut">
+                                            <span class="c-gray">방/욕실</span><span class="hs-text-color">3룸/1 </span>
+                                            <span class="c-gray">• 지상/지하</span><span class="hs-text-color">2/1</span>
+                                            <sapn class="c-gray">• 지상/지하</sapn><span class="hs-text-color">478/215㎡</span>
+                                        </div>
+                                        <div class="slide-item fs-13 text-cut">
+                                            <span class="c-red">매매 </span><span>13억2,000</span>
+                                            <span class="mx-1 c-gray">•</span>
+                                            <span class="mx-1 c-red">전세</span><span>10억2,000</span>
+                                            <span class="mx-1 c-gray">•</span>
+                                            <span class="mx-1 c-red">월세</span><span>1억2,0000/100</span>
+                                            <span class="mx-1 c-gray">•</span>
+                                            <span class="mx-1 c-red">단기</span><span>1234</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hs-slide-bar">
+                                <div class="d-block">
+                                    <div class="slide-title bg-yellow-100" id="slide_02">
+                                        <div class="slide-text">
+                                            <span class="fs-13 fw-600">계약/종료/미등록</span>
+                                            <span class="red fs-13 fw-600">2</span>
+                                        </div>
+                                        <div class="slide-arrow"><img src="/images/V.png" class="arrow" alt="v" class="arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="d-block">
+                                    <div class="slide-list" id="slide_List_02">
+                                        <div class="slide-item justify-between">
+                                            <p class="title2">건물</p>
+                                            <p>-</p>
+                                        </div>
+                                        <div class="slide-item justify-between">
+                                            <p class="title2">
+                                                <span>302호</span>
+                                                <span class="hs-badge bg-a3">상가용</span>
+                                                <span class="hs-badge bg-b4">전체</span>
+                                            </p>
+                                            <p>
+                                                <span class="fs-12 c-gray">계약일</span>
+                                                <span class="fs-12">22.12.23</span>
+                                            </p>
+                                        </div>
+                                        <div class="slide-item justify-between">
+                                            <p class="title2">
+                                                <span>가동 / 302호</span>
+                                                <span class="hs-badge bg-a1">주거용</span>
+                                            </p>
+                                            <p>
+                                                <span class="fs-12 c-gray">종료일</span>
+                                                <span class="fs-12">23.12.23</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="no-item">
+                <img src="/images/no-item.png" alt="">
+                <p>검색된 매물이 없습니다.</p>
+            </div>
+        </div>
+    </div>
+    <div class="go-list">
+        <button id="btn_goList" class="bi bi-card-list"></button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <script src="/js/common/homes-event-broker.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#btn_goList").click(function() {
+                location.href="/pub"
+            }) ;
+
+            $("div[id^=btn_setup_]").click(function() {
+                $("div[id^=btn_setup_]").each(function() {
+                    $(this).children(1).removeClass("active") ;
+                }) ;
+                $(this).children(1).toggleClass("active") ;
+            }) ;
+
+            $("div[id^=slide_]").click(function() {
+                var has = $(this).hasClass("open") ; 
+                if ( has ) {
+                    $(this).removeClass("open") ; 
+                } else {
+                    $(this).removeClass("open").addClass("open") ; 
+                }
+                var ids = $(this).attr("id").split("_") ; 
+                ids.splice(1, 0, "List") ; 
+                var id = ids.join("_") ;
+                
+                $("#" + id).slideToggle(100) ;
+//                $(this).find(".slide-list").slideToggle(100) ;
+            }) ;
+
+            $("#btn_stuff_manage").click(function() {
+                var ifrm = $("<iframe class='pop-ifrm' src='/pub/web/pub_006.html' width='100%' height='100%' />") ; 
+                $("body").append(ifrm) ;
+            }) ;
+        }) ;
+
+        var pop_close = ( param ) => {
+            $("iframe").remove() ;
+        }
+
+    </script>
+</body>
+</html>
