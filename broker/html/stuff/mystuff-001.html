@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ko" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈즈프로 나의물건</title>
+    <!--
+    <link rel="icon" href="/path/to/your/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/path/to/your/favicon.ico" type="image/x-icon">
+    -->
+    <!-- bootstrap 5.3.5 -->    
+    <script src="/js/extern/bootstrap-5.3.5/assets/js/color-modes.js"></script>
+    <link href="/js/extern/bootstrap-5.3.5/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/bootstrap/modal.css">
+
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/variables.css">
+
+    <link rel="stylesheet" href="/css/homes.broker.style.css">
+    <style>
+      .container .inner { gap: 30px; }
+    </style>
+  </head>
+  <body class="no-scroll">
+    <!-------------------------------------------- header------------------------------------- -->
+    <header id="homes_Header">
+    </header>
+    <!-------------------------------------------- header------------------------------------- -->
+    <!-------------------------------------------- main------------------------------------- -->
+    <!-------------------------------------------- setup------------------------------------- -->
+    <div class="top-bar">
+        <div class="left">
+            <p class="title">설정</p>
+            <div class="top-search-wrapper">
+                <button class="hs-button w-100px">
+                    <span>물건관리</span><span class="mx-1 c-red">0</span>
+                </button>
+                <button class="hs-button w-100px">
+                    <span>매물관리</span><span class="mx-2 c-red">0</span>
+                </button>
+                <button class="hs-button w-100px"><span>중개사무소</span></button>
+                <div class="sepa-22"></div>
+                <button class="hs-button w-100px"><span>계약매물</span></button>
+                <button class="hs-button w-100px"><span>종료매물</span></button>
+                <div class="sepa-22"></div>
+
+                <div id="btn_setup_01" class="btn-select w-100px">
+                    <div class="btn-select-text">물건 구분</div>
+                    <div class="btn-select-arrow"><img src="/images/V.png" alt="" /></div>
+                </div>
+                <div class="search-input">
+                    <input type="text" placeholder="검색" id="p_keyword">
+                    <button class="img-btn">
+                        <img src="/images/magnifier.png" alt="">
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <button id="btn_stuff_manage" class="hs-button btn-blue check-round-white">물건등록</button>
+            <button id="btn_help_stuff" class="hs-button btn-lime play">도움말</button>
+        </div>
+    </div>
+    <div class="container2">
+        <div class="map-container">
+            <!-------------------------------------------- map------------------------------------- -->
+            <img src="/images/sample-map.png" alt="">
+            <div class="radius300">
+                <div class="flex">반경 300m 위치 <img src="/images/check-round.png" alt=""></div>
+                <div class="hide">
+                    <p>중개사의 매물보호를</p>
+                    <p>위해 매물의 정확한 </p>
+                    <p>위치는 <span class="red">반경 300m</span></p>
+                    <p> <span class="red">내에 존재</span>합니다.</p>
+                </div>
+            </div>
+            <div class="region-wrapper">
+                <div class="region-img"><img src="/images/location-blue.png" alt=""> 서울시</div>
+                <div class="region-img">송파구</div>
+                <div class="region-text">잠실동</div>
+                <div class="listings-mini bg-d5">단지</div>
+            </div>
+            <div class="realtor"><img src="/images/home-black.png" alt="">
+                <div class="left-bubble">중개사무소</div>
+            </div>
+            <div class="hori-btn-plusminus">
+                <button><img src="/images/plus-dark.png" alt=""></button>
+                <button><img src="/images/minus-dark.png" alt=""></button>
+            </div>
+            <div class="eye-hide"><img src="/images/eye-hide.png" alt="">
+                <div class="left-bubble">매물 없는 단지 숨김</div>
+            </div>
+            <div class="unit-hide">물건
+                <div class="left-bubble">물건댠위 표기</div>
+            </div>
+            <!-------------------------------------------- map------------------------------------- -->
+        </div>
+        <!-------------------------------------------- map List------------------------------------- -->        
+        <div class="right-bar">
+            <div class="top">
+                <p>전체 매물(0/0)</p>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="p_chk_except_map" class="custom-checkbox">
+                    <label for="p_chk_except_map" class="checkbox-label">
+                    <span class="checkbox-icon"></span>
+                    <span class="checkbox-text c-white">지도 외 선택</span>
+                </label>
+                </div>
+            </div>
+            <div class="info-wrapper">
+                <section class="hidden">
+                    <div class="vertical-wrapper white-bg bd-5">
+                        <div class="justify-between">
+                            <p class="title2 fs-14 fw-600">
+                                <span class="hs-badge sm darkblue-bg">아파트</span> 가락쌍용2차(가락동)
+                                <span class="hs-badge sm bg-b3">분양권</span> <span class="hs-badge sm bg-b3">재건축</span>
+                            </p>
+                            <div class="img-box">
+                                <img src="/images/lock.png" alt="">
+                            </div>
+                        </div>
+                        <div>
+                            <span class="gray fs-13 fw-600">
+                                세대/호실
+                            </span> 160/6
+                            <span class="gray">• 단지동/상가동</span> 2/1
+                        </div>
+                        <div class="xxz mb4">
+                            <div class="left">
+                                <p>등록 물건 <span class="red">3</span></p>
+                                <p>등록 매물 <span class="red">1</span></p>
+                                <p class="last">계약 만료 <span class="red">2</span></p>
+                                <div class="custom-select">
+                                    <div class="selected-value">
+                                        <img src="/images/V.png" class="arrow" alt="v">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="no-item">
+                    <img src="/images/no-item.png" alt="">
+                    <p>검색된 매물이 없습니다.</p>
+                </div>
+            </div>
+        </div>
+        <!-------------------------------------------- map List------------------------------------- -->
+    </div>
+    <!-------------------------------------------- setup------------------------------------- -->
+    <!-------------------------------------------- main------------------------------------- -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="/js/common/homes-event-broker.js"></script>
+    <script src="/js/common/homes-comm.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            fn_page_init("T03") ;
+
+            $("div[id^=slide_]").click(function() {
+                var has = $(this).hasClass("open") ; 
+                if ( has ) {
+                    $(this).removeClass("open") ; 
+                } else {
+                    $(this).removeClass("open").addClass("open") ; 
+                }
+                var ids = $(this).attr("id").split("_") ; 
+                ids.splice(1, 0, "List") ; 
+                var id = ids.join("_") ;
+                
+                $("#" + id).slideToggle(100) ;
+//                $(this).find(".slide-list").slideToggle(100) ;
+            }) ;
+
+            $("#btn_stuff_manage").click(function() {
+                var ifrm = $("<iframe class='pop-ifrm' src='./mystuff-002.html' width='100%' height='100%' />") ; 
+                $("body").append(ifrm) ;
+            }) ;
+        }) ;
+
+        var pop_close = ( param ) => {
+            $("iframe").remove() ;
+        }
+
+    </script>
+</body>
+</html>

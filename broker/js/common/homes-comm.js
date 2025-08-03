@@ -1,3 +1,7 @@
+const hsEvent = {
+    "profile_click": new Event("profile-click", { bubbles: true, cancelable: false }) 
+}
+
 const homes_comm = {
     constants: {
         _API_BASE_URL : "http://127.0.0.1"
@@ -10,6 +14,17 @@ const homes_comm = {
         , _HOMES_PRO_BASE_DOMAIN: "http://127.0.0.1:8081"
         , _NO_AUTH_PAGES: [
             "/html/sign-in/sign-in.html" /* 로그인 페이지 */
+        ]
+        , _TOP_MENU: [
+            {"T01": {"text": "마이홈", "href": "/html/main.html"}},
+            {"T02": {"text": "중개매물", "href": "#"}},
+            {"T03": {"text": "나의 물건", "href": "/html/stuff/mystuff-001.html"}},
+            {"T04": {"text": "나의 매수/임차", "href": "#"}},
+            {"T05": {"text": "네이버 광고", "href": "#"}},
+            {"T06": {"text": "고객관리", "href": "#"}},
+            {"T07": {"text": "일정관리", "href": "#"}},
+            {"T08": {"text": "관심목록", "href": "#"}},
+            {"T09": {"text": "고객센터", "href": "#"}}
         ]
     }
     , store: {
@@ -678,18 +693,82 @@ var fn_comm_search = (path, params, fn_callback) => {
 } 
 
 /* 페이지 초기화 */ 
-var fn_page_init = () => {
-    const user = homes_comm.store.getItem("user") ; 
-    /* 왜 그런지 모르겠는데 테마가 dark 에서 light로 자동바뀜(현재 로그인페이지만 그럼) */
-    $("html").attr("data-bs-theme", "dark") ; 
-    /* svg icon load */ 
-//    homes.fn_Loadsvg() ;
+var fn_page_init = (pgid) => {
+    fn_page_event() ; 
+//    const user = homes_comm.store.getItem("user") ; 
+    /* 테마를 light로 일괄변경 */
+    $("html").attr("data-bs-theme", "light") ; 
     /* 상단 GNB 영역생성 */ 
-    fn_create_gnb() ; 
-    /* 좌측 LNB 영역 생성 */
-    fn_create_lnb() ; 
+    fn_Loadmenu(pgid) ; 
 
-    homes_comm.store.getArcodeList( user.arcode ) ;
+//    homes_comm.store.getArcodeList( user.arcode ) ;
+}
+
+var fn_Loadmenu = (pgid) => {
+    var header = $("#homes_Header") ;
+    header.load("/html/common/top-menu.html", () => {   
+        fn_create_Topmenu(pgid) ;
+    }) ;
+}
+
+var fn_toggle_profile = () => {
+    /* 사용자계정 */
+    const user = homes_comm.store.getItem("user") ; 
+    var account = document.querySelector("header .right-menu .account");
+    var accountBtn = document.querySelector("header .right-menu .account button");
+    var accountBox = document.querySelector("header .right-menu .account-box");
+    var body = document.querySelector("body") ;
+    
+    /* user profile event */
+    if (account) {
+        account.addEventListener("click", function () {
+            accountBox.classList.toggle("active");
+            accountBtn.classList.toggle("active");
+//            body.dispatchEvent(hsEvent.profile_click) ; 
+            event.stopPropagation() ;
+        });
+
+        $("#p_broker_name").text(user.usernm) ; 
+        $("#p_broker_nm").text(user.usernm) ; 
+        $("#p_broker_email").text(user.email) ;
+
+    }
+}
+
+var fn_toggle_unit = () => {
+    var setup = homes_comm.store.getItem("setup") ;
+    if ( !setup ) {
+        setup = { uType: "M" } ; /* M: ㎡, P: 평 */ 
+    } else if ( !setup["uType"] ) {
+        setup.uType = "M" ; 
+    }
+    
+    $("span[id^=uType_").removeClass("active") ; 
+    $("#uType_" + setup.uType).addClass("active") ; 
+    homes_comm.store.setItem("setup", setup) ;
+    $("#btn_uType").click(function() {
+        var setup = homes_comm.store.getItem("setup") ;
+        var uType = setup.uType == "M" ? "P" : "M" ; 
+        setup.uType = uType ; 
+        $("span[id^=uType_").removeClass("active") ; 
+        $("#uType_" + setup.uType).addClass("active") ; 
+        homes_comm.store.setItem("setup", setup) ;
+    }) ; 
+}
+
+var fn_create_Topmenu = ( pgid ) => {
+    /* Top menu 생성 */ 
+    var mid = 0 ; 
+    var tmenu = $("#btn_Topmenu") ; 
+    var tmenu = $("#btn_Topmenu") ; 
+    homes_comm.constants._TOP_MENU.forEach( m => {
+        mid ++ ; 
+        var menucd = mid < 10 ? "T0" + mid : "T" + mid ; 
+        var clss = menucd == pgid ? "active" : "" ; 
+        tmenu.append("<a href='" + m[menucd].href + "' class='" + clss + "'>" + m[menucd].text + "</a>") ; 
+    }) ; 
+    fn_toggle_unit() ; 
+    fn_toggle_profile() ;
 }
 
 var fn_get_menu = (cd) => {
@@ -734,56 +813,6 @@ var fn_create_gnb = () => {
         $("button[id^=gnb_]").removeClass("on") ; 
         $("#gnb_" + gnbcd).addClass("on")
     }); 
-}
-
-var fn_create_lnb = () => {
-    var lnb_wrap = $("#homes_admin_lnb") ; 
-    lnb_wrap.load("/html/common/homes-admin-lnb.html", () => {
-        const menu   = fn_get_menu("MCD") ; 
-        menu.forEach((m, i) => {
-            const pageid = page.pageid ; 
-            const gnbcd = page.pageid.split("-").splice(0,1)[0].toLowerCase() ; 
-            if ( m.id == page.pageid.split("-").splice(0,1)[0] ) {
-                $("a[id^=a_" + gnbcd + "]").remove() ; 
-                m.MCD.forEach((mcd, i) => {
-                    $("svg[id^=svg_" + gnbcd + "_" + mcd.id + "]").removeClass("hidden") ; 
-                    $("#lnb_mcd").append("<span id='a_" + gnbcd + "_" + mcd.id + "' class='ml-10 fs-5 fw-semibold'>" + mcd.nm + "</span>") ; 
-                    $("#a_" + gnbcd + "_" + mcd.id).click(function(){
-                        location.href = mcd.link ; 
-                    }) ; 
-                    mcd.SCD.forEach((scd, i) => {
-                        const l_cd = page.pageid.split("-").splice(0,1)[0].toLowerCase() ;
-                        const m_cd = page.pageid.split("-").splice(1,1)[0] ; 
-                        const s_cd  = page.pageid.split("-").splice(2,1)[0] ; 
-                        var menucd = page.pageid.split("-").join("_").toLowerCase() ; 
-                        var li  = $("#li_lnb_hidden").clone() ; 
-                        li.each((i, l) => {
-                            $(l).attr("id", "li_lnb_" + scd.id)
-                            $(l).removeClass("hidden")  ; 
-                            var btn = l.children[0] ; 
-                            for ( var i = 0; i < btn.children.length; i ++ ) {
-                                var b = btn.children[i] ; 
-                                var menucd = page.pageid.split("-").join("_").toLowerCase() ; 
-                                if ( menucd == (l_cd + "_" + m_cd + "_" + scd.id)) {
-                                    $(btn.children[1]).removeClass("hidden") ; 
-                                } else {
-                                    $(btn.children[0]).removeClass("hidden") ; 
-                                    $(btn).click(function() {
-                                        location.href = scd.link ; 
-                                    }) ; 
-                                }
-                                if (i == 2 ) {
-                                    var lnb_menu = btn.children[i] ; 
-                                    $(lnb_menu).html(scd.nm)
-                                }
-                            }
-                            $("#li_lnb").append(l) ; 
-                        }) ; 
-                    }) ; 
-                }) ; 
-            }
-        }) ; 
-    }) ; 
 }
 
 var fn_setpage = (pageinfo) => {
@@ -861,6 +890,11 @@ var _gv = {} ;
 
 // fn_isLogin() ;
 /* event */
-window.onload = () => {
-    fn_page_onLoad() ;
+var fn_page_event = () => {
+    var body = document.querySelector("body") ;
+    body.addEventListener("click", function() {
+        if ($("#btn_profile").find("button").hasClass("active")) {
+            $("#btn_profile").click() ;
+        }
+    }) ;
 }

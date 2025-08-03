@@ -1,11 +1,13 @@
 <!doctype html>
 <html lang="ko" data-bs-theme="light">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#712cf9">
-    <title>홈즈 프로</title>
-
+    <title>홈즈프로 마이홈</title>
+    <!--
+    <link rel="icon" href="/path/to/your/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/path/to/your/favicon.ico" type="image/x-icon">
+    -->
     <!-- bootstrap 5.3.5 -->    
     <script src="/js/extern/bootstrap-5.3.5/assets/js/color-modes.js"></script>
     <link href="/js/extern/bootstrap-5.3.5/assets/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -14,103 +16,465 @@
 
     <link rel="stylesheet" href="/css/bootstrap/modal.css">
 
-    <!-- KAKAo Login API -->
-    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js" integrity="sha384-dok87au0gKqJdxs7msEdBPNnKSRT+/mhTVzq+qOhcL464zXwvcrpjeWvyj1kCdq6" crossorigin="anonymous"></script>
-
-    <!-- services,clusterer,drawing 라이브러리 불러오기 -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3683e4f8faad0637b8a7db5fc23179bd&libraries=services,clusterer,drawing"></script>
-
-    <!-- 다음 우편번호 검색 API -->
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <link rel="stylesheet" href="/css/common.css">
-    <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/custom.css">
     <link rel="stylesheet" href="/css/variables.css">
 
+    <link rel="stylesheet" href="/css/homes.broker.style.css">
+    <style>
+      .container .inner { gap: 30px; }
+    </style>
   </head>
-  <body>
-    <div class="p-3">
-      <div class="table-cell">
-        <table class="table-02">
-          <colgroup>
-            <col width="10%"/>
-            <col width="15%"/>
-            <col width="15%"/>
-            <col width="*"/>
-            <col width="15%"/>
-          </colgroup>
-          <tbody>
-            <tr>
-              <th class="last">403_1_a</th>
-              <th class="last">pop-area</th>
-              <td class="border-b">지역검색(공통)</td>
-              <td class="border-b">
-                <a href="#" id="btn_comm_pop_area" class="link-style">/html/popup/pop-area.html</a>
-              </td>
-              <td class="last-col tac">팝업(공통)</td>
-            </tr>
-            <tr>
-              <th class="last">403_2_a</th>
-              <th class="last">pop-estate-0200</th>
-              <td class="border-b">부동산구분(공동주택)</td>
-              <td class="border-b">
-                <a href="#" id="btn_comm_pop_estate" class="link-style">/html/popup/estate/pop-estate-0200.html</a>
-              </td>
-              <td class="last-col tac">팝업(공통)</td>
-            </tr>
-            <tr>
-              <th class="last">403a</th>
-              <th class="last">coplex-reg-001</th>
-              <td class="border-b">단지물건(물건등록)</td>
-              <td class="border-b">
-                <a href="#" id="btn_reg_group_001" class="link-style">/html/complex/coplex-reg-001.html</a>
-              </td>
-              <td class="last-col tac">팝업</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+  <body class="no-scroll">
+    <header id="homes_Header">
+    </header>
+    <div class="cont-area">
+        <div class="container">
+            <div class="inner">
+                <!-- section -->
+                <section class="profile">
+                    <div class="profile-img"><img src="/images/sample1.png" alt=""></div>
+                    <div class="account-info">
+                        <div class="left">
+                            <div class="name">홍길동</div>
+                            <div class="role">직책 <span>소속공인중개사</span></div>
+                            <div class="mobile">전화번호 <span>010-0000-0000</span></div>
+                        </div>
+                        <button class="btn-img circle cogwheel bg-white"></button>
+                    </div>
+                </section>
+                <!-- section -->
+                <section class="broker-score">
+                    <div class="left">
+                        <span class="title mb-0">은성공인중개사사무소</span>
+                    </div>
+                    <div class="right">
+                        <div class="info">
+                            <span class="fs-13 c-gray">관심매물</span>
+                            <span class="fs-14 c-red">200</span>
+                            <span class="fs-14">개</span>
+                        </div>
+                        <div class="info">
+                            <span class="fs-13 c-gray">홈즈 평점</span>
+                            <span class="fs-14 c-red">1,043</span>
+                            <span class="fs-14">점</span>
+                        </div>
+                        <div class="info">
+                            <span class="fs-13 c-gray">소속 직원</span>
+                            <span class="fs-14 c-red">4</span>
+                            <span class="fs-14">명</span>
+                        </div>
+                    </div>
+                </section>
+                <!-- section -->
+                <section class="grid">
+                    <div class="cell">
+                        <div class="cell-row">
+                            <div class="cell-col">
+                                <div class="title">
+                                    <p>온라인 중개의뢰</p>
+                                    <p><span class="fs-18 c-red">3</span>건</p>
+                                </div>
+                                <div class="text">
+                                    온라인 매도/임대 의뢰 요청된 내역으로 의뢰인과 통화 후, 매물을
+                                    등록하십시오.
+                                </div>
+                            </div>
+                            <div class="cell-col">
+                                <div class="title">
+                                    <p>홈즈번호 확인</p>
+                                    <p><span class="fs-18 c-red">123</span>번</p>
+                                </div>
+                                <div class="text">
+                                    홈즈번호는 매물번호 대신 사용하는 3자리 숫자로 쉽고 빠르게 매물을
+                                    확인하실 수 있습니다.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cell-row-merge">
+                            <div class="cell-1">
+                                <div class="title">
+                                    <p>오늘 일정(<span class="c-red">3</span>)</p>
+                                    <a href="#">더보기 <img src="/images/v3.png" alt=""></a>
+                                </div>
+                                <div class="text">
+                                    <ul>
+                                        <li>
+                                            <p class="line-through">오전 9:00 [중도금]</p>
+                                            <p> [홍길동]</p>
+                                        </li>
+                                        <li>
+                                            <p>오전 9:30 [고객방문]</p>
+                                            <p> [김길동]</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="cell-2">
+                                <div class="title">
+                                    <p>내일 일정(<span class="c-red">3</span>)</p>
+                                    <select>
+                                        <option value="0" selected="">전체</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                </div>
+                                <div class="text">
+                                    <div class="none">일정 없음</div>
+                                </div>
+                            </div>
 
+                        </div>
+                    </div>
+                    <div class="gradient">
+                        <div class="cell-1">홈즈추천</div>
+                        <div class="cell-2">
+                            홈즈프로는 부담 없이 사용 가능하며, 주변 중개사무소와 함께 활용하면 시너지 효과를 얻을 수 있습니다. <br>
+                            또한, 홈즈프로를 추천하시면 
+                            <span class="c-blue">홈즈 평점이 상승</span>해 더 많은 
+                            <span class="c-blue">온라인 매도/임대 의뢰</span>를 받을 수 있습니다.
+                        </div>
+                        <div class="cell-3"><a href="#">바로가기 <img src="/images/v3.png" alt=""></a></div>
+                    </div>
+                    <div class="subcribe">
+                        <div class="cell-1 c-red">15% 미만</div>
+                        <div class="cell-2">
+                          <span class="c-blue">[서울시 송파구 잠실동]</span> 지역의 중개사무소 가입률이
+                          <span class="c-red">[15% 미만]</span>입니다. <br>
+                          <span class="c-red">가입률이 20%에 도달</span>하면 <span class="c-red">소유주가 온라인 매도/임대 의뢰를 진행</span>할 수 있습니다.
+                        </div>
+                    </div>
+                </section>
+                <!-- section -->
+                <section class="grid-List">
+                    <div class="grid-row-01">
+                        <div class="title">물건 현황</div>
+                        <div class="desc bg-gray">
+                            <div class="desc-01">나의 물건<span class="c-red">139</span></div>
+                            <div class="desc-02">등록 매물<span class="c-red">10</span></div>
+                            <div class="desc-03">계약 만료<span class="c-red">10</span></div>
+                        </div>
+                    </div>
+                    <div class="grid-row-02">
+                        <div class="title">계약 만료</div>
+                        <div class="desc">
+                            <div class="desc-01">
+                              <span class="hs-badge bg-darkblue">단독주택</span>
+                              <span class="hs-badge bg-orange-500">주거용</span>
+                                서울시 송파구 잠실동
+                                <span class="c-red">231-1</span>
+                                <button class="img-btn">
+                                  <img src="/images/more.png" alt=""/>
+                                </button>
+                            </div>
+                            <div class="desc-02">
+                                <span class="fs-13 c-gray">점유 상태</span>
+                                <span class="fs-14">전세</span>
+                            </div>
+                            <div class="desc-03">
+                              <span class="fs-13 c-gray">만료일</span>
+                              <span class="fs-14">2024.02.06(2년)/</span>
+                              <span class="fs-14 c-red">90일전</span>
+                            </div>
+                        </div>
+                        <div class="desc">
+                            <div class="desc-01">
+                              <span class="hs-badge bg-darkblue">아파트</span>
+                              <span class="hs-badge bg-orange-500">주거용</span>
+                              잠실주공1단지아파트
+                              <span class="c-red">103동 1203호</span>(잠실동)
+                              <button class="img-btn"><img src="/images/more2.png" alt=""></button>
+                            </div>
+                            <div class="desc-02">
+                              <span class="fs-13 c-gray">점유 상태</span>
+                              <span class="fs-14">전세</span>
+                            </div>
+                            <div class="desc-03">
+                              <span class="c-gray">만료일</span> 2024.02.06(2년)/
+                              <span class="c-red">90일전</span>
+                            </div>
+                        </div>
+                        <div class="expend">전체보기(<span class="c-red">10</span>)<img src="/images/V.png" alt=""></div>
+                    </div>
+                    <div class="grid-row-03">
+                        <div class="title">
+                          공동중개 관리
+                          <a href="#">바로가기 <img src="/images/v3.png" alt=""></a>
+                        </div>
+                        <div class="cell-row-01">
+                            <div class="cell-col-01">
+                                <span class="fs-13 c-gray">멤버십</span>
+                                <span class="fs-14 ml-10 c-cyan">프리미엄</span>
+                            </div>
+                            <div class="cell-col-02">
+                                <span class="fs-13 c-gray">프로공개</span>
+                                <span class="fs-14 ml-10 c-red">1,000</span>(100%) <img src="/images//help.png" alt="">
+                            </div>
+                            <div class="cell-col-03">
+                                <span class="fs-13 c-gray">홈즈공개</span>
+                                <span class="fs-14 ml-10 c-red">700</span>(70%) <img src="/images//help.png" alt="">
+                            </div>
+                            <div class="cell-col-04">
+                                <span class="fs-13 c-gray">송파사무실협업</span>
+                                <span class="fs-14 ml-10 c-red">700</span>(70%)
+                            </div>
+                            <div class="cell-col-05">
+                                <span class="fs-13 c-gray">문정동아파트협업</span>
+                                <span class="fs-14 ml-10 c-red">700</span>(70%)
+                            </div>
+                        </div>
+                        <div class="cell-row-02">
+                            <div class="cell-col-01">
+                                <span class="fs-13 c-gray">멤버십</span>
+                                <span class="fs-14 ml-10 c-orange">베이직</span>
+                            </div>
+                            <div class="cell-col-02">
+                                <span class="fs-13 c-gray">프로공개</span>
+                                <span class="fs-14 ml-10 c-red">850</span>(85%) <img src="/images//help.png" alt="">
+                            </div>
+                            <div class="cell-col-03">
+                                <span class="fs-13 c-gray">홈즈공개</span>
+                                <span class="fs-14 ml-10 c-red">850</span>(85%) <img src="/images//help.png" alt="">
+                            </div>
+                        </div>
+                        <div class="cell-row-03">
+                            <div class="cell-col-01">
+                                <span class="fs-13 c-gray">멤버십</span>
+                                <span class="fs-14 ml-10 c-red">라이트</span>
+                            </div>
+                            <div class="cell-col-02">
+                                <span class="fs-13 c-gray">프로공개</span>
+                                <span class="fs-14 ml-10 c-red">850</span>(85%) <img src="/images//help.png" alt="">
+                            </div>
+                            <div class="cell-col-03">
+                                <span class="fs-13 c-gray">홈즈공개</span>
+                                <span class="fs-14 ml-10 c-red">850</span>(85%) <img src="/images//help.png" alt="">
+                            </div>
+                        </div>
+                        <div class="cell-row-04">
+                            <div class="cell-col-01">
+                              <span class="fs-13 c-gray">홈즈공개 구분</span>
+                            </div>
+                            <div class="cell-col-02">
+                              <span class="fs-14 c-red">미진행 지역</span>
+                              <span class="fs-14"></span>※ 해당 지역은 현재 홈즈공개가 진행되지 않는 지역이며, 순차적으로 진행될 예정입니다.</span>
+                            </div>
+                        </div>
+                        <div class="cell-row-05 fs-14">
+                            <div class="cell-col-01"><span class="fs-13 c-red">홈즈공개 안내</span></div>
+                            <div class="cell-col-02">
+                              해당 지역은
+                              <span class="c-blue">홈즈 공동중개</span>가
+                              <span class="c-red">2024년 5월 7일부터 진행</span>됩니다.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-row-04">
+                        <div class="title">매물 담당 중개사</div>
+                        <div class="cell-row-01">
+                            <div class="cell-col-01">
+                                <sapn class="fs-13 c-gray">미배정 매물</sapn>
+                                <span class="fs-14 ml-15 c-red">124</span>(담당 중개사가 없는 매물)
+                            </div>
+                            <div class="cell-col-02">
+                                <div>
+                                    <sapn class="fs-13 c-gray">미배정 중개사</sapn>
+                                    <span class="fs-14 ml-15 c-red">2</span>(매물 배정이 없는 중개사)
+                                </div>
+                                <button class="hs-button btn-white">일괄 변경</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-row-05">
+                        <div class="cell-row-01">
+                            <div class="title">매도/임대 통계 <a href="#">바로가기 <img src="/images/v3.png" alt=""></a></div>
+                            <div class="cell-col-01">
+                                <div class="desc-01">
+                                    <span class="fs-13 c-gray">매물 진행중</span>
+                                    <span class="fs-14 c-red">1,000</span>
+                                </div>
+                                <div class="desc-02 fs-14">
+                                    <span class="fs-13 c-gray">24년 계약/종료</span>
+                                    <span class="fs-14 c-red">27</span>
+                                    <span class="fs-14">/</span>
+                                    <span class="fs-14 c-blue">32</span>
+                                </div>
+                                <div class="desc-03 fs-14">
+                                    <span class="fs-13 c-gray">12월 계약/종료</span>
+                                    <span class="fs-14 c-red">2</span>
+                                    <span class="fs-14">/</span>
+                                    <span class="fs-14 c-blue">3</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-row-02">
+                            <div class="title">매수/임차 통계 <a href="#">바로가기 <img src="/images/v3.png" alt=""></a></div>
+                            <div class="cell-col-01">
+                                <div class="desc-01">
+                                    <span class="fs-13 c-gray">매수/임차 진행중</span>
+                                    <span class="fs-14 c-red">5</span>
+                                </div>
+                                <div class="desc-02 fs-14">
+                                    <span class="fs-13 c-gray">24년 계약/종료</span>
+                                    <span class="fs-13 c-red">27</span>
+                                    <span class="fs-14">/</span>
+                                    <span class="fs-14 c-blue">32</span>
+                                </div>
+                                <div class="desc-03">
+                                    <span class="fs-13 c-gray">12월 계약/종료</span>
+                                    <span class="fs-13 c-red">2</span>
+                                    <span class="fs-14">/</span>
+                                    <span class="fs-14 c-blue">3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- section -->
+                <section class="communication">
+                    <div class="hs-notice">
+                        <div class="title">공지사항 <a href="#">바로가기 <img src="/images/v3.png" alt=""></a></div>
+                        <div class="noti-List">
+                            <a href="#">
+                                <span class="hs-badge rounded sm white">공지</span> 제목이 나타납니다. 
+                                <span class="hs-badge sm bg-red">NEW</span>
+                            </a>
+                            <span class="gray">2022.02.03</span>
+                        </div>
+                        <div class="noti-List">
+                            <a href="#">
+                                <span class="hs-badge rounded sm bg-orange">점검</span> 제목이 나타납니다. 
+                            </a>
+                            <span class="gray">2022.02.03</span>
+                        </div>
+                        <div class="noti-List">
+                            <a href="#">
+                                <span class="hs-badge rounded sm  bg-red">필독</span> 제목이 나타납니다. 
+                            </a>
+                            <span class="gray">2022.02.03</span>
+                        </div>
+                    </div>
+                    <div class="hs-faq">
+                        <div class="title">자주 찾는 도움말 <a href="#">바로가기 <img src="/images/v3.png" alt=""></a></div>
+                        <div class="faq-List">
+                            <div class="faq-item">해당 제목이 나타남.</div>
+                            <div class="faq-item">해당 제목이 나타남.</div>
+                            <div class="faq-item">해당 제목이 나타</div>
+                            <div class="faq-item">해당 제목이 나타</div>
+                            <div class="faq-item">해당 제목이 나타남.</div>
+                            <div class="faq-item">해당 제목이 나타남.해당 제목이 나타남.</div>
+                            <div class="faq-item">해당 제목이 나타남.해당 제목이 나타남.</div>
+                        </div>
+                    </div>
+                </section>
+                <!-- section -->
+                <section class="qrcode">
+                    <div class="qr-row">
+                        <div class="qr-app">홈즈<span class="c-red">프로</span> 앱</div>
+                        <div class="qr-text">
+                            <div class="qr-desc">
+                                <p class="desc-01 fs-14">
+                                    <span class="c-red">홈즈프로 앱</span>으로
+                                    <span class="c-red">효율적인 업무 관리</span>
+                                    를 통해 사무실을 벗어나 자유롭게 일할 수 있습니다.
+                                </p>
+                                <p class="desc-02 fs-12">
+                                    [QR코드]를 클릭하면 홈즈프로 앱을 다운로드 받으실 수 있습니다. (안드로이드 및 아이폰 지원)
+                                </p>
+                            </div>
+                            <div class="qr-img">
+                                <button class="hs-button-sm btn-lime" id="btn_qrcode">QR코드</button>
+                                <img src="/images/qr-img.png" alt="QR코드" class="qr-code"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-bg-img">
+                        <img src="/images/app.png" alt="">
+                    </div>
+                </section>
+            </div>
+        </div>
+        <footer>
+            <div class="inner">
+                <div class="top">
+                    <div class="left">
+                        <a href="#"><img src="/images/footer-logo.png" alt=""></a>
+                        <a href="#">이용약관</a>
+                        <a href="#">개인정보처리방침</a>
+                        <a href="#">부동산 관리규정</a>
+                        <a href="#">신규단지 등록요청</a>
+                        <a class="gray" href="#">원격지원</a>
+                        <a class="gray" href="#">중개사 모집</a>
+                    </div>
+                    <div class="right">
+                        <a href="#"><img src="/images/footer-instargram.png" alt=""></a>
+                        <a href="#"><img src="/images/footer-youtube.png" alt=""></a>
+                        <a href="#"><img src="/images/footer-facebook.png" alt=""></a>
+                        <a href="#"><img src="/images/footer-naver.png" alt=""></a>
+                    </div>
+
+                </div>
+                <div class="bottom">
+                    <div class="left">
+                        <div class="f1">(주)아이비소프트</div>
+                        <div class="f2">대표: 김종진 <div class="x-margin"></div> 사업자등록번호: 212-26-29838 <br>
+                            주소: 서울시 강동구 양재대로 1334(성내동 429-3) 동부빌딩 406호 <br>
+                            사업 제휴문의: biz@ibsoft.co.kr 통신판매업 신고번호: 제2019-서울강동-0000호</div>
+                        <div class="f3">IBsoft, Inc. All rights reserved.</div>
+                    </div>
+                    <div class="right">
+                        <div class="f4">홈즈 매물 관리센터</div>
+                        <div class="f5">전화문의 안내</div>
+                        <div class="f6">고객지원 시간 10:00~18:00 <br>
+                            점심시간 12:00~13:00 <br>
+                            (토요일, 일요일, 공휴일 휴무)</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+    <script src="/js/common/homes-event-broker.js"></script>
     <script src="/js/common/homes-comm.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        fn_page_init("T01") ;
+      }) ;
+
+
+      var pop_open_group_001 = () => {
+          popup.pop_open( "/complex/coplex-reg-001.html", {
+            popid: "brk-web-reg-group-001"
+          }) ; 
+      }
+
+      var pop_open_estate = () => {
+          popup.fn_comm_open( "/popup/estate/pop-estate-0200.html", {
+            popid: "pop-estategb"
+          }) ; 
+      }
+      var fn_page_onLoad = () => {
+        $("#btn_reg_group_001").click(function() {
+          /* 단지내 물건등록 */ 
+          pop_open_group_001() ;
+        }) ; 
+
+        $("#btn_comm_pop_estate").click(function() {
+          /* 단지내-부동산구분 설정 */ 
+          pop_open_estate() ; 
+        }) ; 
+
+        $("#btn_comm_pop_area").click(function() {
+          homes_comm.popup.fn_comm_popopen_area({
+              "cid": ''
+              , "arcd": "11110"
+              , "legcd": '00000'
+          }, ( data ) => {}) ; 
+        })
+      }
+    </script>
+
   </body>
-
-  <script type="text/javascript">
-    var pop_open_group_001 = () => {
-        popup.pop_open( "/complex/coplex-reg-001.html", {
-          popid: "brk-web-reg-group-001"
-        }) ; 
-    }
-
-    var pop_open_estate = () => {
-        popup.fn_comm_open( "/popup/estate/pop-estate-0200.html", {
-          popid: "pop-estategb"
-        }) ; 
-    }
-    var fn_page_onLoad = () => {
-      $("#btn_reg_group_001").click(function() {
-        /* 단지내 물건등록 */ 
-        pop_open_group_001() ;
-      }) ; 
-
-      $("#btn_comm_pop_estate").click(function() {
-        /* 단지내-부동산구분 설정 */ 
-        pop_open_estate() ; 
-      }) ; 
-
-      $("#btn_comm_pop_area").click(function() {
-        homes_comm.popup.fn_comm_popopen_area({
-            "cid": ''
-            , "arcd": "11110"
-            , "legcd": '00000'
-        }, ( data ) => {}) ; 
-      })
-    }
-  </script>
-
-
 </html>
