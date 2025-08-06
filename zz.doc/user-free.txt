@@ -6,3 +6,14 @@
 
 /** 관리자 ***************************/
 5. 단지정보 확인 및 등록
+
+[Window Title]
+DB_HOMES_TEST: 오류
+
+[Content]
+SQL 오류 (1062): Duplicate entry '11110174001120-1' for key 'PRIMARY'
+
+[확인]
+
+[Footer]
+해당 오류에 대한 몇 가지 도움말 찾기 (=> ecosia.org)

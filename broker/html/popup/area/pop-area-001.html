@@ -1,0 +1,239 @@
+    <div class="pop-dimmed"></div>
+    <div class="pop-area" id="pop-area-001">
+        <div class="s-area">
+            <button type="button" id="btn_sdname">&nbsp;</button>
+            <div class="arrow-next" id="btn_next_01"><img src="/images/V.png" alt=""></div>
+            <button type="button" id="btn_sggname">&nbsp;</button>
+            <div class="arrow-next" id="btn_next_02"><img src="/images/V.png" alt=""></div>
+            <button type="button" id="btn_emdname">&nbsp;</button>
+        </div>
+        <div class="s-area-List">
+            <div class="s-List">
+                <button type="button" class="btn-area">&nbsp;</button>
+                <button type="button" class="btn-area">&nbsp;</button>
+                <button type="button" class="btn-area">&nbsp;</button>
+                <button type="button" class="btn-area">&nbsp;</button>
+                <button type="button" class="btn-area">&nbsp;</button>
+                <button type="button" class="btn-area">&nbsp;</button>
+            </div>
+        </div>
+        <button type="button" class="btn-hidden" id="btn_hddn_close">창닫기</button>
+    </div>
+    <script type="text/javascript">
+        var popup = {} ; 
+        popup.data = {} ; 
+        var params = {} ;
+        var fn_get_arcode = ( params ) => {
+            return new Promise(resolve => {
+                homes_comm.network.get("/common/arcode/" + popup.params.arcode, {
+                }).then(response => {
+                    resolve(response.data) ;
+                }) ; 
+            }) ; 
+        }
+        var fn_get_sdList = (params) => {
+            return new Promise(resolve => {
+                var arList = homes_comm.store.getItem("arList")
+                if ( !arList ) {
+                    homes_comm.network.get("/common/arcode/sdList", {
+                    }).then(response => {
+                        arList = { sdList: {}} ; 
+                        arList.sdList = response.data ;
+                        homes_comm.store.setItem("arList", arList) ; 
+                        resolve(response.data) ; 
+                    }) ; 
+                } else {
+                    var arList = homes_comm.store.getItem("arList") ; 
+                    resolve(arList.sdList) ;
+                }
+            }) ;
+        }
+        var fn_get_sidoList = () => {
+            var arList = homes_comm.store.getItem("arList")
+            var sdList = arList.sdList ;
+            var sdCode = sdList[0] ; 
+            fn_set_button(popup.data.arCode, 1) ;
+            fn_set_sdList(sdList) ;
+        }
+        var fn_get_sggList = (code) => {
+            var sdcode = code || popup.data.arCode.sdcode ; 
+            homes_comm.network.get("/common/arcode/sgg/" + sdcode, {
+            }).then(response => {
+                if ( response.data && response.data.length > 0) {
+                    var sggCode = response.data[0] ; 
+                    fn_set_button({
+                        sdcode : sggCode.sdcode,
+                        sdname : sggCode.sdname,
+                        arcode : sggCode.arcode,
+                        sggname: sggCode.arname, 
+                        emdcode: "",
+                        emdname: ""
+                    }, 2) ;
+                }
+                fn_set_sggList(response.data) ;
+            }) ;
+        }
+        var fn_get_emdList = ( areacode, arCode ) => {
+            var arcode  = areacode.substring(0,  5) ; 
+            var legcode = areacode.substring(5, 10) ; 
+            homes_comm.network.get("/common/arcode/emd/" + arcode, {
+            }).then(response => {
+                if ( arCode ) {
+                    fn_set_button(arCode, 3) ;
+                } else {
+                    var emdCode = response.data[0] ; 
+                    fn_set_button({
+                        sdcode : emdCode.sdcode,
+                        sdname : emdCode.sdname,
+                        arcode : emdCode.sggcode,
+                        sggname: emdCode.sggname, 
+                        emdcode: emdCode.legcode,
+                        emdname: emdCode.arname
+                    }, 3) ;
+                }
+                fn_set_emdList(arcode, popup.data.arCode.emdcode, response.data)
+            }) ;
+
+        }
+        
+        var fn_set_sdList = (sdList) => {
+            $(".s-List").empty() ; 
+            sdList.forEach(code => {
+                var txtColor = "" ; 
+                if ( code.sdcode == popup.data.arCode.sdcode) {
+                    txtColor = " c-blue"
+                } else {
+                    txtColor = "" ; 
+                }
+                var btn = $("<button type='button' class='btn-area" + txtColor + "' id='ar_" + code.areacode + "'>" + code.arname + "</button>") ;
+                $(".s-List").append(btn) ;
+                var sdcode = code.sdcode ; 
+                btn.click(function() {
+                    fn_get_sggList(sdcode) ;
+                }) ;
+            }) ;
+            var addcnt = 6 - ( sdList.length % 6 ) ; 
+            if ( addcnt == 6 ) return ; 
+            for ( i = 1; i <= addcnt; i ++ ) {
+                var id = 'btn_empty_0' + i ;
+                var btn = $("<button type='button' class='btn-area cur-default' id='" + id + "' disabled/>") ; 
+                btn.html("&nbsp;") ; 
+                $(".s-List").append(btn) ;
+            }
+        }
+
+        var fn_set_sggList = (sggList) => {
+            $(".s-List").empty() ; 
+            sggList.forEach(code => {
+                var txtColor = "" ; 
+                if ( code.arcode == popup.data.arCode.sggcode) {
+                    txtColor = " c-blue"
+                } else {
+                    txtColor = "" ; 
+                }
+                var btn = $("<button type='button' class='btn-area" + txtColor + "' id='ar_" + code.areacode + "'>" + code.arname + "</button>") ;
+                $(".s-List").append(btn) ;
+                var areacode = code.areacode ;
+                btn.click(function() {
+                    popup.data.arCode.emdcode = "" ;
+                    popup.data.arCode.emdname = "" ;
+                    fn_get_emdList(areacode) ;
+                }) ; 
+            }) ;
+            var addcnt = 6 - ( sggList.length % 6 ) ; 
+            if ( addcnt == 6 ) return ; 
+            for ( i = 1; i <= addcnt; i ++ ) {
+                var id = 'btn_empty_0' + i ;
+                var btn = $("<button type='button' class='btn-area cur-default' id='" + id + "' disabled/>") ; 
+                btn.html("&nbsp;") ; 
+                $(".s-List").append(btn) ;
+            }
+        }
+
+        var fn_set_emdList = ( arcode, legcode, emdList ) => {
+            $(".s-List").empty() ; 
+            emdList.forEach(code => {
+                var txtColor = "" ; 
+                var areacode = arcode + legcode ; 
+                if ( areacode == code.areacode) {
+                    txtColor = " c-blue"
+                } else {
+                    txtColor = "" ; 
+                }
+                var btn = $("<button type='button' class='btn-area" + txtColor + "' id='ar_" + code.areacode + "'>" + code.arname + "</button>") ; 
+                $(".s-List").append(btn) ;
+                var areacode = code.areacode ;
+                btn.click(function() {
+                    popup.data.arCode.emdcode = code.legcode ;
+                    popup.data.arCode.emdname = code.arname ;
+                    popup.data.arCode.areacode = code.areacode ; 
+                    popup.data.arCode.arcode = code.arcode ; 
+                    popup.data.arCode.legcode = code.legcode ;
+                    homes_comm.popup.pop_data[popup.id] = popup.data.arCode ; 
+                    $("#btn_hddn_close").click() ;
+                }) ;
+            }) ; 
+            var addcnt = 6 - ( emdList.length % 6 ) ; 
+            if ( addcnt == 6 ) return ; 
+            for ( i = 1; i <= addcnt; i ++ ) {
+                var id = 'btn_empty_0' + i ;
+                var btn = $("<button type='button' class='btn-area cur-default' id='" + id + "' disabled/>") ; 
+                btn.html("&nbsp;") ; 
+                $(".s-List").append(btn) ;
+            }
+
+        }
+
+        var fn_set_button = ( arCode, arLevel ) => {
+            popup.data.arCode = {
+                sdcode : arCode.sdcode,
+                sdname : arCode.sdname,
+                sggcode: arCode.arcode,
+                sggname: arCode.sggname, 
+                emdcode: arCode.emdcode,
+                emdname: arCode.emdname
+            }
+            $("#btn_sdname").text(arCode.sdname) ; 
+            $("#btn_sggname").text(arCode.sggname) ; 
+            $("#btn_emdname").text(arCode.emdname) ; 
+            /* 무조건 보임 */ 
+//            $("#btn_sdname").show() ;
+            $("#btn_next_01").hide() ;
+            $("#btn_sggname").hide() ;
+            $("#btn_next_02").hide() ;
+            $("#btn_emdname").hide() ;
+
+            if ( arLevel > 1 ) {
+                $("#btn_next_01").show() ;
+                $("#btn_sggname").show() ;
+            }
+            if ( arLevel > 2 ) {
+                $("#btn_next_02").show() ;
+                $("#btn_emdname").show() ;
+            }
+        }
+
+        $(document).ready(function() {
+            popup.id = homes_comm.popup.param_data.popid ; 
+            popup.params = homes_comm.popup.param_data[popup.id].params ; 
+
+            $("button.btn-area").click(function() {
+                $(".pop-dimmed").click() ;
+            }) ; 
+            $("#btn_sdname").click(function() {
+                fn_get_sidoList() ;
+            }) ; 
+            $("#btn_sggname").click(function() {
+                fn_get_sggList() ;
+            }) ; 
+
+            fn_get_sdList({
+            }).then(data => {
+                return fn_get_arcode() ; 
+            }).then( data => {
+                var areacode = popup.params.arcode ; 
+                fn_get_emdList(areacode, data.arCode) ;
+            }) ;
+        }) ; 
+
+    </script>

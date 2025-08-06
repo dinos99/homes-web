@@ -232,6 +232,51 @@ const homes_comm = {
                 fn_callback.apply( null, [ response ]) ; 
             }) ; 
         }
+        , get: ( url, params ) => {
+            var api_url = homes_comm.fn_get_api_url(url) ; 
+            return new Promise((resolve, reject) => {
+                fetch(api_url, {
+                    method: "GET",
+                    mode: "cors", 
+                    cache: "no-cache", 
+                    credentials: "same-origin", 
+                    headers: {
+                      "Content-Type": "application/json"
+                    },
+                    redirect: "follow", 
+                    referrerPolicy: "no-referrer"// body의 데이터 유형은 반드시 "Content-Type" 헤더와 일치해야
+                }).then((response) => {
+//                    homes_ui.progress(false) ; 
+                    return response.json() ;
+                }).then((response) => { 
+//                    homes_ui.progress(false) ; 
+                    var errorCd = response.error.httpSttusCd ; 
+                    if ( errorCd === 200) {
+                        resolve({ data: response.data }) ; 
+                    } else  {
+                        homes_comm.message.alert(response.error.errorMessage) ; 
+                    }
+                }).catch((e) => {
+                    homes_ui.progress(false) ; 
+                    homes_comm.message.alert("네트워크 에러가 발생하였습니다.") ; 
+                    reject(e) ; 
+                }) ;
+            }) ; 
+        }
+        , post: (url, params, fn_callgack) => {
+            var api_url = "/api/" + homes_comm.constants._API_VERSION + url ; 
+            var is_auth = params["is_auth"] || true ; /* 기본 인증필요 */ 
+            return new Promise((resolve, reject) => {
+                homes_comm.network.send_api(api_url, {
+                    "method": "POST",
+                    "is_auth": is_auth
+                }, params).then(response => {
+                    resolve({data: response.data}) ;
+                }).catch(error => {
+                    reject(error) ; 
+                }) ;
+            }) ;
+        }
         , send_api: (api_url, option, params, fn_callgack) => {
             return new Promise((resolve, reject) => {
                 var def_option = {
@@ -386,13 +431,50 @@ const homes_comm = {
         pop_stack: []
         , pop_data: {}
         , param_data: {}
-        , pop_open: ( url, option ) => {
+        , pop_open: ( url, param ) => {
+            var pop_url = "/html/popup" + url ; 
+            var wrapid = "wrap_" + param.popid ; 
+
+            var popwrap = $("<div id='" + wrapid + "'/>") ; 
+            $("body").append(popwrap) ;
+            return new Promise(resolve => {
+                homes_comm.popup.param_data.popid = param.popid ;
+                homes_comm.popup.param_data[param.popid] = {
+                    "params": param
+                }
+                popwrap.load( pop_url, () => {
+                    $(".pop-dimmed").click(function() {
+                        resolve({
+                            "action"  : "pop_close",
+                            "pop_data": {}
+                        }) ; 
+                        delete homes_comm.popup.param_data[param.popid] ;
+                        popwrap.remove() ;
+                    }) ;
+                    $("#btn_hddn_close").click(function() {
+                        var data = homes_comm.popup.pop_data[param.popid] ; 
+                        resolve({
+                            "action"  : "pop_area_select",
+                            "pop_data": data
+                        }) ; 
+                        delete homes_comm.popup.param_data[param.popid] ;
+                        delete homes_comm.popup.pop_data[popup.id] ; 
+                        popwrap.remove() ;
+                    }) ; 
+                }) ; 
+            }) ; 
+
+
+
+
+            /*
             var contid = option.popid ;
             var cont = $("<div id='" + contid + "' class='popup-container'/>") ; 
             $("body").append(cont) ;
             cont.load("/html" + url, () => {
                 fn_open_completed( option ) ;
             }) ;
+            */
         }
         , pop_close: ( pop_option ) => {
             $("#" + pop_option.popid).remove() ;
@@ -875,13 +957,34 @@ var fn_isLogin = () => {
     return true ;
 }
 
+/* 공통코드 조회 */
+var fn_get_commcode = ( grpcd ) => {
+    return new Promise((resolve, reject) => {
+        var commcode = homes_comm.store.getItem("commcode") ; 
+        if ( !!commcode && !!commcode[grpcd]) {
+            resolve({
+                data: commcode[grpcd]
+            }) ; 
+        } else {
+            homes_comm.network.get("/commcode/" + grpcd, {
+            }).then(response => {
+                if ( !!!commcode ) commcode = {} ;
+                commcode[grpcd] = response.data ; 
+                homes_comm.store.setItem("commcode", commcode) ; 
+                resolve(response) ;
+            }).catch(error => {
+                reject(error) ;
+            }) ; 
+        }
+    }) ;
+}
+
 var homes = homes_comm ;
 var homes_ui = homes_comm.ui ; 
 var network  = homes_comm.network ; 
 var popup    = homes_comm.popup ; 
 var store    = homes_comm.store ; 
 var message  = homes_comm.message ; 
-var popup    = homes_comm.popup ; 
 
 var page = { pageid: "" } ; 
 

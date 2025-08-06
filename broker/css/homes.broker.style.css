@@ -96,6 +96,26 @@ div.aicenter {
   font-size: 16px;
 }
 
+
+.hs-check-button {
+  border-radius: var(--bs-border-radius) ;
+  border: 1px solid var(--bs-border-color) ;
+  padding: 3px 5px ; 
+  font-size: var(--hs-button-fs-13);
+  font-weight: var(--hs-button-fw-500) ;
+  min-width: 70px;
+  height: 35px;
+  background-color: #ffffff ;
+  color: var(--hs-text-color) ;
+  margin-right: 5px; 
+}
+
+.hs-check-button.active {
+  background-color: var(--hs-color-lime) !important;
+  color: var(--hs-color-ffffff) !important;
+  border: 1px solid var(--hs-color-lime) ;
+}
+
 .hs-button {
   border-radius: var(--bs-border-radius) ;
   border: 1px solid var(--bs-border-color) ;
@@ -109,9 +129,9 @@ div.aicenter {
 }
 
 .hs-button.active {
-  background-color: var(--hs-color-92d050) !important;
+  background-color: var(--hs-color-lime) !important;
   color: var(--hs-color-ffffff) !important;
-  border: 1px solid var(--hs-border-92d050) ;
+  border: 1px solid var(--hs-color-lime) ;
 }
 
 .hs-button-big-size {
@@ -194,9 +214,9 @@ div.aicenter {
 
 .hs-button-sm.btn-lime, .hs-button.btn-lime,
 .hs-button-big-size.btn-lime, .hs-button-nosize.btn-lime {
-  background-color: var(--hs-color-92d050) !important;
+  background-color: var(--hs-color-lime) !important;
   color: var(--hs-color-ffffff) !important;
-  border: 1px solid var(--hs-border-92d050) ;
+  border: 1px solid var(--hs-color-lime) ;
 }
 
 .hs-button-sm.play, .hs-button.play {
@@ -679,7 +699,7 @@ select:disabled::picker-icon {
 /* 비활성화 상태 스타일 */
 .custom-checkbox:disabled + .checkbox-label {
   opacity: 0.5;
-  cursor: not-allowed;
+  /* cursor: not-allowed; */
 }
 
 .custom-checkbox:disabled + .checkbox-label .checkbox-icon {
@@ -3262,6 +3282,7 @@ section.right-settings  div.hr{
   color: #fff;
   padding: 0 ; 
   background: url(/images/btn-pop-close.png) no-repeat;
+  border-radius: 0 ;
 }
 .pop-help {
   position: fixed;
@@ -3298,7 +3319,6 @@ section.right-settings  div.hr{
   width: 100% ; 
 }
 
-
 .popup .pop-header .pop-cont {
   display: flex;
   justify-content: space-between ;
@@ -3319,7 +3339,7 @@ section.right-settings  div.hr{
   bottom: 0;
   overflow: auto;
   margin: 0px auto; 
-  margin-top: 67px;
+  margin-top: 68px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -3327,6 +3347,7 @@ section.right-settings  div.hr{
   align-content: center;
   flex-wrap: nowrap;
 }
+
 .popup .pop-container .pop-cont {
   width: var(--hs-body-max-width ) ; 
   border-radius: 5px;

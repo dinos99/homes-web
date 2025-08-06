@@ -223,6 +223,10 @@ a.ui-datepicker-prev-next {
   background-size: 100%;
 }
 
+/* cursor */
+.cur-default { cursor: default; }
+.cur-hand { cursor: pointer; }
+
 /* positon */
 .pos-absolute { position: absolute !important; }
 
@@ -736,9 +740,9 @@ button.btn-naver {
   top: 170px;
   left: calc(50% - 424px) ; 
   width: 828px ; /* ( 130 * 6 ) + 48 */
-  max-height: 564px; /* ( 50 * 10 ) + 10 + 10 + 10 + 34 */
+  max-height: 578px; /* ( 50 * 10 ) + 10 + 10 + 10 + 34 */
   min-height: 94px ;
-  padding: 10px 0; 
+  padding: 10px 0 24px 0; 
 }
 
 .pop-area .s-area {
@@ -797,4 +801,12 @@ button.btn-naver {
 }
 .arrow-next img {
   rotate: -90deg;
+}
+
+.btn-hidden {
+  position: fixed ;
+  top: -9999px;
+  left: -9999px;
+  width: 100px;
+  height: 35px; 
 }

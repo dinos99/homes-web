@@ -43,25 +43,20 @@
                         <div class="cont first bg-gray">
                             <div class="label"> 지역 </div>
                             <div class="fields">
-                                <div class="btn-select no-max-width">
-                                    <div class="btn-select-text"> 서울특별시 &gt; 송파구 &gt; 잠실동</div>
+                                <div class="btn-select no-max-width" id="btn_popArea">
+                                    <div class="btn-select-text"> 
+                                        <span id="p_brk_sdnm">서울특별시</span> &gt; 
+                                        <span id="p_brk_sggnm">송파구</span> &gt;
+                                        <span id="p_brk_emdnm">잠실동</span>
+                                        <input type="hidden" id="p_brk_arcode"/>
+                                    </div>
                                     <div class="btn-select-arrow"><img src="/images/V.png" alt=""></div>
                                 </div>
                             </div>
                         </div>
                         <div class="cont bg-gray">
                             <div class="label"> 단지구분 </div>
-                            <div class="fields">
-                                <button class="hs-button btn-lime">전체</button>
-                                <button class="hs-button btn-white">아파트</button>
-                                <button class="hs-button btn-white">주상복합</button>
-                                <button class="hs-button btn-white">오피스텔</button>
-                                <button class="hs-button btn-white">레지던스</button>
-                                <button class="hs-button btn-white">빌라/연립</button>
-                                <button class="hs-button btn-white">도시형 생활주택</button>
-                                <button class="hs-button btn-white">타운하우스</button>
-                                <button class="hs-button btn-white">지식산업센터</button>
-                                <button class="hs-button btn-white">미분류</button>
+                            <div class="fields" id="btn_chk_complex">
                             </div>
                         </div>
                         <div class="cont bg-gray">
@@ -84,11 +79,12 @@
                         </div>
                     </section>
                     
-                    <section>
+                    <section id="sec_cplxList">
                         <div class="title">단지 선택</div>
-                        <div class="cont first justify-center bg-gray">
+                        <div id="no_complex" class="cont first justify-center bg-gray">
                             해당 지역에 등록된 단지가 없습니다.
                         </div>
+                        <!--
                         <div class="cont justify-between bg-gray">
                             <div class="desc no-width">
                                 갤러리아 펠리스 / 주상복합 / 1개동 / 129세대 
@@ -122,6 +118,7 @@
                                 등록완료 / 2025.07.25
                             </div>
                         </div>
+                        -->
                     </section>
                 </div>
             </div>
@@ -167,23 +164,134 @@
             </div>
         </div>
     </div>
-    <div class="go-list">
-        <button id="btn_goList" class="bi bi-card-list"></button>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
+    <script src="/js/common/homes-comm.js"></script>
     <script src="/js/common/homes-event-broker.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            $("#btn_goList").click(function() {
-                location.href="/pub"
-            }) ;
+        var popup = {} ; 
+        var broker = store.getItem("user") ; 
+        var p_data = {
+            "brkno": broker.userno
+        } ;
+        var fn_init_popup = ( popid ) => {
+            popup.id = popid ; 
+            var arcode = !!!broker.arcode ? "1171010100" : broker.arcode ; 
+            $("#p_brk_arcode").val(arcode) ; 
+        }
+        
+        var fn_get_arcode = ( params ) => {
+            return new Promise(resolve => {
+                var arcode = !!!broker.arcode ? "1171010100" : broker.arcode ; 
+                homes_comm.network.get("/common/arcode/" + arcode, {
+                }).then(response => {
+                    resolve(response.data) ;
+                }) ; 
+            }) ; 
+        }
 
+        var fn_get_complexList = ( params ) => {
+            homes.network.post("/broker/complexList", {
+                "brkno": params.brkno,
+                "arcd" : params.arcd,
+                "legcd": params.legcd
+            }).then( response => {
+                fn_set_complex_List( response.data ) ;
+            }).catch( error => {
+            }) ;
+        }
+
+        var fn_set_complex_List = ( complexList ) => {
+            $("#sec_cplxList").empty() ; 
+            $("#sec_cplxList").append("<div class='title'>단지 선택</div>") ; 
+            if ( !complexList || complexList.length == 0 ) {
+                var no_cplx = $("<div class='cont first justify-center bg-gray' />") ; 
+                no_cplx.text("해당 지역에 등록된 단지가 없습니다.") ; 
+                $("#sec_cplxList").append(no_cplx) ;
+                return ; 
+            }
+            complexList.forEach(cp => {
+                var div_cont = $("<div class='cont justify-between bg-gray'/>") ;
+                var desc = $("<div class='desc no-width'/>") ; 
+                var html =  cp.cplxNm + " / " ; 
+                if (cp.cplxTy == "CPX999") {
+                    html += "<span class='c-red'>미분류</span> / "
+                } else {
+                    html += "<span>" + cp.cplxTyNm + "</span> / " 
+                }
+                html += homes_comm.util.fn_format_number(cp.cplxDongCo) + "개동 / " ;
+                html += homes_comm.util.fn_format_number(cp.cplxHshldCo) + "세대" ;
+                desc.html(html) ;
+
+                var field = $("<div class='fields'/>") ; 
+                var button =$("<button type='button' class='hs-button btn-lime'>단지등록</button>") ; 
+                field.append(button) ; 
+
+                div_cont.append(desc) ;
+                div_cont.append(field) ;
+                $("#sec_cplxList").append(div_cont) ;
+
+            }) ;
+        }
+
+        var fn_set_area_button = (data) => {
+            $("#p_brk_sdnm").text(data.sdname) ; 
+            $("#p_brk_sggnm").text(data.sggname) ; 
+            $("#p_brk_emdnm").text(data.emdname) ; 
+            p_data.areacode = data.areacode ; 
+            p_data.arcd = data.arcode ;
+            p_data.legcd = data.legcode ; 
+        }
+
+        var fn_set_checkbutton = ( data ) => {
+            $("#btn_chk_complex").empty() ; 
+            $("#btn_chk_complex").append("<button class='hs-check-button active' id='btn_cpx_CPX000'>전체</button>") ;
+            data.forEach(cpx => {
+                var button = $("<button type='button' class='hs-check-button' id='btn_cpx_" + cpx.commcd + "'>" + cpx.codenm + "</button>") ; 
+                $("#btn_chk_complex").append(button) ; 
+            }) ;
+            $("button[id^=btn_cpx_]").click(function() {
+                $("button[id^=btn_cpx_]").removeClass("active") ; 
+                $(this).addClass("active") ; 
+            }) ;
+        }
+
+        $(document).ready(function() {
+            fn_init_popup("mystuff-002") ; 
             $("#btn_close").click(function() {
                 parent.pop_close({
-                    "id": "pub_006",
+                    "id": popup.id,
                     "action": "pop-close" 
+                }) ;
+            }) ; 
+            
+            $("#btn_popArea").click(function() {
+                homes_comm.popup.pop_open("/area/pop-area-001.html", {
+                    popid : popup.id,
+                    arcode: $("#p_brk_arcode").val()
+                }).then(pop_result => {
+                    if ( pop_result.action == "pop_area_select") {
+                        fn_set_area_button(pop_result.pop_data) ;
+                        fn_get_complexList({
+                            "brkno": p_data.brkno,
+                            "arcd" : p_data.arcd,
+                            "legcd": p_data.legcd
+                        }) ;
+                    }
+                }) ;
+            }) ;
+
+            fn_get_commcode("cpx")
+            .then(response => {
+                fn_set_checkbutton(response.data) ; 
+                return fn_get_arcode() ;
+            }).then(response => {
+                fn_set_area_button(response.arCode) ; 
+                fn_get_complexList({
+                    "brkno": p_data.brkno,
+                    "arcd" : p_data.arcd,
+                    "legcd": p_data.legcd
                 }) ;
             }) ; 
         }) ;

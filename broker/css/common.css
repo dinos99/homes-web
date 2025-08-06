@@ -20,7 +20,8 @@ body,html {
     background-color: #efefef;
     color: #9c9c9c;
     border: none;
-    cursor: no-drop;
+    /* cursor: no-drop */ ;
+    cursor: default ;
   }
   button:disabled:active {
     filter: none;
