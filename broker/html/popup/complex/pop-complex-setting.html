@@ -1,0 +1,211 @@
+<div class="pop-dimmed"></div>
+<div class="pop-area wid-900px top-70px" id="pop-complex-setting">
+    <div class="pop-cont-wrap">
+        <p class="title">부동산 구분</p>
+        <div class="table-box-wrap">            
+            <div class="table-box">
+                <div class="label">단지명</div>
+                <div class="field" id="div_cplxnm">&nbsp;</div>
+            </div>
+            <div class="table-box">
+                <div class="label">공동주택</div>
+                <div class="field" id="comm_house">
+                </div>
+            </div>
+            <div class="table-box">
+                <div class="label">공동건물</div>
+                <div class="field" id="comm_buld">
+                </div>
+            </div>
+            <div class="table-box">
+                <div class="label info">안내</div>
+                <div class="field info">
+                    <p>해당단지(집합건물)의 부동산구분이 설정되어 있지 않습니다.</p>
+                    <p>
+                        <span class="c-red">주소의 지도를 확인</span>하신 후,
+                        해당단지(집합건물)에 맞는 
+                        <span class="c-red">정확한 부동산 구분을 선택</span>해 주십시오.
+                    </p>
+                </div>
+            </div>
+            <div class="table-box">
+                <div class="label text h-350px">주소</div>
+                <div class="field text h-350px">
+                    <div class="w-100 mb-10">
+                        <span class="hs-badge gray">지번</span>
+                        <span id="txt_cp_jibun"></span>
+                        <span class="hs-badge gray ml-20">도로명</span>
+                        <span id="txt_cp_rdnm"></span>
+                    </div>
+                    <div class="w-100">
+                        <div id="cpxmap" style="width:740px;height:300px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="button-box">
+            <button type="button" class="btn-hidden" id="btn_hddn_close">창닫기</button>
+            <button type="button" id="btn_cancel" class="hs-button btn-cancel">취소</button>
+            <button type="button" id="btn_ok" class="hs-button btn-blue" disabled="disabled">확인</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var cpxpop = {
+        popid: "",
+        params: {},
+        data: {
+            cplxTy: "",
+            x: "",
+            y: ""
+        }
+    } ; 
+    
+    fn_set_comm_house = ( dataList ) => {
+        $("#comm_house").empty() ; 
+        if ( !!dataList && dataList.length > 0 ) {
+            dataList.forEach( data => {
+                var btn = $("<button type='button' id='btn_est_" + data.commcd + "' class='hs-check-button'/>") ;
+                btn.text(data.codenm) ; 
+                $("#comm_house").append(btn) ; 
+            }) ; 
+        }
+    }
+    fn_set_comm_buld = ( dataList ) => {
+        $("#comm_buld").empty() ; 
+        if ( !!dataList && dataList.length > 0 ) {
+            dataList.forEach( data => {
+                var btn = $("<button type='button' id='btn_est_" + data.commcd + "' class='hs-check-button'/>") ;
+                btn.text(data.codenm) ; 
+                $("#comm_buld").append(btn) ; 
+            }) ; 
+        }
+    }
+    
+    var fn_set_checkbutton = () => {
+        $("button[id^=btn_est_]").click(function() {
+            $("button[id^=btn_est_]").removeClass("active") ; 
+            $(this).addClass("active") ; 
+
+            $("#btn_ok").removeAttr("disabled") ; 
+
+        }) ;
+    }
+
+    var fn_get_map = () => {
+        var addr = cpxpop.params.plotLoc + " " + cpxpop.params.buldnm ; 
+        var geocoder = new kakao.maps.services.Geocoder(); 
+        geocoder.addressSearch(addr, (result, status) => {
+            if (status === kakao.maps.services.Status.OK) {
+                console.log(result[0]);
+                var jb = $("#txt_cp_jibun") ;
+                var rd = $("#txt_cp_rdnm") ;
+                
+                cpxpop.data.x = result[0].x ; 
+                cpxpop.data.y = result[0].y ; 
+
+                jb.text(result[0].address_name) ;
+                rd.text(result[0].road_address.address_name) ;
+
+                var container = document.getElementById('cpxmap'); //지도를 담을 영역의 DOM 레퍼런스
+                var coords = result[0] ; 
+                var options = { //지도를 생성할 때 필요한 기본 옵션
+                    center: new kakao.maps.LatLng(coords.y, coords.x), //지도의 중심좌표.
+                    level: 3 //지도의 레벨(확대, 축소 정도)
+                };
+                var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+                // 마커가 표시될 위치입니다 
+                var mpos  = new kakao.maps.LatLng(coords.y, coords.x); 
+
+                // 마커를 생성합니다
+                var marker = new kakao.maps.Marker({
+                    position: mpos
+                });
+
+                // 마커가 지도 위에 표시되도록 설정합니다
+                marker.setMap(map);
+                
+                // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+                var zoomControl = new kakao.maps.ZoomControl();
+                map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+            }
+        }) ;
+    }
+
+    var fn_set_data = () => {
+//        console.log(cpxpop.params) ; 
+        var param = cpxpop.params ;
+        var cplxnm = param.cplxnm ; 
+        $("#div_cplxnm").text(cplxnm) ;
+    }
+
+    var fn_get_complexTy = () => {
+        $("button[id^=btn_est_]").each(function() {
+            var is_active = $(this).hasClass("active") ; 
+            if ( is_active ) {
+                cpxpop.data.cplxTy = $(this).attr("id").split("_").splice(2,1).toString() ;
+                cpxpop.data.cplxTynm = $(this).text() ; 
+            }
+        }) ; 
+    }
+
+    var fn_save_complex = () => {
+        var broker = homes_comm.store.getItem("user") ; 
+        network.post("/broker/insBrkComplex", {
+            "cplxno": cpxpop.params.cplxno,
+            "brkno" : broker.userno, 
+            "cplxTy": cpxpop.data.cplxTy,
+            "arcd"  : cpxpop.params.arcd,
+            "legcd" : cpxpop.params.legcd,
+            "x"     : cpxpop.data.x,
+            "y"     : cpxpop.data.y
+        }).then(response => {
+            var insco = Number(response.data.insco) ; 
+            if ( insco > 0 ) {
+                fn_pop_colose(response.data) ; 
+            }
+        }).catch(error => {
+        }) ; 
+    }
+
+    var fn_pop_colose = ( data ) => {
+         homes_comm.popup.pop_data[cpxpop.popid] = data ; 
+         $("#btn_hddn_close").click() ;
+    }
+
+    $(document).ready(function() {
+        cpxpop.popid = homes_comm.popup.param_data.popid ; 
+        cpxpop.params = homes_comm.popup.param_data[cpxpop.popid].params ; 
+        fn_get_commcode("EST110")
+        .then(response => {
+            fn_set_comm_house(response.data) ;
+            return fn_get_commcode("EST120") ; 
+        }).then(response => {
+            fn_set_comm_buld(response.data) ;
+            fn_set_checkbutton() ;
+        })
+
+        fn_set_data() ; 
+        fn_get_map() ; 
+
+        $("#btn_cancel").click(function() {
+            $("#btn_hddn_close").click() ;
+        }) ;
+
+        $("#btn_ok").click(function() {
+
+            fn_get_complexTy() ;
+            var message = `해당 집합건물(단지)의 부동산구분이 ${cpxpop.data.cplxTynm}입니까?`
+            homes_comm.message.confirm(message)
+            .then(conf => {
+                if ( conf ) {
+                    fn_save_complex() ;
+                }
+            }) ;
+        }) ;
+
+
+    }) ; 
+</script>

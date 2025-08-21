@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="ko" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈즈프로 나의물건</title>
+    <link rel="icon" href="/images/logo_homes_pro_32.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/logo_homes_pro_32.png" type="image/x-icon">
+
+    <!-- bootstrap 5.3.5 -->    
+    <script src="/js/extern/bootstrap-5.3.5/assets/js/color-modes.js"></script>
+    <link href="/js/extern/bootstrap-5.3.5/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- kakao map api -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e23a8c880d6b5fcb0f9af25ed39b0b10&libraries=services,clusterer,drawing"></script>
+
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/variables.css">
+
+    <link rel="stylesheet" href="/css/homes.broker.style.css">
+    
+</head>
+<body>
+    <div class="popup no-title">
+        <header class="pop-header">
+            <div class="pop-cont sm">
+            </div>
+            <button id="btn_close" class="btn-close-x"></button>
+        </header>
+        <div class="pop-container">
+            <div class="pop-cont sm no-mgbottom">
+                <div class="pop-section no-pdtop">
+                    <section class="first">
+                        <div class="section-wrap">
+                            <div class="sec-Left">
+                                <div class="item-Left buld-name">
+                                    <span class="hs-badge bg-darkblue">아파트</span>
+                                </div>
+                                <div class="item-Left buld-name">
+                                    <span>잠실주공1단지 102동(잠실동)</span>
+                                </div>
+                                <div class="item-Left buld-name">
+                                    <span class="hs-badge bg-red">신축</span>
+                                    <span class="hs-badge bg-red">분양권</span>
+                                    <span class="hs-badge bg-red">복층</span>
+                                </div>
+                            </div>
+                            <div class="sec-Right">
+                                <div class="item-Right">
+                                    <span class="blit-icon empty-heart">
+                                        고객관심 <em class="c-red">6</em> 중개사관심 <em class="c-red">4</em>
+                                    </span>
+                                    <button type="button" class="hs-button btn-lime btn-disp">단지</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="section-driver">
+            </div>
+            <div class="pop-cont sm no-mgtop">
+                <div class="pop-section no-pdtop">
+                    <section class="first">
+                        <div class="section-wrap d-block">
+                            <div class="items-sidebar cell-4 no-pdtop">
+                                <div class="item">
+                                    <p class="item-sub">1988.08.20(20년)</p>
+                                    <p class="item-sub c-gray fs-13">사용 승인일</p>
+                                </div>
+                                <div class="item-bar"></div>
+                                <div class="item">
+                                    <p class="item-sub">1,211세대</p>
+                                    <p class="item-sub c-gray fs-13">세대 수</p>
+                                </div>
+                                <div class="item-bar"></div>
+                                <div class="item">
+                                    <p class="item-sub">10개동</p>
+                                    <p class="item-sub c-gray fs-13">단지 동</p>
+                                </div>
+                                <div class="item-bar"></div>
+                                <div class="item">
+                                    <p class="item-sub">12호실 / 1개 동</p>
+                                    <p class="item-sub c-gray fs-13">총 동수/상가동</p>
+                                </div>
+                            </div>
+                            <div class="items-sidebar cell-4 bg-gray">
+                                <div class="item">
+                                    <p class="item-sub">
+                                        <span class="c-gray"> 등록물건 </span>
+                                        <span class="mx-2 c-red">20</span>
+                                    </p>
+                                </div>
+                                <div class="item-bar"></div>
+                                <div class="item">
+                                    <p class="item-sub">
+                                        <span class="c-gray"> 등록매물 </span>
+                                        <span class="mx-2 c-red">3</span>
+                                    </p>
+                                </div>
+                                <div class="item-bar"></div>
+                                <div class="item">
+                                    <p class="item-sub">
+                                        <span class="c-gray"> 계약만료 </span>
+                                        <span class="mx-2 c-red">1</span>
+                                    </p>
+                                </div>
+                                <div class="item-bar"></div>
+                                <div class="item">
+                                    <p class="item-sub">
+                                        <span class="c-gray"> 네이버광고 </span>
+                                        <span class="mx-2 c-red">0</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="tab-line bdtop-2">
+                    <button class="btn-tab active">등록정보</button>
+                    <button class="btn-tab">호실관리</button>
+                    <button class="btn-tab">매물통계</button>
+                    <button class="btn-tab">시세/실거래가</button>
+                    <button class="btn-tab">통합관리</button>
+                </div>
+                <div class="pop-section">
+                    <section class="first">
+                        <div class="title">물건등록</div>
+                        <div class="cont first justify-center bg-gray">
+                            <div class="hs-slide-bar">
+                                <div class="d-block">
+                                    <div id="dv_dong_number" class="slide-title type-02">
+                                        <div class="d-block">
+                                            <div class="slide-text justify-start my-2">
+                                                <div id="dnum_1101" class="hs-label room-number selected">1101동</div>
+                                                <div id="dnum_1102" class="hs-label room-number">1102동</div>
+                                                <div id="dnum_1103" class="hs-label room-number">1103동</div>
+                                                <div id="dnum_1104" class="hs-label room-number">1104동</div>
+                                                <div id="dnum_1105" class="hs-label room-number">1105동</div>
+                                                <div id="dnum_1106" class="hs-label room-number">1106동</div>
+                                                <div id="dnum_1107" class="hs-label room-number">1107동</div>
+                                                <div id="dnum_1108" class="hs-label room-number">1108동</div>
+                                                <div id="dnum_1109" class="hs-label room-number">1109동</div>
+                                                <div id="dnum_1110" class="hs-label room-number">1110동</div>
+                                                <div class="slide-abs-arrow">
+                                                    <img src="/images/V.png" class="arrow" alt="v">
+                                                </div>
+                                            </div>
+                                            <div class="slide-hddn-List justify-start my-2">
+                                                <div id="dnum_1111" class="hs-label room-number">1111동</div>
+                                                <div id="dnum_1112" class="hs-label room-number">1112동</div>
+                                                <div id="dnum_1113" class="hs-label room-number">1113동</div>
+                                                <div id="dnum_1114" class="hs-label room-number">1114동</div>
+                                                <div id="dnum_1115" class="hs-label room-number">상가동</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cont first justify-center bg-gray">
+                            <div class="d-block w-100">
+                                <div id="dv_dongnm" class="dong-text">1101동</div>
+                                <div class="dong-matrix">
+                                    <div class="buld" id="dv_buld">
+                                        <!-- 옥탑방 라인 -->
+                                        <div class="rooftop">
+                                            <div class="floor">&nbsp;</div>
+                                            <div class="room">옥탑501</div>
+                                            <div class="room empty nbdt">&nbsp;</div>
+                                            <div class="room">옥탑503</div>
+                                            <div class="room empty nbdt nbdr">&nbsp;</div>
+                                            <div class="room empty nbdt nbdl nbdr">&nbsp;</div>
+                                        </div>
+                                        <!-- 층별 -->
+                                        <div class="floor-box">
+                                            <div class="floor">4</div>
+                                            <div class="room">401</div>
+                                            <div class="room">402</div>
+                                            <div class="room">403</div>
+                                            <div class="room">404</div>
+                                            <div class="room empty nbdt nbdr">&nbsp;</div>
+                                        </div>
+                                        <div class="floor-box">
+                                            <div class="floor">3</div>
+                                            <div class="room">301</div>
+                                            <div class="room done">302</div>
+                                            <div class="room">303</div>
+                                            <div class="room">304</div>
+                                            <div class="room empty nbdt nbdr">&nbsp;</div>
+                                        </div>
+                                        <div class="floor-box">
+                                            <div class="floor">2</div>
+                                            <div class="room rest-space">&nbsp;</div>
+                                            <div class="room rest-space">&nbsp;</div>
+                                            <div class="room">203</div>
+                                            <div class="room done">204</div>
+                                            <div class="room empty nbdt nbdr">&nbsp;</div>
+                                        </div>
+                                        <div class="floor-box">
+                                            <div class="floor">1</div>
+                                            <div class="room">101</div>
+                                            <div class="room">102</div>
+                                            <div class="room rest-space">&nbsp;</div>
+                                            <div class="room">104</div>
+                                            <div class="room last">105</div>
+                                        </div>
+                                        <!-- 지하층 -->
+                                        <div class="under-ground">
+                                            <div class="floor">B1</div>
+                                            <div class="room">101</div>
+                                            <div class="room etc-pps">102</div>
+                                            <div class="room etc-pps">103</div>
+                                            <div class="room done">104</div>
+                                            <div class="room rest-space last">&nbsp;</div>
+                                        </div>
+                                        <div class="under-ground bottom">
+                                            <div class="floor">B2</div>
+                                            <div class="room etc-pps">201</div>
+                                            <div class="room etc-pps">202</div>
+                                            <div class="room rest-space">&nbsp;</div>
+                                            <div class="room rest-space">&nbsp;</div>
+                                            <div class="room rest-space last">&nbsp;</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-category">
+                                    <div class="box-cate">
+                                        <div class="cate cat-gray"></div>
+                                        <div class="text">필로터 및 기타공간</div>
+                                    </div>
+                                    <div class="box-cate">
+                                        <div class="cate cat-lightblue"></div>
+                                        <div class="text">기타용도</div>
+                                    </div>
+                                    <div class="box-cate">
+                                        <div class="cate cat-lime"></div>
+                                        <div class="text">등록물건</div>
+                                    </div>
+                                    <div class="box-cate">
+                                        <div class="cate cat-red"></div>
+                                        <div class="text">선택물건</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cont justify-around bg-gray">
+                            <div class="label-2">
+                                <div class="label-01">
+                                    <div class="fs-14 c-gray">지상 / 지하층</div>
+                                    <div class="label-text fs-15">4층 / 2층</div>
+                                </div>
+                                <div class="label-02">
+                                    <div class="fs-14 c-gray">엘리베이터</div>
+                                    <div class="label-text fs-15">없음</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cont justify-start bg-gray">
+                            <div class="action-field">
+                                <div class="action-label">
+                                    <span class="c-red">1101동</span> /
+                                    <span class="c-red">1109호</span>
+                                    <button type="button" class="btn-x"></button>
+                                </div>
+                                <div class="action-field">
+                                    <select class="form-select" id="p_select_01">
+                                        <option value="00">소유주 구분</option>
+                                        <option value="01">소유주</option>
+                                        <option value="02">소유주 가족</option>
+                                        <option value="03">법인 대표</option>
+                                        <option value="04">법인 직원</option>
+                                        <option value="05">관리인</option>
+                                        <option value="06">일반전화</option>
+                                    </select>
+                                    <input type="text" class="w-180px" maxlength="16" id="p_text_01" placeholder="휴대전화번호(숫자만입력)" />
+                                    <input type="text" class="w-100px" id="p_text_02" placeholder="이름" />
+                                    <button type="button" class="hs-button btn-cyan mx-2">연락처</button>
+                                    <select class="form-select hidden" id="p_select_02" disabled="disabled">
+                                        <option value="00">통신사선택</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cont justify-start bg-gray">
+                            <div class="action-field">
+                                <div class="action-label">
+                                    <span class="c-red">가동</span> /
+                                    <span class="c-red">1302호</span>
+                                    <button type="button" class="btn-x"></button>
+                                </div>
+                                <div class="action-field">
+                                    <select class="form-select" id="p_select_01">
+                                        <option value="00">소유주 구분</option>
+                                        <option value="01">소유주</option>
+                                        <option value="02">소유주 가족</option>
+                                        <option value="03">법인 대표</option>
+                                        <option value="04">법인 직원</option>
+                                        <option value="05">관리인</option>
+                                        <option value="06">일반전화</option>
+                                    </select>
+                                    <input type="text" class="w-180px" maxlength="16" id="p_text_01" placeholder="휴대전화번호(숫자만입력)" />
+                                    <input type="text" class="w-100px" id="p_text_02" placeholder="이름" />
+                                    <button type="button" class="hs-button btn-orange mx-2">연락처</button>
+                                    <select class="form-select" id="p_select_02" disabled="disabled">
+                                        <option value="00">통신사선택</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cont justify-start bg-lightblue">
+                            <div class="info">
+                                <div class="info-label c-blue">물건등록</div>
+                                <div class="info-text">
+                                    상단에서 내 물건으로 등록할 호실을 <span class="c-red">모두 선택한 뒤, [물건 등록]을 클릭</span>하십시오.
+                                </div>
+                                <button type="button" class="hs-button btn-red" disabled="disabled">물건등록</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="go-list">
+            <button id="btn_goList" class="bi bi-card-list"></button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <script src="/js/common/homes-comm.js"></script>
+    <script src="/js/common/homes-event-broker.js"></script>
+    <script type="text/javascript">
+        var build = {
+            room_co: 5,
+            rftop: [
+                {text: "옥탑501", pps: ""},
+                {text: ""       , pps: "empty" },
+                {text: "옥탑503", pps: ""},
+                {text: ""       , pps: "empty" },
+                {text: ""       , pps: "empty" },
+            ],
+            floor: [
+                [{text: "401", pps: "" },
+                    {text: "402", pps: "" },
+                    {text: "403", pps: "" },
+                    {text: "404", pps: "" },
+                    {text: ""   , pps: "empty" }],
+                [{text: "301", pps: "" },
+                    {text: "302", pps: "done" },
+                    {text: "303", pps: "" },
+                    {text: "304", pps: "" },
+                    {text: ""   , pps: "empty" }],
+                [{text: ""   , pps: "rest-space" },
+                    {text: ""   , pps: "rest-space" },
+                    {text: "203", pps: "" },
+                    {text: "204", pps: "done" },
+                    {text: ""   , pps: "empty" }],
+                [{text: "101", pps: "" },
+                    {text: "102", pps: "" },
+                    {text: ""   , pps: "rest-space" },
+                    {text: "104", pps: "" },
+                    {text: "105", pps: "" }],
+            ],
+            under: [
+                [{text: "B101", pps: "" },
+                    {text: "B102", pps: "etc-pps" },
+                    {text: "B103", pps: "etc-pps" },
+                    {text: "B104", pps: "done" },
+                    {text: ""    , pps: "rest-space" }],
+                [{text: "B101", pps: "etc-pps" },
+                    {text: "B102", pps: "etc-pps" },
+                    {text: ""    , pps: "rest-space" },
+                    {text: ""    , pps: "rest-space" },
+                    {text: ""    , pps: "rest-space" }],
+            ]
+        }
+        var fn_set_floor = () => {
+
+            $("#dv_buld").empty() ;
+            if ( !!build["rftop"] && build.rftop.length > 0 ) {
+                var dv_rooftop = $("<div class='rooftop'/>") ; 
+                var dv_floor = $("<div class='floor'/>") ; 
+                dv_rooftop.append(dv_floor) ;
+                for ( var i = 0; i < build.room_co; i ++ ){
+                    var rf = build.rftop[i] ; 
+                    var dv_room  = $("<div class='room' />") ;
+                    dv_room.text(rf.text) ; 
+                    dv_room.addClass(rf.pps) ;
+                    if ( rf.pps == "empty" ) {
+                        dv_room.addClass("nbdt") ;
+                        if ( i == 0 ) dv_room.addClass("nbdl") ;
+                        else {
+                            var pre_rf = build.rftop[i - 1] ;
+                            if ( pre_rf.pps == "empty") {
+                                dv_room.addClass("nbdl") ;
+                            }
+                        }
+                    }
+                    if (i == (build.room_co  - 1) && !!rf.text) dv_room.addClass("last") ;
+                    dv_rooftop.append(dv_room) ;
+                }
+                $("#dv_buld").append(dv_rooftop) ; 
+            }
+            for ( var r = 0 ; r < build.floor.length; r ++ ) {
+                var flbox = build.floor[r] ; 
+                var dv_fbox = $("<div class='floor-box'/>") ;
+                var dv_floor = $("<div class='floor'/>") ; 
+                dv_floor.text(build.floor.length - r) ;
+                dv_fbox.append(dv_floor) ;
+                for ( var i = 0; i < build.room_co; i ++ ) {
+                    var fl = flbox[i] ;
+                    var dv_room  = $("<div class='room' />") ;
+                    dv_room.text(fl.text) ; 
+                    dv_room.addClass(fl.pps) ;
+                    dv_fbox.append(dv_room) ;
+                    if ( fl.pps == "empty" ) {
+                        dv_room.addClass("nbdt") ;
+                        if ( i == 0 ) dv_room.addClass("nbdl") ;
+                        else {
+                            var pre_fl = build.floor[r][i - 1] ;
+                            if ( pre_fl.pps == "empty") {
+                                dv_room.addClass("nbdl") ;
+                            }
+                        }
+                    }
+                    if ( i == (build.room_co - 1) && (!!fl.text || fl.pps != "empty")) dv_room.addClass("last") ;
+                }
+                $("#dv_buld").append(dv_fbox) ; 
+            }
+            for ( var r = 0 ; r < build.under.length; r ++ ) {
+                var under = build.under[r] ; 
+                var dv_fbox = $("<div class='under-ground'/>") ;
+                var dv_floor = $("<div class='floor'/>") ; 
+                dv_floor.text("B" + Number(r + 1)) ;
+                if ( r == build.under.length - 1) dv_fbox.addClass("bottom") ;
+                dv_fbox.append(dv_floor) ;
+                for ( var i = 0; i < build.room_co; i ++ ) {
+                    var fl = under[i] ;
+                    var dv_room  = $("<div class='room' />") ;
+                    dv_room.text(fl.text) ; 
+                    dv_room.addClass(fl.pps) ;
+                    dv_fbox.append(dv_room) ;
+                    if ( fl.pps == "empty" ) {
+                        dv_room.addClass("nbdt") ;
+                        if ( i == 0 ) dv_room.addClass("nbdl") ;
+                        else {
+                            var pre_fl = build.under[r][i - 1] ;
+                            if ( pre_fl.pps == "empty") {
+                                dv_room.addClass("nbdl") ;
+                            }
+                        }
+                    }
+                    if ( i == (build.room_co - 1) && (!!under.text || under.pps != "empty")) dv_room.addClass("last") ;
+                }
+                $("#dv_buld").append(dv_fbox) ; 
+            }
+
+            var pos_y = build.floor.length * 30 ; 
+            if ( !!!build["rftop"] || build.rftop.length == 0 ) pos_y = pos_y - 30 ;
+            $(".dong-matrix").css("background-position-y", pos_y + "px") ;
+
+        }
+
+        $(document).ready(function() {
+            $("#btn_goList").click(function() {
+                location.href="/pub"
+            }) ;
+
+            $(".slide-abs-arrow").click(function() {
+                var has = $("#dv_dong_number").hasClass("open") ;
+                if ( has ) {
+                    $("#dv_dong_number").removeClass("open") ; 
+                    $(".slide-hddn-List").css("display", "none")
+                } else {
+                    $("#dv_dong_number").removeClass("open").addClass("open"); 
+                    $(".slide-hddn-List").css("display", "flex")
+                }
+            }) ;
+
+            $("div[id^=dnum_]").click(function() {
+                $("div[id^=dnum_]").each(function() {
+                    $(this).removeClass("selected") ; 
+                }) ;
+                $(this).addClass("selected") ; 
+                $("#dv_dongnm").text($(this).text()) ;
+            }) ;
+
+            fn_set_floor() ;
+
+        }) ;
+
+    </script>
+</body>
+</html>

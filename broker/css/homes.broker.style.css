@@ -33,6 +33,8 @@ button {
 
 /* ????????????????????????????????????? */
 button:active { filter: brightness(0.8); }
+button.btn-disp:active { filter: brightness(1) !important ; }
+button.btn-disp { cursor: default !important; }
 
 a { color: #5f5f5f; }
 .d-flex.vc { align-items: center; }
@@ -126,6 +128,13 @@ div.aicenter {
   height: 35px;
   background-color: var(--hs-color-ffffff) ;
   color: var(--hs-color-5f5f5f) ;
+}
+
+button.hs-button:disabled {
+  border: none !important;
+  background-color: #efefef !important;
+  color: #9c9c9c !important; 
+  cursor: default;
 }
 
 .hs-button.active {
@@ -2405,8 +2414,8 @@ button.square-btn {
   padding: 1px;
   box-sizing: content-box;
   padding-bottom: 11px;
-  /* max-height: 938px; */
-  /* height: calc(100vh - 156px); */
+  max-height: 938px;
+  height: calc(100vh - 156px);
 }
 
 .container2 .right-bar .info-wrapper section {
@@ -2469,7 +2478,7 @@ button.square-btn {
   margin-top: 2px; 
 }
 .container2 .right-bar .info-wrapper section  .info-list:hover {
-  background-color: var(--hs---hs-hover-color-blue) ; 
+  background-color: var(--hs-hover-color-blue) ; 
 }
 
 .container2 .right-bar .info-wrapper section .img-wrapper .text-box .info-list {
@@ -3319,11 +3328,20 @@ section.right-settings  div.hr{
   width: 100% ; 
 }
 
+.popup.no-title .pop-header {
+  border: 0 ; 
+  height: 40px ;
+}
+
 .popup .pop-header .pop-cont {
   display: flex;
   justify-content: space-between ;
   align-items: center;
   width: var(--hs-body-max-width ) ; 
+}
+
+.popup .pop-cont.sm {
+  width: 840px !important;
 }
 
 .popup .pop-header .pop-cont .pop-title h3 {
@@ -3347,6 +3365,10 @@ section.right-settings  div.hr{
   align-content: center;
   flex-wrap: nowrap;
 }
+.popup.no-title .pop-container {
+  margin-top: 0px; 
+}
+
 
 .popup .pop-container .pop-cont {
   width: var(--hs-body-max-width ) ; 
@@ -3371,7 +3393,7 @@ section.right-settings  div.hr{
   background-color: #ffffff; 
   padding: 0 20px ;
   border: 0 ; 
-  border-bottom: 2px solid #ffffff; 
+  border-bottom: 2px solid var(--hs-border-color) !important ; 
   border-radius: 0;
   font-weight: 600 ;
   font-size: 14px;
@@ -3379,7 +3401,7 @@ section.right-settings  div.hr{
 .popup .pop-container .pop-cont .tab-line .btn-tab.active,
 .popup .pop-container .pop-cont .tab-line .btn-tab:hover,
 .popup .pop-container .pop-cont .tab-line .btn-tab:active {
-  border-bottom: 2px solid #ff6161; 
+  border-bottom: 2px solid #ff6161 !important; 
   border-radius: 0;
   color: var(--hs-color-red) ;
   font-weight: 600 ;
@@ -3391,6 +3413,10 @@ section.right-settings  div.hr{
   padding: 1px;
   padding-top: 2px;
 }
+.pop-section.no-pdtop {
+  padding-top: 1px !important; 
+}
+
 
 .pop-section section {
   border: 0 ;
@@ -3418,7 +3444,95 @@ section.right-settings  div.hr{
   border-radius: 5px;
   margin-top: 10px;
   min-height: 60px; 
+} 
+.pop-section section .cont .label-2 { 
+  display: flex;
+  width: 100%; 
+  padding: 10px 20px;
+  line-height: 15px;
 }
+.pop-section section .cont .label-2 .label-01,
+.pop-section section .cont .label-2 .label-02 { 
+  display: flex; 
+  justify-content: flex-start ;
+  width: 50%;
+  height: 20px;
+  line-height: 20px; 
+  padding-left: 10px;
+}
+.pop-section section .cont .label-2 .label-02 { padding-left: 30px; border-left: 1px solid var(--hs-darker-border-color); }
+.pop-section section .cont .label-2 .label-01 .label-text,
+.pop-section section .cont .label-2 .label-02 .label-text { padding-left: 20px; }
+
+.pop-section section .cont .action-field { 
+  position: relative;
+  display: flex;
+  width: 100%; 
+  padding: 6px 10px;
+  height: 60px;
+}
+.pop-section section .cont .action-field .action-label {
+  position: relative;
+  width: 200px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center ;
+  line-height: 36px;
+  padding: 6px 10px;
+}
+.pop-section section .cont .action-field .action-label .btn-x {
+  position: absolute;
+  top: 16px;
+  background-color:transparent;
+  background-image: url(/images/x.png);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  width: 30px;
+  height: 20px;
+}
+
+.pop-section section .cont .action-field .action-label::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  right: 0;
+  width: 1px;
+  height: 20px;
+  background-color: var(--hs-darker-border-color) ; 
+}
+
+.pop-section section .cont .info { 
+  position: relative;
+  display: flex;
+  width: 100%; 
+  padding: 10px 20px;
+  height: 60px;
+}
+.pop-section section .cont .info .info-label {
+  position: relative;
+  width: 120px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center ;
+  line-height: 40px;
+}
+.pop-section section .cont .info .info-label::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: 0;
+  width: 1px;
+  height: 20px;
+  background-color: var(--hs-darker-border-color) ; 
+}
+
+.pop-section section .cont .info .info-text { padding-left: 15px; line-height: 40px; }
+.pop-section section .cont .info button {
+  position: absolute; 
+  top: 13px;
+  right: 20px;
+}
+
 .pop-section section .cont.first {
   margin-top: 20px; 
 }
@@ -3456,6 +3570,68 @@ section.right-settings  div.hr{
   margin-bottom: 0px; 
 }
 
+.pop-section section .section-wrap {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center ;
+}
+
+.pop-section section .section-wrap .items-sidebar {
+    flex: 1;
+    display: flex ;
+    align-items: center;
+    justify-content: space-around ;
+    gap: 10px;
+    padding: 10px 0px;
+}
+
+.section-wrap .items-sidebar.cell-4 .item {
+    display: flex ;
+    width: 25%;
+    flex-direction: column;
+    align-items: center;
+}
+.section-wrap .items-sidebar.cell-4 .item .item-sub {
+  font-size: 15px;
+  width: 150px;
+  text-align: left ;
+}
+
+
+.section-wrap .items-sidebar .item-bar {
+  width: 1px; 
+  background:#ededed; 
+  min-height: 40px; 
+}
+
+
+.section-wrap .sec-Left {
+  display: flex; 
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center ;
+}
+
+.section-wrap .sec-Left .item-Left.buld-name {
+    padding: 0 5px;
+    text-align: center;
+    align-content: center;
+    display: inline-block;
+    font-size: 22px;
+    line-height: 22px;
+    font-weight: 500;
+}
+
+.pop-container .section-driver {
+  background-color: #ffffff;
+  width: 100%;
+  height: 10px;
+  border: 0;
+}
+
 .pop-container .pop-footer {
   width: 100% ; 
   height: 60px ;
@@ -3465,6 +3641,14 @@ iframe.pop-ifrm {
   position: fixed;
   top: 0 ; 
   left: 0; 
-  right: 0 ; 
+  width: 100%; 
+  height: 100%; 
+  z-index: 1100;
+}
+
+iframe.pop-ifrm.info {
+  position: fixed;
+  top: 95px ;
+  width: calc(100% - 421px) !important; 
   z-index: 1100;
 }

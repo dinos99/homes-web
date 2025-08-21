@@ -9,6 +9,7 @@ const homes_comm = {
         , _API_VERSION: "v1"
         , _LOGIN_PAGE_URL: "/html/sign-in/sign-in.html"  
         , _LOGIN_AFTER_PAGE_URL: "/html/system/SYST00010001.html"
+        , _KAKAO_API_APP_KEY_JS: "e23a8c880d6b5fcb0f9af25ed39b0b10"
         , _KAKAO_LOGIN_REDIRECT_URL: "/html/auth/kakao_auth_redirect.html"
         /* 프리패스 페이지 */ 
         , _HOMES_PRO_BASE_DOMAIN: "http://127.0.0.1:8081"
@@ -153,14 +154,9 @@ const homes_comm = {
                 var option = options || {} ;
                 option.title = option["title"] || "&nbsp;" ; 
                 option.message = message ; 
-                cont.load("/html/popup/popAlert.html", () => {
-                    $("#alert_title").html(option.title) ;
-                    $("#alert_cont").html(option.message) ;
-                    $(".btn-close").click(function() {
-                        resolve(true) ; 
-                        $("#pop_cont_alert").remove() ;
-                    })
-                    $("#btn_ok").click(function() {
+                cont.load("/html/popup/pop-alert.html", () => {
+                    $(".message").html(message)
+                    $("#btn_alert_ok").click(function() {
                         resolve(true) ; 
                         $("#pop_cont_alert").remove() ;
                     }) ; 
@@ -174,21 +170,16 @@ const homes_comm = {
                 var option = options || {} ;
                 option.title = option["title"] || "&nbsp;" ; 
                 option.message = message ; 
-                cont.load("/html/popup/popConfirm.html", (html) => {
-                    $("#alert_title").html(option.title) ;
-                    $("#alert_cont").html(option.message) ;
-                    $(".btn-close").click(function() {
-                        reject(true) ; 
-                        $("#pop_cont_confirm").remove() ;
-                    }) ;
-                    $("#btn_cancel").click(function() {
-                        reject(true) ; 
-                        $("#pop_cont_confirm").remove() ;
-                    }) ;
-                    $("#btn_ok").click(function() {
+                cont.load("/html/popup/pop-confirm.html", (html) => {
+                    $(".message").html(message)
+                    $("#btn_conf_ok").click(function() {
                         resolve(true) ; 
                         $("#pop_cont_confirm").remove() ;
                     }) ; 
+                    $("#btn_conf_cancel").click(function() {
+                        resolve(false) ; 
+                        $("#pop_cont_confirm").remove() ;
+                    }) ;
                 }) ;
             }) ;
 
@@ -311,8 +302,6 @@ const homes_comm = {
                 if ( def_option.headers["Content-Type"] == "multipart/form-data") {
                     delete def_option.headers["Content-Type"] ; 
                 }
-                
-                console.log(def_option)
 
                 var api_base_url = homes_comm.fn_get_base_url() ; 
                 if ( api_url.indexOf("/api") === 0 || api_url.indexOf("/auth") === 0) {
@@ -454,7 +443,7 @@ const homes_comm = {
                     $("#btn_hddn_close").click(function() {
                         var data = homes_comm.popup.pop_data[param.popid] ; 
                         resolve({
-                            "action"  : "pop_area_select",
+                            "action"  : "pop_close",
                             "pop_data": data
                         }) ; 
                         delete homes_comm.popup.param_data[param.popid] ;

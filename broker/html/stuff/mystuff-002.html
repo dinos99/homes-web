@@ -3,13 +3,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>홈즈프로 중개매물</title>
+    <title>홈즈프로 나의물건</title>
+    <link rel="icon" href="/images/logo_homes_pro_32.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/logo_homes_pro_32.png" type="image/x-icon">
 
     <!-- bootstrap 5.3.5 -->    
     <script src="/js/extern/bootstrap-5.3.5/assets/js/color-modes.js"></script>
     <link href="/js/extern/bootstrap-5.3.5/assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- bootstrap icon-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- kakao map api -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e23a8c880d6b5fcb0f9af25ed39b0b10&libraries=services,clusterer,drawing"></script>
 
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/custom.css">
@@ -57,6 +62,16 @@
                         <div class="cont bg-gray">
                             <div class="label"> 단지구분 </div>
                             <div class="fields" id="btn_chk_complex">
+                                <button type="button" class="hs-check-button active" id="btn_cpx_00">전체</button>
+                                <button type="button" class="hs-check-button" id="btn_cpx_01">아파트</button>
+                                <button type="button" class="hs-check-button" id="btn_cpx_02">주상복합</button>
+                                <button type="button" class="hs-check-button" id="btn_cpx_03">오피스텔</button>
+                                <button type="button" class="hs-check-button" id="btn_cpx_04">레지던스</button>
+                                <button type="button" class="hs-check-button" id="btn_cpx_05">빌라/연립</button>
+                                <button type="button" class="hs-check-button" id="btn_cpx_06">도시형 생활주택</button>
+                                <button type="button" class="hs-check-button" id="btn_cpx_07">타운하우스</button>
+                                <button type="button" class="hs-check-button" id="btn_cpx_08">지식산업센터</button>
+                                <button type="button" class="hs-check-button" id="btn_cpx_09">미분류</button>
                             </div>
                         </div>
                         <div class="cont bg-gray">
@@ -108,14 +123,6 @@
                             </div>
                             <div class="fields">
                                 <button class="hs-button btn-lime">단지등록</button>
-                            </div>
-                        </div>
-                        <div class="cont justify-between bg-light-blue">
-                            <div class="desc no-width">
-                                잠실1단지 아파트 / 3개동 / 1,024세대 
-                            </div>
-                            <div class="fields">
-                                등록완료 / 2025.07.25
                             </div>
                         </div>
                         -->
@@ -173,7 +180,8 @@
         var popup = {} ; 
         var broker = store.getItem("user") ; 
         var p_data = {
-            "brkno": broker.userno
+            "brkno" : broker.userno,
+            "cplxTy": "00"
         } ;
         var fn_init_popup = ( popid ) => {
             popup.id = popid ; 
@@ -191,37 +199,135 @@
             }) ; 
         }
 
+        /*
         var fn_get_complexList = ( params ) => {
             homes.network.post("/broker/complexList", {
-                "brkno": params.brkno,
-                "arcd" : params.arcd,
-                "legcd": params.legcd
+                "brkno" : params.brkno,
+                "arcd"  : params.arcd,
+                "legcd" : params.legcd
             }).then( response => {
                 fn_set_complex_List( response.data ) ;
             }).catch( error => {
             }) ;
         }
+        */
 
-        var fn_set_complex_List = ( complexList ) => {
+        var fn_get_complexList = () => {
+            var cplxTy = p_data.cplxTy ;
+            homes.network.post("/broker/complexList", {
+                "brkno": p_data.brkno,
+                "arcd" : p_data.arcd,
+                "legcd": p_data.legcd
+            }).then( response => {
+                var dataList = {
+                    mComplex: [],
+                    oComplex: [],
+                    tComplex: []
+                }
+                if ( cplxTy == "00" ) { /* 전체 */
+                    fn_set_complex_List( response.data ) ;
+                } else if ( cplxTy == "03" ) {
+                    dataList.mComplex = [] ;
+                    dataList.oComplex = [] ;
+                    dataList.tComplex = [] ; 
+                    response.data.mComplex.filter( cplx => ( cplx.cplxTy == "EST113" || cplx.cplxTy == "EST121" )).forEach(cplx => {
+                        dataList.mComplex.push(cplx) ;
+                    }) ; 
+                    response.data.oComplex.filter( cplx => ( cplx.cplxTy == "EST113" || cplx.cplxTy == "EST121" )).forEach(cplx => {
+                        dataList.oComplex.push(cplx) ;
+                    }) ; 
+                    fn_set_complex_List( dataList ) ;
+                } else if ( cplxTy == "05" ) { /* 빌라/연립 */ 
+                    dataList.mComplex = [] ;
+                    dataList.oComplex = [] ;
+                    dataList.tComplex = [] ; 
+                    response.data.mComplex.filter( cplx => ( cplx.cplxTy == "EST114" || cplx.cplxTy == "EST115" )).forEach(cplx => {
+                        dataList.mComplex.push(cplx) ;
+                    }) ; 
+                    response.data.oComplex.filter( cplx => ( cplx.cplxTy == "EST114" || cplx.cplxTy == "EST115" )).forEach(cplx => {
+                        dataList.oComplex.push(cplx) ;
+                    }) ; 
+                    fn_set_complex_List( dataList ) ;
+                } else if ( cplxTy == "09" ) { /* 미분류 */ 
+                    dataList.mComplex = [] ;
+                    dataList.oComplex = [] ;
+                    dataList.tComplex = response.data.tComplex ; 
+                    fn_set_complex_List( dataList ) ;
+                } else {
+                    var ix = Number(cplxTy) ;
+                    const estcd = [ "EST000", "EST111", "EST112", "EST113", "EST119", "EST114", "EST117", "EST118", "EST123", "EST999"]  ;
+                    dataList.mComplex = [] ;
+                    dataList.oComplex = [] ;
+                    dataList.tComplex = [] ; 
+                    response.data.mComplex.filter( cplx => ( cplx.cplxTy == estcd[ix] )).forEach(cplx => {
+                        dataList.mComplex.push(cplx) ;
+                    }) ; 
+                    response.data.oComplex.filter( cplx => ( cplx.cplxTy == estcd[ix] )).forEach(cplx => {
+                        dataList.oComplex.push(cplx) ;
+                    }) ; 
+                    fn_set_complex_List( dataList ) ;
+                }
+
+            }).catch( error => {
+            }) ;
+        }
+
+        var fn_set_complex_List = ( complex ) => {
             $("#sec_cplxList").empty() ; 
             $("#sec_cplxList").append("<div class='title'>단지 선택</div>") ; 
-            if ( !complexList || complexList.length == 0 ) {
+
+            var mComplex = complex.mComplex ; 
+            var oComplex = complex.oComplex ; 
+            var tComplex = complex.tComplex ; 
+            var tCnt = 0 ; 
+            tCnt += mComplex == null || mComplex.length == 0 ? 0 : mComplex.length ; 
+            tCnt += oComplex == null || oComplex.length == 0 ? 0 : oComplex.length ; 
+            tCnt += tComplex == null || tComplex.length == 0 ? 0 : tComplex.length ; 
+            if ( tCnt == 0 ) {
                 var no_cplx = $("<div class='cont first justify-center bg-gray' />") ; 
                 no_cplx.text("해당 지역에 등록된 단지가 없습니다.") ; 
                 $("#sec_cplxList").append(no_cplx) ;
                 return ; 
             }
-            complexList.forEach(cp => {
+
+            mComplex.forEach(cp => {
+                var div_cont = $("<div class='cont justify-between bg-light-blue'/>") ;
+                var desc = $("<div class='desc no-width'/>") ; 
+                var html =  cp.cplxnm + " / " + cp.cplxTyNm + " / " ; 
+
+                html += homes_comm.util.fn_format_number(cp.cplxDongCo) + "개동 " ;
+                if ( cp.cplxTy == 'EST113' || cp.cplxTy == 'EST121' || cp.cplxTy == 'EST123' ) {
+                    html += homes_comm.util.fn_format_number(cp.cplxHshldCo) + "호실  " ;
+                } else {
+                    html += homes_comm.util.fn_format_number(cp.cplxHshldCo) + "세대 " ;
+                }
+                desc.html(html) ;
+
+                var field = $("<div class='fields'/>") ; 
+                var button =$("<button type='button' class='hs-button btn-lime'>등록완료</button>") ; 
+                field.append("등록완료 / " + cp.crde) ; 
+
+                div_cont.append(desc) ;
+                div_cont.append(field) ;
+                $("#sec_cplxList").append(div_cont) ;
+
+            }) ;
+            
+            oComplex.forEach(cp => {
                 var div_cont = $("<div class='cont justify-between bg-gray'/>") ;
                 var desc = $("<div class='desc no-width'/>") ; 
-                var html =  cp.cplxNm + " / " ; 
+                var html =  cp.cplxnm + " / " ; 
                 if (cp.cplxTy == "CPX999") {
                     html += "<span class='c-red'>미분류</span> / "
                 } else {
                     html += "<span>" + cp.cplxTyNm + "</span> / " 
                 }
-                html += homes_comm.util.fn_format_number(cp.cplxDongCo) + "개동 / " ;
-                html += homes_comm.util.fn_format_number(cp.cplxHshldCo) + "세대" ;
+                html += homes_comm.util.fn_format_number(cp.cplxDongCo) + "개동 " ;
+                if ( cp.cplxTy == 'EST113' || cp.cplxTy == 'EST121' || cp.cplxTy == 'EST123' ) {
+                    html += homes_comm.util.fn_format_number(cp.cplxHshldCo) + "호실  " ;
+                } else {
+                    html += homes_comm.util.fn_format_number(cp.cplxHshldCo) + "세대 " ;
+                }
                 desc.html(html) ;
 
                 var field = $("<div class='fields'/>") ; 
@@ -233,6 +339,46 @@
                 $("#sec_cplxList").append(div_cont) ;
 
             }) ;
+            tComplex.forEach(cp => {
+                var div_cont = $("<div class='cont justify-between bg-gray'/>") ;
+                var desc = $("<div class='desc no-width'/>") ; 
+                var html =  cp.cplxnm + " / " ; 
+                if (cp.cplxTy == "CPX999") {
+                    html += "<span class='c-red'>미분류</span> / "
+                } else {
+                    html += "<span>" + cp.cplxTyNm + "</span> / " 
+                }
+                html += homes_comm.util.fn_format_number(cp.cplxDongCo) + "개동 " ;
+                if ( cp.cplxTy == 'EST113' || cp.cplxTy == 'EST121' || cp.cplxTy == 'EST123' ) {
+                    html += homes_comm.util.fn_format_number(cp.cplxHshldCo) + "호실  " ;
+                } else {
+                    html += homes_comm.util.fn_format_number(cp.cplxHshldCo) + "세대 " ;
+                }
+                desc.html(html) ;
+
+                var field = $("<div class='fields'/>") ; 
+                var button =$("<button type='button' class='hs-button btn-lime'>단지등록</button>") ; 
+                field.append(button) ; 
+
+                div_cont.append(desc) ;
+                div_cont.append(field) ;
+                $("#sec_cplxList").append(div_cont) ;
+                button.click(function() {
+                    fn_pop_complex_setting({
+                        "cplxno"  : cp.cplxno, 
+                        "areacode": p_data.areacode,
+                        "arcd"    : p_data.arcd,
+                        "legcd"   : p_data.legcd,
+                        "sdname"  : p_data.sdname,
+                        "sggname" : p_data.sggname,
+                        "emdname" : p_data.emdname,
+                        "plotLoc" : cp.plotLoc,
+                        "buldnm"  : cp.buldnm,
+                        "cplxnm"  : cp.cplxnm
+                    })
+                }) ; 
+            }) ;
+
         }
 
         var fn_set_area_button = (data) => {
@@ -242,19 +388,42 @@
             p_data.areacode = data.areacode ; 
             p_data.arcd = data.arcode ;
             p_data.legcd = data.legcode ; 
+            p_data.sdname = data.sdname ;
+            p_data.sggname = data.sggname ; 
+            p_data.emdname = data.emdname ; 
         }
 
-        var fn_set_checkbutton = ( data ) => {
-            $("#btn_chk_complex").empty() ; 
-            $("#btn_chk_complex").append("<button class='hs-check-button active' id='btn_cpx_CPX000'>전체</button>") ;
-            data.forEach(cpx => {
-                var button = $("<button type='button' class='hs-check-button' id='btn_cpx_" + cpx.commcd + "'>" + cpx.codenm + "</button>") ; 
-                $("#btn_chk_complex").append(button) ; 
-            }) ;
+        var fn_set_checkbutton = () => {
             $("button[id^=btn_cpx_]").click(function() {
+                p_data.cplxTy = $(this).attr("id").split("_").splice(2,1).toString() ;
                 $("button[id^=btn_cpx_]").removeClass("active") ; 
                 $(this).addClass("active") ; 
+                
+                fn_get_complexList({
+                    "brkno": p_data.brkno,
+                    "arcd" : p_data.arcd,
+                    "legcd": p_data.legcd
+                }) ; 
             }) ;
+        }
+
+
+        fn_pop_complex_setting = ( param ) => {
+            homes_comm.popup.pop_open("/complex/pop-complex-setting.html", {
+                "popid"   : "pop_cpsetting",
+                "cplxno"  : param.cplxno, 
+                "areacode": param.areacode,
+                "arcd"    : param.arcd,
+                "legcd"   : param.legcd,
+                "sdname"  : param.sdname,
+                "sggname" : param.sggname,
+                "emdname" : param.emdname,
+                "plotLoc" : param.plotLoc,
+                "buldnm"  : param.buldnm,
+                "cplxnm"  : param.cplxnm
+            }).then(pop_result => {
+                fn_get_complexList() ;
+            }) ; 
         }
 
         $(document).ready(function() {
@@ -271,30 +440,26 @@
                     popid : popup.id,
                     arcode: $("#p_brk_arcode").val()
                 }).then(pop_result => {
-                    if ( pop_result.action == "pop_area_select") {
-                        fn_set_area_button(pop_result.pop_data) ;
-                        fn_get_complexList({
-                            "brkno": p_data.brkno,
-                            "arcd" : p_data.arcd,
-                            "legcd": p_data.legcd
-                        }) ;
-                    }
+                    fn_set_area_button(pop_result.pop_data) ;
+                    fn_get_complexList({
+                        "brkno": p_data.brkno,
+                        "arcd" : p_data.arcd,
+                        "legcd": p_data.legcd
+                    }) ;
                 }) ;
             }) ;
 
-            fn_get_commcode("cpx")
+            fn_set_checkbutton() ; 
+            fn_get_arcode()
             .then(response => {
-                fn_set_checkbutton(response.data) ; 
-                return fn_get_arcode() ;
-            }).then(response => {
                 fn_set_area_button(response.arCode) ; 
                 fn_get_complexList({
                     "brkno": p_data.brkno,
                     "arcd" : p_data.arcd,
                     "legcd": p_data.legcd
                 }) ;
-            }) ; 
-        }) ;
+            }) ;
+        }) ; 
     </script>
 </body>
 </html>

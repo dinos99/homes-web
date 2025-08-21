@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈즈프로 나의물건</title>
+    <link rel="icon" href="/images/logo_homes_pro_32.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/logo_homes_pro_32.png" type="image/x-icon">
+
+    <!-- bootstrap 5.3.5 -->    
+    <script src="/js/extern/bootstrap-5.3.5/assets/js/color-modes.js"></script>
+    <link href="/js/extern/bootstrap-5.3.5/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- kakao map api -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e23a8c880d6b5fcb0f9af25ed39b0b10&libraries=services,clusterer,drawing"></script>
+
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/variables.css">
+
+    <link rel="stylesheet" href="/css/homes.broker.style.css">
+    
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <script src="/js/common/homes-comm.js"></script>
+    <script src="/js/common/homes-event-broker.js"></script>
+    <script type="text/javascript">
+        var stuff = {
+            param: {},
+            data: {}
+        }
+
+        var fn_set_param = () => {
+            stuff.param = parent.fn_get_param() ; 
+        }
+
+        $(document).ready(function() {
+            fn_set_param() ; 
+        }) ;
+
+    </script>
+</body>
+</html>

@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>홈즈프로 나의물건</title>
-    <!--
-    <link rel="icon" href="/path/to/your/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="/path/to/your/favicon.ico" type="image/x-icon">
-    -->
+    
+    <link rel="icon" href="/images/logo_homes_pro_32.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/logo_homes_pro_32.png" type="image/x-icon">
+
     <!-- bootstrap 5.3.5 -->    
     <script src="/js/extern/bootstrap-5.3.5/assets/js/color-modes.js"></script>
     <link href="/js/extern/bootstrap-5.3.5/assets/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -102,9 +102,9 @@
         <!-------------------------------------------- map List------------------------------------- -->        
         <div class="right-bar">
             <div class="top">
-                <p>전체 매물(0/0)</p>
+                <p>전체 물건(0/0)</p>
                 <div class="checkbox-container">
-                    <input type="checkbox" id="p_chk_except_map" class="custom-checkbox">
+                    <input type="checkbox" id="p_chk_except_map" class="custom-checkbox" checked="checked">
                     <label for="p_chk_except_map" class="checkbox-label">
                     <span class="checkbox-icon"></span>
                     <span class="checkbox-text c-white">지도 외 선택</span>
@@ -112,36 +112,7 @@
                 </div>
             </div>
             <div class="info-wrapper">
-                <section class="hidden">
-                    <div class="vertical-wrapper white-bg bd-5">
-                        <div class="justify-between">
-                            <p class="title2 fs-14 fw-600">
-                                <span class="hs-badge sm darkblue-bg">아파트</span> 가락쌍용2차(가락동)
-                                <span class="hs-badge sm bg-b3">분양권</span> <span class="hs-badge sm bg-b3">재건축</span>
-                            </p>
-                            <div class="img-box">
-                                <img src="/images/lock.png" alt="">
-                            </div>
-                        </div>
-                        <div>
-                            <span class="gray fs-13 fw-600">
-                                세대/호실
-                            </span> 160/6
-                            <span class="gray">• 단지동/상가동</span> 2/1
-                        </div>
-                        <div class="xxz mb4">
-                            <div class="left">
-                                <p>등록 물건 <span class="red">3</span></p>
-                                <p>등록 매물 <span class="red">1</span></p>
-                                <p class="last">계약 만료 <span class="red">2</span></p>
-                                <div class="custom-select">
-                                    <div class="selected-value">
-                                        <img src="/images/V.png" class="arrow" alt="v">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <section id="sec_stuffList">
                 </section>
                 <div class="no-item">
                     <img src="/images/no-item.png" alt="">
@@ -158,33 +129,135 @@
     <script src="/js/common/homes-event-broker.js"></script>
     <script src="/js/common/homes-comm.js"></script>
     <script type="text/javascript">
+        var broker = {} ; 
+        var stuff = {
+            param: {},
+            data: {}
+        }
+
+        var pop_close = ( param ) => {
+            $("iframe").remove() ;
+            fn_get_stuff_List() ;
+        }
+
+        var fn_get_stuff_List = () => {
+            broker = store.getItem("user") ; 
+            broker.brkno = broker.userno ; 
+            network.post("/stuff/stuffList", {
+                "brkno": broker.brkno
+            }).then(response => {
+                stuff.data = response.data ; 
+                fn_set_List(stuff.data) ; 
+            }) ;
+        }
+
+        var fn_set_List = ( dataList ) => {
+            if ( !!dataList && dataList.length > 0 ) {
+                $(".no-item").removeClass("hidden").addClass("hidden") ; 
+                $("#sec_stuffList").empty() ; 
+                dataList.forEach(data => {
+//                    console.log(data) ;
+                    var vwrap = $("<div id='dv_buld_" + data.buldno + "' class='vertical-wrapper white-bg bd-5'/>") ;
+                    var stitle = $("<div class='justify-between'/>") ;
+
+                    var dv_hshld = $("<div/>") ; 
+                    var span_3  = $("<span class='gray fs-13 fw-600' />") ; 
+                    if ( data.cplxTy == 'EST113' || data.cplxTy == 'EST121' || data.cplxTy == 'EST123' ) {
+                        span_3.text("호실") ; 
+                    } else {
+                        span_3.text("세대") ; 
+                    }
+                    var span_4 = $("<span class='gray mx-1'/>") ; 
+                    span_4.text(homes_comm.util.fn_format_number(data.THshldCo)) ;
+
+                    var span_5 = $("<span class='gray'/>") ;
+                    var span_6 = $("<span class='gray mx-1'/>") ;
+                    span_5.text("• 단지동") ; 
+                    span_6.text(homes_comm.util.fn_format_number(data.TDongCo)) ; 
+
+                    dv_hshld.append(span_3) ;
+                    dv_hshld.append(span_4) ;
+                    dv_hshld.append(span_5) ;
+                    dv_hshld.append(span_6) ;
+
+                    var dv_xxz = $("<div class='xxz mb4'/>") ; 
+                    var dv_Left = $("<div class='left'/>") ; 
+                    var p_1 = $("<p/>") ; 
+                    var p_2 = $("<p/>") ; 
+                    var p_3 = $("<p class='last'/>") ; 
+                    p_1.html("등록물건 <span class='c-red'/>0</span/>") ; 
+                    p_2.html("등록매물 <span class='c-red'/>0</span/>") ; 
+                    p_3.html("계약만료 <span class='c-red'/>0</span/>") ; 
+                    var dv_cusel = $("<div class='custom-select'/>") ; 
+                    var dv_cuselVal = $("<div class='selected-value'/>") ; 
+                    dv_cuselVal.append("<img src='/images/V.png' class='arrow' alt='V'/>") ; 
+
+                    dv_cusel.append(dv_cuselVal) ;
+
+                    dv_Left.append(p_1) ; 
+                    dv_Left.append(p_2) ; 
+                    dv_Left.append(p_3) ; 
+                    dv_Left.append(dv_cusel) ; 
+                    dv_xxz.append(dv_Left) ; 
+
+                    var sp = $("<p class='title2 fs-14 fw-600' />") ;
+                    var span_1 = $("<span class='hs-badge " + data.estColor + "'/>") ;
+                    var span_2 = $("<span class='mx-1'/>") ; 
+                    var imgLoc = $("<div class='img-box' />") ; 
+                    imgLoc.html("<img src='/images/lock.png' alt='자물쇠' />")
+                    
+                    span_1.text(data.estnm) ; 
+                    span_2.text(data.buldnm) ; 
+                    sp.append(span_1) ;
+                    sp.append(span_2) ;
+
+                    stitle.append(sp) ;
+                    stitle.append(imgLoc) ;
+                    vwrap.append(stitle) ; 
+                    vwrap.append(dv_hshld) ; 
+                    vwrap.append(dv_xxz) ; 
+
+                    vwrap.click(function() {
+                        fn_set_data(data) ;
+                        fn_pop_info(data) ;
+                    }) ; 
+                    $("#sec_stuffList").append(vwrap) ; 
+                }) ;
+            }
+        }
+
+        var fn_pop_info = ( data ) => {
+            var ifrm = $("#ifrm_stuff_info") ; 
+            if ( ifrm.length > 0 ) {
+
+            } else {
+                var ifrm = $("<iframe class='pop-ifrm info' id='ifrm_stuff_info' src='/html/stuff/mystuff-003.html' />") ; 
+                $("body").append(ifrm) ;
+            }
+        }
+        var fn_set_data = ( data ) => {
+            stuff.data = data ; 
+            $("div[id^=dv_buld_]").removeClass("active") ; 
+            $("#dv_buld_" + data.buldno).addClass("active")
+        }
+
+        var fn_get_param = () => {
+            return stuff.data ; 
+        }
+
         $(document).ready(function() {
+            broker = store.getItem("user") ; 
+            broker.brkno = broker.userno ; 
             fn_page_init("T03") ;
 
-            $("div[id^=slide_]").click(function() {
-                var has = $(this).hasClass("open") ; 
-                if ( has ) {
-                    $(this).removeClass("open") ; 
-                } else {
-                    $(this).removeClass("open").addClass("open") ; 
-                }
-                var ids = $(this).attr("id").split("_") ; 
-                ids.splice(1, 0, "List") ; 
-                var id = ids.join("_") ;
-                
-                $("#" + id).slideToggle(100) ;
-//                $(this).find(".slide-list").slideToggle(100) ;
-            }) ;
-
             $("#btn_stuff_manage").click(function() {
-                var ifrm = $("<iframe class='pop-ifrm' src='./mystuff-002.html' width='100%' height='100%' />") ; 
+                var ifrm = $("<iframe class='pop-ifrm' id='ifrm_stuff_manage' src='/html/stuff/mystuff-002.html' />") ; 
                 $("body").append(ifrm) ;
             }) ;
         }) ;
 
-        var pop_close = ( param ) => {
-            $("iframe").remove() ;
-        }
+
+        fn_get_stuff_List() ; 
 
     </script>
 </body>

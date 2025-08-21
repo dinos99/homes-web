@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈즈프로 중개매물</title>
+
+    <!-- bootstrap 5.3.5 -->    
+    <script src="/js/extern/bootstrap-5.3.5/assets/js/color-modes.js"></script>
+    <link href="/js/extern/bootstrap-5.3.5/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/variables.css">
+
+    <link rel="stylesheet" href="/css/homes.broker.style.css">
+    
+</head>
+<body>
+    <div class="go-list">
+        <button id="btn_goList" class="bi bi-card-list"></button>
+    </div>
+    <div class="pop-dimmed"></div>
+    <div class="pop-alert">
+        <div class="message">
+            정보가 수정되었습니다.
+        </div>
+        <div class="buttons">
+            <button id="btn_alert_ok" type="button" class="hs-button btn-blue">확인</button>
+        </div>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <script src="/js/common/homes-event-broker.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#btn_goList").click(function() {
+                location.href="/pub"
+            }) ;
+
+        }) ;
+    </script>
+</body>
+</html>
