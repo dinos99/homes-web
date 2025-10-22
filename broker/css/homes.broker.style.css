@@ -3292,7 +3292,10 @@ section.right-settings  div.hr{
   padding: 0 ; 
   background: url(/images/btn-pop-close.png) no-repeat;
   border-radius: 0 ;
+  cursor: pointer ;
 }
+.btn-close-x.shift { right: 10px; }
+
 .pop-help {
   position: fixed;
   display: flex ; 
@@ -3326,6 +3329,7 @@ section.right-settings  div.hr{
   justify-content: center ;
   align-items: center;
   width: 100% ; 
+  z-index:1100; /* 최상단 */ 
 }
 
 .popup.no-title .pop-header {
@@ -3650,5 +3654,6 @@ iframe.pop-ifrm.info {
   position: fixed;
   top: 95px ;
   width: calc(100% - 421px) !important; 
+  background-color: #ffffff;
   z-index: 1100;
 }

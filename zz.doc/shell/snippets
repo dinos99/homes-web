@@ -1,1 +1,14 @@
+# 서버스토리지 확인
 sudo du -h / | grep '[0-9\.]\+G'
+
+#인스턴스 재기동후 
+# 0. root계정 전환 
+su -p 
+serverTester#!2a
+# 1. mariadb 시작 
+systemctl start mariadb
+# 2. apache 시작
+systemctl start httpd
+# 3. server start 
+
+

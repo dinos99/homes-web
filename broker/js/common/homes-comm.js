@@ -150,15 +150,15 @@ const homes_comm = {
         alert: ( message, options ) => {
             return new Promise(resolve => {
                 var cont = $("<div id='pop_cont_alert' class='popup-container'/>") ; 
-                $("body").append(cont) ; 
+                $("body", top.document).append(cont) ; 
                 var option = options || {} ;
                 option.title = option["title"] || "&nbsp;" ; 
                 option.message = message ; 
                 cont.load("/html/popup/pop-alert.html", () => {
-                    $(".message").html(message)
-                    $("#btn_alert_ok").click(function() {
+                    $(".message", top.document).html(message)
+                    $("#btn_alert_ok", top.document).click(function() {
                         resolve(true) ; 
-                        $("#pop_cont_alert").remove() ;
+                        $("#pop_cont_alert", top.document).remove() ;
                     }) ; 
                 }) ;
             }) ;
@@ -264,7 +264,7 @@ const homes_comm = {
                 }, params).then(response => {
                     resolve({data: response.data}) ;
                 }).catch(error => {
-                    reject(error) ; 
+                    homes_comm.message.alert(error.errorMessage) ; 
                 }) ;
             }) ;
         }
@@ -949,20 +949,30 @@ var fn_isLogin = () => {
 /* 공통코드 조회 */
 var fn_get_commcode = ( grpcd ) => {
     return new Promise((resolve, reject) => {
-        var commcode = homes_comm.store.getItem("commcode") ; 
-        if ( !!commcode && !!commcode[grpcd]) {
-            resolve({
-                data: commcode[grpcd]
-            }) ; 
-        } else {
+        var commcode = {} ; 
+        if (!Array.isArray(grpcd)) {
             homes_comm.network.get("/commcode/" + grpcd, {
             }).then(response => {
-                if ( !!!commcode ) commcode = {} ;
                 commcode[grpcd] = response.data ; 
-                homes_comm.store.setItem("commcode", commcode) ; 
-                resolve(response) ;
+                resolve(commcode) ;
             }).catch(error => {
                 reject(error) ;
+            }) ;
+        } else {
+            var commcode = homes_comm.store.getItem("commcode") ;
+            if ( !!!commcode ) commcode = {} ;
+            homes_comm.network.post("/commcode/commCodeList", {
+                "grpcds": grpcd
+            }).then(response => {
+                grpcd.forEach(gcd => {
+                    commcode[gcd] = [] ; 
+                    response.data
+                    .filter(code => (code.grpcd == gcd))
+                    .forEach(code => {
+                        commcode[gcd].push(code) ;
+                    }) ; 
+                    resolve(commcode) ;
+                }) ; 
             }) ; 
         }
     }) ;

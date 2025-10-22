@@ -128,7 +128,10 @@ input, select, textarea,
 }
 
 .container.body {
-  overflow: auto; 
+  overflow: overlay; 
+  padding-left: 0;
+  padding-right: 0;
+  max-height: calc(100% - 120px);
 }
 
 /*** bootstrap custom finished */
@@ -304,6 +307,20 @@ a.ui-datepicker-prev-next-hover {
 
 /* display */
 .hidden { display: none !important;  }
+
+/* scroll */
+.no-scroll { overflow: hidden !important;}
+
+.link-style {
+  font-size: 14px; 
+  font-weight: 400;
+  cursor:pointer ;
+  color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1)) ;
+  text-decoration: underline;
+}
+.link-style:hover, .link-style:active {
+  color: #ff6161;
+}
 
 button.btn-icon {
   padding: 0;

@@ -32,26 +32,28 @@
             </div>
             <div class="container body">
                 <div id="diaryList" class="my-3 p-3 bg-body rounded shadow-sm">
-                    <div class="d-flex text-body-secondary pt-3" id="diryno_2025062601">
+                    <div class="d-flex text-body-secondary pt-3">
                         <div class="pb-3 small lh-sm w-100">
                             <div class="diary-list between">
-                                <h3 class="text-gray-dark">2025.06.26</h3>
-                                <div>
-                                    <a href="#" class="text-decoration-none mx-1"><i class="bi bi-cloudy-fill text-orange"></i></a>
-                                    <a href="#" class="text-decoration-none mx-1"><i class="bi bi-emoji-sunglasses-fill text-yellow"></i></a>
-                                    <a href="#" class="text-decoration-none mx-1"><i class="bi bi-file-image text-primary no-margin-r"></i></a>
-                                    <a href="#" class="text-decoration-none"><span class="text-dark no-margin-l">0</span></a>
+                                <h3 class="text-gray-dark" id="text_diryde"></h3>
+                                <div id="icon_set">
+                                    <a href="#" class="text-decoration-none mx-1"><i id="diry_wthr" class="bi"></i></a>
+                                    <a href="#" class="text-decoration-none mx-1"><i id="diry_felling" class="bi text-yellow"></i></a>
+                                    <a href="#" class="text-decoration-none mx-1 hidden" id="diry_image">
+                                        <i class="bi bi-file-image text-primary no-margin-r"></i>
+                                    </a>
+                                    <a href="#" class="text-decoration-none"><span class="text-dark no-margin-l" id="diry_image_cnt"></span></a>
                                     <a href="#" class="text-decoration-none mx-1"><i class="bi bi-chat-text text-dark no-margin-r"></i></a>
                                     <a href="#" class="text-decoration-none"><span class="text-dark no-margin-l">0</span></a>
                                 </div>
                             </div>
-                            <div class="diary-list between">기대선 어르신 생신축하드려요 !!!</div>
-                            <div class="diary-list start">
-                                <span class="badge mr-5px red">임시공휴일</span>
-                                <span class="badge mr-5px info">기대선생일</span>
+                            <div class="diary-list between" id="text_diryTitle"></div>
+                            <div class="diary-list start" id="diry_badge">
+                            </div>
+                            <div class="diary-list start" id="diry_Tag">
                             </div>
                             <div class="diary-cont border rounded">
-                                <div class="textarea-style ql-container ql-snow">
+                                <div class="textarea-style ql-container ql-snow view">
                                     <div class="ql-editor" id="diary_html">
 
                                     </div>
@@ -61,6 +63,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="btn-action me-2">
+                        <button type="button" class="btn btn-outline-secondary" id="btn_List">목록으로</button>
                     </div>
                 </div>
             </div>

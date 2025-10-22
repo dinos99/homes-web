@@ -24,23 +24,146 @@
     
 </head>
 <body>
+    <div class="popup no-title">
+        <header class="pop-header">
+            <div class="pop-cont sm">
+            </div>
+            <button id="btn_close" class="btn-close-x shift"></button>
+        </header>
+        <div class="pop-container">
+            <div class="pop-cont sm no-mgbottom">
+                <div class="pop-section no-pdtop">
+                    <section class="first">
+                        <div class="section-wrap">
+                            <div class="sec-Left">
+                                <div class="item-Left buld-name">
+                                    <span class="hs-badge" id="p_build_type"></span>
+                                </div>
+                                <div class="item-Left buld-name">
+                                    <span id="p_buildnm"></span>
+                                </div>
+                                <div class="item-Left buld-name">
+                                    <!--
+                                    <span class="hs-badge bg-red">신축</span>
+                                    <span class="hs-badge bg-red">분양권</span>
+                                    <span class="hs-badge bg-red">복층</span>
+                                    -->
+                                </div>
+                            </div>
+                            <div class="sec-Right">
+                                <div class="item-Right">
+                                    <span class="blit-icon empty-heart">
+                                        고객관심 <em class="c-red">0</em>
+                                        중개사관심 <em class="c-red">0</em>
+                                    </span>
+                                    <button type="button" id="btn_disp_complex" class="hs-button btn-lime btn-disp hidden">단지</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="section-driver">
+            </div>
+            <div class="pop-cont sm no-mgtop">
+                <div class="pop-section no-pdtop">
+                    <section class="first">
+                        <div class="section-wrap d-block">
+                            <div class="items-sidebar cell-4 no-pdtop">
+                                <div class="item">
+                                    <p class="item-sub" id="p_promise_de">-</p>
+                                    <p class="item-sub c-gray fs-13">사용 승인일</p>
+                                </div>
+                                <div class="item-bar"></div>
+                                <div class="item">
+                                    <p class="item-sub" id="p_hshldco">0세대</p>
+                                    <p class="item-sub c-gray fs-13">총 세대 수/단지 동</p>
+                                </div>
+                                <div class="item-bar"></div>
+                                <div class="item">
+                                    <p class="item-sub" id="p_domgco">0호실 / 0개동</p>
+                                    <p class="item-sub c-gray fs-13">총 상가 수/상가동</p>
+                                </div>
+                                <div class="item-bar"></div>
+                            </div>
+                            <!--
+                            <div class="items-sidebar cell-4 bg-gray">
+                                <div class="item">
+                                    <p class="item-sub">
+                                        <span class="c-gray"> 등록물건 </span>
+                                        <span class="mx-2 c-red">0</span>
+                                    </p>
+                                </div>
+                                <div class="item-bar"></div>
+                                <div class="item">
+                                    <p class="item-sub">
+                                        <span class="c-gray"> 등록매물 </span>
+                                        <span class="mx-2 c-red">0</span>
+                                    </p>
+                                </div>
+                                <div class="item-bar"></div>
+                                <div class="item">
+                                    <p class="item-sub">
+                                        <span class="c-gray"> 계약만료 </span>
+                                        <span class="mx-2 c-red">0</span>
+                                    </p>
+                                </div>
+                                <div class="item-bar"></div>
+                                <div class="item">
+                                    <p class="item-sub">
+                                        <span class="c-gray"> 네이버광고 </span>
+                                        <span class="mx-2 c-red">0</span>
+                                    </p>
+                                </div>
+                            </div>
+                            -->
+                        </div>
+                    </section>
+                </div>
+                <div class="tab-line bdtop-2" id="p_tab_items">
+                    <button class="btn-tab">등록정보</button>
+                    <button class="btn-tab">호실관리</button>
+                    <button class="btn-tab">매물통계</button>
+                    <button class="btn-tab">시세/실거래가</button>
+                    <button class="btn-tab">통합관리</button>
+                </div>
+                <div class="pop-section" id="dv_container">
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
     <script src="/js/common/homes-comm.js"></script>
     <script src="/js/common/homes-event-broker.js"></script>
+    <script src="/js/stuff/mystuff-003.js"></script>
     <script type="text/javascript">
-        var stuff = {
-            param: {},
-            data: {}
-        }
-
-        var fn_set_param = () => {
-            stuff.param = parent.fn_get_param() ; 
-        }
 
         $(document).ready(function() {
-            fn_set_param() ; 
+            build.info = parent.fn_get_param() ;             
+            $(".slide-abs-arrow").click(function() {
+                var has = $("#dv_dong_number").hasClass("open") ;
+                if ( has ) {
+                    $("#dv_dong_number").removeClass("open") ; 
+                    $(".slide-hddn-List").css("display", "none")
+                } else {
+                    $("#dv_dong_number").removeClass("open").addClass("open"); 
+                    $(".slide-hddn-List").css("display", "flex")
+                }
+            }) ;
+
+            $("div[id^=dnum_]").click(function() {
+                $("div[id^=dnum_]").each(function() {
+                    $(this).removeClass("selected") ; 
+                }) ;
+                $(this).addClass("selected") ; 
+                $("#dv_dongnm").text($(this).text()) ;
+            }) ;
+
+            fn_set_data() ; 
+            /* 제일처음 등록정보 로드 */ 
+            fn_pageLoad("310") ;
         }) ;
 
     </script>

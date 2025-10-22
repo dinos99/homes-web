@@ -113,6 +113,7 @@
             </div>
             <div class="info-wrapper">
                 <section id="sec_stuffList">
+                    <div id="dv_cplxList"></div>
                 </section>
                 <div class="no-item">
                     <img src="/images/no-item.png" alt="">
@@ -144,92 +145,86 @@
             broker = store.getItem("user") ; 
             broker.brkno = broker.userno ; 
             network.post("/stuff/stuffList", {
-                "brkno": broker.brkno
             }).then(response => {
                 stuff.data = response.data ; 
                 fn_set_List(stuff.data) ; 
-            }) ;
+            });
         }
+        var fn_set_cplxList = ( cplxList ) => {
+            $(".no-item").removeClass("hidden").addClass("hidden") ; 
+            $("#dv_cplxList").empty() ; 
+            cplxList.forEach( data => {
+                var vwrap = $("<div id='dv_buld_" + data.buldno + "' class='vertical-wrapper white-bg bd-5'/>") ;
+                var stitle = $("<div class='justify-between'/>") ;
+                var dv_hshld = $("<div/>") ; 
+                var span_3  = $("<span class='gray fs-13 fw-600' />") ; 
+                if ( data.estTy == 'EST113' || data.estTy == 'EST121' || data.estTy == 'EST123' ) span_3.text("호실") ; 
+                else span_3.text("세대") ; 
+                var span_4 = $("<span class='gray mx-1'/>") ; 
+                span_4.text(homes_comm.util.fn_format_number(data.hshldCo)) ;
+                var span_5 = $("<span class='gray'/>") ;
+                var span_6 = $("<span class='gray mx-1'/>") ;
+                span_5.text("• 단지동") ; 
+                span_6.text(homes_comm.util.fn_format_number(data.dongCo)) ; 
+                dv_hshld.append(span_3) ;
+                dv_hshld.append(span_4) ;
+                dv_hshld.append(span_5) ;
+                dv_hshld.append(span_6) ;
+                var dv_xxz = $("<div class='xxz mb4'/>") ; 
+                var dv_Left = $("<div class='left'/>") ; 
+                var p_1 = $("<p/>") ; 
+                var p_2 = $("<p/>") ; 
+                var p_3 = $("<p class='last'/>") ; 
+                p_1.html("등록물건 <span class='c-red'/>0</span/>") ; 
+                p_2.html("등록매물 <span class='c-red'/>0</span/>") ; 
+                p_3.html("계약만료 <span class='c-red'/>0</span/>") ; 
+                var dv_cusel = $("<div class='custom-select'/>") ; 
+                var dv_cuselVal = $("<div class='selected-value'/>") ; 
+                dv_cuselVal.append("<img src='/images/V.png' class='arrow' alt='V'/>") ; 
+                dv_cusel.append(dv_cuselVal) ;
+                dv_Left.append(p_1) ; 
+                dv_Left.append(p_2) ; 
+                dv_Left.append(p_3) ; 
+                dv_Left.append(dv_cusel) ; 
+                dv_xxz.append(dv_Left) ; 
+                var sp = $("<p class='title2 fs-14 fw-600' />") ;
+                var span_1 = $("<span class='hs-badge " + data.estColor + "'/>") ;
+                var span_2 = $("<span class='mx-1'/>") ; 
+                var imgLoc = $("<div class='img-box' />") ; 
+                imgLoc.html("<img src='/images/lock.png' alt='자물쇠' />")
+                
+                span_1.text(data.estTynm) ; 
+                span_2.text(data.buldnm) ; 
+                sp.append(span_1) ;
+                sp.append(span_2) ;
 
-        var fn_set_List = ( dataList ) => {
-            if ( !!dataList && dataList.length > 0 ) {
-                $(".no-item").removeClass("hidden").addClass("hidden") ; 
-                $("#sec_stuffList").empty() ; 
-                dataList.forEach(data => {
-//                    console.log(data) ;
-                    var vwrap = $("<div id='dv_buld_" + data.buldno + "' class='vertical-wrapper white-bg bd-5'/>") ;
-                    var stitle = $("<div class='justify-between'/>") ;
+                stitle.append(sp) ;
+                stitle.append(imgLoc) ;
+                vwrap.append(stitle) ; 
+                vwrap.append(dv_hshld) ; 
+                vwrap.append(dv_xxz) ; 
+                
+                vwrap.click(function() {
+                    fn_set_data(data) ;
+                    fn_pop_info(data) ;
+                }) ; 
+                
+                $("#dv_cplxList").append(vwrap) ; 
 
-                    var dv_hshld = $("<div/>") ; 
-                    var span_3  = $("<span class='gray fs-13 fw-600' />") ; 
-                    if ( data.cplxTy == 'EST113' || data.cplxTy == 'EST121' || data.cplxTy == 'EST123' ) {
-                        span_3.text("호실") ; 
-                    } else {
-                        span_3.text("세대") ; 
-                    }
-                    var span_4 = $("<span class='gray mx-1'/>") ; 
-                    span_4.text(homes_comm.util.fn_format_number(data.THshldCo)) ;
 
-                    var span_5 = $("<span class='gray'/>") ;
-                    var span_6 = $("<span class='gray mx-1'/>") ;
-                    span_5.text("• 단지동") ; 
-                    span_6.text(homes_comm.util.fn_format_number(data.TDongCo)) ; 
-
-                    dv_hshld.append(span_3) ;
-                    dv_hshld.append(span_4) ;
-                    dv_hshld.append(span_5) ;
-                    dv_hshld.append(span_6) ;
-
-                    var dv_xxz = $("<div class='xxz mb4'/>") ; 
-                    var dv_Left = $("<div class='left'/>") ; 
-                    var p_1 = $("<p/>") ; 
-                    var p_2 = $("<p/>") ; 
-                    var p_3 = $("<p class='last'/>") ; 
-                    p_1.html("등록물건 <span class='c-red'/>0</span/>") ; 
-                    p_2.html("등록매물 <span class='c-red'/>0</span/>") ; 
-                    p_3.html("계약만료 <span class='c-red'/>0</span/>") ; 
-                    var dv_cusel = $("<div class='custom-select'/>") ; 
-                    var dv_cuselVal = $("<div class='selected-value'/>") ; 
-                    dv_cuselVal.append("<img src='/images/V.png' class='arrow' alt='V'/>") ; 
-
-                    dv_cusel.append(dv_cuselVal) ;
-
-                    dv_Left.append(p_1) ; 
-                    dv_Left.append(p_2) ; 
-                    dv_Left.append(p_3) ; 
-                    dv_Left.append(dv_cusel) ; 
-                    dv_xxz.append(dv_Left) ; 
-
-                    var sp = $("<p class='title2 fs-14 fw-600' />") ;
-                    var span_1 = $("<span class='hs-badge " + data.estColor + "'/>") ;
-                    var span_2 = $("<span class='mx-1'/>") ; 
-                    var imgLoc = $("<div class='img-box' />") ; 
-                    imgLoc.html("<img src='/images/lock.png' alt='자물쇠' />")
-                    
-                    span_1.text(data.estnm) ; 
-                    span_2.text(data.buldnm) ; 
-                    sp.append(span_1) ;
-                    sp.append(span_2) ;
-
-                    stitle.append(sp) ;
-                    stitle.append(imgLoc) ;
-                    vwrap.append(stitle) ; 
-                    vwrap.append(dv_hshld) ; 
-                    vwrap.append(dv_xxz) ; 
-
-                    vwrap.click(function() {
-                        fn_set_data(data) ;
-                        fn_pop_info(data) ;
-                    }) ; 
-                    $("#sec_stuffList").append(vwrap) ; 
-                }) ;
+            }) ; 
+        }
+        var fn_set_List = ( data ) => {
+            var cplxList = data.cplxList ;
+            if ( !!cplxList && cplxList.length > 0 ) { 
+                fn_set_cplxList( cplxList ) ; 
             }
         }
 
         var fn_pop_info = ( data ) => {
             var ifrm = $("#ifrm_stuff_info") ; 
             if ( ifrm.length > 0 ) {
-
+                ifrm.attr("src", "/html/stuff/mystuff-003.html") ;
             } else {
                 var ifrm = $("<iframe class='pop-ifrm info' id='ifrm_stuff_info' src='/html/stuff/mystuff-003.html' />") ; 
                 $("body").append(ifrm) ;

@@ -1,4 +1,4 @@
-.navlink-active { color: #ff6161 !important; }
+.navlink-active { color: #ff5050 !important; }
 
 p.page-title { font-size:1.5em; }
 
@@ -91,7 +91,7 @@ table.table th.border-primary {
 /* bootstrap custom */
 .form-label.required::after {
   content: " *";
-  color:#ff6161 ;
+  color:#ff5050 ;
   font-weight: 900 ;
 }
 
@@ -414,7 +414,7 @@ a.ui-datepicker-prev-next {
 
 /* link-style */
 a.link-style { text-decoration: none; }
-a.link-style:hover { color: #ff6161; text-decoration: underline ;}
+a.link-style:hover { color: #ff5050; text-decoration: underline ;}
 
 a.link-style.bold { font-weight: 600; }
 
@@ -768,6 +768,7 @@ button.btn-naver {
   display: flex ;
   justify-content: center;
   align-items: center;
+  z-index: 1100;
 }
 .pop-area {
   background: #ffffff;
@@ -779,6 +780,7 @@ button.btn-naver {
   /* max-height: 578px; */
   min-height: 94px ;
   padding: 10px 0 24px 0; 
+  z-index: 1100;
 }
 
 .pop-area.wid-900px {
@@ -921,6 +923,7 @@ button.btn-naver {
   width: 300px ; 
   height: 150px ;
   padding: 24px 10px ; 
+  z-index: 1100;
 }
 
 .pop-alert .message {
@@ -994,6 +997,9 @@ button.btn-naver {
 
 .hs-label.room-number {
   cursor: pointer ; 
+  min-width: 65px;
+  /* text-align: left; */
+  font-size: 13px !important;
 }
 
 .hs-label.selected { 
@@ -1086,13 +1092,16 @@ button.btn-naver {
 
 .dong-matrix .buld .room.last { border-right: 1px solid #5f5f5f; }
 .dong-matrix .buld .room.empty { background: transparent; }
-.dong-matrix .buld .room.empty.nbdt { border-top: 0; }
-.dong-matrix .buld .room.empty.nbdl { border-left: 0; }
-.dong-matrix .buld .room.empty.nbdr { border-right: 0; }
+.dong-matrix .buld .room.nbdt { border-top: 0; }
+.dong-matrix .buld .room.nbdl { border-left: 0; }
+.dong-matrix .buld .room.nbdr { border-right: 0; }
 
 .dong-matrix .buld .room.etc-pps { background: var(--hs-color-lightblue); }
 .dong-matrix .buld .room.rest-space { background: #e6e6e6; }
+.dong-matrix .buld .room.empty-space { background: #eeeeee; }
 .dong-matrix .buld .room.done { background-color: var(--hs-color-lime) ; }
+.dong-matrix .buld .room.hover { background-color: var(--hs-pink-100) ; }
+.dong-matrix .buld .room.selected { background-color: var(--hs-color-red) ; }
 
 .box-category { 
   display:flex;

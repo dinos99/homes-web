@@ -198,20 +198,6 @@
                 }) ; 
             }) ; 
         }
-
-        /*
-        var fn_get_complexList = ( params ) => {
-            homes.network.post("/broker/complexList", {
-                "brkno" : params.brkno,
-                "arcd"  : params.arcd,
-                "legcd" : params.legcd
-            }).then( response => {
-                fn_set_complex_List( response.data ) ;
-            }).catch( error => {
-            }) ;
-        }
-        */
-
         var fn_get_complexList = () => {
             var cplxTy = p_data.cplxTy ;
             homes.network.post("/broker/complexList", {
@@ -220,50 +206,31 @@
                 "legcd": p_data.legcd
             }).then( response => {
                 var dataList = {
-                    mComplex: [],
-                    oComplex: [],
                     tComplex: []
                 }
                 if ( cplxTy == "00" ) { /* 전체 */
                     fn_set_complex_List( response.data ) ;
                 } else if ( cplxTy == "03" ) {
-                    dataList.mComplex = [] ;
-                    dataList.oComplex = [] ;
                     dataList.tComplex = [] ; 
-                    response.data.mComplex.filter( cplx => ( cplx.cplxTy == "EST113" || cplx.cplxTy == "EST121" )).forEach(cplx => {
-                        dataList.mComplex.push(cplx) ;
-                    }) ; 
-                    response.data.oComplex.filter( cplx => ( cplx.cplxTy == "EST113" || cplx.cplxTy == "EST121" )).forEach(cplx => {
-                        dataList.oComplex.push(cplx) ;
+                    response.data.tComplex.filter( cplx => ( cplx.cplxTy == "EST113" || cplx.cplxTy == "EST121" )).forEach(cplx => {
+                        dataList.tComplex.push(cplx) ;
                     }) ; 
                     fn_set_complex_List( dataList ) ;
                 } else if ( cplxTy == "05" ) { /* 빌라/연립 */ 
-                    dataList.mComplex = [] ;
-                    dataList.oComplex = [] ;
                     dataList.tComplex = [] ; 
-                    response.data.mComplex.filter( cplx => ( cplx.cplxTy == "EST114" || cplx.cplxTy == "EST115" )).forEach(cplx => {
-                        dataList.mComplex.push(cplx) ;
-                    }) ; 
-                    response.data.oComplex.filter( cplx => ( cplx.cplxTy == "EST114" || cplx.cplxTy == "EST115" )).forEach(cplx => {
-                        dataList.oComplex.push(cplx) ;
+                    response.data.tComplex.filter( cplx => ( cplx.cplxTy == "EST114" || cplx.cplxTy == "EST115" )).forEach(cplx => {
+                        dataList.tComplex.push(cplx) ;
                     }) ; 
                     fn_set_complex_List( dataList ) ;
                 } else if ( cplxTy == "09" ) { /* 미분류 */ 
-                    dataList.mComplex = [] ;
-                    dataList.oComplex = [] ;
                     dataList.tComplex = response.data.tComplex ; 
                     fn_set_complex_List( dataList ) ;
                 } else {
                     var ix = Number(cplxTy) ;
                     const estcd = [ "EST000", "EST111", "EST112", "EST113", "EST119", "EST114", "EST117", "EST118", "EST123", "EST999"]  ;
-                    dataList.mComplex = [] ;
-                    dataList.oComplex = [] ;
                     dataList.tComplex = [] ; 
-                    response.data.mComplex.filter( cplx => ( cplx.cplxTy == estcd[ix] )).forEach(cplx => {
-                        dataList.mComplex.push(cplx) ;
-                    }) ; 
-                    response.data.oComplex.filter( cplx => ( cplx.cplxTy == estcd[ix] )).forEach(cplx => {
-                        dataList.oComplex.push(cplx) ;
+                    response.data.tComplex.filter( cplx => ( cplx.cplxTy == estcd[ix] )).forEach(cplx => {
+                        dataList.tComplex.push(cplx) ;
                     }) ; 
                     fn_set_complex_List( dataList ) ;
                 }
@@ -275,13 +242,8 @@
         var fn_set_complex_List = ( complex ) => {
             $("#sec_cplxList").empty() ; 
             $("#sec_cplxList").append("<div class='title'>단지 선택</div>") ; 
-
-            var mComplex = complex.mComplex ; 
-            var oComplex = complex.oComplex ; 
             var tComplex = complex.tComplex ; 
             var tCnt = 0 ; 
-            tCnt += mComplex == null || mComplex.length == 0 ? 0 : mComplex.length ; 
-            tCnt += oComplex == null || oComplex.length == 0 ? 0 : oComplex.length ; 
             tCnt += tComplex == null || tComplex.length == 0 ? 0 : tComplex.length ; 
             if ( tCnt == 0 ) {
                 var no_cplx = $("<div class='cont first justify-center bg-gray' />") ; 
@@ -289,58 +251,11 @@
                 $("#sec_cplxList").append(no_cplx) ;
                 return ; 
             }
-
-            mComplex.forEach(cp => {
-                var div_cont = $("<div class='cont justify-between bg-light-blue'/>") ;
-                var desc = $("<div class='desc no-width'/>") ; 
-                var html =  cp.cplxnm + " / " + cp.cplxTyNm + " / " ; 
-
-                html += homes_comm.util.fn_format_number(cp.cplxDongCo) + "개동 " ;
-                if ( cp.cplxTy == 'EST113' || cp.cplxTy == 'EST121' || cp.cplxTy == 'EST123' ) {
-                    html += homes_comm.util.fn_format_number(cp.cplxHshldCo) + "호실  " ;
-                } else {
-                    html += homes_comm.util.fn_format_number(cp.cplxHshldCo) + "세대 " ;
-                }
-                desc.html(html) ;
-
-                var field = $("<div class='fields'/>") ; 
-                var button =$("<button type='button' class='hs-button btn-lime'>등록완료</button>") ; 
-                field.append("등록완료 / " + cp.crde) ; 
-
-                div_cont.append(desc) ;
-                div_cont.append(field) ;
-                $("#sec_cplxList").append(div_cont) ;
-
-            }) ;
-            
-            oComplex.forEach(cp => {
-                var div_cont = $("<div class='cont justify-between bg-gray'/>") ;
-                var desc = $("<div class='desc no-width'/>") ; 
-                var html =  cp.cplxnm + " / " ; 
-                if (cp.cplxTy == "CPX999") {
-                    html += "<span class='c-red'>미분류</span> / "
-                } else {
-                    html += "<span>" + cp.cplxTyNm + "</span> / " 
-                }
-                html += homes_comm.util.fn_format_number(cp.cplxDongCo) + "개동 " ;
-                if ( cp.cplxTy == 'EST113' || cp.cplxTy == 'EST121' || cp.cplxTy == 'EST123' ) {
-                    html += homes_comm.util.fn_format_number(cp.cplxHshldCo) + "호실  " ;
-                } else {
-                    html += homes_comm.util.fn_format_number(cp.cplxHshldCo) + "세대 " ;
-                }
-                desc.html(html) ;
-
-                var field = $("<div class='fields'/>") ; 
-                var button =$("<button type='button' class='hs-button btn-lime'>단지등록</button>") ; 
-                field.append(button) ; 
-
-                div_cont.append(desc) ;
-                div_cont.append(field) ;
-                $("#sec_cplxList").append(div_cont) ;
-
-            }) ;
             tComplex.forEach(cp => {
                 var div_cont = $("<div class='cont justify-between bg-gray'/>") ;
+                if ( cp.isMine == "Y" ) {
+                    div_cont = $("<div class='cont justify-between bg-light-blue'/>") ;
+                }
                 var desc = $("<div class='desc no-width'/>") ; 
                 var html =  cp.cplxnm + " / " ; 
                 if (cp.cplxTy == "CPX999") {
@@ -359,6 +274,10 @@
                 var field = $("<div class='fields'/>") ; 
                 var button =$("<button type='button' class='hs-button btn-lime'>단지등록</button>") ; 
                 field.append(button) ; 
+                if ( cp.isMine == "Y" ) {
+                    field = $("<div class='fields'/>") ; 
+                    field.append("등록완료 / " + cp.crde) ; 
+                }
 
                 div_cont.append(desc) ;
                 div_cont.append(field) ;
@@ -366,6 +285,7 @@
                 button.click(function() {
                     fn_pop_complex_setting({
                         "cplxno"  : cp.cplxno, 
+                        "buldno"  : cp.buldno,
                         "areacode": p_data.areacode,
                         "arcd"    : p_data.arcd,
                         "legcd"   : p_data.legcd,

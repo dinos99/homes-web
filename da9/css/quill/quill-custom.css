@@ -8,3 +8,11 @@
 .ql-editor p {
     line-height: 2 !important;
 }
+
+.ql-container.view {
+    border: 0;
+}
+
+.ql-container.view .ql-editor { 
+    padding: 0;
+}

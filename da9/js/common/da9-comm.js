@@ -1,13 +1,13 @@
 const w_set = [
     { icon: "", text: "" },
-    { icon: "bi-sun-fill", text: "햇볕은 쨍쨍" },
-    { icon: "bi-cloud-sun-fill", text: "구름 조금" },
-    { icon: "bi-cloudy-fill", text: "흐림" },
-    { icon: "bi-clouds-fill", text: "곧 비올듯" },
-    { icon: "bi-cloud-rain-fill", text: "어라? 비가 내리네?" },
-    { icon: "bi-cloud-rain-heavy-fill", text: "비가 퍼붓는데?" },
-    { icon: "bi-cloud-sleet-fill", text: "비도오고 눈도오고" },
-    { icon: "bi-cloud-snow-fill" ,text: "눈이내린다!" }
+    { icon: "bi-sun-fill", text: "햇볕은 쨍쨍", color:"text-orange" },
+    { icon: "bi-cloud-sun-fill", text: "구름 조금", color:"text-orange" },
+    { icon: "bi-cloudy-fill", text: "흐림", color:"text-gray" },
+    { icon: "bi-clouds-fill", text: "곧 비올듯", color:"text-gray" },
+    { icon: "bi-cloud-rain-fill", text: "어라? 비가 내리네?", color:"text-gray" },
+    { icon: "bi-cloud-rain-heavy-fill", text: "비가 퍼붓는데?", color:"text-gray" },
+    { icon: "bi-cloud-sleet-fill", text: "비도오고 눈도오고", color:"text-gray" },
+    { icon: "bi-cloud-snow-fill" ,text: "눈이내린다!", color:"text-gray" }
 ] ;
 const f_set = [
     { icon: "", text: "" },
@@ -54,16 +54,17 @@ const da9comm = {
         fn_create_header: menu => {
             var header = $("#d_header") ; 
             header.load("/html/common/header-top.html", () => {
-                $("#btn_Logo").text("@Brother da-9") ;
+                $("#btn_Logo").text("s-Log") ;
                 $("a[id^=nav_]").removeClass("active") ;
                 $("a[id^=nav_]").removeAttr("aria-current") ;
 
                 $("#nav_" + menu).addClass("active") ;
                 $("#nav_" + menu).attr("aria-current", "page") ;
-
+                /*
                 $("#d_profile").click(function() {
                     $(".d-profile-menu").toggle() ;
                 }) ;
+                */
             }) ; 
         }
     }, 

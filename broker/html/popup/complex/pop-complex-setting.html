@@ -61,7 +61,7 @@
         }
     } ; 
     
-    fn_set_comm_house = ( dataList ) => {
+    var fn_set_comm_house = ( dataList ) => {
         $("#comm_house").empty() ; 
         if ( !!dataList && dataList.length > 0 ) {
             dataList.forEach( data => {
@@ -71,7 +71,7 @@
             }) ; 
         }
     }
-    fn_set_comm_buld = ( dataList ) => {
+    var fn_set_comm_buld = ( dataList ) => {
         $("#comm_buld").empty() ; 
         if ( !!dataList && dataList.length > 0 ) {
             dataList.forEach( data => {
