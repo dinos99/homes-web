@@ -1,0 +1,146 @@
+<div class="pop-area default">
+    <div class="pop-cont-wrap">
+        <p class="title">부동산 구분</p>
+        <div class="">
+            <table class="table-01">
+                <tbody>
+                    <tr class="hidden" id="buldgb_2_1">
+                        <th rowspan="2">집합건물</th>
+                        <th>공동주택</th>
+                        <td><div id="dv_EST110"></div></td>
+                    </tr>
+                    <tr class="hidden" id="buldgb_2_2">
+                        <th>공동건물</th>
+                        <td><div id="dv_EST120"></div></td>
+                    </tr>
+                    <tr class="hidden" id="buldgb_1_1">
+                        <th rowspan="2">단독건물</th>
+                        <th>일반주택</th>
+                        <td><div id="dv_EST210"></div></td>
+                    </tr>
+                    <tr class="hidden" id="buldgb_1_2">
+                        <th>일반건물</th>
+                        <td><div id="dv_EST220"></div></td>
+                    </tr>
+                    <tr class="hidden" id="buldgb_3_1">
+                        <th colspan="2">토지</td>
+                        <td>
+                            <div class="d-flex" id="dv_EST310">
+                                <button type="button" id="btn_EST310" class="hs-check-button">토지선택</button>
+                                <select class="form-select" id="sel_EST310" disabled="disabled">
+                                    <option value="" selected="">토지선택 선택</option>
+                                    <option value="EST311">대</option>
+                                    <option value="EST312">산</option>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2"><span class='c-red'>안내</span></td>
+                        <td> 건물유형 또는 지목을 선택 후, 확인을 클릭하십시오. </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="py-3 justify-between">
+                <button id="btn_cancel" class="hs-button btn-cancel" disabled="disbled">취소</button>
+                <button id="btn_pop_ppscd_ok" class="hs-button btn-blue"   disabled="disbled">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var ppsList = {} ; 
+    var thispop = {
+        popid: "pop_ppscd",
+        params:  homes_comm.popup.param_data["pop_ppscd"].params,
+        data: {}
+    }
+    var fn_filtering = ( dataList, ppscd ) => {
+        ppsList[ppscd] = [] ; 
+        return new Promise(resolve => {
+            dataList.filter(ppscode => (ppscode.ppsCd02 == ppscd))
+            .forEach(ppscode => {
+                ppsList[ppscd].push(ppscode) ; 
+                if ( ppscd != "EST310") {
+                    var button = $("<button type='button' id='btn_" + ppscode.ppsCd03 + "' class='hs-check-button' data-ppscd='" + ppscode.ppsCd03 + "'>" + ppscode.ppsNm03 + "</button>") ; 
+                    $("#dv_" + ppscode.ppsCd02).append(button) ; 
+                    
+                    button.click(function() {
+                        var pcode = $(this).attr("data-ppscd") ; 
+                        fn_set_ppscd(pcode)
+                    }) ; 
+                }
+            }) ; 
+            resolve(ppsList[ppscd]) ; 
+        }) ;
+    }
+    fn_init_button = () => {
+        $("button[id^=btn_EST]").removeClass("active") ; 
+        $("#sel_EST310").val("") ; 
+        $("#sel_EST310").attr("disabled", "disabled") ;
+        $("#btn_pop_ppscd_ok").attr("disabled", "disabled") ;
+        $("#btn_cancel").attr("disabled", "disabled") ;
+    }
+    fn_set_ppscd = ( ppscd ) => {
+        console.log("*** ppscd:" + ppscd ) ;
+        fn_init_button() ;
+        $("#btn_" + ppscd).addClass("active") ;
+        if ( ppscd == "EST310" ) {
+            $("#sel_EST310").removeAttr("disabled") ;
+        }
+        if ( ppscd != "EST310") {
+            thispop.data.ppscd = ppscd ; 
+            $("#btn_pop_ppscd_ok").removeAttr("disabled") ;
+            $("#btn_cancel").removeAttr("disabled") ;
+        } 
+        if ( ppscd == "EST311" || ppscd == "EST312" ) {
+            $("#sel_EST310").removeAttr("disabled") ;
+            $("#sel_EST310").val(ppscd) ;
+        }
+        homes_comm.popup.pop_data["pop_ppscd"] = {
+            "ppsList": ppsList,
+            "ppscd"  : ppscd
+        } ; 
+    }
+    fn_set_buldgb = () => {
+        console.log(thispop.params.buldgb) ; 
+        var buldgb = thispop.params["buldgb"] ; 
+        if ( !!buldgb ) {
+            $("tr[id^=buldgb_" + buldgb + "]").removeClass("hidden")
+        } else {
+            $("tr[id^=buldgb_]").removeClass("hidden")
+        }
+    } ; 
+    fn_set_event = () => {
+        $("#btn_EST310").click(function() {
+            fn_set_ppscd("EST310") ;
+        }) ; 
+        $("#sel_EST310").change(function() {
+            var sel = $(this).val() ; 
+            if (sel != "") {
+                fn_set_ppscd(sel) ;
+            }
+        }) ;
+    }
+    $(document).ready(function() {
+        fn_set_buldgb() ; 
+        homes_comm.fn_get_ppscdList({
+
+        }).then(response => {
+            var dataList = response.data ; 
+            fn_filtering(dataList, "EST110", {
+            }).then(result => {
+                return fn_filtering(dataList, "EST120")  ; 
+            }).then(result => {
+                return fn_filtering(dataList, "EST210")  ; 
+            }).then(result => {
+                return fn_filtering(dataList, "EST220")  ; 
+            }).then(result => {
+                return fn_filtering(dataList, "EST310")  ; 
+            }).then(result => { 
+                fn_set_event() ;
+                homes_comm.popup.pop_set_center(thispop.popid) ; 
+            }); 
+        }) ;
+    }) ; 
+</script>

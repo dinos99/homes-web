@@ -17,6 +17,8 @@
     --hs-color-646f7c: #646f7c;
     --hs-color-3ec729: #3ec729;
 
+    --hs-color-naver: #92d050;
+
     --hs-hover-color-blue: #f6faff;
     --hs-table-header-color: #f6faff;
 
@@ -68,6 +70,9 @@
     --hs-border-color: #ededed; 
     --hs-darker-border-color: #c6c6c6; 
     --hs-border-top-color: #ededed ;
+
+    /* background-color */
+    --hs-bg-gray: #f9fafa ;
 }
 
 .fs-12 { font-size: var(--hs-fs-12) !important; }

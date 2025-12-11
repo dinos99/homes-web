@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ko" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈즈프로 나의물건</title>
+    <link rel="icon" href="/images/logo_homes_pro_32.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/logo_homes_pro_32.png" type="image/x-icon">
+
+    <!-- bootstrap 5.3.5 -->    
+    <script src="/js/extern/bootstrap-5.3.5/assets/js/color-modes.js"></script>
+    <link href="/js/extern/bootstrap-5.3.5/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- kakao map api -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e23a8c880d6b5fcb0f9af25ed39b0b10&libraries=services,clusterer,drawing"></script>
+
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/variables.css">
+
+    <link rel="stylesheet" href="/css/homes.broker.style.css">
+    
+</head>
+<body>
+    <div class="popup">
+        <header class="pop-header">
+            <div class="pop-cont">
+                <div class="pop-title">
+                    <h3>물건등록</h3>
+                </div>
+            </div>
+            <div class="pop-help">
+                <button class="hs-button btn-lime play">도움말</button>
+            </div>
+            <button id="btn_close" class="btn-close-x"></button>
+        </header>
+        <div class="pop-container">
+            <div class="pop-cont">
+                <div class="tab-line">
+                    <button class="btn-tab">단지 물건</button>
+                    <button class="btn-tab active">단지외 물건</button>
+                </div>
+                <div class="pop-section">
+                    <section class="first">
+                        <div class="title">지역/단지구분 선택</div>
+                        <div class="cont first bg-gray">
+                            <div class="label"> 지역 </div>
+                            <div class="fields">
+                                <div class="btn-select no-max-width" id="btn_popArea">
+                                    <div class="btn-select-text"> 
+                                        <span id="p_brk_sdnm">서울특별시</span> &gt; 
+                                        <span id="p_brk_sggnm">송파구</span> &gt;
+                                        <span id="p_brk_emdnm">잠실동</span>
+                                        <input type="hidden" id="p_brk_arcode"/>
+                                    </div>
+                                    <div class="btn-select-arrow"><img src="/images/V.png" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cont bg-gray">
+                            <div class="label"> 단지구분 </div>
+                            <div class="fields" id="btn_chk_complex">
+                                <button type="button" class="hs-check-button active" id="btn_cpx_00">전체</button>
+                                <button type="button" class="hs-check-button" id="btn_cpx_01">아파트</button>
+                                <button type="button" class="hs-check-button" id="btn_cpx_02">주상복합</button>
+                                <button type="button" class="hs-check-button" id="btn_cpx_03">오피스텔</button>
+                                <button type="button" class="hs-check-button" id="btn_cpx_04">레지던스</button>
+                                <button type="button" class="hs-check-button" id="btn_cpx_05">빌라/연립</button>
+                                <button type="button" class="hs-check-button" id="btn_cpx_06">도시형 생활주택</button>
+                                <button type="button" class="hs-check-button" id="btn_cpx_07">타운하우스</button>
+                                <button type="button" class="hs-check-button" id="btn_cpx_08">지식산업센터</button>
+                                <button type="button" class="hs-check-button" id="btn_cpx_09">미분류</button>
+                            </div>
+                        </div>
+                        <div class="cont bg-gray">
+                            <div class="label separate c-red"> 안내 </div>
+                            <div class="desc info-text">
+                                <p>
+                                    <span>단지 등록후, 해당</span>
+                                    <span class="c-red">단지 정보에서 보유한 호실(물건)을 추가하고 이를 매물로 등록</span>
+                                    <span>할 수 있습니다.(단지 내 상가도 단지에 포함되어 등록가능합니다.)</span>
+                                </p>
+                                <p>
+                                    <span class="c-red">집합건물은 모두 기본적으로 [미분류]상태로 표시</span>
+                                    <span>되며, 단지 등록과정에서 직접 부동산구분을 선택하시면,</span>
+                                    <span class="c-red">선택한 구분에 따라 단지포함여부가 판단</span><span>되고</span>
+                                </p>
+                                <p>
+                                    <span class="c-red">홈즈평점이 제공</span><span>됩니다.</span>
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="sec_cplxList">
+                        <div class="title">단지 선택</div>
+                        <div id="no_complex" class="cont first justify-center bg-gray">
+                            해당 지역에 등록된 단지가 없습니다.
+                        </div>
+                        <!--
+                        <div class="cont justify-between bg-gray">
+                            <div class="desc no-width">
+                                갤러리아 펠리스 / 주상복합 / 1개동 / 129세대 
+                            </div>
+                            <div class="fields">
+                                <button class="hs-button btn-lime">단지등록</button>
+                            </div>
+                        </div>
+                        <div class="cont justify-between bg-gray">
+                            <div class="desc no-width">
+                                갤러리아 펠리스 / <span class="c-red">미분류</span> / 1개동 / 129세대
+                            </div>
+                            <div class="fields">
+                                <button class="hs-button btn-lime">단지등록</button>
+                            </div>
+                        </div>
+                        <div class="cont justify-between bg-gray">
+                            <div class="desc no-width">
+                                잠실1단지 아파트 / -개동 / -세대 
+                                <span class="c-red">[단지등록요청-단지정보 등록예정]</span>
+                            </div>
+                            <div class="fields">
+                                <button class="hs-button btn-lime">단지등록</button>
+                            </div>
+                        </div>
+                        -->
+                    </section>
+                </div>
+            </div>
+            <div class="pop-footer">
+                <footer>
+                    <div class="inner">
+                        <div class="top">
+                            <div class="left">
+                                <a href="#"><img src="/images/footer-logo.png" alt=""></a>
+                                <a href="#">이용약관</a>
+                                <a href="#">개인정보처리방침</a>
+                                <a href="#">부동산 관리규정</a>
+                                <a href="#">신규단지 등록요청</a>
+                                <a class="gray" href="#">원격지원</a>
+                                <a class="gray" href="#">중개사 모집</a>
+                            </div>
+                            <div class="right">
+                                <a href="#"><img src="/images/footer-instargram.png" alt=""></a>
+                                <a href="#"><img src="/images/footer-youtube.png" alt=""></a>
+                                <a href="#"><img src="/images/footer-facebook.png" alt=""></a>
+                                <a href="#"><img src="/images/footer-naver.png" alt=""></a>
+                            </div>
+
+                        </div>
+                        <div class="bottom">
+                            <div class="left">
+                                <div class="f1">(주)아이비소프트</div>
+                                <div class="f2">대표: 김종진 <div class="x-margin"></div> 사업자등록번호: 212-26-29838 <br>
+                                    주소: 서울시 강동구 양재대로 1334(성내동 429-3) 동부빌딩 406호 <br>
+                                    사업 제휴문의: biz@ibsoft.co.kr 통신판매업 신고번호: 제2019-서울강동-0000호</div>
+                                <div class="f3">IBsoft, Inc. All rights reserved.</div>
+                            </div>
+                            <div class="right">
+                                <div class="f4">홈즈 매물 관리센터</div>
+                                <div class="f5">전화문의 안내</div>
+                                <div class="f6">고객지원 시간 10:00~18:00 <br>
+                                    점심시간 12:00~13:00 <br>
+                                    (토요일, 일요일, 공휴일 휴무)</div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <script src="/js/common/homes-comm.js"></script>
+    <script src="/js/common/homes-event-broker.js"></script>
+    <script src="/js/stuff/mystuff-004.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            fn_init_popup("mystuff-004") ; 
+        }) ;
+    </script>
+</body>
+</html>

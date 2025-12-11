@@ -1,0 +1,179 @@
+<section class="first">
+    <div class="title">물건주소</div>
+    <div class="cont first">
+        <div class="addres-map">
+            <div class="adress">
+                <div class="field bg-gray h-60px">
+                    <div class="label"> 주소검색 </div>
+                    <div class="label-field">
+                        <div class="search-box">
+                            <input type="text" id="text_cplx_addr" class="search-bar" placeholder="예)단지명,건물명,지번,도로명주소 검색" value="방이동 89"/>
+                            <button type="button" class="search-btn" id="btn_addr_search">
+                                <img src="/images/btn-search-green.png" alt="검색" id="btn_search_del"/>
+                            </button>
+                            <!--
+                            <button type="button" id="btn_kakao_map" class="hs-button btn-lime">주소검색</button>
+                            -->
+                            <div class="addr-search-result">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field bg-gray h-80px">
+                    <div class="label"> 검색주소 </div>
+                    <div class="label-field" id="dv_map_result">
+                        등록할 물건의 주소를 검색하십시오.
+                    </div>
+                </div>
+                <div class="field bg-gray h-80px">
+                    <div class="label">
+                        <input type="checkbox" id="check_extra" class="custom-checkbox">
+                        <label for="check_extra" class="checkbox-label">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-text fs-13 c-gray">별도검색</span>
+                        </label>
+                    </div>
+                    <div class="label-field">
+                        <div class="d-block">
+                            <p>주소가 검색되지 않았을경우 <span class="c-blue">[별도검색]</span>을 선택하고 다시 입력하십시오.</p>
+                            <p>토지는 <span class="c-blue">[별도검색]</span>을 선택하셔야 주소가 검색될 수 있습니다.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="addr-map" id="addr_map">
+                <div class="map-info">
+                    <div class="d-block tac">
+                        <p class="my-2">※ 주소를 검색하면</p>
+                        <p class="my-2">해당위치의 주소가 지도에 표시됩니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="sc_buld_info" class="hidden">
+    <div class="title">통합정보</div>
+    <div class="cont first bg-gray">
+        <div class="label"> 주소 </div>
+        <div class="fields">
+            <span id="sp_buld_arname"></span>
+            <span id="sp_buld_bunji" class="c-red"></span>
+            <span id="sp_buld_buldnm" class=""></span>
+        </div>
+    </div>
+    <div class="cont first bg-gray">
+        <div class="label required"> 부동산 구분 </div>
+        <div class="fields" id="dv_ppscode">
+        </div>
+    </div>
+    <div id="dv_info_01" class="cont bg-gray">
+        <div class="label separate c-red"> 안내 </div>
+        <div class="fields">
+            <span class="">등록할 물건의 부동산 구분을 입력하십시오.</span>
+        </div>
+    </div>
+    <div id="dv_buldnm" class="cont first bg-gray hidden">
+        <div class="label"> 단지(건물)명 </div>
+        <div class="w-350px fields separate" id="dv_buld_buldnm">단지외</div>
+        <div class="label"> 사용(승인)일 </div>
+        <div class="fields" id="dv_buld_cfmvinde">-</div>
+    </div>
+    <div id="dv_buldco" class="cont bg-gray hidden">
+        <div class="label"> 총 동수</div>
+        <div class="w-350px fields separate" id="dv_buld_buldco"> - </div>
+        <div class="label" id="dv_buld_floor_label"></div>
+        <div class="fields" id="dv_buld_floorco"> - </div>
+    </div>
+    <!-- 공동주택인 경우 -->
+    <div id="dv_comm_house" class="cont bg-gray hidden">
+        <div class="label">세대수</div>
+        <div class="w-350px fields separate" id="dv_buld_hshldco"> - </div>
+        <div class="label">비주거호실</div>
+        <div class="fields"> - </div>
+    </div>
+    <!-- 일반주택인 경우 -->
+    <div id="dv_house" class="cont bg-gray hidden">
+        <div class="label">가구수</div>
+        <div class="w-350px fields separate" id="dv_buld_fmlyco"> - </div>
+        <div class="label">비주거호실</div>
+        <div class="fields"> - </div>
+    </div>
+    <!-- 일반건물 or 공동건물인 경우 -->
+    <div id="dv_building" class="cont bg-gray hidden">
+        <div class="label">호실수</div>
+        <div class="w-350px fields separate"> - </div>
+        <div class="label">호실용도</div>
+        <div class="fields"> - </div>
+    </div>
+    <div id="dv_parkingco" class="cont bg-gray hidden">
+        <div class="label">총 주차수</div>
+        <div class="w-350px fields separate" id="dv_buld_parkingco"> - </div>
+        <div class="label">대지면적</div>
+        <div class="fields" id="dv_buld_platAr">
+            <span id="sp_unit_platAr"> - </span>
+            <span id="sp_unit_mp_platAr"></span>
+        </div>
+    </div>
+    <div id="dv_area" class="cont bg-gray hidden">
+        <div class="label">건축면적</div>
+        <div class="w-350px fields separate" id="dv_unit_buldAr">
+            <span id="sp_unit_buldAr"> - </span>
+            <span id="sp_unit_mp_buldAr"></span>
+        </div>
+        <div class="label">연면적</div>
+        <div class="fields" id="dv_unit_totalAr">
+            <span id="sp_unit_totalAr"> - </span>
+            <span id="sp_unit_mp_totalAr"></span>
+        </div>
+    </div>
+    <div id="dv_info_02" class="cont bg-gray hidden">
+        <div class="label separate c-red"> 안내 </div>
+        <div class="fields">
+            <span class="">해당정보의
+            <em class="c-red">수정이 필요할 경우</em>
+            물건을 등록 후, 물건의
+            <em class="c-red">[통합관리]</em>에서
+            <em class="c-red">[건축물정보 관리]</em>또는
+            <em class="c-red">[건축물정보 수정요청]</em>을 통해
+            수정요청 하실 수 있습니다.
+        </div>
+    </div>
+    <div id="dv_buld_single" class="hidden"></div>
+</section>
+<section id="sc_dong_info" class="hidden">
+    <div class="title">동(건물)정보</div>
+    <div class="cont first bg-light-blue">
+        <div class="label"> 동(건물) 수 </div>
+        <div class="fields" id="dv_bdong_dongco">
+        </div>
+    </div>
+    <div id="dv_dong_List">
+        <div id="dv_dong_1111" class="cont justify-between bg-gray">
+            <div class="label">동(건물)명</div>
+            <div class="w-150px fields separate" id=""> 102동
+            </div>
+            <div class="w-150px label">지상/지하층</div>
+            <div class="w-150px fields separate" id=""> 24층 / 1층
+            </div>
+            <div class="w-150px label">엘레베이터</div>
+            <div class="w-150px fields" id="">
+                <span class="c-blue">있음</span>
+            </div>
+        </div>
+    </div>
+    <div id="dv_info_03" class="cont bg-gray hidden">
+        <div class="label separate c-red"> 안내 </div>
+        <div class="fields">
+            <span class="">해당정보의
+            <em class="c-red">수정이 필요할 경우</em>
+            물건을 등록 후, 물건의
+            <em class="c-red">[통합관리]</em>에서
+            <em class="c-red">[건축물정보 관리]</em>또는
+            <em class="c-red">[건축물정보 수정요청]</em>을 통해
+            수정요청 하실 수 있습니다.
+        </div>
+    </div>
+</section>
+<script src="/js/stuff/mystuff-220.js"></script>

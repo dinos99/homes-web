@@ -1,0 +1,1 @@
+var _MESSAGE_REQUIRED_ADDR_ = "주소를 입력하여 주십시오." ; 

@@ -7,7 +7,9 @@ stuff_310.ownList = [] ;
 
 stuff_310.fn_page_onLoad = ( params ) => {
     stuff_310.params = params ; 
+    console.log(stuff_310.params) ;
     stuff_310.data.cplxno = params.cplxno ; 
+    stuff_310.data.buldno = params.buldno ; 
     /* 공통코드 조회 */
     fn_get_commcode(["OWT", "TCM"]).then(data => {
         commcode = data ; 
@@ -17,8 +19,53 @@ stuff_310.fn_page_onLoad = ( params ) => {
         /* 단지 소유주 목록 조회 */ 
         return stuff_310.fn_get_ownerList( params ) ; 
     }).then(response => {
+        /* 소유주 목록 조회 */ 
         stuff_310.fn_set_owner(response.data) ;
     }) ;
+
+    $("#btn_insert_stuff").attr("disabled", "disabled") ;
+    $("#btn_insert_stuff").click(function() {
+        stuff_310.fn_save_data() ;
+    }) ; 
+}
+
+/* 가능하면 제일 마지막에 조회할것 */ 
+stuff_310.fn_get_brkstuff = () => {
+    var buldno = stuff_310.params.buldno ; 
+    homes_comm.network.post("/stuff/brker-stuff", {
+        "buldno": buldno 
+    }).then(response => {
+        stuff_310.fn_set_brkstuff(response.data) ;
+    }) ; 
+}
+
+stuff_310.fn_set_brkstuff = ( sfList ) => {
+    stuff_310.data.stuffList = sfList ;
+    var psb_save = false ; 
+    sfList.forEach(stuff => {
+        var dv_stuff = $("div[id$=" + stuff.buldno + "_" + stuff.pssionno + "]") ; 
+        if ( dv_stuff.length > 0 ) {
+            dv_stuff.removeClass() ; 
+            dv_stuff.addClass("room") ;
+            dv_stuff.attr("data-stuffno", stuff.stuffno) ; 
+            dv_stuff.off("click") ; 
+            dv_stuff.hover(function() {
+                $(this).removeClass("hover").addClass("done") ;
+            }, function() {
+                $(this).removeClass("hover").addClass("done") ;
+            }); 
+            if ( stuff.sfsttus == "D") {
+                dv_stuff.removeClass("selected").addClass("done") ; 
+            } else if ( stuff.sfsttus == "T" ) {
+                dv_stuff.removeClass("selected").addClass("selected") ;
+                psb_save = true ;  
+            }
+
+            var grpid  = dv_stuff.attr("id").split("_").splice(0,3).join("_") ; 
+            var isLast = $("div[id^=" + grpid + "]").length == dv_stuff.index() ; 
+            if ( isLast ) dv_stuff.addClass("last") ; 
+        }
+    }) ; 
 }
 
 
@@ -96,7 +143,8 @@ stuff_310.fn_get_floor = ( buldno ) => {
         "buldno": buldno 
     }).then(response => {
         stuff_310.data = response.data ;
-        stuff_310.data.cplxno = stuff_310.params.cplxno 
+        stuff_310.data.buldno = response.data.buldno ; 
+        stuff_310.data.cplxno = response.data.cplxno 
         $("#text_floor_co").text(stuff_310.data.floor.floorCo) ;
         var underCo = stuff_310.data.under.floorCo ; 
         if ( !!!underCo || underCo == 0) {
@@ -150,22 +198,17 @@ stuff_310.fn_set_under = () => {
                         var dv_room  = $("<div class='room' />") ;
                         dv_room.text(floor[r].roomNm) ; 
                         dv_room.attr("id", "room_" + flno + "_" + floor[r].buldno + "_" + floor[r].pssionno) ;
-                        if ( floor[r].stuffno != "0" && floor[r].sfsttus == "D") {
-                            dv_room.addClass("done") ;
-                        } else if ( floor[r].stuffno != "0" && floor[r].sfsttus == 'T' ) {
-                            dv_room.addClass("selected") ; 
-                        } else {
-                            /* under *********************************/
-                            dv_room.addClass("cursor-hand") ;
-                            dv_room.click(function() {
-                                $(this).addClass("selected") ;
-                                $(this).removeClass("cursor-hand") ; 
-                                $(this).off("click") ;
-                                stuff_310.fn_set_owndata($(this).attr("id"), "floor").then(response => {
-                                    stuff_310.fn_set_owner(response.data) ;
-                                }) ; 
-                            }) ;
-                        }
+                        /* under *********************************/
+                        dv_room.addClass("cursor-hand") ;
+                        dv_room.click(function() {
+                            $(this).addClass("selected") ;
+                            $(this).removeClass("cursor-hand") ; 
+                            $(this).off("click") ;
+                            stuff_310.fn_set_owndata($(this).attr("id"), "floor").then(response => {
+                                stuff_310.fn_set_owner(response.data) ;
+                                stuff_310.fn_get_brkstuff() ;
+                            }) ; 
+                        }) ;
                         dv_fbox.append(dv_room) ;
                     } else {
                         var dv_room  = $("<div class='room' />") ;
@@ -209,27 +252,23 @@ stuff_310.fn_set_floor = () => {
                     if ( !!floor[r].roomNm ) {
                         dv_room.attr("id", "room_" + flno + "_" + floor[r].buldno + "_" + floor[r].pssionno) ;
                         dv_room.text(floor[r].roomNm) ; 
-                        if ( floor[r].stuffno != "0" && floor[r].sfsttus == "R" ) {
-                            dv_room.addClass("done") ;
-                        } else if ( floor[r].stuffno != "0" && floor[r].sfsttus == 'T' ) {
-                            dv_room.addClass("selected") ; 
-                        } else {
-                            /* floor *********************************/
-                            dv_room.addClass("cursor-hand") ;
-                            dv_room.hover(function() {
-                               $(this).addClass("hover") ;
-                            }, function() {
-                               $(this).removeClass("hover") ;
+                        /* floor *********************************/
+                        dv_room.addClass("cursor-hand") ;
+                        dv_room.hover(function() {
+                            $(this).addClass("hover") ;
+                        }, function() {
+                            $(this).removeClass("hover") ;
+                        }) ; 
+                        dv_room.click(function() {
+                            $(this).addClass("selected") ;
+                            $(this).removeClass("cursor-hand") ; 
+                            $(this).off("click") ;
+                            stuff_310.fn_set_owndata($(this).attr("id"), "floor").then(response => {
+                                stuff_310.fn_set_owner(response.data) ;
+                                stuff_310.fn_get_brkstuff() ;
                             }) ; 
-                            dv_room.click(function() {
-                                $(this).addClass("selected") ;
-                                $(this).removeClass("cursor-hand") ; 
-                                $(this).off("click") ;
-                                stuff_310.fn_set_owndata($(this).attr("id"), "floor").then(response => {
-                                    stuff_310.fn_set_owner(response.data) ;
-                                }) ; 
-                            }) ;
-                        }
+                        }) ;
+                        
                         dv_fbox.append(dv_room) ;
                     } else {
                         var dv_room  = $("<div class='room' />") ;
@@ -258,19 +297,25 @@ stuff_310.fn_set_data = () => {
     var pos_y = data.floor.floorCo * 30 ; 
     if ( !!!data["rftop"] || data.rftop.floorCo == 0 ) pos_y = pos_y - 30 ;
     $(".dong-matrix").css("background-position-y", pos_y + "px") ;
+
+    /* 중개사 물건목록 조회 */ 
+    stuff_310.fn_get_brkstuff() ;
 }
 
 stuff_310.fn_set_owner = ( dataList ) => {
     $("#dv_ownerList").empty() ;
-    var rn = dataList.length ; 
     if ( !!dataList && dataList.length > 0 ) {
         dataList.forEach((data, i) => {
-            var rownum = Number(i + 1) ;
-            var dv_owner   = $("<div id='owrn_" + rownum + "' class='cont justify-start bg-gray'/>") ; 
+            var rownum = data.owno + "_" + data.owseq ;
+            var dv_owner   = $("<div id='owrn_" + data.owno + "_" + data.owseq + "' class='cont justify-start bg-gray'/>") ; 
+            dv_owner.attr("data-owno"   , data.owno) ; 
+            dv_owner.attr("data-owseq"  , data.owseq) ;
+            dv_owner.attr("data-stuffno", data.stuffno) ; 
+
             var dv_acfield = $("<div class='action-field' />") ; 
             var dv_aclabel = $("<div class='action-label' />") ; 
-            dv_aclabel.append("<span class='c-red'>" + data.stffnm01 + "</span> / ") ; 
-            dv_aclabel.append("<span class='c-red'>" + data.stffnm02 + "</span>") ; 
+            dv_aclabel.append("<span class='c-red' id='sfnm01_" + rownum + "'>" + data.stffnm01 + "</span> / ") ; 
+            dv_aclabel.append("<span class='c-red' id='sfnm02_" + rownum + "'>" + data.stffnm02 + "</span>") ; 
             var btn_del = $("<button type='button' id='btn_del_" + data.owno + "_" + data.owseq + "' class='btn-x'></button>") ; 
             var _buldno = data.buldno ; 
             btn_del.click(function() {
@@ -283,7 +328,7 @@ stuff_310.fn_set_owner = ( dataList ) => {
             dv_acfield.append(dv_aclabel) ;
 
             var dv_field  = $("<div class='action-field'/>") ;
-            var sel_owner = $("<select id='sel_owt_" + rownum + "' class='form-select'/>") ; 
+            var sel_owner = $("<select id='sel_owt_" + data.owno + "_" + data.owseq + "' class='form-select'/>") ; 
             sel_owner.append("<option value=''>소유주 구분</option>") ; 
             commcode["OWT"].forEach(code => {
                 var option = "<option value='" + code.code + "'>" + code.codenm + "</option>" ; 
@@ -291,13 +336,27 @@ stuff_310.fn_set_owner = ( dataList ) => {
             }) ; 
             dv_field.append(sel_owner) ; 
             var text_cttpc = $("<input type='text' class='w-180px' maxlength='16' id='text_cttpc_" + rownum + "' placeholder='휴대전화번호(숫자만입력)' />") ; 
+
+            text_cttpc.keypress(function(e) {
+                console.log(e.keyCode)
+                if (e.keyCode < 48 || e.keyCode > 57 ) {
+                    return false ;
+                }
+            }) ; 
+            text_cttpc.blur(function() {
+                var is_mobile = homes_comm.validate.fn_isMobilePattern($(this).val()) ;
+                if ( !is_mobile) {
+                    homes_comm.message.alert("핸드폰 형식이 아닙니다.") ; 
+                }
+            }) ; 
+
             dv_field.append(text_cttpc) ; 
-            var text_ownernm = $("<input type='text' class='w-100px' id='text_ownernm_" + rownum + "' placeholder='이름' />") ; 
+            var text_ownernm = $("<input type='text' class='w-100px' maxlength='30' id='text_ownernm_" + rownum + "' placeholder='이름' />") ; 
             dv_field.append(text_ownernm) ; 
             var btn_contact = $("<button type='button' class='hs-button btn-cyan mx-2'>연락처</button>") ; 
             dv_field.append(btn_contact) ; 
-            var sel_telecom =  $("<select id='sel_tcm_" + rownum + "' class='form-select'/>") ; 
-            sel_telecom.attr("disabled", "disabled") ;           
+            var sel_telecom =  $("<select id='sel_tcm_" + data.owno + "_" + data.owseq + "' class='form-select'/>") ; 
+//            sel_telecom.attr("disabled", "disabled") ;           
             sel_telecom.append("<option value=''>통신사선택</option>") ;   
             commcode["TCM"].forEach(code => {
                 var option = "<option value='" + code.code + "'>" + code.codenm + "</option>" ; 
@@ -308,13 +367,24 @@ stuff_310.fn_set_owner = ( dataList ) => {
             dv_acfield.append(dv_field) ; 
             dv_owner.append(dv_acfield) 
             $("#dv_ownerList").append(dv_owner) ; 
-            
-            $("div[id$=" + data.buldno + "_" + data.pssionno + "]").off("click") ; 
-            $("div[id$=" + data.buldno + "_" + data.pssionno + "]").removeClass("cursor-hand") ; 
-            if ( data.sfsttus == "T" ) {
-                $("div[id$=" + data.buldno + "_" + data.pssionno + "]").addClass("selected") ; 
-            } else if (data.sfsttus == "D") {
-                $("div[id$=" + data.buldno + "_" + data.pssionno + "]").addClass("done") ;
+            sel_telecom.addClass("hidden") ;
+            sel_owner.change(function() {
+                var otype = $(this).val() ;
+                if (otype == "OWT001") {
+                    /* 소유주 선택시 통신사 선택 활성화 */ 
+                    sel_telecom.removeClass("hidden") ; 
+                } else {
+                    sel_telecom.removeClass("hidden").addClass("hidden") ; 
+                }
+            }) ;
+
+            sel_owner.val(data.ownerTy) ; 
+            sel_telecom.val(data.ccbCd) ; 
+            text_cttpc.val(data.cttpc) ;
+            text_ownernm.val(data.ownernm) ; 
+
+            if ( data.ownerTy == "OWT001" ) {
+                sel_telecom.removeClass("hidden") ;
             }
         }) ; 
 
@@ -336,7 +406,8 @@ stuff_310.fn_get_ownerList = ( param ) => {
 
 /* 소유주 신규생성 */ 
 stuff_310.fn_set_owndata = ( id, fgb ) => {
-    var cplxno   = stuff_310.data.cplxno ; 
+    var cplxno   = stuff_310.params.cplxno ; 
+    console.log(stuff_310.params) ;
     var flno     = id.split("_").splice(1, 1).toString() ; 
     var buldno   = id.split("_").splice(2, 1).toString() ;
     var pssionno = id.split("_").splice(3, 1).toString() ;
@@ -360,6 +431,7 @@ stuff_310.fn_set_owndata = ( id, fgb ) => {
             "buldno"   : buldno,
             "cplxno"   : cplxno,
             "pssionno" : pssionno,
+            "ppscd"    : stuff_310.params.cplxTy,
             "stffnm01" : cp_dong, /* 단지동 */ 
             "stffnm02" : cp_ho,   /* 단지동 호수 */
             "ownerTy"  : "", 
@@ -383,4 +455,42 @@ stuff_310.fn_delete_owner = ( owno, owseq, buldno ) => {
     }).then(response => {
        stuff_310.fn_set_owner(response.data) ;
     }) ;
+}
+
+/* 데이터 저장 */ 
+stuff_310.fn_save_data = () => {
+    var stuffList = stuff_310.data.stuffList ; 
+    var ownerList = [] ; 
+    $("div[id^=owrn]").each(function() {
+        var owno    = $(this).attr("data-owno") ; 
+        var owseq   = $(this).attr("data-owseq") ; 
+        var stuffno = $(this).attr("data-stuffno") ; 
+        var rownum  = owno + "_" + owseq ; 
+        ownerList.push({
+            "owno"     : owno,
+            "owseq"    : owseq,
+            "stuffno"  : stuffno,
+            "stffnm01" : $("#sfnm01_" + rownum).text(),
+            "stffnm02" : $("#sfnm02_" + rownum).text(),
+            "ownerTy"  : $("#sel_owt_" + rownum).val(),
+            "ownernm"  : $("#text_ownernm_" + rownum).val(),
+            "cttpc"    : $("#text_cttpc_" + rownum).val(),
+            "ccbCd"    : $("#sel_tcm_" + rownum).val()
+        }) ; 
+    }) ; 
+    stuff_310.data.ownerList = ownerList ; 
+    homes_comm.network.post("/stuff/update-stuff", {
+        "stuffListVo": stuffList,
+        "ownerListVo": ownerList
+    }).then(response => {
+        homes_comm.message.alert("물건이 등록되었습니다.").then(ok => {
+            stuffList.forEach(stuff => {
+                $("div[id$=" + stuff.buldno + "_" + stuff.pssionno + "]")
+                    .removeClass("done")
+                    .removeClass("selected")
+                    .addClass("done") ;
+            }) ; 
+        }) ; 
+    }) ;
+
 }

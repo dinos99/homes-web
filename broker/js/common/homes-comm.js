@@ -94,8 +94,18 @@ const homes_comm = {
             var regexp = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
             return regexp.test(pass) ;
         }
+        , fn_isMobilePattern: (cttpc) => {
+            var regexp = /^01\d\d{3,4}\d{4}$/
+            return regexp.test(cttpc) ;
+        }
     }
     , util: {
+        fn_Lpad: ( text, num, f_char ) => {
+            return ("" + text).padStart(num, f_char);
+        },
+        fn_Rpad: ( text, num, f_char ) => {
+            return ("" + text).padEnd(num, f_char);
+        },
         /* file size 변환 */ 
         fn_conv_filesize: (fsize, option) => {
             const unit_shot = ["KB", "MB", "GB", "TB"];
@@ -124,6 +134,7 @@ const homes_comm = {
         }
         , fn_format_date: ( str_date ) => {
             if ( !!!str_date ) return "" ; 
+            if ( str_date.length != 8 ) return "" ; 
             var yyyymmdd = [] ; 
             yyyymmdd.push(str_date.substring(0, 4)) ; 
             yyyymmdd.push(str_date.substring(4, 6)) ; 
@@ -425,6 +436,14 @@ const homes_comm = {
             var wrapid = "wrap_" + param.popid ; 
 
             var popwrap = $("<div id='" + wrapid + "'/>") ; 
+            var is_popup  = $("#" + wrapid).length > 0 ; 
+            var is_dimmed = $(".pop-dimmed").length > 0 ; 
+            if ( is_popup ) {
+                 $("#" + wrapid).remove() ;
+            }
+            if ( !is_dimmed ) {
+                $("body").append("<div class='pop-dimmed'/>") ; 
+            }
             $("body").append(popwrap) ;
             return new Promise(resolve => {
                 homes_comm.popup.param_data.popid = param.popid ;
@@ -432,14 +451,29 @@ const homes_comm = {
                     "params": param
                 }
                 popwrap.load( pop_url, () => {
+                    popwrap.children().eq(0).attr("id", param.popid) ;
                     $(".pop-dimmed").click(function() {
                         resolve({
                             "action"  : "pop_close",
                             "pop_data": {}
                         }) ; 
                         delete homes_comm.popup.param_data[param.popid] ;
+                        $(this).remove() ;
                         popwrap.remove() ;
                     }) ;
+                    $("#btn_cancel").off("click") ;
+                    $("#btn_cancel").click(function() {
+                        var data = homes_comm.popup.pop_data[param.popid] ; 
+                        resolve({
+                            "action"  : "pop_close",
+                            "pop_data": data
+                        }) ; 
+                        delete homes_comm.popup.param_data[param.popid] ;
+                        delete homes_comm.popup.pop_data[popup.id] ; 
+                        $(".pop-dimmed").remove() ;
+                        popwrap.remove() ;
+                    }) ; 
+                    $("#btn_hddn_close").off("click") ;
                     $("#btn_hddn_close").click(function() {
                         var data = homes_comm.popup.pop_data[param.popid] ; 
                         resolve({
@@ -448,25 +482,40 @@ const homes_comm = {
                         }) ; 
                         delete homes_comm.popup.param_data[param.popid] ;
                         delete homes_comm.popup.pop_data[popup.id] ; 
+                        $(".pop-dimmed").remove() ;
                         popwrap.remove() ;
                     }) ; 
+                    $("#btn_" + param.popid + "_ok").off("click") ; 
+                    $("#btn_" + param.popid + "_ok").click(function() {
+                        var data = homes_comm.popup.pop_data[param.popid] ; 
+                        resolve({
+                            "action"  : "pop_data",
+                            "pop_data": data
+                        }) ; 
+                        delete homes_comm.popup.param_data[param.popid] ;
+                        delete homes_comm.popup.pop_data[popup.id] ; 
+                        $(".pop-dimmed").remove() ;
+                        popwrap.remove() ;
+                    }) ;
                 }) ; 
             }) ; 
-
-
-
-
-            /*
-            var contid = option.popid ;
-            var cont = $("<div id='" + contid + "' class='popup-container'/>") ; 
-            $("body").append(cont) ;
-            cont.load("/html" + url, () => {
-                fn_open_completed( option ) ;
-            }) ;
-            */
         }
         , pop_close: ( pop_option ) => {
             $("#" + pop_option.popid).remove() ;
+        }
+        , pop_set_center: ( popid ) => {
+            var popup = $("#" + popid ) ; 
+            var dimmed = $(".pop-dimmed") ; 
+            var win_w = dimmed.width() ; 
+            var win_h = dimmed.height() ; 
+            var pop_w = popup.width() ; 
+            var pop_h = popup.height() ; 
+
+            var center_x = ( win_w - pop_w ) / 2 ; 
+            var center_y = ( win_h - pop_h - 140 ) / 2 ; 
+            popup.css("left", center_x + "px") ;
+            popup.css("top" , center_y + "px") ;
+
         }
         , pop_movewindow: (el, pop_option) => {
             var pid = pop_option.pid ; 
@@ -657,8 +706,223 @@ const homes_comm = {
         }) ; 
 
     }
-}
+    /* naver 주소검색 */ 
+    , fn_naver_addr_search: ( params ) => {
+        var param = {
+            "display": params["display"] || 10,
+            "start"  : params["start"] || 1,
+            "query"  : params["query"] || "",
+            "sort"   : "sim"
+        } ; 
+        if ( !!param.query ) {
+            return new Promise(resolve => {
+                homes_comm.network.send_api("/api/naver/addr", {
+                    "method": "POST",
+                    "is_auth": false
+                }, param).then(response => {
+                    resolve({data: JSON.parse(response.data)}) ; 
+                }).catch(error => {
+                    homes_comm.message.alert(error.errorMessage)
+                    .then(result => {
+                        reject({
+                            "resjult": false,
+                            "message": error.errorMessage
+                        })
+                    }) ; 
+                })  ; 
+            }) ; 
+        } else {
+            return new Promise((resolve, reject) => {
+                homes_comm.message.alert(_MESSAGE_REQUIRED_ADDR_)
+                .then(result => {
+                    reject({
+                        "result" : false,
+                        "message":_MESSAGE_REQUIRED_ADDR_
+                    })
+                })
+            }) ; 
+        }
+    }
+    /* 카카오 좌표체계(WTM) => 위/경도 좌표체계(WGS84) 변환(Javascript 사용) */ 
+    , fn_trans_coords_KakaoToLatLng: ( params ) => {
+        return new Promise( resolve => {
+            var geocoder = new kakao.maps.services.Geocoder() ; 
+            // WTM 좌표를 WGS84 좌표계의 좌표로 변환한다
+            geocoder.transCoord(params.x, params.y, (result, status) => {
+                if (status === kakao.maps.services.Status.OK) {
+                    resolve({"data": {
+                        "LatY": result[0].y, /* 위도 */
+                        "LngX": result[0].x  /* 경도 */ 
+                    }}) ;
+                }
+            }, {
+                input_coord: kakao.maps.services.Coords.WTM,
+                output_coord: kakao.maps.services.Coords.WGS84
+            });
+        }) ; 
+    }
+    /* 카카오 좌표체계(WTM) => 위/경도 좌표체계(WGS84) 변환(API 사용) */ 
+    , fn_trans_coords_kton: ( params ) => {
+        return new Promise((resolve, reject) => {
+            homes_comm.network.send_api("/api/kakao/transcoord", {
+                    "method": "POST",
+                    "is_auth": false
+                }, {
+                    "x": params.x,
+                    "y": params.y
+                }).then(response => {
+                    if ( response.error.errorMessage == "HTTP_OK") {
+                        var naver = JSON.parse(response.data) ; 
+                        if ( naver.meta.total_count > 0 ) {
+                            naver = { "x": naver.documents[0].x.toString(), "y": naver.documents[0].y.toString() }
+                        } else {
+                            naver = { "x": '0', "y": '0'}
+                        }
+                        resolve({
+                            "data": {
+                                "kakao": { "x": params.x, "y": params.y },
+                                "naver": { "x": naver.x , "y": naver.y  } 
+                            }
+                        })
+                    } else {
+                        reject({
+                            "result" : false,
+                            "message":response.error.errorMessage
+                        })
+                    }
+                }); 
+        }) ; 
+    }
+    /* kakao map Load */
+    , fn_Load_kakaomap: ( option ) => {
+        var mapContainer = document.getElementById('addr_map') ;  /* 지도를 표시할 div */
+        var mapOption = {
+            center: new daum.maps.LatLng(option.x, option.y), // 지도의 중심좌표
+            level: 5 // 지도의 확대 레벨
+        };
+        /* 지도를 미리 생성 */ 
+        var map = new daum.maps.Map(mapContainer, mapOption);
+        
+        /* 마커를 미리 생성 */
+        var marker = new daum.maps.Marker({
+            "position": new daum.maps.LatLng(option.x, option.y),
+            "map"     : map
+        });
+        /* 해당 주소에 대한 좌표를 받아서 */
+        var coords = new daum.maps.LatLng(option.y, option.x) ;
+        /* 지도를 보여준다. */
+        mapContainer.style.display = "block";
+        map.relayout();
+        /* 지도 중심을 변경한다. */
+        map.setCenter(coords);
+        /* 마커를 결과값으로 받은 위치로 옮긴다. */
+        marker.setPosition(coords)
+    }
+    /* naver map Load */
+    , fn_Load_navermap: ( option ) => {
+        var coords = option.coords ; 
+        var useControl = !!option["control"] ; 
+        var useZoom    = !!option["zoom"] ; 
+         
+        $("#" + option.mapid).empty() ;
+        var mapDiv = document.getElementById(option.mapid) ; 
+        
+        var map = new naver.maps.Map(mapDiv, {
+            center: new naver.maps.LatLng(coords.y, coords.x), //지도의 초기 중심 좌표
+            useStyleMap: true,
+            zoom: 19, //지도의 초기 줌 레벨
+            minZoom: 7, //지도의 최소 줌 레벨
+            mapTypeControl: useControl, //지도 유형 컨트롤의 표시 여부
+            mapTypeControlOptions: { //지도 유형 컨트롤의 옵션
+                style: naver.maps.MapTypeControlStyle.BUTTON,
+                position: naver.maps.Position.TOP_LEFT
+            },
+            zoomControl: useZoom, //줌 컨트롤의 표시 여부
+            zoomControlOptions: { //줌 컨트롤의 옵션
+                position: naver.maps.Position.TOP_RIGHT
+            }
+        });
+        
+        map.addListener('click', function(e) {
+            var latlng = e.coord,
+                utmk = naver.maps.TransCoord.fromLatLngToUTMK(latlng),
+                tm128 = naver.maps.TransCoord.fromUTMKToTM128(utmk),
+                naverCoord = naver.maps.TransCoord.fromTM128ToNaver(tm128);
 
+            utmk.x = parseFloat(utmk.x.toFixed(1));
+            utmk.y = parseFloat(utmk.y.toFixed(1));
+
+            console.log('LatLng: ' + latlng.toString());
+            console.log('UTMK: ' + utmk.toString());
+            console.log('TM128: ' + tm128.toString());
+            console.log('NAVER: ' + naverCoord.toString());
+        });
+
+        var marker = new naver.maps.Marker({
+            position: new naver.maps.LatLng(coords.y, coords.x),
+            map: map
+        });
+        return new Promise(resolve => {
+            resolve({
+                "data" : option,
+                "nvmap": {
+                    "map"   : map,
+                    "marker": marker
+                }
+            }) ;
+        }) ; 
+    /*
+        var contentString = [].join("");
+        var infowindow = new naver.maps.InfoWindow({
+            content: contentString,
+            anchorSize: new naver.maps.Size(15, 5),
+            pixelOffset: new naver.maps.Point(0, -10)
+        });
+        naver.maps.Event.addListener(marker, "click", function(e) {
+            if (infowindow.getMap()) {
+                infowindow.close();
+            } else {
+                infowindow.open(map, marker);
+            }
+        });
+//        infowindow.open(map, marker);
+    */
+    }
+    /* kakao address search */ 
+    , fn_kakao_addr_search: ( option ) => {
+        /* 부모창에 반드시 로드되어야 함 */ 
+        var geocoder = new daum.maps.services.Geocoder();
+        if ( !!option.query ) {
+            return new Promise(resolve => {
+                geocoder.addressSearch(option.query, function(results, status) {
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
+//                            var result = results[0]; //첫번째 결과의 값을 활용
+                        resolve({
+                            "status": daum.maps.services.Status.OK,
+                            "data"  : results
+                        }) ;
+                    } else {
+                        resolve({
+                            "status": status,
+                            "data"  : null
+                        })
+                    }
+                })
+            }) ; 
+        } else {
+            return new Promise((resolve, reject) => {
+                homes_comm.message.alert(_MESSAGE_REQUIRED_ADDR_)
+                .then(result => {
+                    reject({
+                        "result" : false,
+                        "message":_MESSAGE_REQUIRED_ADDR_
+                    })
+                })
+            }) ; 
+        }
+    }
+}
 
 const constants = {
     kakao: {
@@ -948,34 +1212,100 @@ var fn_isLogin = () => {
 
 /* 공통코드 조회 */
 var fn_get_commcode = ( grpcd ) => {
+    var commcode = {} ; 
+    var grpcds = [] ; 
+    if (!Array.isArray(grpcd)) grpcds.push(grpcd) ; 
+    else grpcds = grpcd ;
+    
     return new Promise((resolve, reject) => {
-        var commcode = {} ; 
-        if (!Array.isArray(grpcd)) {
-            homes_comm.network.get("/commcode/" + grpcd, {
-            }).then(response => {
-                commcode[grpcd] = response.data ; 
-                resolve(commcode) ;
-            }).catch(error => {
-                reject(error) ;
-            }) ;
-        } else {
-            var commcode = homes_comm.store.getItem("commcode") ;
-            if ( !!!commcode ) commcode = {} ;
-            homes_comm.network.post("/commcode/commCodeList", {
-                "grpcds": grpcd
-            }).then(response => {
-                grpcd.forEach(gcd => {
-                    commcode[gcd] = [] ; 
-                    response.data
-                    .filter(code => (code.grpcd == gcd))
-                    .forEach(code => {
-                        commcode[gcd].push(code) ;
-                    }) ; 
-                    resolve(commcode) ;
+        homes_comm.network.post("/commcode/commCodeList", {
+            "grpcds": grpcds
+        }).then(response => {
+            grpcd.forEach(gcd => {
+                commcode[gcd] = [] ; 
+                response.data
+                .filter(code => (code.grpcd == gcd))
+                .forEach(code => {
+                    commcode[gcd].push(code) ;
                 }) ; 
+                resolve(commcode) ;
             }) ; 
-        }
+        }) ; 
     }) ;
+}
+
+homes_comm.fn_get_ppscdList = ( param ) => {
+    return new Promise(resolve => {
+        homes_comm.network.get("/commcode/ppsList", {
+        }).then(response => {
+            resolve({"data": response.data}) ;
+        }) ; 
+    }) ;
+} ;
+
+homes_comm.fn_open_ppscode = ( param ) => {
+    return new Promise(( resolve, reject ) => {
+        var params = param || {
+            "ppscd" : "",
+            "buldgb": ""
+        } ; 
+        params.ppscd  = params["ppscd"] || "" ;
+        params.buldgb = params["buldgb"] || "" ; 
+        homes_comm.popup.pop_open("/estate/pop-ppscd.html", {
+            "popid" : "pop_ppscd",
+            "ppscd" : params.ppscd,
+            "buldgb": params.buldgb
+        }).then(result => {
+            if ( result.action == "pop_data") {
+                resolve({
+                    "ppsList": result.pop_data.ppsList,
+                    "ppscd"  : result.pop_data.ppscd 
+                }) ; 
+            }
+        }) ;
+    }) ;
+}
+
+/* 공통 help icon */ 
+homes_comm.fn_set_comm_help = ( params ) => {
+    var pgid = params["pgid"] ; /* 필수: 유입경로 */
+    var help_data = params["data"] ; /* 필수: 필요데이터 */ 
+    /*
+    console.log("*** comm help pgid: " + pgid) ; 
+    console.log("*** comm help data: " + help_data) ;
+    */
+}
+
+/* upper_cd로 공통코드 조회 */ 
+var fn_get_upcode = ( upcd ) => {
+    var commcode = {} ; 
+    return new Promise((resolve, reject) => {
+        homes_comm.network.get("/commcode/upcd/" + upcd, {
+        }).then(response => {
+            if ( !!response.data && response.data.length > 0) {
+                var gcd = response.data[0].grpcd ; 
+                commcode[gcd] = [] ; 
+                response.data.forEach(code => {
+                    commcode[gcd].push(code) ;
+                })
+                resolve({data: commcode}) ;
+            } else {
+                resolve({data:[]}) ; 
+            }
+        }) ; 
+    }) ;
+}
+
+/* pop-footer Load */
+var fn_pop_footer_Load = ( params ) => {
+    var footer = params || { id: "pop_footer" } ; 
+    footer["id"] = !!params["id"] ? params.id : "pop_footer" ; 
+    var footer = $("#" + footer.id ) ; 
+    return new Promise(resolve => {
+        footer.load("/html/common/pop-footer.html", () => {
+            resolve(true) ; 
+        }) ;
+    }) ; 
 }
 
 var homes = homes_comm ;

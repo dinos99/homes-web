@@ -178,12 +178,12 @@
     $(document).ready(function() {
         cpxpop.popid = homes_comm.popup.param_data.popid ; 
         cpxpop.params = homes_comm.popup.param_data[cpxpop.popid].params ; 
-        fn_get_commcode("EST110")
+        fn_get_upcode("EST110")
         .then(response => {
-            fn_set_comm_house(response.data) ;
-            return fn_get_commcode("EST120") ; 
+            fn_set_comm_house(response.data.EST) ;
+            return fn_get_upcode("EST120") ; 
         }).then(response => {
-            fn_set_comm_buld(response.data) ;
+            fn_set_comm_buld(response.data.EST) ;
             fn_set_checkbutton() ;
         })
 
