@@ -12,3 +12,20 @@ systemctl start httpd
 # 3. server start 
 
 
+SHOW FULL PROCESSLIST;
+-- 락테이블 조회
+SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCKS;
+-- 대기중인 락 조회
+SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCK_WAITS;
+-- 트랜젝션조회
+SELECT * FROM INFORMATION_SCHEMA.INNODB_TRX;
+
+-- 종합쿼리
+SELECT * FROM information_schema.`PROCESSLIST`
+WHERE Command <> 'Sleep'
+AND USER NOT IN ('system user', 'event_scheduler')
+ORDER BY TIME DESC ; 
+
+
+-- 해당 프로세스 종료
+kill 66215;
