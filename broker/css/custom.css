@@ -1268,3 +1268,15 @@ table.table-01 td {
   height: 60px;
 }
 
+span.arrow-down {
+  margin-left: 5px;
+  content: url(/images/V.png);
+  transition: 0.3s;
+  transform: rotate(0);
+}
+span.arrow-up {
+  margin-left: 5px;
+  content: url(/images/V.png);
+  transition: 0.3s;
+  transform: rotate(180deg);
+}
