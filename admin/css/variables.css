@@ -1,0 +1,31 @@
+[data-bs-theme=lignt] {
+    /* color */
+    --hm-color-white    : #ffffff;
+    --hm-color-red      : #ff5959;
+    --hm-color-orange   : #f7941d;
+    --hm-color-green    : #3ec729;
+    --hm-color-naver    : #92d050;
+    --hm-color-gray     : #f9fafa ;
+    --hm-color-gray-dark: #646f7c;
+
+    --hm-color-0ec4bf: #0ec4bf;
+    --hm-color-92d050: #92d050;
+
+    --hm-table-header-green: #0d904f;
+
+    --hm-color-save: #0d904f; 
+    --hm-color-dark: #3d3d3d ; 
+    --hm-color-even: #e2efda; 
+
+    /* text-color */
+    --hm-text-color: #fafafa; 
+
+    /* font-weight */
+    --hm-fw-600: 600 ; 
+
+    /* border-color */
+    --hm-color-border: #dddddd ; 
+}
+
+.c-white { color: var(--hm-color-white) !important; }
+.c-red   { color: var(--hm-color-red)   !important; }

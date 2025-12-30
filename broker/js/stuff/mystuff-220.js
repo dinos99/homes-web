@@ -68,6 +68,7 @@ stuff_220.fn_set_addr_result = ( addr ) => {
 stuff_220.fn_set_kakao_addr_data = ( status, dataList ) => {
     $(".addr-search-result").removeClass("show")
     $(".addr-search-result").empty() ;
+    debugger ; 
     if ( status == "OK" && !!dataList && dataList.length > 0) {
         $(".addr-search-result").append("<div class='addr-title'>주소 선택</div>") ; 
         dataList.forEach((data, i) => {
@@ -200,9 +201,9 @@ stuff_220.fn_set_buld_info = ( addr, data ) => {
         var bunji_j = " " ;  
         recap.mstrbun = Number(recap.bunjib) ; 
         recap.mstrji  = recap.bunjij ; 
-        
+        debugger ; 
         if ( recap.mstrji != "0000" ) {
-            recap.mstrbun = " - " + Number(recap.mstrji) ;
+            recap.mstrbun = recap.mstrbun + " - " + Number(recap.mstrji) ;
         }
 
         /* **********************************************
@@ -425,9 +426,9 @@ stuff_220.fn_set_display = ( bdinfo ) => {
     $("#dv_dong_List").empty() ; 
     var is_vbtn = 0 ; 
     var hddn_dong = $("<div id='dv_dong_hddn_area' />") ; 
+    var rn_last = homes_comm.util.fn_Lpad(tList.length, 4, '0') ; 
     tList.forEach((dinfo, i) => {
         var rn = homes_comm.util.fn_Lpad(i + 1, 4, '0') ; 
-        var rn_last = homes_comm.util.fn_Lpad(tList.length, 4, '0') ; 
         var is_hidden = rn > 3 ;
 
         var dv_dong = $("<div id='dv_dong_" + rn + "' class='cont justify-between bg-gray'/>") ; 
@@ -481,7 +482,7 @@ stuff_220.fn_set_display = ( bdinfo ) => {
             }) ;
         }
     }) ; 
-
+    if ( tList.length <= 3 ) $("#btn_v_List").hide() ; 
 } ; 
 
 $(document).ready(function() {

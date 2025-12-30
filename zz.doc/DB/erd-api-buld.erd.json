@@ -4,9 +4,9 @@
   "settings": {
     "width": 5000,
     "height": 5000,
-    "scrollTop": -1600,
-    "scrollLeft": -33.3333,
-    "zoomLevel": 1,
+    "scrollTop": 0,
+    "scrollLeft": 0,
+    "zoomLevel": 0.97,
     "show": 511,
     "database": 4,
     "databaseName": "",
@@ -33,21 +33,21 @@
     "tableIds": [
       "_Z7NJmV8KGnoUlzx0XU5y",
       "FOsp5U1D1uAyqJg-TPqsw",
-      "yhZ8U3NdLzAvMxSpmJxsi",
       "k2nPAyc7xcaGZkNjiFtH8",
       "jpBoybCvcNXO46sp__Wt_",
       "RSIjQJATCDmNASwklgpa5",
       "rQ31Xo6TzSRhTMrqujnLJ",
       "wPikazigo3-Jqif1u0BXl",
       "II-vMR_iFu5ure-liWVFU",
-      "RJy7CpBqSj4Bw9W0-yJ5k",
       "uzF-QdaecFIGiwqLelE7l",
       "0lomtViqQO_lDI2RVrRgc",
       "GDrlc0MIFmuoIxxNcDW2k",
       "uD_uQwxdK3RUdiilJYz-a",
       "euXWm55vFyOWAJjWGHDX3",
       "Crpc5EAycmb2L_c6gGwWX",
-      "xEhdJ5LZTt1YHJuMHWcRx"
+      "gFGET0TJ_2AzpqqSHVhKU",
+      "PTqm7TT3v0H4fuBU4poJf",
+      "NwGtvmlroRBQxU_j2Q3oA"
     ],
     "relationshipIds": [],
     "indexIds": [
@@ -62,8 +62,7 @@
       "bgrzYM6uSfBaxzbM2A2EM",
       "U4xpKkm1-zYPyk5Ut6VNC",
       "8Tzu3dGPJMcsqujzHlHZY",
-      "hgBww4Lvn2eyGmOY6VMPJ",
-      "87eb4IvMydYTV069M2pRO"
+      "sndSTysShHxbLdMxW0cme"
     ],
     "memoIds": [
       "ciNM9ieWR3AZ0YUjCkuo3"
@@ -152,180 +151,16 @@
           "bMRC5wcpBY9EVe9I6D4Xz"
         ],
         "ui": {
-          "x": 2612.7691,
-          "y": 378,
+          "x": 2743.7691,
+          "y": 129,
           "zIndex": 277,
           "widthName": 130,
           "widthComment": 103,
           "color": "#FFC107"
         },
         "meta": {
-          "updateAt": 1766310338051,
+          "updateAt": 1766563578040,
           "createAt": 1748698000495
-        }
-      },
-      "AX4GKbyj9VjTw-5XdZzW0": {
-        "id": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "TB_BD_SUBJIBUN",
-        "comment": "건축물대장_부속지번",
-        "columnIds": [
-          "YOr5ccZdNvdCoK-w5uDdo",
-          "ELqj7ROx3nU3_8v0d0TM8",
-          "2ZFaj9YhaENhvdaUIDfBR",
-          "Asa6Fe29NOV5EhcQc1a3G",
-          "4aqEhAXUG0oU73H18LYaw",
-          "g17h2o0ueYI5djxO0mqlW",
-          "I8SsCU2M9izyfLcgWp35A",
-          "OY8eVH_CA_emXA19d-AI_",
-          "gqM2zyqFy6_cWVCzJBvil",
-          "mds0kawtuOfyhm8ZZCbjo",
-          "ik_QFfaCqMPb1DFf_27X9",
-          "BNG0b14lPdTzX66ji1T_z",
-          "hJO08iTQCzxzmoATRdDND",
-          "C0RZLTYW-X3aJE2sok5P9",
-          "dwnkmVDa0UXT02ahVsGNe",
-          "J1P2Ht9g-AXhDw3TGwwnT",
-          "E49WLLOaSdPJeEN_UK6Fj",
-          "mI_2xGS8kxSzaJ6ugbtP6",
-          "oI9BRf9OPPHidZykRN2ih",
-          "t7XmH5bJoeu7UgCk_d6Vp",
-          "jS5OWcnNWUv8CPFMI9tx1",
-          "5-Q7d9hq88twbItpZXiNM",
-          "uM1a_6i7N_Zm6hvT0v8Ij",
-          "2cvRI1ntLFOjOPn16BkP3",
-          "JG6KRfqJywmGu7FDX4MRR",
-          "cVmzxmnR3dfcN_xXibqTM",
-          "xvMYgYhllu0B2URVswBwX",
-          "CfMqNslkWF1wP7ja5-4Bn",
-          "5nJaFb2urMXrIV1dV78Is",
-          "AC60iUY07RoI5YwIsUOi4",
-          "W3Bqq-EXI74FsxC3T_y8Y",
-          "QXDFHeUPPIpgKA1qIDO2U",
-          "WUJ6sDkEj33RpUHwvVV7b",
-          "ZPbkduVIw-1YEozIVU3PC",
-          "7oUtRdoTmobOUuY3y9YXi",
-          "YaZJqxKnbSo9MoUVBFEu2",
-          "WS7NIJ0qCLDzRPTEaSRBl",
-          "f4dsBmrzKQ3M6EgcJVd8P",
-          "8d9eSaak-3wUNHS2_xpwm",
-          "LD3aQzNG-0UHzswzNDysM",
-          "UMxrbFz1fqzLtLmYtIAvq",
-          "oRMJfs4l1pUFPqX_ftBQL",
-          "jrMmPxbmT8SVMY1QhHmfJ"
-        ],
-        "seqColumnIds": [
-          "YOr5ccZdNvdCoK-w5uDdo",
-          "ELqj7ROx3nU3_8v0d0TM8",
-          "2ZFaj9YhaENhvdaUIDfBR",
-          "Asa6Fe29NOV5EhcQc1a3G",
-          "4aqEhAXUG0oU73H18LYaw",
-          "g17h2o0ueYI5djxO0mqlW",
-          "I8SsCU2M9izyfLcgWp35A",
-          "OY8eVH_CA_emXA19d-AI_",
-          "gqM2zyqFy6_cWVCzJBvil",
-          "mds0kawtuOfyhm8ZZCbjo",
-          "ik_QFfaCqMPb1DFf_27X9",
-          "BNG0b14lPdTzX66ji1T_z",
-          "hJO08iTQCzxzmoATRdDND",
-          "C0RZLTYW-X3aJE2sok5P9",
-          "dwnkmVDa0UXT02ahVsGNe",
-          "J1P2Ht9g-AXhDw3TGwwnT",
-          "E49WLLOaSdPJeEN_UK6Fj",
-          "mI_2xGS8kxSzaJ6ugbtP6",
-          "oI9BRf9OPPHidZykRN2ih",
-          "t7XmH5bJoeu7UgCk_d6Vp",
-          "jS5OWcnNWUv8CPFMI9tx1",
-          "5-Q7d9hq88twbItpZXiNM",
-          "uM1a_6i7N_Zm6hvT0v8Ij",
-          "2cvRI1ntLFOjOPn16BkP3",
-          "JG6KRfqJywmGu7FDX4MRR",
-          "cVmzxmnR3dfcN_xXibqTM",
-          "xvMYgYhllu0B2URVswBwX",
-          "CfMqNslkWF1wP7ja5-4Bn",
-          "5nJaFb2urMXrIV1dV78Is",
-          "AC60iUY07RoI5YwIsUOi4",
-          "W3Bqq-EXI74FsxC3T_y8Y",
-          "QXDFHeUPPIpgKA1qIDO2U",
-          "WUJ6sDkEj33RpUHwvVV7b",
-          "ZPbkduVIw-1YEozIVU3PC",
-          "7oUtRdoTmobOUuY3y9YXi",
-          "YaZJqxKnbSo9MoUVBFEu2",
-          "WS7NIJ0qCLDzRPTEaSRBl",
-          "f4dsBmrzKQ3M6EgcJVd8P",
-          "8d9eSaak-3wUNHS2_xpwm",
-          "LD3aQzNG-0UHzswzNDysM",
-          "UMxrbFz1fqzLtLmYtIAvq",
-          "oRMJfs4l1pUFPqX_ftBQL",
-          "jrMmPxbmT8SVMY1QhHmfJ"
-        ],
-        "ui": {
-          "x": 3034,
-          "y": 14,
-          "zIndex": 296,
-          "widthName": 93,
-          "widthComment": 115,
-          "color": "#FFC107"
-        },
-        "meta": {
-          "updateAt": 1766310206955,
-          "createAt": 1748758142830
-        }
-      },
-      "P8PMihSQSnpvrHOZ5UKgg": {
-        "id": "P8PMihSQSnpvrHOZ5UKgg",
-        "name": "TB_HBD_SUBJIBUN",
-        "comment": "홈즈_건축물대장_부속지번",
-        "columnIds": [
-          "B5VyL6uhvMT2TW0V4ZvDw",
-          "VsXCfzeuCep4wk4RarHFk",
-          "vY7ku4-1A39MocOtBQW-O",
-          "iXoN0jrf9qDzR_jYmDl3S",
-          "s0YZ7VHd6Rn7OAP7z69Cp",
-          "yqt9p68gtjdMpT_Xwmloe",
-          "8CpO49lm9bUHKUS1W8TQi",
-          "gaj38Ns8hCkchEvIAjqRt",
-          "9rtH9Q1sI6ucWLIECSVmG",
-          "EW5rqaiLkauC3HwT35kxq",
-          "BdBmTVCovCK0Cnb97uLQf",
-          "9bhQxflvbd84ta2vFHVzF",
-          "Ijf8AmqrHWGQXzz-Ji3TL",
-          "yJP8WtbfBSWfbmdFXzrOW",
-          "zkx152tcsGeT_J1uggqk0",
-          "96jcdMhD7UjZ15ZqagwJ_",
-          "f-KOgJDdHP1bon2t7XRmZ",
-          "BT_wOFOKo5CO9pn3yaGrA"
-        ],
-        "seqColumnIds": [
-          "B5VyL6uhvMT2TW0V4ZvDw",
-          "VsXCfzeuCep4wk4RarHFk",
-          "vY7ku4-1A39MocOtBQW-O",
-          "iXoN0jrf9qDzR_jYmDl3S",
-          "s0YZ7VHd6Rn7OAP7z69Cp",
-          "yqt9p68gtjdMpT_Xwmloe",
-          "8CpO49lm9bUHKUS1W8TQi",
-          "gaj38Ns8hCkchEvIAjqRt",
-          "9rtH9Q1sI6ucWLIECSVmG",
-          "EW5rqaiLkauC3HwT35kxq",
-          "BdBmTVCovCK0Cnb97uLQf",
-          "9bhQxflvbd84ta2vFHVzF",
-          "Ijf8AmqrHWGQXzz-Ji3TL",
-          "yJP8WtbfBSWfbmdFXzrOW",
-          "zkx152tcsGeT_J1uggqk0",
-          "96jcdMhD7UjZ15ZqagwJ_",
-          "f-KOgJDdHP1bon2t7XRmZ",
-          "BT_wOFOKo5CO9pn3yaGrA"
-        ],
-        "ui": {
-          "x": 2531,
-          "y": 930,
-          "zIndex": 403,
-          "widthName": 102,
-          "widthComment": 144,
-          "color": "#FFC107"
-        },
-        "meta": {
-          "updateAt": 1766310293905,
-          "createAt": 1749182913755
         }
       },
       "FOsp5U1D1uAyqJg-TPqsw": {
@@ -359,118 +194,16 @@
           "89IMP0TC-qTqL1RaxAAjF"
         ],
         "ui": {
-          "x": 1524.1444,
-          "y": 2420,
+          "x": 1195.1757,
+          "y": 2451.7834,
           "zIndex": 548,
           "widthName": 124,
           "widthComment": 173,
           "color": "#FFC107"
         },
         "meta": {
-          "updateAt": 1766113290177,
+          "updateAt": 1766724737985,
           "createAt": 1749790394356
-        }
-      },
-      "yhZ8U3NdLzAvMxSpmJxsi": {
-        "id": "yhZ8U3NdLzAvMxSpmJxsi",
-        "name": "TB_BD_TITLE_LEDGR_PRMISS_DE",
-        "comment": "건축물대장_표제부_허가_일자",
-        "columnIds": [
-          "YChTTftDFFnPpeydwPCcc",
-          "MGNYvQFDXIbHYcoED63Kr",
-          "7gSiTmF-6TuvP-kb_cQId",
-          "p4a6nvai3EKIQRDS-dpHG",
-          "y2L9fBncrGG7Drox2_R9N",
-          "r7iALEPWuJS5uj2TCVMND",
-          "yxoFIPC5jlU2JfaPLq6jR",
-          "uTAjRs3XOl6SrwUrGtWgY",
-          "UEEw_TKWIE-5AmPgmD2kp",
-          "J2bNZ5A-PCf_e7cVEBx9K",
-          "NYwSX7IQwKFST76panlCO",
-          "mA7bclLDme-zF8Q1hLGF_"
-        ],
-        "seqColumnIds": [
-          "YChTTftDFFnPpeydwPCcc",
-          "MGNYvQFDXIbHYcoED63Kr",
-          "7gSiTmF-6TuvP-kb_cQId",
-          "p4a6nvai3EKIQRDS-dpHG",
-          "y2L9fBncrGG7Drox2_R9N",
-          "r7iALEPWuJS5uj2TCVMND",
-          "yxoFIPC5jlU2JfaPLq6jR",
-          "uTAjRs3XOl6SrwUrGtWgY",
-          "UEEw_TKWIE-5AmPgmD2kp",
-          "J2bNZ5A-PCf_e7cVEBx9K",
-          "NYwSX7IQwKFST76panlCO",
-          "mA7bclLDme-zF8Q1hLGF_",
-          "SqIpuX2zEGR3LekeVyKgS"
-        ],
-        "ui": {
-          "x": 1190,
-          "y": 2730,
-          "zIndex": 1481,
-          "widthName": 173,
-          "widthComment": 161,
-          "color": "#FF5722"
-        },
-        "meta": {
-          "updateAt": 1766131420630,
-          "createAt": 1750113994527
-        }
-      },
-      "bHCZ3cbHuF4b65qOULfiN": {
-        "id": "bHCZ3cbHuF4b65qOULfiN",
-        "name": "TB_BRK_COMPLEX",
-        "comment": "중개사_단지",
-        "columnIds": [
-          "ZmpndvApT_9846JxiEWff",
-          "6BXPB-jrDzYrdwyK_wxb0",
-          "6brOPktLZlE36-azNvSgY",
-          "Y7Fl_2hKnNC3VYXT3moTo",
-          "QI2zNnB5tqRQTN-NVqFFi",
-          "cLyI0OGcRoOWiOjZ9nrGU",
-          "Az86RjG1k_Gx0BjXbXX1h",
-          "4OQ8wOAznSJIs7yvsegNX",
-          "jpjswgNjz_EYEO34zEJbW",
-          "RvB7lqwT9pZ0xoI_eg67-",
-          "FrFBwOGqMLu0tEuQtKdPO",
-          "_u0MUh3faU0GUNvSX7YDA",
-          "0BAFyJWCaY-Xpl07vSZoO",
-          "Fy8UXw-0IfTCxPX1iVRSg",
-          "pe1qS9u_y-jzM_4uNqixx",
-          "J0Tfw1fJb9fNlZvk7vf1e",
-          "8O4Adc-dJTDBx4cL35RsG"
-        ],
-        "seqColumnIds": [
-          "ZmpndvApT_9846JxiEWff",
-          "enSiIU6nV3piol3KWklXA",
-          "6BXPB-jrDzYrdwyK_wxb0",
-          "6brOPktLZlE36-azNvSgY",
-          "Y7Fl_2hKnNC3VYXT3moTo",
-          "QI2zNnB5tqRQTN-NVqFFi",
-          "cLyI0OGcRoOWiOjZ9nrGU",
-          "Az86RjG1k_Gx0BjXbXX1h",
-          "4OQ8wOAznSJIs7yvsegNX",
-          "jpjswgNjz_EYEO34zEJbW",
-          "RvB7lqwT9pZ0xoI_eg67-",
-          "FrFBwOGqMLu0tEuQtKdPO",
-          "_u0MUh3faU0GUNvSX7YDA",
-          "0BAFyJWCaY-Xpl07vSZoO",
-          "Fy8UXw-0IfTCxPX1iVRSg",
-          "pe1qS9u_y-jzM_4uNqixx",
-          "J0Tfw1fJb9fNlZvk7vf1e",
-          "8O4Adc-dJTDBx4cL35RsG"
-        ],
-        "ui": {
-          "x": 2541,
-          "y": 1655,
-          "zIndex": 1509,
-          "widthName": 99,
-          "widthComment": 67,
-          "color": "#03A9F4"
-        },
-        "meta": {
-          "updateAt": 1766309829389,
-          "createAt": 1754464930165
         }
       },
       "k2nPAyc7xcaGZkNjiFtH8": {
@@ -573,139 +306,6 @@
         "meta": {
           "updateAt": 1766310089753,
           "createAt": 1760785800630
-        }
-      },
-      "0CYVlcEex6SdnFzFRZwLe": {
-        "id": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "TB_RD_RDMASTER",
-        "comment": "도로명_마스터",
-        "columnIds": [
-          "6SQh_lwnpcHUxV5g3L2bs",
-          "tuHDkCBAc12vd7bAzBLkf",
-          "lX-BOqWI3wPRKZJ1pvgAb",
-          "mq4W_DvaK8CYqKQBLOGFu",
-          "hD2ltWCmQ5EyegqfwmhKB",
-          "6gBDt5X30zNyux4k_d2Ce",
-          "F1OAf5jWyHFlWrh-CtPMb",
-          "ijLqMY_uaLH71sHk0fTV3",
-          "YTWpw24sQnt8BQxk0grSI",
-          "LmQJ9yqMnLt2LPReGVOqa",
-          "SVKj3JnDrAegJKPK0ICBn",
-          "f3Bu02Yi8mELQPTl45wLI",
-          "40B86edDkQoBLkxP6RXW6",
-          "Fxa5c2285v5YshJ6jXlWU",
-          "bHsDzGcspAALokiZLvWe8",
-          "vvLhI3eOjoNVmtzLz5E9Z",
-          "uBXMt2AWH4o0dpTmxBpsP",
-          "uQsLZQkKQUffGa6tCFUOP",
-          "Bobgjf1l9Pi0ue1F3Jn-h",
-          "19KPTSVwmzdVKdWh67U9E",
-          "5ZEzxkXVbYTXyeTZlwYsk"
-        ],
-        "seqColumnIds": [
-          "6SQh_lwnpcHUxV5g3L2bs",
-          "tuHDkCBAc12vd7bAzBLkf",
-          "lX-BOqWI3wPRKZJ1pvgAb",
-          "mq4W_DvaK8CYqKQBLOGFu",
-          "hD2ltWCmQ5EyegqfwmhKB",
-          "6gBDt5X30zNyux4k_d2Ce",
-          "F1OAf5jWyHFlWrh-CtPMb",
-          "ijLqMY_uaLH71sHk0fTV3",
-          "YTWpw24sQnt8BQxk0grSI",
-          "LmQJ9yqMnLt2LPReGVOqa",
-          "n2GaEXYt1kvXlAYGp_7za",
-          "SVKj3JnDrAegJKPK0ICBn",
-          "f3Bu02Yi8mELQPTl45wLI",
-          "40B86edDkQoBLkxP6RXW6",
-          "Fxa5c2285v5YshJ6jXlWU",
-          "bHsDzGcspAALokiZLvWe8",
-          "vvLhI3eOjoNVmtzLz5E9Z",
-          "uBXMt2AWH4o0dpTmxBpsP",
-          "uQsLZQkKQUffGa6tCFUOP",
-          "Bobgjf1l9Pi0ue1F3Jn-h",
-          "19KPTSVwmzdVKdWh67U9E",
-          "5ZEzxkXVbYTXyeTZlwYsk"
-        ],
-        "ui": {
-          "x": 2706.6592,
-          "y": 756,
-          "zIndex": 1864,
-          "widthName": 101,
-          "widthComment": 79,
-          "color": "#009688"
-        },
-        "meta": {
-          "updateAt": 1766310299475,
-          "createAt": 1763703953539
-        }
-      },
-      "ISLiEyZ6iOpdEZ3ykYryY": {
-        "id": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "TB_RD_RDBULD",
-        "comment": "도로명_건물",
-        "columnIds": [
-          "C2u4LiGMm2kp_NREDNBWT",
-          "ADR3_dv3cCvbpVDa6l0gn",
-          "yPIUmX_vBR5uJ5Kqd9LiX",
-          "dJmnaxOpQU2V4USz62kGK",
-          "swZZd_J-5gYH0QlUtKnpA",
-          "MXghv8kP3dCGoeYhm-oIX",
-          "-ieNyldjLjIs7swd2Idvu",
-          "6y2_HDfMVXErR6vMb3FiA",
-          "RFiPzHft7rxivMyALckI1",
-          "lYu6u7LYAMWDB4NL9LJ39",
-          "hdnQcn_n2-Fv5lXqI3zAB",
-          "rq-al9gin9yF4aXKkV7lq",
-          "oxsfGAfODEETxwLDfIqzS",
-          "Apboxn-QHyZ2CbhY6zsfe",
-          "XjlW6dlF9fHSbQKtxXtM8",
-          "5i7vAfee69zO8rsqHHN8J",
-          "pyaEvX0verMS8FRiOz9Bz",
-          "8PPAgMANaY8vdHTDANBK7",
-          "4NwjFk1LJL8cKVBWYFoy4",
-          "jgJdbFpw1rEsQH8OcJ0aH",
-          "Brvy3U6HjJGwmPePlpkjY",
-          "2wxI3S10t8_Ol9mpc2kgx",
-          "4VgwgEimkO8lZP_o5_ToS",
-          "pDRFmoCeX5xEiSwt8Ti2k"
-        ],
-        "seqColumnIds": [
-          "C2u4LiGMm2kp_NREDNBWT",
-          "ADR3_dv3cCvbpVDa6l0gn",
-          "yPIUmX_vBR5uJ5Kqd9LiX",
-          "dJmnaxOpQU2V4USz62kGK",
-          "swZZd_J-5gYH0QlUtKnpA",
-          "MXghv8kP3dCGoeYhm-oIX",
-          "-ieNyldjLjIs7swd2Idvu",
-          "6y2_HDfMVXErR6vMb3FiA",
-          "RFiPzHft7rxivMyALckI1",
-          "lYu6u7LYAMWDB4NL9LJ39",
-          "hdnQcn_n2-Fv5lXqI3zAB",
-          "rq-al9gin9yF4aXKkV7lq",
-          "oxsfGAfODEETxwLDfIqzS",
-          "Apboxn-QHyZ2CbhY6zsfe",
-          "XjlW6dlF9fHSbQKtxXtM8",
-          "5i7vAfee69zO8rsqHHN8J",
-          "pyaEvX0verMS8FRiOz9Bz",
-          "8PPAgMANaY8vdHTDANBK7",
-          "4NwjFk1LJL8cKVBWYFoy4",
-          "jgJdbFpw1rEsQH8OcJ0aH",
-          "Brvy3U6HjJGwmPePlpkjY",
-          "2wxI3S10t8_Ol9mpc2kgx",
-          "4VgwgEimkO8lZP_o5_ToS",
-          "pDRFmoCeX5xEiSwt8Ti2k"
-        ],
-        "ui": {
-          "x": 3236.8807,
-          "y": 1157,
-          "zIndex": 1945,
-          "widthName": 85,
-          "widthComment": 67,
-          "color": "#009688"
-        },
-        "meta": {
-          "updateAt": 1766310374077,
-          "createAt": 1763706242499
         }
       },
       "RSIjQJATCDmNASwklgpa5": {
@@ -832,6 +432,7 @@
         "comment": "홈즈_건물_관리대장_마스터",
         "columnIds": [
           "DLCjtyR32G8XPMwuWFNJl",
+          "Vae4xFWj4M5vgnKtwMgh3",
           "Rg9OTOxms6v2JoKNEPaB4",
           "nD4dtwj91p8qR85vdCWkJ",
           "akRE8Z8sKb7FMSDU25kJl",
@@ -885,6 +486,7 @@
         "seqColumnIds": [
           "DLCjtyR32G8XPMwuWFNJl",
           "XmnxmnYApjV-WB4ELCbcs",
+          "Vae4xFWj4M5vgnKtwMgh3",
           "Rg9OTOxms6v2JoKNEPaB4",
           "nD4dtwj91p8qR85vdCWkJ",
           "akRE8Z8sKb7FMSDU25kJl",
@@ -937,15 +539,15 @@
           "NPYHxUqkGvX3BwnQGnEp5"
         ],
         "ui": {
-          "x": 628,
-          "y": 610.3333,
+          "x": 633.1546,
+          "y": 642.2921,
           "zIndex": 2128,
           "widthName": 120,
           "widthComment": 149,
           "color": "#FFC107"
         },
         "meta": {
-          "updateAt": 1766205142426,
+          "updateAt": 1766742598841,
           "createAt": 1763886994543
         }
       },
@@ -1061,15 +663,15 @@
           "jbSqL8jZhI00bfkAUnkFF"
         ],
         "ui": {
-          "x": 621,
-          "y": 2048,
+          "x": 628.2164,
+          "y": 1948,
           "zIndex": 2201,
           "widthName": 84,
           "widthComment": 149,
           "color": "#FFC107"
         },
         "meta": {
-          "updateAt": 1766466936040,
+          "updateAt": 1766726584768,
           "createAt": 1764043408516
         }
       },
@@ -1105,15 +707,15 @@
           "76om1-VuOTZK0oIjCR7An"
         ],
         "ui": {
-          "x": 2019.5001,
-          "y": 1983,
+          "x": 1799.5001,
+          "y": 1975,
           "zIndex": 2214,
           "widthName": 109,
           "widthComment": 178,
           "color": "#FFC107"
         },
         "meta": {
-          "updateAt": 1766310412283,
+          "updateAt": 1766563551113,
           "createAt": 1764149546476
         }
       },
@@ -1163,15 +765,15 @@
           "AC07zK0skVxCgI5DfVP2d"
         ],
         "ui": {
-          "x": 1622.0831,
-          "y": 2006,
+          "x": 1197.0831,
+          "y": 1936,
           "zIndex": 2267,
           "widthName": 126,
           "widthComment": 178,
           "color": "#FFC107"
         },
         "meta": {
-          "updateAt": 1766310415805,
+          "updateAt": 1766563548772,
           "createAt": 1764150422840
         }
       },
@@ -1228,15 +830,15 @@
           "a8USKArqwnoMjd9X4k-P5"
         ],
         "ui": {
-          "x": 2053.0832,
-          "y": 2368,
+          "x": 1790.0832,
+          "y": 1932,
           "zIndex": 2268,
           "widthName": 164,
           "widthComment": 178,
           "color": "#FFC107"
         },
         "meta": {
-          "updateAt": 1766310435863,
+          "updateAt": 1766563556111,
           "createAt": 1764649389220
         }
       },
@@ -1333,15 +935,15 @@
           "QMAiFXHMkN6sybPrGgRaF"
         ],
         "ui": {
-          "x": 43,
-          "y": 2051,
+          "x": 30.6289,
+          "y": 1949.969,
           "zIndex": 2291,
           "widthName": 119,
           "widthComment": 178,
           "color": "#8BC34A"
         },
         "meta": {
-          "updateAt": 1766466933899,
+          "updateAt": 1766726581044,
           "createAt": 1765793523195
         }
       },
@@ -1416,15 +1018,15 @@
           "5XpzBYL32Zwbwrdm8GZjh"
         ],
         "ui": {
-          "x": 38,
-          "y": 612,
+          "x": 40.0619,
+          "y": 641.8969,
           "zIndex": 2357,
           "widthName": 155,
           "widthComment": 202,
           "color": "#8BC34A"
         },
         "meta": {
-          "updateAt": 1766205141435,
+          "updateAt": 1766726371284,
           "createAt": 1765856409988
         }
       },
@@ -1497,10 +1099,10 @@
         "columnIds": [
           "U9zXcUESRT-6f8RAQt2G8",
           "EwS20pcLTjrUzV6fTSeWn",
+          "tBkKYNYq9o_dn6db756KW",
           "E_dl19yBH0jQe2YRBnxmr",
           "9108Cz-PX5u-OGitulYjA",
           "GrjxUw5tvuz_wRnJUQkQh",
-          "5FZd53vOBataDLqIHdg-F",
           "zcMgtrW5N0oBslfSlbI_3",
           "k7-_dK5ZkO-Jr_ijLX2zd",
           "1tDKUUls7N2c59XyCjIz2",
@@ -1510,6 +1112,7 @@
           "3h8RlNh6VmevxmTw5YtbK",
           "zDHPIc0simDvbfiQ5V7-1",
           "8oex2y3dgnUfA0HmVHTff",
+          "yRV5c_p-hXnBk9gyKduRp",
           "2Bsho0qDyddk6a0CDhTX6",
           "Q91564ZIG7ChsX7n7bvBK",
           "4huh-AmXhDmr0sRy1zaPM",
@@ -1521,6 +1124,7 @@
         "seqColumnIds": [
           "U9zXcUESRT-6f8RAQt2G8",
           "EwS20pcLTjrUzV6fTSeWn",
+          "tBkKYNYq9o_dn6db756KW",
           "E_dl19yBH0jQe2YRBnxmr",
           "9108Cz-PX5u-OGitulYjA",
           "GrjxUw5tvuz_wRnJUQkQh",
@@ -1538,6 +1142,7 @@
           "3h8RlNh6VmevxmTw5YtbK",
           "zDHPIc0simDvbfiQ5V7-1",
           "8oex2y3dgnUfA0HmVHTff",
+          "yRV5c_p-hXnBk9gyKduRp",
           "2Bsho0qDyddk6a0CDhTX6",
           "Q91564ZIG7ChsX7n7bvBK",
           "bcmDCzbgI2FQ5Cx8rt4_z",
@@ -1557,7 +1162,7 @@
           "color": "#FFC107"
         },
         "meta": {
-          "updateAt": 1766113188373,
+          "updateAt": 1766737360164,
           "createAt": 1765965086946
         }
       },
@@ -1619,16 +1224,116 @@
           "LHKTIi13dlKux_r3owco3"
         ],
         "ui": {
-          "x": 41,
-          "y": 1404,
+          "x": 36.8765,
+          "y": 1431.8351,
           "zIndex": 2545,
           "widthName": 176,
           "widthComment": 202,
           "color": "#FFC107"
         },
         "meta": {
-          "updateAt": 1766466914257,
+          "updateAt": 1766726382101,
           "createAt": 1766465591113
+        }
+      },
+      "gFGET0TJ_2AzpqqSHVhKU": {
+        "id": "gFGET0TJ_2AzpqqSHVhKU",
+        "name": "TB_RD_RDRELATE",
+        "comment": "도로명_관련지번",
+        "columnIds": [
+          "GXa95zUDm2gGnfHW8sgKT",
+          "Xb1HCudZYtfiB2t7Jw_Wj",
+          "uYaI-WSgmCKAQTTNR03Rw",
+          "XOwdvNnScY3cz_Rj1SUN2",
+          "twwZLRp4j5tU2e087iT4t",
+          "jM8gibsvY6BQUmmweLtlI",
+          "KRJEnSE-TyQsQRr6lXg-5",
+          "6NyE-JyMdcKYsisLrkGTI"
+        ],
+        "seqColumnIds": [
+          "GXa95zUDm2gGnfHW8sgKT",
+          "Xb1HCudZYtfiB2t7Jw_Wj",
+          "uYaI-WSgmCKAQTTNR03Rw",
+          "DFWkkLevbNolh0iHSyHur",
+          "jU7uDV4Q3K0uC5GL6I6pz",
+          "eIpMeMaKTBT9EIC3URZiW",
+          "XOwdvNnScY3cz_Rj1SUN2",
+          "twwZLRp4j5tU2e087iT4t",
+          "jM8gibsvY6BQUmmweLtlI",
+          "KRJEnSE-TyQsQRr6lXg-5",
+          "6NyE-JyMdcKYsisLrkGTI"
+        ],
+        "ui": {
+          "x": 1900.2678,
+          "y": 1332.8179,
+          "zIndex": 2555,
+          "widthName": 95,
+          "widthComment": 91,
+          "color": "#009688"
+        },
+        "meta": {
+          "updateAt": 1766575313425,
+          "createAt": 1766571698684
+        }
+      },
+      "PTqm7TT3v0H4fuBU4poJf": {
+        "id": "PTqm7TT3v0H4fuBU4poJf",
+        "name": "TB_SY_HTBSEQ",
+        "comment": "시스템_건물관리대장_SEQ",
+        "columnIds": [
+          "JMeymrJo788WOCyd74-tg",
+          "93QN8OIFCINvk-6nrO4e7",
+          "593BVv2VPTNQOVQBwjFQ1"
+        ],
+        "seqColumnIds": [
+          "JMeymrJo788WOCyd74-tg",
+          "93QN8OIFCINvk-6nrO4e7",
+          "593BVv2VPTNQOVQBwjFQ1"
+        ],
+        "ui": {
+          "x": 35.0515,
+          "y": 1443.814,
+          "zIndex": 2559,
+          "widthName": 81,
+          "widthComment": 141,
+          "color": "#F44336"
+        },
+        "meta": {
+          "updateAt": 1766726603520,
+          "createAt": 1766724790252
+        }
+      },
+      "NwGtvmlroRBQxU_j2Q3oA": {
+        "id": "NwGtvmlroRBQxU_j2Q3oA",
+        "name": "TB_SY_HBDNO",
+        "comment": "시스템_건물관리대장_HBDNO",
+        "columnIds": [
+          "ukEASi8aMB2ZJQH51owAX",
+          "bx-XXNjMPzX1oQ0kNqiQg",
+          "5WZ056OwWyoKE811bMx-Z",
+          "rO25a-XC8sK7LtKSxKnfp",
+          "LXsn0ABiNdGxqOuqDo2o5",
+          "Amj5mRIWxWU4NPonFuw4q"
+        ],
+        "seqColumnIds": [
+          "ukEASi8aMB2ZJQH51owAX",
+          "bx-XXNjMPzX1oQ0kNqiQg",
+          "5WZ056OwWyoKE811bMx-Z",
+          "rO25a-XC8sK7LtKSxKnfp",
+          "LXsn0ABiNdGxqOuqDo2o5",
+          "Amj5mRIWxWU4NPonFuw4q"
+        ],
+        "ui": {
+          "x": 32.9897,
+          "y": 1586.5979,
+          "zIndex": 2613,
+          "widthName": 80,
+          "widthComment": 162,
+          "color": "#F44336"
+        },
+        "meta": {
+          "updateAt": 1766728063440,
+          "createAt": 1766727793032
         }
       }
     },
@@ -2353,1226 +2058,6 @@
           "createAt": 1748698831035
         }
       },
-      "YOr5ccZdNvdCoK-w5uDdo": {
-        "id": "YOr5ccZdNvdCoK-w5uDdo",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "BULD_REGSTR_PK",
-        "comment": "관리_건축물대장_PK",
-        "dataType": "VARCHAR(33)",
-        "default": "",
-        "options": 10,
-        "ui": {
-          "keys": 1,
-          "widthName": 96,
-          "widthComment": 110,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749267791485,
-          "createAt": 1748758205378
-        }
-      },
-      "2ZFaj9YhaENhvdaUIDfBR": {
-        "id": "2ZFaj9YhaENhvdaUIDfBR",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "REGSTR_GB_CD",
-        "comment": "대장_구분_코드",
-        "dataType": "VARCHAR(1)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 84,
-          "widthComment": 84,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758246730,
-          "createAt": 1748758232480
-        }
-      },
-      "Asa6Fe29NOV5EhcQc1a3G": {
-        "id": "Asa6Fe29NOV5EhcQc1a3G",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "REGSTR_GB_NM",
-        "comment": "대장_구분_코드_명",
-        "dataType": "VARCHAR(100)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 88,
-          "widthComment": 101,
-          "widthDataType": 81,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758286613,
-          "createAt": 1748758247920
-        }
-      },
-      "4aqEhAXUG0oU73H18LYaw": {
-        "id": "4aqEhAXUG0oU73H18LYaw",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "REGSTR_KD_CD",
-        "comment": "대장_종류_코드",
-        "dataType": "VARCHAR(1)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 85,
-          "widthComment": 84,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758290471,
-          "createAt": 1748758262378
-        }
-      },
-      "g17h2o0ueYI5djxO0mqlW": {
-        "id": "g17h2o0ueYI5djxO0mqlW",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "REGSTR_KD_NM",
-        "comment": "대장_종류_코드_명",
-        "dataType": "VARCHAR(100)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 88,
-          "widthComment": 101,
-          "widthDataType": 81,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758304875,
-          "createAt": 1748758291824
-        }
-      },
-      "I8SsCU2M9izyfLcgWp35A": {
-        "id": "I8SsCU2M9izyfLcgWp35A",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "PLOT_LOC",
-        "comment": "대지_위치",
-        "dataType": "VARCHAR(500)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 81,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758319517,
-          "createAt": 1748758307012
-        }
-      },
-      "OY8eVH_CA_emXA19d-AI_": {
-        "id": "OY8eVH_CA_emXA19d-AI_",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "RDNM_PLO_LOC",
-        "comment": "도로명_대지_위치",
-        "dataType": "VARCHAR(400)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 90,
-          "widthComment": 96,
-          "widthDataType": 81,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758336170,
-          "createAt": 1748758321320
-        }
-      },
-      "gqM2zyqFy6_cWVCzJBvil": {
-        "id": "gqM2zyqFy6_cWVCzJBvil",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "BULD_NM",
-        "comment": "건물_명",
-        "dataType": "VARCHAR(100)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 81,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758351695,
-          "createAt": 1748758337530
-        }
-      },
-      "mds0kawtuOfyhm8ZZCbjo": {
-        "id": "mds0kawtuOfyhm8ZZCbjo",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "ARCD",
-        "comment": "시군구_코드",
-        "dataType": "VARCHAR(5)",
-        "default": "",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 67,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748763101965,
-          "createAt": 1748758353548
-        }
-      },
-      "ik_QFfaCqMPb1DFf_27X9": {
-        "id": "ik_QFfaCqMPb1DFf_27X9",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "LEGCD",
-        "comment": "법정동_코드",
-        "dataType": "VARCHAR(5)",
-        "default": "",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 67,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748763104425,
-          "createAt": 1748758366974
-        }
-      },
-      "BNG0b14lPdTzX66ji1T_z": {
-        "id": "BNG0b14lPdTzX66ji1T_z",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "PLOT_GB_CD",
-        "comment": "대지_구분_코드",
-        "dataType": "VARCHAR(1)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 70,
-          "widthComment": 84,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758402144,
-          "createAt": 1748758380236
-        }
-      },
-      "hJO08iTQCzxzmoATRdDND": {
-        "id": "hJO08iTQCzxzmoATRdDND",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "BUN",
-        "comment": "번",
-        "dataType": "VARCHAR(4)",
-        "default": "",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748763106802,
-          "createAt": 1748758403713
-        }
-      },
-      "C0RZLTYW-X3aJE2sok5P9": {
-        "id": "C0RZLTYW-X3aJE2sok5P9",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "JI",
-        "comment": "지",
-        "dataType": "VARCHAR(4)",
-        "default": "",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748763109438,
-          "createAt": 1748758420324
-        }
-      },
-      "dwnkmVDa0UXT02ahVsGNe": {
-        "id": "dwnkmVDa0UXT02ahVsGNe",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "SP_PLOT_NM",
-        "comment": "특수지_명",
-        "dataType": "VARCHAR(200)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 72,
-          "widthComment": 60,
-          "widthDataType": 81,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758447892,
-          "createAt": 1748758435713
-        }
-      },
-      "J1P2Ht9g-AXhDw3TGwwnT": {
-        "id": "J1P2Ht9g-AXhDw3TGwwnT",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "BLOCK",
-        "comment": "블록",
-        "dataType": "VARCHAR(20)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758462303,
-          "createAt": 1748758449354
-        }
-      },
-      "E49WLLOaSdPJeEN_UK6Fj": {
-        "id": "E49WLLOaSdPJeEN_UK6Fj",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "LOT",
-        "comment": "로트",
-        "dataType": "VARCHAR(20)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758476930,
-          "createAt": 1748758466608
-        }
-      },
-      "mI_2xGS8kxSzaJ6ugbtP6": {
-        "id": "mI_2xGS8kxSzaJ6ugbtP6",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "NW_ADDR_ROAD_CD",
-        "comment": "새주소_도로_코드",
-        "dataType": "VARCHAR(12)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 117,
-          "widthComment": 96,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758491294,
-          "createAt": 1748758477742
-        }
-      },
-      "oI9BRf9OPPHidZykRN2ih": {
-        "id": "oI9BRf9OPPHidZykRN2ih",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "NW_ADDR_LEG_CD",
-        "comment": "새주소_법정동_코드",
-        "dataType": "VARCHAR(5)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 105,
-          "widthComment": 108,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758505076,
-          "createAt": 1748758492261
-        }
-      },
-      "t7XmH5bJoeu7UgCk_d6Vp": {
-        "id": "t7XmH5bJoeu7UgCk_d6Vp",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "NW_ADDR_GRND_CD",
-        "comment": "새주소_지상지하_코드",
-        "dataType": "VARCHAR(1)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 118,
-          "widthComment": 120,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758522514,
-          "createAt": 1748758511367
-        }
-      },
-      "jS5OWcnNWUv8CPFMI9tx1": {
-        "id": "jS5OWcnNWUv8CPFMI9tx1",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "NW_ADDR_MAIN_B",
-        "comment": "새주소_본_번",
-        "dataType": "INT(5)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 106,
-          "widthComment": 72,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758564356,
-          "createAt": 1748758526530
-        }
-      },
-      "5-Q7d9hq88twbItpZXiNM": {
-        "id": "5-Q7d9hq88twbItpZXiNM",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "NW_ADDR_SUB_B",
-        "comment": "새주소_부_번",
-        "dataType": "INT(5)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 97,
-          "widthComment": 72,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758579144,
-          "createAt": 1748758565094
-        }
-      },
-      "uM1a_6i7N_Zm6hvT0v8Ij": {
-        "id": "uM1a_6i7N_Zm6hvT0v8Ij",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "SUB_REGSTR_GB_CD",
-        "comment": "부속_대장_구분_코드",
-        "dataType": "VARCHAR(1)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 111,
-          "widthComment": 113,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758596970,
-          "createAt": 1748758580096
-        }
-      },
-      "2cvRI1ntLFOjOPn16BkP3": {
-        "id": "2cvRI1ntLFOjOPn16BkP3",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "SUB_REGSTR_GB_NM",
-        "comment": "부속_대장_구분_코드_명",
-        "dataType": "VARCHAR(100)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 115,
-          "widthComment": 130,
-          "widthDataType": 81,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758642198,
-          "createAt": 1748758603859
-        }
-      },
-      "JG6KRfqJywmGu7FDX4MRR": {
-        "id": "JG6KRfqJywmGu7FDX4MRR",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "SUB_ARCD",
-        "comment": "부속_시군구_코드",
-        "dataType": "VARCHAR(5)",
-        "default": "",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 96,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748763112700,
-          "createAt": 1748758644225
-        }
-      },
-      "cVmzxmnR3dfcN_xXibqTM": {
-        "id": "cVmzxmnR3dfcN_xXibqTM",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "SUB_LEGCD",
-        "comment": "부속_법정동_코드",
-        "dataType": "VARCHAR(5)",
-        "default": "",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 64,
-          "widthComment": 96,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748763115179,
-          "createAt": 1748758658129
-        }
-      },
-      "xvMYgYhllu0B2URVswBwX": {
-        "id": "xvMYgYhllu0B2URVswBwX",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "SUB_PLOT_GB_CD",
-        "comment": "부속_대지_구분_코드",
-        "dataType": "VARCHAR(1)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 96,
-          "widthComment": 113,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758687365,
-          "createAt": 1748758673116
-        }
-      },
-      "CfMqNslkWF1wP7ja5-4Bn": {
-        "id": "CfMqNslkWF1wP7ja5-4Bn",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "SUB_BUN",
-        "comment": "부속_번",
-        "dataType": "VARCHAR(4)",
-        "default": "",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748763117682,
-          "createAt": 1748758688079
-        }
-      },
-      "5nJaFb2urMXrIV1dV78Is": {
-        "id": "5nJaFb2urMXrIV1dV78Is",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "SUB_JI",
-        "comment": "부속_지",
-        "dataType": "VARCHAR(4)",
-        "default": "",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748763120871,
-          "createAt": 1748758702322
-        }
-      },
-      "AC60iUY07RoI5YwIsUOi4": {
-        "id": "AC60iUY07RoI5YwIsUOi4",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "SUB_SP_PLOT_NM",
-        "comment": "부속_특수지_명",
-        "dataType": "VARCHAR(200)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 98,
-          "widthComment": 84,
-          "widthDataType": 81,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758726203,
-          "createAt": 1748758714475
-        }
-      },
-      "W3Bqq-EXI74FsxC3T_y8Y": {
-        "id": "W3Bqq-EXI74FsxC3T_y8Y",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "SUB_BLOCK",
-        "comment": "부속_블럭",
-        "dataType": "VARCHAR(20)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 64,
-          "widthComment": 60,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758740549,
-          "createAt": 1748758726970
-        }
-      },
-      "QXDFHeUPPIpgKA1qIDO2U": {
-        "id": "QXDFHeUPPIpgKA1qIDO2U",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "SUB_LOT",
-        "comment": "부속_로트",
-        "dataType": "VARCHAR(20)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758756378,
-          "createAt": 1748758745520
-        }
-      },
-      "WUJ6sDkEj33RpUHwvVV7b": {
-        "id": "WUJ6sDkEj33RpUHwvVV7b",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "SUB_ETC_JIBUN_NM",
-        "comment": "부속_기타_지번_명",
-        "dataType": "VARCHAR(300)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 109,
-          "widthComment": 101,
-          "widthDataType": 81,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758768764,
-          "createAt": 1748758760217
-        }
-      },
-      "ZPbkduVIw-1YEozIVU3PC": {
-        "id": "ZPbkduVIw-1YEozIVU3PC",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "CREAT_DE",
-        "comment": "생성_일자",
-        "dataType": "VARCHAR(8)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758785653,
-          "createAt": 1748758769927
-        }
-      },
-      "7oUtRdoTmobOUuY3y9YXi": {
-        "id": "7oUtRdoTmobOUuY3y9YXi",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "FST_UPLOAD_DT",
-        "comment": "최초_업로드_일시",
-        "dataType": "DATETIME",
-        "default": "NOW()",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 90,
-          "widthComment": 96,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758813651,
-          "createAt": 1748758789197
-        }
-      },
-      "YaZJqxKnbSo9MoUVBFEu2": {
-        "id": "YaZJqxKnbSo9MoUVBFEu2",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "FST_UPLOAD_USER_NO",
-        "comment": "최초_업로드_사용자_번호",
-        "dataType": "INT(10)",
-        "default": "0",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 126,
-          "widthComment": 137,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758832702,
-          "createAt": 1748758789473
-        }
-      },
-      "WS7NIJ0qCLDzRPTEaSRBl": {
-        "id": "WS7NIJ0qCLDzRPTEaSRBl",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "LST_CHNG_DT",
-        "comment": "최종_변경_일시",
-        "dataType": "DATETIME",
-        "default": "NOW()",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 78,
-          "widthComment": 84,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758849702,
-          "createAt": 1748758789755
-        }
-      },
-      "f4dsBmrzKQ3M6EgcJVd8P": {
-        "id": "f4dsBmrzKQ3M6EgcJVd8P",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "LST_CHNG_USER_NO",
-        "comment": "최종_변경_사용자_번호",
-        "dataType": "INT(10)",
-        "default": "0",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 114,
-          "widthComment": 125,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758870553,
-          "createAt": 1748758789991
-        }
-      },
-      "8d9eSaak-3wUNHS2_xpwm": {
-        "id": "8d9eSaak-3wUNHS2_xpwm",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "BATCH_YN",
-        "comment": "배치_여부",
-        "dataType": "CHAR(1)",
-        "default": "'Y'",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758890880,
-          "createAt": 1748758790279
-        }
-      },
-      "LD3aQzNG-0UHzswzNDysM": {
-        "id": "LD3aQzNG-0UHzswzNDysM",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "CREAT_USER_NO",
-        "comment": "생성_사용자_번호",
-        "dataType": "INT(10)",
-        "default": "0",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 92,
-          "widthComment": 96,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758914388,
-          "createAt": 1748758790531
-        }
-      },
-      "UMxrbFz1fqzLtLmYtIAvq": {
-        "id": "UMxrbFz1fqzLtLmYtIAvq",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "CREAT_DT",
-        "comment": "생성_일시",
-        "dataType": "DATETIME",
-        "default": "NOW()",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758932009,
-          "createAt": 1748758790822
-        }
-      },
-      "oRMJfs4l1pUFPqX_ftBQL": {
-        "id": "oRMJfs4l1pUFPqX_ftBQL",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "UPDT_USER_NO",
-        "comment": "수정_사용자_번호",
-        "dataType": "INT(10)",
-        "default": "0",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 87,
-          "widthComment": 96,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758963605,
-          "createAt": 1748758791085
-        }
-      },
-      "jrMmPxbmT8SVMY1QhHmfJ": {
-        "id": "jrMmPxbmT8SVMY1QhHmfJ",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "UPDT_DT",
-        "comment": "수정_일시",
-        "dataType": "DATETIME",
-        "default": "NOW()",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1748758981726,
-          "createAt": 1748758964660
-        }
-      },
-      "B5VyL6uhvMT2TW0V4ZvDw": {
-        "id": "B5VyL6uhvMT2TW0V4ZvDw",
-        "tableId": "P8PMihSQSnpvrHOZ5UKgg",
-        "name": "BULD_REGSTR_PK",
-        "comment": "건축물관리대장_PK",
-        "dataType": "VARCHAR(33)",
-        "default": "",
-        "options": 10,
-        "ui": {
-          "keys": 1,
-          "widthName": 96,
-          "widthComment": 105,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749184126611,
-          "createAt": 1749182964419
-        }
-      },
-      "vY7ku4-1A39MocOtBQW-O": {
-        "id": "vY7ku4-1A39MocOtBQW-O",
-        "tableId": "P8PMihSQSnpvrHOZ5UKgg",
-        "name": "REGSTR_GB_CD",
-        "comment": "대장_구분_코드",
-        "dataType": "VARCHAR(1)",
-        "default": "",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 84,
-          "widthComment": 84,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749183081806,
-          "createAt": 1749183050087
-        }
-      },
-      "iXoN0jrf9qDzR_jYmDl3S": {
-        "id": "iXoN0jrf9qDzR_jYmDl3S",
-        "tableId": "P8PMihSQSnpvrHOZ5UKgg",
-        "name": "REGSTR_KD_CD",
-        "comment": "대장_종류_코드",
-        "dataType": "VARCHAR(1)",
-        "default": "",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 85,
-          "widthComment": 84,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749183105606,
-          "createAt": 1749183082468
-        }
-      },
-      "s0YZ7VHd6Rn7OAP7z69Cp": {
-        "id": "s0YZ7VHd6Rn7OAP7z69Cp",
-        "tableId": "P8PMihSQSnpvrHOZ5UKgg",
-        "name": "ARCD",
-        "comment": "시군구코드",
-        "dataType": "VARCHAR(5)",
-        "default": "'00000'",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 62,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749183155513,
-          "createAt": 1749183106184
-        }
-      },
-      "yqt9p68gtjdMpT_Xwmloe": {
-        "id": "yqt9p68gtjdMpT_Xwmloe",
-        "tableId": "P8PMihSQSnpvrHOZ5UKgg",
-        "name": "LEGCD",
-        "comment": "법정동코드",
-        "dataType": "VARCHAR(5)",
-        "default": "'00000'",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 62,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749183160144,
-          "createAt": 1749183136476
-        }
-      },
-      "8CpO49lm9bUHKUS1W8TQi": {
-        "id": "8CpO49lm9bUHKUS1W8TQi",
-        "tableId": "P8PMihSQSnpvrHOZ5UKgg",
-        "name": "BUN",
-        "comment": "지번_번",
-        "dataType": "VARCHAR(4)",
-        "default": "'0000'",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749183183051,
-          "createAt": 1749183163352
-        }
-      },
-      "gaj38Ns8hCkchEvIAjqRt": {
-        "id": "gaj38Ns8hCkchEvIAjqRt",
-        "tableId": "P8PMihSQSnpvrHOZ5UKgg",
-        "name": "JI",
-        "comment": "지번_지",
-        "dataType": "VARCHAR(4)",
-        "default": "'0000'",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749183196620,
-          "createAt": 1749183183819
-        }
-      },
-      "9rtH9Q1sI6ucWLIECSVmG": {
-        "id": "9rtH9Q1sI6ucWLIECSVmG",
-        "tableId": "P8PMihSQSnpvrHOZ5UKgg",
-        "name": "SUB_ARCD",
-        "comment": "부속_시군구코드",
-        "dataType": "VARCHAR(5)",
-        "default": "'00000'",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 91,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749183220122,
-          "createAt": 1749183197269
-        }
-      },
-      "EW5rqaiLkauC3HwT35kxq": {
-        "id": "EW5rqaiLkauC3HwT35kxq",
-        "tableId": "P8PMihSQSnpvrHOZ5UKgg",
-        "name": "SUB_LEGCD",
-        "comment": "부속_법정동코드",
-        "dataType": "VARCHAR(5)",
-        "default": "'00000'",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 64,
-          "widthComment": 91,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749183238367,
-          "createAt": 1749183220745
-        }
-      },
-      "BdBmTVCovCK0Cnb97uLQf": {
-        "id": "BdBmTVCovCK0Cnb97uLQf",
-        "tableId": "P8PMihSQSnpvrHOZ5UKgg",
-        "name": "SUB_BUN",
-        "comment": "부속_번",
-        "dataType": "VARCHAR(4)",
-        "default": "'0000'",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749183252815,
-          "createAt": 1749183239058
-        }
-      },
-      "9bhQxflvbd84ta2vFHVzF": {
-        "id": "9bhQxflvbd84ta2vFHVzF",
-        "tableId": "P8PMihSQSnpvrHOZ5UKgg",
-        "name": "SUB_JI",
-        "comment": "부속_지",
-        "dataType": "VARCHAR(4)",
-        "default": "'0000'",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749183268619,
-          "createAt": 1749183253580
-        }
-      },
-      "Ijf8AmqrHWGQXzz-Ji3TL": {
-        "id": "Ijf8AmqrHWGQXzz-Ji3TL",
-        "tableId": "P8PMihSQSnpvrHOZ5UKgg",
-        "name": "PLOT_LOC",
-        "comment": "대지_위치",
-        "dataType": "VARCHAR(500)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 81,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749183315195,
-          "createAt": 1749183277008
-        }
-      },
-      "yJP8WtbfBSWfbmdFXzrOW": {
-        "id": "yJP8WtbfBSWfbmdFXzrOW",
-        "tableId": "P8PMihSQSnpvrHOZ5UKgg",
-        "name": "BULD_NM",
-        "comment": "건물_명",
-        "dataType": "VARCHAR(100)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 81,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749183333081,
-          "createAt": 1749183317284
-        }
-      },
-      "zkx152tcsGeT_J1uggqk0": {
-        "id": "zkx152tcsGeT_J1uggqk0",
-        "tableId": "P8PMihSQSnpvrHOZ5UKgg",
-        "name": "CREAT_USER_NO",
-        "comment": "생성_사용자_번호",
-        "dataType": "INT(10)",
-        "default": "0",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 92,
-          "widthComment": 96,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749183409402,
-          "createAt": 1749183354968
-        }
-      },
-      "96jcdMhD7UjZ15ZqagwJ_": {
-        "id": "96jcdMhD7UjZ15ZqagwJ_",
-        "tableId": "P8PMihSQSnpvrHOZ5UKgg",
-        "name": "CREAT_DT",
-        "comment": "생성_일시",
-        "dataType": "DATETIME",
-        "default": "NOW()",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749183423382,
-          "createAt": 1749183386139
-        }
-      },
-      "f-KOgJDdHP1bon2t7XRmZ": {
-        "id": "f-KOgJDdHP1bon2t7XRmZ",
-        "tableId": "P8PMihSQSnpvrHOZ5UKgg",
-        "name": "UPDT_USER_NO",
-        "comment": "수정_사용자_번호",
-        "dataType": "INT(10)",
-        "default": "0",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 87,
-          "widthComment": 96,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749183438790,
-          "createAt": 1749183407854
-        }
-      },
-      "BT_wOFOKo5CO9pn3yaGrA": {
-        "id": "BT_wOFOKo5CO9pn3yaGrA",
-        "tableId": "P8PMihSQSnpvrHOZ5UKgg",
-        "name": "UPDT_DT",
-        "comment": "수정_일시",
-        "dataType": "DATETIME",
-        "default": "NOW()",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749184322844,
-          "createAt": 1749183413471
-        }
-      },
-      "VsXCfzeuCep4wk4RarHFk": {
-        "id": "VsXCfzeuCep4wk4RarHFk",
-        "tableId": "P8PMihSQSnpvrHOZ5UKgg",
-        "name": "BULD_REGSTR_SEQ",
-        "comment": "건축물관리대장_일련번호",
-        "dataType": "INT(4)",
-        "default": "",
-        "options": 10,
-        "ui": {
-          "keys": 1,
-          "widthName": 104,
-          "widthComment": 139,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749184128533,
-          "createAt": 1749184089050
-        }
-      },
-      "ELqj7ROx3nU3_8v0d0TM8": {
-        "id": "ELqj7ROx3nU3_8v0d0TM8",
-        "tableId": "AX4GKbyj9VjTw-5XdZzW0",
-        "name": "BULD_REGSTR_SEQ",
-        "comment": "건축물관리대장_일련번호",
-        "dataType": "INT(4)",
-        "default": "",
-        "options": 10,
-        "ui": {
-          "keys": 1,
-          "widthName": 104,
-          "widthComment": 139,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1749267794923,
-          "createAt": 1749267719650
-        }
-      },
       "kt0zXZ2h_Lthl-QNFe9I8": {
         "id": "kt0zXZ2h_Lthl-QNFe9I8",
         "tableId": "FOsp5U1D1uAyqJg-TPqsw",
@@ -3693,266 +2178,6 @@
           "createAt": 1749790620200
         }
       },
-      "YChTTftDFFnPpeydwPCcc": {
-        "id": "YChTTftDFFnPpeydwPCcc",
-        "tableId": "yhZ8U3NdLzAvMxSpmJxsi",
-        "name": "BULD_REGSTR_PK",
-        "comment": "건축물대장_PK",
-        "dataType": "VARCHAR(33)",
-        "default": "",
-        "options": 10,
-        "ui": {
-          "keys": 1,
-          "widthName": 96,
-          "widthComment": 81,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1750114084774,
-          "createAt": 1750114065968
-        }
-      },
-      "MGNYvQFDXIbHYcoED63Kr": {
-        "id": "MGNYvQFDXIbHYcoED63Kr",
-        "tableId": "yhZ8U3NdLzAvMxSpmJxsi",
-        "name": "PRMISS_DE",
-        "comment": "허가_일자",
-        "dataType": "VARCHAR(8)",
-        "default": "'0000'",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 62,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1750114389616,
-          "createAt": 1750114086133
-        }
-      },
-      "7gSiTmF-6TuvP-kb_cQId": {
-        "id": "7gSiTmF-6TuvP-kb_cQId",
-        "tableId": "yhZ8U3NdLzAvMxSpmJxsi",
-        "name": "STWK_DE",
-        "comment": "착공_일자",
-        "dataType": "VARCHAR(8)",
-        "default": "'00000000'",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1750114396605,
-          "createAt": 1750114117520
-        }
-      },
-      "p4a6nvai3EKIQRDS-dpHG": {
-        "id": "p4a6nvai3EKIQRDS-dpHG",
-        "tableId": "yhZ8U3NdLzAvMxSpmJxsi",
-        "name": "PRMISS_NO_YYYY",
-        "comment": "허가번호_년",
-        "dataType": "VARCHAR(4)",
-        "default": "'0000'",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 97,
-          "widthComment": 67,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1750114279014,
-          "createAt": 1750114139624
-        }
-      },
-      "y2L9fBncrGG7Drox2_R9N": {
-        "id": "y2L9fBncrGG7Drox2_R9N",
-        "tableId": "yhZ8U3NdLzAvMxSpmJxsi",
-        "name": "PRMISS_NO_ORG_CD",
-        "comment": "허가번호_기관_코드",
-        "dataType": "VARCHAR(7)",
-        "default": "'0000000'",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 116,
-          "widthComment": 108,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1750114274286,
-          "createAt": 1750114171477
-        }
-      },
-      "r7iALEPWuJS5uj2TCVMND": {
-        "id": "r7iALEPWuJS5uj2TCVMND",
-        "tableId": "yhZ8U3NdLzAvMxSpmJxsi",
-        "name": "PRMISS_NO_ORG_NM",
-        "comment": "허가번호_기관_코드_명",
-        "dataType": "VARCHAR(100)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 120,
-          "widthComment": 125,
-          "widthDataType": 81,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1750114250070,
-          "createAt": 1750114219503
-        }
-      },
-      "yxoFIPC5jlU2JfaPLq6jR": {
-        "id": "yxoFIPC5jlU2JfaPLq6jR",
-        "tableId": "yhZ8U3NdLzAvMxSpmJxsi",
-        "name": "PRMISS_NO_GB_CD",
-        "comment": "허가번호_구분_코드",
-        "dataType": "VARCHAR(4)",
-        "default": "'0000'",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 107,
-          "widthComment": 108,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1750114321396,
-          "createAt": 1750114219691
-        }
-      },
-      "uTAjRs3XOl6SrwUrGtWgY": {
-        "id": "uTAjRs3XOl6SrwUrGtWgY",
-        "tableId": "yhZ8U3NdLzAvMxSpmJxsi",
-        "name": "PRMISS_NO_GB_NM",
-        "comment": "허가번호_구분_코드_명",
-        "dataType": "VARCHAR(100)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 110,
-          "widthComment": 125,
-          "widthDataType": 81,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1750114344789,
-          "createAt": 1750114219892
-        }
-      },
-      "UEEw_TKWIE-5AmPgmD2kp": {
-        "id": "UEEw_TKWIE-5AmPgmD2kp",
-        "tableId": "yhZ8U3NdLzAvMxSpmJxsi",
-        "name": "CREAT_USER_NO",
-        "comment": "생성_사용자_번호",
-        "dataType": "INT(10)",
-        "default": "0",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 92,
-          "widthComment": 96,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1750114420170,
-          "createAt": 1750114220081
-        }
-      },
-      "J2bNZ5A-PCf_e7cVEBx9K": {
-        "id": "J2bNZ5A-PCf_e7cVEBx9K",
-        "tableId": "yhZ8U3NdLzAvMxSpmJxsi",
-        "name": "CREAT_DT",
-        "comment": "생성_일시",
-        "dataType": "DATETIME",
-        "default": "NOW()",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1750114430510,
-          "createAt": 1750114220286
-        }
-      },
-      "NYwSX7IQwKFST76panlCO": {
-        "id": "NYwSX7IQwKFST76panlCO",
-        "tableId": "yhZ8U3NdLzAvMxSpmJxsi",
-        "name": "UPDT_USER_NO",
-        "comment": "수정_사용자_번호",
-        "dataType": "INT(10)",
-        "default": "0",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 87,
-          "widthComment": 96,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1750114448898,
-          "createAt": 1750114220625
-        }
-      },
-      "mA7bclLDme-zF8Q1hLGF_": {
-        "id": "mA7bclLDme-zF8Q1hLGF_",
-        "tableId": "yhZ8U3NdLzAvMxSpmJxsi",
-        "name": "UPDT_DT",
-        "comment": "수정_일시",
-        "dataType": "DATETIME",
-        "default": "NOW()",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1750114461430,
-          "createAt": 1750114221001
-        }
-      },
-      "SqIpuX2zEGR3LekeVyKgS": {
-        "id": "SqIpuX2zEGR3LekeVyKgS",
-        "tableId": "yhZ8U3NdLzAvMxSpmJxsi",
-        "name": "",
-        "comment": "",
-        "dataType": "",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1750114221353,
-          "createAt": 1750114221353
-        }
-      },
       "rKRcvDuqQ-ZHiqjRlup7J": {
         "id": "rKRcvDuqQ-ZHiqjRlup7J",
         "tableId": "FOsp5U1D1uAyqJg-TPqsw",
@@ -4051,366 +2276,6 @@
         "meta": {
           "updateAt": 1750306920759,
           "createAt": 1750305944554
-        }
-      },
-      "ZmpndvApT_9846JxiEWff": {
-        "id": "ZmpndvApT_9846JxiEWff",
-        "tableId": "bHCZ3cbHuF4b65qOULfiN",
-        "name": "CPLXNO",
-        "comment": "단지_번호",
-        "dataType": "VARCHAR(22)",
-        "default": "",
-        "options": 10,
-        "ui": {
-          "keys": 1,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1755335424212,
-          "createAt": 1754464972741
-        }
-      },
-      "enSiIU6nV3piol3KWklXA": {
-        "id": "enSiIU6nV3piol3KWklXA",
-        "tableId": "bHCZ3cbHuF4b65qOULfiN",
-        "name": "HBD_CPLX_SEQ",
-        "comment": "단지_일련번호",
-        "dataType": "VARCHAR(22)",
-        "default": "",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 84,
-          "widthComment": 79,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1754465022820,
-          "createAt": 1754465001667
-        }
-      },
-      "6BXPB-jrDzYrdwyK_wxb0": {
-        "id": "6BXPB-jrDzYrdwyK_wxb0",
-        "tableId": "bHCZ3cbHuF4b65qOULfiN",
-        "name": "BRKNO",
-        "comment": "중개사번호",
-        "dataType": "INT(10)",
-        "default": "",
-        "options": 10,
-        "ui": {
-          "keys": 1,
-          "widthName": 60,
-          "widthComment": 62,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1755340422525,
-          "createAt": 1754465024980
-        }
-      },
-      "Az86RjG1k_Gx0BjXbXX1h": {
-        "id": "Az86RjG1k_Gx0BjXbXX1h",
-        "tableId": "bHCZ3cbHuF4b65qOULfiN",
-        "name": "ARCD",
-        "comment": "시군구_코드",
-        "dataType": "VARCHAR(5)",
-        "default": "",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 67,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1754465053008,
-          "createAt": 1754465040824
-        }
-      },
-      "4OQ8wOAznSJIs7yvsegNX": {
-        "id": "4OQ8wOAznSJIs7yvsegNX",
-        "tableId": "bHCZ3cbHuF4b65qOULfiN",
-        "name": "LEGCD",
-        "comment": "법정동_코드",
-        "dataType": "VARCHAR(5)",
-        "default": "",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 67,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1754465067460,
-          "createAt": 1754465054161
-        }
-      },
-      "QI2zNnB5tqRQTN-NVqFFi": {
-        "id": "QI2zNnB5tqRQTN-NVqFFi",
-        "tableId": "bHCZ3cbHuF4b65qOULfiN",
-        "name": "CPLXNM",
-        "comment": "단지_명",
-        "dataType": "VARCHAR(100)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 81,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1755335429819,
-          "createAt": 1754465068508
-        }
-      },
-      "cLyI0OGcRoOWiOjZ9nrGU": {
-        "id": "cLyI0OGcRoOWiOjZ9nrGU",
-        "tableId": "bHCZ3cbHuF4b65qOULfiN",
-        "name": "BULDNM",
-        "comment": "건물명",
-        "dataType": "VARCHAR(100)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 81,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1755335432138,
-          "createAt": 1754465084553
-        }
-      },
-      "jpjswgNjz_EYEO34zEJbW": {
-        "id": "jpjswgNjz_EYEO34zEJbW",
-        "tableId": "bHCZ3cbHuF4b65qOULfiN",
-        "name": "CPLX_TY",
-        "comment": "단지_유형",
-        "dataType": "VARCHAR(6)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1754887546024,
-          "createAt": 1754465097841
-        }
-      },
-      "RvB7lqwT9pZ0xoI_eg67-": {
-        "id": "RvB7lqwT9pZ0xoI_eg67-",
-        "tableId": "bHCZ3cbHuF4b65qOULfiN",
-        "name": "CPLX_HSHLD_CO",
-        "comment": "단지_세대_수",
-        "dataType": "INT(10)",
-        "default": "0",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 92,
-          "widthComment": 72,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1754465191294,
-          "createAt": 1754465163811
-        }
-      },
-      "FrFBwOGqMLu0tEuQtKdPO": {
-        "id": "FrFBwOGqMLu0tEuQtKdPO",
-        "tableId": "bHCZ3cbHuF4b65qOULfiN",
-        "name": "CPLX_DONG_CO",
-        "comment": "단지_동_수",
-        "dataType": "INT(10)",
-        "default": "0",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 90,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1754465225845,
-          "createAt": 1754465197643
-        }
-      },
-      "Fy8UXw-0IfTCxPX1iVRSg": {
-        "id": "Fy8UXw-0IfTCxPX1iVRSg",
-        "tableId": "bHCZ3cbHuF4b65qOULfiN",
-        "name": "CREAT_USER_NO",
-        "comment": "생성_사용자_번호",
-        "dataType": "INT(10)",
-        "default": "0",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 92,
-          "widthComment": 96,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1754465248051,
-          "createAt": 1754465227278
-        }
-      },
-      "pe1qS9u_y-jzM_4uNqixx": {
-        "id": "pe1qS9u_y-jzM_4uNqixx",
-        "tableId": "bHCZ3cbHuF4b65qOULfiN",
-        "name": "CREAT_DT",
-        "comment": "생성_일시",
-        "dataType": "DATETIME",
-        "default": "NOW()",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1754465291889,
-          "createAt": 1754465227462
-        }
-      },
-      "J0Tfw1fJb9fNlZvk7vf1e": {
-        "id": "J0Tfw1fJb9fNlZvk7vf1e",
-        "tableId": "bHCZ3cbHuF4b65qOULfiN",
-        "name": "UPDT_USER_NO",
-        "comment": "수정_사용자_번호",
-        "dataType": "INT(10)",
-        "default": "0",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 87,
-          "widthComment": 96,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1754465282407,
-          "createAt": 1754465227618
-        }
-      },
-      "8O4Adc-dJTDBx4cL35RsG": {
-        "id": "8O4Adc-dJTDBx4cL35RsG",
-        "tableId": "bHCZ3cbHuF4b65qOULfiN",
-        "name": "UPDT_DT",
-        "comment": "수정_일시",
-        "dataType": "DATETIME",
-        "default": "NOW()",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1754465299297,
-          "createAt": 1754465227831
-        }
-      },
-      "Y7Fl_2hKnNC3VYXT3moTo": {
-        "id": "Y7Fl_2hKnNC3VYXT3moTo",
-        "tableId": "bHCZ3cbHuF4b65qOULfiN",
-        "name": "PLOT_LOC",
-        "comment": "대지_위치",
-        "dataType": "VARCHAR(500)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 81,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1754887463242,
-          "createAt": 1754887439308
-        }
-      },
-      "_u0MUh3faU0GUNvSX7YDA": {
-        "id": "_u0MUh3faU0GUNvSX7YDA",
-        "tableId": "bHCZ3cbHuF4b65qOULfiN",
-        "name": "LOC_X",
-        "comment": "위치_X좌표",
-        "dataType": "VARCHAR(20)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 62,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1755156499420,
-          "createAt": 1755156473481
-        }
-      },
-      "0BAFyJWCaY-Xpl07vSZoO": {
-        "id": "0BAFyJWCaY-Xpl07vSZoO",
-        "tableId": "bHCZ3cbHuF4b65qOULfiN",
-        "name": "LOC_Y",
-        "comment": "위치_Y좌표",
-        "dataType": "VARCHAR(20)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 62,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1755156513210,
-          "createAt": 1755156473695
-        }
-      },
-      "6brOPktLZlE36-azNvSgY": {
-        "id": "6brOPktLZlE36-azNvSgY",
-        "tableId": "bHCZ3cbHuF4b65qOULfiN",
-        "name": "BULDNO",
-        "comment": "건물번호(대표)",
-        "dataType": "VARCHAR(22)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 81,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1755339034951,
-          "createAt": 1755339021713
         }
       },
       "ZqbGjFKr1Xr-GvGUw6A9a": {
@@ -4891,926 +2756,6 @@
         "meta": {
           "updateAt": 1765429397336,
           "createAt": 1761532840194
-        }
-      },
-      "6SQh_lwnpcHUxV5g3L2bs": {
-        "id": "6SQh_lwnpcHUxV5g3L2bs",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "ARCD",
-        "comment": "시군구코드(행정동코드)",
-        "dataType": "VARCHAR(5)",
-        "default": "",
-        "options": 10,
-        "ui": {
-          "keys": 1,
-          "widthName": 60,
-          "widthComment": 129,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763704114874,
-          "createAt": 1763704028041
-        }
-      },
-      "tuHDkCBAc12vd7bAzBLkf": {
-        "id": "tuHDkCBAc12vd7bAzBLkf",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "RDNO",
-        "comment": "도로명_번호",
-        "dataType": "VARCHAR(7)",
-        "default": "",
-        "options": 10,
-        "ui": {
-          "keys": 1,
-          "widthName": 60,
-          "widthComment": 67,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763704164362,
-          "createAt": 1763704075266
-        }
-      },
-      "lX-BOqWI3wPRKZJ1pvgAb": {
-        "id": "lX-BOqWI3wPRKZJ1pvgAb",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "EMDSEQ",
-        "comment": "읍면동_일련번호",
-        "dataType": "VARCHAR(2)",
-        "default": "",
-        "options": 10,
-        "ui": {
-          "keys": 1,
-          "widthName": 60,
-          "widthComment": 91,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763704167410,
-          "createAt": 1763704112655
-        }
-      },
-      "mq4W_DvaK8CYqKQBLOGFu": {
-        "id": "mq4W_DvaK8CYqKQBLOGFu",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "RDNAME",
-        "comment": "도로명",
-        "dataType": "VARCHAR(100)",
-        "default": "",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 81,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763704205313,
-          "createAt": 1763704115942
-        }
-      },
-      "hD2ltWCmQ5EyegqfwmhKB": {
-        "id": "hD2ltWCmQ5EyegqfwmhKB",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "EMDGB",
-        "comment": "0: 읍면, 1:동, 2:미부여",
-        "dataType": "CHAR(1)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 116,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763704309140,
-          "createAt": 1763704220371
-        }
-      },
-      "6gBDt5X30zNyux4k_d2Ce": {
-        "id": "6gBDt5X30zNyux4k_d2Ce",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "EMDCD",
-        "comment": "읍면동_코드",
-        "dataType": "VARCHAR(3)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 67,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763704338261,
-          "createAt": 1763704305762
-        }
-      },
-      "F1OAf5jWyHFlWrh-CtPMb": {
-        "id": "F1OAf5jWyHFlWrh-CtPMb",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "EMDNM",
-        "comment": "읍면동_명",
-        "dataType": "VARCHAR(50)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763704362837,
-          "createAt": 1763704347736
-        }
-      },
-      "ijLqMY_uaLH71sHk0fTV3": {
-        "id": "ijLqMY_uaLH71sHk0fTV3",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "UPRDNO",
-        "comment": "상위_도로명_번호",
-        "dataType": "VARCHAR(7)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 96,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763704415523,
-          "createAt": 1763704387360
-        }
-      },
-      "YTWpw24sQnt8BQxk0grSI": {
-        "id": "YTWpw24sQnt8BQxk0grSI",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "UPRDNAME",
-        "comment": "상위_도로면",
-        "dataType": "VARCHAR(100)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 66,
-          "widthComment": 67,
-          "widthDataType": 81,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763704432091,
-          "createAt": 1763704418668
-        }
-      },
-      "LmQJ9yqMnLt2LPReGVOqa": {
-        "id": "LmQJ9yqMnLt2LPReGVOqa",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "USE_AT",
-        "comment": "사용_여부(0:사용, 1:미사용)",
-        "dataType": "CHAR(1)",
-        "default": "'0'",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 146,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763704488877,
-          "createAt": 1763704457920
-        }
-      },
-      "n2GaEXYt1kvXlAYGp_7za": {
-        "id": "n2GaEXYt1kvXlAYGp_7za",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "USE_YN",
-        "comment": "",
-        "dataType": "",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763704504003,
-          "createAt": 1763704498463
-        }
-      },
-      "SVKj3JnDrAegJKPK0ICBn": {
-        "id": "SVKj3JnDrAegJKPK0ICBn",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "CHNG_HIST_RESN",
-        "comment": "변경_이력_사유",
-        "dataType": "VARCHAR(1)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 98,
-          "widthComment": 84,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763704566253,
-          "createAt": 1763704510510
-        }
-      },
-      "f3Bu02Yi8mELQPTl45wLI": {
-        "id": "f3Bu02Yi8mELQPTl45wLI",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "CHNG_HIST_INFO",
-        "comment": "변경_이력_정보",
-        "dataType": "VARCHAR(14)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 97,
-          "widthComment": 84,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763704692265,
-          "createAt": 1763704671335
-        }
-      },
-      "40B86edDkQoBLkxP6RXW6": {
-        "id": "40B86edDkQoBLkxP6RXW6",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "NTFCDE",
-        "comment": "고시_일자",
-        "dataType": "VARCHAR(8)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763704948611,
-          "createAt": 1763704931554
-        }
-      },
-      "Fxa5c2285v5YshJ6jXlWU": {
-        "id": "Fxa5c2285v5YshJ6jXlWU",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "ERSRDE",
-        "comment": "말소_일자",
-        "dataType": "VARCHAR(8)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763704999821,
-          "createAt": 1763704949082
-        }
-      },
-      "bHsDzGcspAALokiZLvWe8": {
-        "id": "bHsDzGcspAALokiZLvWe8",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "USE_YN",
-        "comment": "사용_여부",
-        "dataType": "CHAR(1)",
-        "default": "'Y'",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763713705223,
-          "createAt": 1763705011194
-        }
-      },
-      "vvLhI3eOjoNVmtzLz5E9Z": {
-        "id": "vvLhI3eOjoNVmtzLz5E9Z",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "BATCH_YN",
-        "comment": "배치_여부",
-        "dataType": "CHAR(1)",
-        "default": "'N'",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763713705981,
-          "createAt": 1763705034580
-        }
-      },
-      "uBXMt2AWH4o0dpTmxBpsP": {
-        "id": "uBXMt2AWH4o0dpTmxBpsP",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "CRDE",
-        "comment": "생성_일자",
-        "dataType": "VARCHAR(8)",
-        "default": "DATE_FORMAT(NOW(), '%Y%m%d')",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 189
-        },
-        "meta": {
-          "updateAt": 1763713710048,
-          "createAt": 1763705060161
-        }
-      },
-      "uQsLZQkKQUffGa6tCFUOP": {
-        "id": "uQsLZQkKQUffGa6tCFUOP",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "CREAT_USER_NO",
-        "comment": "생성_사용자_번호",
-        "dataType": "INT(10)",
-        "default": "0",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 92,
-          "widthComment": 96,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763713699613,
-          "createAt": 1763705075513
-        }
-      },
-      "Bobgjf1l9Pi0ue1F3Jn-h": {
-        "id": "Bobgjf1l9Pi0ue1F3Jn-h",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "CREAT_DT",
-        "comment": "생성_일시",
-        "dataType": "DATETIME",
-        "default": "NOW()",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763713700299,
-          "createAt": 1763705092968
-        }
-      },
-      "19KPTSVwmzdVKdWh67U9E": {
-        "id": "19KPTSVwmzdVKdWh67U9E",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "UPDT_USER_NO",
-        "comment": "수정_사용자_번호",
-        "dataType": "INT(10)",
-        "default": "0",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 87,
-          "widthComment": 96,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763713701008,
-          "createAt": 1763705111919
-        }
-      },
-      "5ZEzxkXVbYTXyeTZlwYsk": {
-        "id": "5ZEzxkXVbYTXyeTZlwYsk",
-        "tableId": "0CYVlcEex6SdnFzFRZwLe",
-        "name": "UPDT_DT",
-        "comment": "수정_일시",
-        "dataType": "DATETIME",
-        "default": "NOW()",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763713701953,
-          "createAt": 1763705125488
-        }
-      },
-      "dJmnaxOpQU2V4USz62kGK": {
-        "id": "dJmnaxOpQU2V4USz62kGK",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "ARCODE",
-        "comment": "지역코드_(행정동 + 법정동)",
-        "dataType": "VARCHAR(10)",
-        "default": "",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 149,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763706462148,
-          "createAt": 1763706273011
-        }
-      },
-      "C2u4LiGMm2kp_NREDNBWT": {
-        "id": "C2u4LiGMm2kp_NREDNBWT",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "BDMGRNO",
-        "comment": "도로명_건물관리번호_PK",
-        "dataType": "VARCHAR(25)",
-        "default": "",
-        "options": 10,
-        "ui": {
-          "keys": 1,
-          "widthName": 62,
-          "widthComment": 134,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763706346531,
-          "createAt": 1763706309331
-        }
-      },
-      "ADR3_dv3cCvbpVDa6l0gn": {
-        "id": "ADR3_dv3cCvbpVDa6l0gn",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "RDCODE",
-        "comment": "도로명코드",
-        "dataType": "VARCHAR(12)",
-        "default": "",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 62,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763706431952,
-          "createAt": 1763706387782
-        }
-      },
-      "swZZd_J-5gYH0QlUtKnpA": {
-        "id": "swZZd_J-5gYH0QlUtKnpA",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "JIBUNB",
-        "comment": "지번_번",
-        "dataType": "VARCHAR(4)",
-        "default": "",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763706557645,
-          "createAt": 1763706467549
-        }
-      },
-      "MXghv8kP3dCGoeYhm-oIX": {
-        "id": "MXghv8kP3dCGoeYhm-oIX",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "JIBUNJ",
-        "comment": "지번_지",
-        "dataType": "VARCHAR(4)",
-        "default": "",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763706568451,
-          "createAt": 1763706558990
-        }
-      },
-      "-ieNyldjLjIs7swd2Idvu": {
-        "id": "-ieNyldjLjIs7swd2Idvu",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "UNDER_AT",
-        "comment": "지하_여부(0:지상, 1:지하, 2:공중, 3:수상)",
-        "dataType": "CHAR(1)",
-        "default": "'0'",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 212,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763706703954,
-          "createAt": 1763706568451
-        }
-      },
-      "6y2_HDfMVXErR6vMb3FiA": {
-        "id": "6y2_HDfMVXErR6vMb3FiA",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "BD_MAIN_BUN",
-        "comment": "건물_본_번",
-        "dataType": "VARCHAR(5)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 82,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763706784058,
-          "createAt": 1763706709657
-        }
-      },
-      "RFiPzHft7rxivMyALckI1": {
-        "id": "RFiPzHft7rxivMyALckI1",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "BD_SUB_BUN",
-        "comment": "건물_부_본",
-        "dataType": "VARCHAR(5)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 73,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763706803672,
-          "createAt": 1763706787335
-        }
-      },
-      "lYu6u7LYAMWDB4NL9LJ39": {
-        "id": "lYu6u7LYAMWDB4NL9LJ39",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "BULDNM",
-        "comment": "건축물관리대장_건물_명",
-        "dataType": "VARCHAR(40)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 132,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763706919409,
-          "createAt": 1763706817490
-        }
-      },
-      "hdnQcn_n2-Fv5lXqI3zAB": {
-        "id": "hdnQcn_n2-Fv5lXqI3zAB",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "BULDNM_SUB",
-        "comment": "건물_명_상세(건물_동_명)",
-        "dataType": "VARCHAR(100)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 77,
-          "widthComment": 137,
-          "widthDataType": 81,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763707581243,
-          "createAt": 1763706850203
-        }
-      },
-      "yPIUmX_vBR5uJ5Kqd9LiX": {
-        "id": "yPIUmX_vBR5uJ5Kqd9LiX",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "EMDSEQ",
-        "comment": "읍면동_일련번호",
-        "dataType": "VARCHAR(2)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 91,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763706975968,
-          "createAt": 1763706936532
-        }
-      },
-      "oxsfGAfODEETxwLDfIqzS": {
-        "id": "oxsfGAfODEETxwLDfIqzS",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "MV_RESN_CD",
-        "comment": "이동_사유_코드",
-        "dataType": "VARCHAR(2)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 75,
-          "widthComment": 84,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763707095574,
-          "createAt": 1763707071155
-        }
-      },
-      "Apboxn-QHyZ2CbhY6zsfe": {
-        "id": "Apboxn-QHyZ2CbhY6zsfe",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "NTFCDE",
-        "comment": "고시_일자",
-        "dataType": "VARCHAR(8)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763707280893,
-          "createAt": 1763707248442
-        }
-      },
-      "rq-al9gin9yF4aXKkV7lq": {
-        "id": "rq-al9gin9yF4aXKkV7lq",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "BULDNM_SGG",
-        "comment": "건물_명_시군구용",
-        "dataType": "VARCHAR(40)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 79,
-          "widthComment": 96,
-          "widthDataType": 75,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763707592401,
-          "createAt": 1763707530587
-        }
-      },
-      "XjlW6dlF9fHSbQKtxXtM8": {
-        "id": "XjlW6dlF9fHSbQKtxXtM8",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "COMM_AT",
-        "comment": "공동주택_여부(0:비공동주택, 1:공동주택)",
-        "dataType": "VARCHAR(1)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 218,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763707654445,
-          "createAt": 1763707602604
-        }
-      },
-      "5i7vAfee69zO8rsqHHN8J": {
-        "id": "5i7vAfee69zO8rsqHHN8J",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "BSARCD",
-        "comment": "기초_구역_번호",
-        "dataType": "VARCHAR(5)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 84,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763707690841,
-          "createAt": 1763707669338
-        }
-      },
-      "pyaEvX0verMS8FRiOz9Bz": {
-        "id": "pyaEvX0verMS8FRiOz9Bz",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "DET_ALLOW_AT",
-        "comment": "상세_주소_부여_여부(0:미부여, 1:부여)",
-        "dataType": "VARCHAR(1)",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 84,
-          "widthComment": 204,
-          "widthDataType": 68,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763707771145,
-          "createAt": 1763707691708
-        }
-      },
-      "8PPAgMANaY8vdHTDANBK7": {
-        "id": "8PPAgMANaY8vdHTDANBK7",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "USE_YN",
-        "comment": "사용_여부",
-        "dataType": "CHAR(1)",
-        "default": "'Y'",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763707790814,
-          "createAt": 1763707777318
-        }
-      },
-      "4NwjFk1LJL8cKVBWYFoy4": {
-        "id": "4NwjFk1LJL8cKVBWYFoy4",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "BATCH_YN",
-        "comment": "배치_여부",
-        "dataType": "CHAR(1)",
-        "default": "'N'",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763707803102,
-          "createAt": 1763707791389
-        }
-      },
-      "jgJdbFpw1rEsQH8OcJ0aH": {
-        "id": "jgJdbFpw1rEsQH8OcJ0aH",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "CRDE",
-        "comment": "생성_일자",
-        "dataType": "VARCHAR(8)",
-        "default": "DATE_FORMAT(NOW(), '%Y%m%d')",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 68,
-          "widthDefault": 189
-        },
-        "meta": {
-          "updateAt": 1763713743623,
-          "createAt": 1763707803666
-        }
-      },
-      "Brvy3U6HjJGwmPePlpkjY": {
-        "id": "Brvy3U6HjJGwmPePlpkjY",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "CREAT_USER_NO",
-        "comment": "생성_사용자_번호",
-        "dataType": "INT(10)",
-        "default": "0",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 92,
-          "widthComment": 96,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763707833951,
-          "createAt": 1763707820276
-        }
-      },
-      "2wxI3S10t8_Ol9mpc2kgx": {
-        "id": "2wxI3S10t8_Ol9mpc2kgx",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "CREAT_DT",
-        "comment": "생성_일자",
-        "dataType": "DATETIME",
-        "default": "NOW()",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763707898794,
-          "createAt": 1763707833953
-        }
-      },
-      "4VgwgEimkO8lZP_o5_ToS": {
-        "id": "4VgwgEimkO8lZP_o5_ToS",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "UPDT_USER_NO",
-        "comment": "수정_사용자_번호",
-        "dataType": "INT(10)",
-        "default": "0",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 87,
-          "widthComment": 96,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763707904627,
-          "createAt": 1763707861214
-        }
-      },
-      "pDRFmoCeX5xEiSwt8Ti2k": {
-        "id": "pDRFmoCeX5xEiSwt8Ti2k",
-        "tableId": "ISLiEyZ6iOpdEZ3ykYryY",
-        "name": "UPDT_DT",
-        "comment": "수정_일시",
-        "dataType": "DATETIME",
-        "default": "NOW()",
-        "options": 8,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1763707891803,
-          "createAt": 1763707882520
         }
       },
       "3rK4I1sH4ZfjTtP8lsTAO": {
@@ -12378,7 +9323,7 @@
         "tableId": "wPikazigo3-Jqif1u0BXl",
         "name": "BTM_UNDER",
         "comment": "최하(지하)_층",
-        "dataType": "",
+        "dataType": "INT(4)",
         "default": "0",
         "options": 0,
         "ui": {
@@ -12389,7 +9334,7 @@
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1766205141435,
+          "updateAt": 1766742751464,
           "createAt": 1766205141435
         }
       },
@@ -13012,6 +9957,466 @@
           "updateAt": 1766466927036,
           "createAt": 1766466911928
         }
+      },
+      "GXa95zUDm2gGnfHW8sgKT": {
+        "id": "GXa95zUDm2gGnfHW8sgKT",
+        "tableId": "gFGET0TJ_2AzpqqSHVhKU",
+        "name": "RDCODE",
+        "comment": "도로명코드",
+        "dataType": "VARCHAR(12)",
+        "default": "",
+        "options": 10,
+        "ui": {
+          "keys": 1,
+          "widthName": 60,
+          "widthComment": 62,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766571946828,
+          "createAt": 1766571748995
+        }
+      },
+      "Xb1HCudZYtfiB2t7Jw_Wj": {
+        "id": "Xb1HCudZYtfiB2t7Jw_Wj",
+        "tableId": "gFGET0TJ_2AzpqqSHVhKU",
+        "name": "RD_MAIN_BUN",
+        "comment": "도로명_본_번",
+        "dataType": "VARCHAR(5)",
+        "default": "",
+        "options": 10,
+        "ui": {
+          "keys": 1,
+          "widthName": 82,
+          "widthComment": 72,
+          "widthDataType": 68,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766571948987,
+          "createAt": 1766571759770
+        }
+      },
+      "uYaI-WSgmCKAQTTNR03Rw": {
+        "id": "uYaI-WSgmCKAQTTNR03Rw",
+        "tableId": "gFGET0TJ_2AzpqqSHVhKU",
+        "name": "RD_SUB_BUN",
+        "comment": "도로명_부_번",
+        "dataType": "VARCHAR(5)",
+        "default": "",
+        "options": 10,
+        "ui": {
+          "keys": 1,
+          "widthName": 73,
+          "widthComment": 72,
+          "widthDataType": 68,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766571950753,
+          "createAt": 1766571793681
+        }
+      },
+      "DFWkkLevbNolh0iHSyHur": {
+        "id": "DFWkkLevbNolh0iHSyHur",
+        "tableId": "gFGET0TJ_2AzpqqSHVhKU",
+        "name": "ARCODE",
+        "comment": "지역코드",
+        "dataType": "VARCHAR(10)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766571816548,
+          "createAt": 1766571806780
+        }
+      },
+      "jU7uDV4Q3K0uC5GL6I6pz": {
+        "id": "jU7uDV4Q3K0uC5GL6I6pz",
+        "tableId": "gFGET0TJ_2AzpqqSHVhKU",
+        "name": "BUNJIB",
+        "comment": "번지_번",
+        "dataType": "VARCHAR(4)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 68,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766571846941,
+          "createAt": 1766571817389
+        }
+      },
+      "eIpMeMaKTBT9EIC3URZiW": {
+        "id": "eIpMeMaKTBT9EIC3URZiW",
+        "tableId": "gFGET0TJ_2AzpqqSHVhKU",
+        "name": "BUNJIJ",
+        "comment": "번지_지",
+        "dataType": "VARCHAR(4)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 68,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766571857633,
+          "createAt": 1766571847438
+        }
+      },
+      "XOwdvNnScY3cz_Rj1SUN2": {
+        "id": "XOwdvNnScY3cz_Rj1SUN2",
+        "tableId": "gFGET0TJ_2AzpqqSHVhKU",
+        "name": "CRDE",
+        "comment": "생성_일자",
+        "dataType": "VARCHAR(8)",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 68,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766571870496,
+          "createAt": 1766571857633
+        }
+      },
+      "twwZLRp4j5tU2e087iT4t": {
+        "id": "twwZLRp4j5tU2e087iT4t",
+        "tableId": "gFGET0TJ_2AzpqqSHVhKU",
+        "name": "CREAT_USER_NO",
+        "comment": "생성_사용자_번호",
+        "dataType": "INT(10)",
+        "default": "0",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 92,
+          "widthComment": 96,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766571893766,
+          "createAt": 1766571877817
+        }
+      },
+      "jM8gibsvY6BQUmmweLtlI": {
+        "id": "jM8gibsvY6BQUmmweLtlI",
+        "tableId": "gFGET0TJ_2AzpqqSHVhKU",
+        "name": "CREAT_DT",
+        "comment": "생성_일시",
+        "dataType": "DATETIME",
+        "default": "NOW()",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766571907849,
+          "createAt": 1766571893767
+        }
+      },
+      "KRJEnSE-TyQsQRr6lXg-5": {
+        "id": "KRJEnSE-TyQsQRr6lXg-5",
+        "tableId": "gFGET0TJ_2AzpqqSHVhKU",
+        "name": "UPDT_USER_NO",
+        "comment": "수정_사용자_번호",
+        "dataType": "INT(10)",
+        "default": "0",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 87,
+          "widthComment": 96,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766571922797,
+          "createAt": 1766571907850
+        }
+      },
+      "6NyE-JyMdcKYsisLrkGTI": {
+        "id": "6NyE-JyMdcKYsisLrkGTI",
+        "tableId": "gFGET0TJ_2AzpqqSHVhKU",
+        "name": "UPDT_DT",
+        "comment": "수정_일시",
+        "dataType": "DATETIME",
+        "default": "NOW()",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766571935116,
+          "createAt": 1766571922798
+        }
+      },
+      "JMeymrJo788WOCyd74-tg": {
+        "id": "JMeymrJo788WOCyd74-tg",
+        "tableId": "PTqm7TT3v0H4fuBU4poJf",
+        "name": "HTBSEQ",
+        "comment": "건물관리대장_SEQ",
+        "dataType": "INT(10)",
+        "default": "0",
+        "options": 15,
+        "ui": {
+          "keys": 1,
+          "widthName": 60,
+          "widthComment": 100,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766725111505,
+          "createAt": 1766724953858
+        }
+      },
+      "593BVv2VPTNQOVQBwjFQ1": {
+        "id": "593BVv2VPTNQOVQBwjFQ1",
+        "tableId": "PTqm7TT3v0H4fuBU4poJf",
+        "name": "CREAT_DT",
+        "comment": "생성_일시",
+        "dataType": "DATETIME",
+        "default": "NOW()",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766725041041,
+          "createAt": 1766725009215
+        }
+      },
+      "93QN8OIFCINvk-6nrO4e7": {
+        "id": "93QN8OIFCINvk-6nrO4e7",
+        "tableId": "PTqm7TT3v0H4fuBU4poJf",
+        "name": "CREAT_USER_NO",
+        "comment": "생성_사용자_번호",
+        "dataType": "INT(10)",
+        "default": "0",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 92,
+          "widthComment": 96,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766725212931,
+          "createAt": 1766725196127
+        }
+      },
+      "yRV5c_p-hXnBk9gyKduRp": {
+        "id": "yRV5c_p-hXnBk9gyKduRp",
+        "tableId": "Crpc5EAycmb2L_c6gGwWX",
+        "name": "CRDE",
+        "comment": "생성_일자",
+        "dataType": "VARCHAR(8)",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 68,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766726364873,
+          "createAt": 1766726349940
+        }
+      },
+      "ukEASi8aMB2ZJQH51owAX": {
+        "id": "ukEASi8aMB2ZJQH51owAX",
+        "tableId": "NwGtvmlroRBQxU_j2Q3oA",
+        "name": "HBDNO",
+        "comment": "관리대장_PK",
+        "dataType": "VARCHAR(33)",
+        "default": "",
+        "options": 10,
+        "ui": {
+          "keys": 1,
+          "widthName": 60,
+          "widthComment": 69,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766728167101,
+          "createAt": 1766727855780
+        }
+      },
+      "bx-XXNjMPzX1oQ0kNqiQg": {
+        "id": "bx-XXNjMPzX1oQ0kNqiQg",
+        "tableId": "NwGtvmlroRBQxU_j2Q3oA",
+        "name": "BULDGB",
+        "comment": "건물구분",
+        "dataType": "CHAR(1)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766727964746,
+          "createAt": 1766727914889
+        }
+      },
+      "5WZ056OwWyoKE811bMx-Z": {
+        "id": "5WZ056OwWyoKE811bMx-Z",
+        "tableId": "NwGtvmlroRBQxU_j2Q3oA",
+        "name": "ARCD",
+        "comment": "지역_코드",
+        "dataType": "VARCHAR(5)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 68,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766727979940,
+          "createAt": 1766727966006
+        }
+      },
+      "rO25a-XC8sK7LtKSxKnfp": {
+        "id": "rO25a-XC8sK7LtKSxKnfp",
+        "tableId": "NwGtvmlroRBQxU_j2Q3oA",
+        "name": "LEGCD",
+        "comment": "법정동_코드",
+        "dataType": "VARCHAR(5)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 67,
+          "widthDataType": 68,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766727997675,
+          "createAt": 1766727979942
+        }
+      },
+      "LXsn0ABiNdGxqOuqDo2o5": {
+        "id": "LXsn0ABiNdGxqOuqDo2o5",
+        "tableId": "NwGtvmlroRBQxU_j2Q3oA",
+        "name": "CREAT_USER_NO",
+        "comment": "생성_사용자_번호",
+        "dataType": "INT(10)",
+        "default": "0",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 92,
+          "widthComment": 96,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766728080355,
+          "createAt": 1766728062834
+        }
+      },
+      "Amj5mRIWxWU4NPonFuw4q": {
+        "id": "Amj5mRIWxWU4NPonFuw4q",
+        "tableId": "NwGtvmlroRBQxU_j2Q3oA",
+        "name": "CREAT_DT",
+        "comment": "생성_일시",
+        "dataType": "DATETIME",
+        "default": "NOW()",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766728091295,
+          "createAt": 1766728063440
+        }
+      },
+      "tBkKYNYq9o_dn6db756KW": {
+        "id": "tBkKYNYq9o_dn6db756KW",
+        "tableId": "Crpc5EAycmb2L_c6gGwWX",
+        "name": "PKEY_TY",
+        "comment": "관리대장_PK_유형",
+        "dataType": "CHAR",
+        "default": "'E'",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 98,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766737429850,
+          "createAt": 1766737353092
+        }
+      },
+      "Vae4xFWj4M5vgnKtwMgh3": {
+        "id": "Vae4xFWj4M5vgnKtwMgh3",
+        "tableId": "wPikazigo3-Jqif1u0BXl",
+        "name": "HTBDSEQ",
+        "comment": "관리대장_마스터_SEQ",
+        "dataType": "INT(4)",
+        "default": "",
+        "options": 10,
+        "ui": {
+          "keys": 1,
+          "widthName": 60,
+          "widthComment": 117,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1766742635120,
+          "createAt": 1766742542722
+        }
       }
     },
     "relationshipEntities": {},
@@ -13249,6 +10654,42 @@
         "meta": {
           "updateAt": 1766466631055,
           "createAt": 1766466604933
+        }
+      },
+      "UoKZOewMDpiZ40gjXwmUr": {
+        "id": "UoKZOewMDpiZ40gjXwmUr",
+        "name": "IDX_RD_RDRELATE_001",
+        "tableId": "gFGET0TJ_2AzpqqSHVhKU",
+        "indexColumnIds": [
+          "bBAJDYbKnwzMgDIJbLARi"
+        ],
+        "seqIndexColumnIds": [
+          "bBAJDYbKnwzMgDIJbLARi"
+        ],
+        "unique": false,
+        "meta": {
+          "updateAt": 1766572227682,
+          "createAt": 1766572212641
+        }
+      },
+      "sndSTysShHxbLdMxW0cme": {
+        "id": "sndSTysShHxbLdMxW0cme",
+        "name": "IDX_SY_HBDNO_001",
+        "tableId": "NwGtvmlroRBQxU_j2Q3oA",
+        "indexColumnIds": [
+          "qaMSMON6n90T2XLZIAqI0",
+          "g57WnO55PAjY2lKYftHj1",
+          "0_thbq7khRYeFxNaEytyj"
+        ],
+        "seqIndexColumnIds": [
+          "qaMSMON6n90T2XLZIAqI0",
+          "g57WnO55PAjY2lKYftHj1",
+          "0_thbq7khRYeFxNaEytyj"
+        ],
+        "unique": false,
+        "meta": {
+          "updateAt": 1766728397268,
+          "createAt": 1766728384033
         }
       }
     },
@@ -13552,6 +10993,46 @@
           "updateAt": 1766466613547,
           "createAt": 1766466613547
         }
+      },
+      "bBAJDYbKnwzMgDIJbLARi": {
+        "id": "bBAJDYbKnwzMgDIJbLARi",
+        "indexId": "UoKZOewMDpiZ40gjXwmUr",
+        "columnId": "DFWkkLevbNolh0iHSyHur",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 1766572227682,
+          "createAt": 1766572227682
+        }
+      },
+      "qaMSMON6n90T2XLZIAqI0": {
+        "id": "qaMSMON6n90T2XLZIAqI0",
+        "indexId": "sndSTysShHxbLdMxW0cme",
+        "columnId": "bx-XXNjMPzX1oQ0kNqiQg",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 1766728395911,
+          "createAt": 1766728395911
+        }
+      },
+      "g57WnO55PAjY2lKYftHj1": {
+        "id": "g57WnO55PAjY2lKYftHj1",
+        "indexId": "sndSTysShHxbLdMxW0cme",
+        "columnId": "5WZ056OwWyoKE811bMx-Z",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 1766728396474,
+          "createAt": 1766728396474
+        }
+      },
+      "0_thbq7khRYeFxNaEytyj": {
+        "id": "0_thbq7khRYeFxNaEytyj",
+        "indexId": "sndSTysShHxbLdMxW0cme",
+        "columnId": "rO25a-XC8sK7LtKSxKnfp",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 1766728397268,
+          "createAt": 1766728397268
+        }
       }
     },
     "memoEntities": {
@@ -13559,15 +11040,15 @@
         "id": "ciNM9ieWR3AZ0YUjCkuo3",
         "value": "도로명_변경이력사유\n    0:도로명변경, \n    1:도로명폐지, \n    2:시도시군구변경,\n    3:읍면동변경, \n    4:영문도로명변경, \n    9:기타\n\n도로명_변경이력정보\n    도로명코드(12)+ 읍면동일련번호(2)\n    ※ 신규정보일경우“신규”로표시\n\n도로명_이동사유코드\n    31:신규, \n    34:변동, \n    63:폐지,\n    72:건물군내일부건물폐지,\n    73:건물군내일부건물생성",
         "ui": {
-          "x": 1894.6261,
-          "y": 1333,
+          "x": 1850.2962,
+          "y": 934.0309,
           "zIndex": 2017,
           "width": 279,
           "height": 338,
           "color": ""
         },
         "meta": {
-          "updateAt": 1766310887815,
+          "updateAt": 1766571698893,
           "createAt": 1763707130505
         }
       }
