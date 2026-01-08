@@ -35,44 +35,118 @@
         
       </div>
 
-      <div class="d-lg-flex align-items-center gap-2">
-        <!--
-        <h3 class="text-white mb-2 mb-lg-0 fs-5 text-center">Check Flexy Premium Version</h3>
-        <div class="d-flex align-items-center justify-content-center gap-2">
-          
-          <div class="dropdown d-flex">
-            <a class="btn btn-primary d-flex align-items-center gap-1 " href="javascript:void(0)" id="drop4"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="ti ti-shopping-cart fs-5"></i>
-              Buy Now
-              <i class="ti ti-chevron-down fs-5"></i>
-            </a>
-          </div>
-        </div>
-        -->
-      </div>
+      <div class="d-lg-flex align-items-center gap-2"></div>
 
     </div>
     <!-- Sidebar Start -->
     <aside class="left-sidebar">
       <!-- Sidebar scroll-->
       <div>
-        <!--
-        <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="./index.html" class="text-nowrap logo-img">
-            <img src="assets/images/logos/logo.svg" alt="" />
-          </a>
-          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-            <i class="ti ti-x fs-6"></i>
-          </div>
-        </div>
-        -->
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
           <ul id="sidebarnav">
             <li class="nav-small-cap">
               <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
-              <span class="hide-menu">Homes</span>
+              <span class="hide-menu">Homes pro</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link justify-content-between has-arrow" href="javascript:void(0)" aria-expanded="false">
+                <div class="d-flex align-items-center gap-3">
+                  <span class="d-flex">
+                    <i class="bi bi-cloud-download"></i>
+                  </span>
+                  <span class="hide-menu">건축물대장 API</span>
+                </div>
+              </a>
+              <ul aria-expanded="false" class="collapse first-level">
+                <li class="sidebar-item">
+                  <a class="sidebar-link justify-content-between" target="ifrm_cont" href="buldapi/BAPI0101.html">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="round-16 d-flex align-items-center justify-content-center">
+                        <i class="bi bi-file-earmark-text"></i>
+                      </div>
+                      <span class="hide-menu">관련지번</span>
+                    </div>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a class="sidebar-link justify-content-between" target="ifrm_cont" href="buldapi/BAPI0201.html">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="round-16 d-flex align-items-center justify-content-center">
+                        <i class="bi bi-file-earmark-text"></i>
+                      </div>
+                      <span class="hide-menu">기본개요</span>
+                    </div>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a class="sidebar-link justify-content-between" target="ifrm_cont" href="buldapi/BAPI0301.html">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="round-16 d-flex align-items-center justify-content-center">
+                        <i class="bi bi-file-earmark-text"></i>
+                      </div>
+                      <span class="hide-menu">표제부</span>
+                    </div>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a class="sidebar-link justify-content-between" target="ifrm_cont" href="buldapi/BAPI0401.html">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="round-16 d-flex align-items-center justify-content-center">
+                        <i class="bi bi-file-earmark-text"></i>
+                      </div>
+                      <span class="hide-menu">총괄표제부</span>
+                    </div>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a class="sidebar-link justify-content-between" target="ifrm_cont" href="buldapi/BAPI0501.html">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="round-16 d-flex align-items-center justify-content-center">
+                        <i class="bi bi-file-earmark-text"></i>
+                      </div>
+                      <span class="hide-menu">층별개요</span>
+                    </div>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a class="sidebar-link justify-content-between" target="ifrm_cont" href="buldapi/BAPI0601.html">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="round-16 d-flex align-items-center justify-content-center">
+                        <i class="bi bi-file-earmark-text"></i>
+                      </div>
+                      <span class="hide-menu">전유부</span>
+                    </div>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a class="sidebar-link justify-content-between" target="ifrm_cont" href="buldapi/BAPI0701.html">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="round-16 d-flex align-items-center justify-content-center">
+                        <i class="bi bi-file-earmark-text"></i>
+                      </div>
+                      <span class="hide-menu">전유공용면적</span>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link justify-content-between" target="ifrm_cont" href="system/batch/BAT00001.html" aria-expanded="false">
+                <div class="d-flex align-items-center gap-3">
+                  <span class="d-flex">
+                    <i class="bi bi-clock"></i>
+                  </span>
+                  <span class="hide-menu">배치관리</span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <div class="sidebar-divider lg"></div>
+            </li>
+            <li class="nav-small-cap">
+              <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
+              <span class="hide-menu">IBSoft</span>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link justify-content-between has-arrow" href="javascript:void(0)" aria-expanded="false">
@@ -85,21 +159,20 @@
               </a>
               <ul aria-expanded="false" class="collapse first-level">
                 <li class="sidebar-item">
-                  <a class="sidebar-link justify-content-between" target="ifrm_cont" href="reports/REPT0001.html">
+                  <a class="sidebar-link justify-content-between" target="ifrm_cont" href="reports/REPT0101.html">
                     <div class="d-flex align-items-center gap-3">
                       <div class="round-16 d-flex align-items-center justify-content-center">
-                        <i class="ti ti-circle"></i>
+                        <i class="bi bi-file-earmark-text"></i>
                       </div>
-                      <span class="hide-menu">TodoList</span>
+                      <span class="hide-menu"><em class='c-red'>Homes</em> 작업목록</span>
                     </div>
                   </a>
                 </li>
                 <li class="sidebar-item">
-                  <a class="sidebar-link justify-content-between"  
-                    href="#">
+                  <a class="sidebar-link justify-content-between" target="ifrm_cont" href="reports/REPT0201.html">
                     <div class="d-flex align-items-center gap-3">
                       <div class="round-16 d-flex align-items-center justify-content-center">
-                        <i class="ti ti-circle"></i>
+                        <i class="bi bi-file-earmark-text"></i>
                       </div>
                       <span class="hide-menu font-pre">주간 업무보고</span>
                     </div>
@@ -110,7 +183,7 @@
                     href="#">
                     <div class="d-flex align-items-center gap-3">
                       <div class="round-16 d-flex align-items-center justify-content-center">
-                        <i class="ti ti-circle"></i>
+                        <i class="bi bi-file-earmark-text"></i>
                       </div>
                       <span class="hide-menu font-pre">월간 업무보고</span>
                     </div>
@@ -121,7 +194,7 @@
                     href="#">
                     <div class="d-flex align-items-center gap-3">
                       <div class="round-16 d-flex align-items-center justify-content-center">
-                        <i class="ti ti-circle"></i>
+                        <i class="bi bi-file-earmark-text"></i>
                       </div>
                       <span class="hide-menu font-pre">홈즈 작업일정(WBS)</span>
                     </div>
@@ -133,7 +206,7 @@
             <!-- Dashboard -->
             <!-- ---------------------------------- -->
             <li>
-              <span class="sidebar-divider lg"></span>
+              <div class="sidebar-divider lg"></div>
             </li>
           </ul>
         </nav>
@@ -145,11 +218,15 @@
     <!--  Main wrapper -->
     <div class="ifrm-wrapper">
         <div class="inner">
-          <iframe src="about:blank" width="100%" hegiht="100%" name="ifrm_cont"></iframe>
+          <iframe src="reports/REPT0202.html" width="100%" hegiht="100%" name="ifrm_cont"></iframe>
         </div>
     </div>
   </div>
-  <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
+  <div id="dv_dimmed" class="dimmed hidden"></div>
+  <div id="dv_alert_wrap" class="dialogue-wrapper hidden"></div>
+
+  <!-- jqQuery 3.7.1 -->
+  <script src="/js/extern/jquery-3.7.1.min.js"></script>
   <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="./assets/js/sidebarmenu.js"></script>
   <script src="./assets/js/app.min.js"></script>
