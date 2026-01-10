@@ -19,6 +19,8 @@
     --hm-table-header-border-top: #fa6161;
     --hm-table-border-color: #696969;
 
+    --hm-color-yellow-100: #ffffcc ; 
+
     --hm-color-save: #0d904f; 
     --hm-color-dark: #3d3d3d ; 
     --hm-color-even: #e2efda; 
@@ -34,6 +36,23 @@
     /* border-color */
     --hm-color-border: #dddddd ; 
     --hm-input-border-color: #dfe5ef ;
+}
+
+.btn-outline-gray {
+    --bs-btn-color: #6c757d;
+    --bs-btn-border-color: #6c757d;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #6c757d;
+    --bs-btn-hover-border-color: #6c757d;
+    --bs-btn-focus-shadow-rgb: 108, 117, 125;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #6c757d;
+    --bs-btn-active-border-color: #6c757d;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #6c757d;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #6c757d;
+    --bs-gradient: none;
 }
 
 /* common-style *****************************************************************/
@@ -71,6 +90,9 @@
 .w-700px { width: 700px !important; }
 .w-750px { width: 750px !important; }
 
+
+.w-1200px { width: 1200px !important; }
+
 /* text-align */ 
 .tac { text-align: center !important; }
 .tal { text-align: left !important; }
@@ -91,5 +113,8 @@
 
 /* font-weight */
 .bold { font-weight: 600 ; }
+
+/* flex */
+.justify-end { justify-content: flex-end !important;}
 
 /* common-style *****************************************************************/

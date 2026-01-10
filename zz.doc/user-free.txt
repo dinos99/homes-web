@@ -14,20 +14,3 @@ TRUNCATE TABLE TB_HBD_LEDGR ;
 TRUNCATE TABLE TB_HBD_LEDGR_MSTR ; 
 
 
-
-#{buldRegstrPk}
-, #{flrno}
-, #{buldnm}
-, #{dongnm}
-, #{flgbcd}
-, #{flgbnm}
-, #{floorno}
-, #{floornm}
-, #{ppscd}
-, #{ppsetcnm}
-, #{totalAr}
-, #{arExcldAt}
-, #{mainBuldAt}
-, #{crde}
-, #{creatUserNo}
-, #{updtUserNo}

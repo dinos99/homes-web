@@ -128,8 +128,66 @@
                                     <td></td>
                                     <td colspan="2" class="last">중개사 회원가입 확인 및 수정</td>
                                 </tr>
+                                <tr>
+                                    <td colspan="4" class="summary tar last">
+                                        <div class="summary-wrap">
+                                            <div class="summary-label">진행도</div>
+                                            <div class="summary-text">
+                                                <span class='c-blue'>완료</span>: <span>1</span>, 
+                                                <span class='c-green'>진행중</span>: <span>3</span>, 
+                                                <span class='c-red'>전체</span>: <span>6</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="summary tar last">
+                                        <div class="summary-wrap">
+                                            <div class="summary-label">진행율</div>
+                                            <div class="summary-text"><span class='c-red'>16.67</span><span> %</span></div>
+                                        </div>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="issue-table">
+                        <table>
+                            <colgroup>
+                                <col width="150px" />
+                                <col width="*" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th colspan="2" class="last"> 주요 이슈사항 </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="tac"> 2025.12.31 </td>
+                                    <td class="last"> 연말 및 신정휴무 </td>
+                                </tr>
+                                <tr>
+                                    <td class="tac"> 2026.01.02 </td>
+                                    <td class="last"> 화면오픈예정 ( 일정변동사항 있음 ) </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+
+                <div class="action-button w-1200px">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-gray">
+                            <i class="bi bi-clipboard-check"></i> 보고완료
+                        </button>
+                        <button type="button" class="btn btn-outline-gray">
+                            <i class="bi bi-pencil-square"></i> 수정
+                        </button>
+                        <button type="button" class="btn btn-outline-gray" id="btn_go_List">
+                            <i class="bi bi-list-task"></i> 목록
+                        </button>
                     </div>
                 </div>
             </div>
@@ -141,11 +199,9 @@
     <script src="/js/extern/jquery-ui-1.14.1/jquery-ui.js"></script>
     <script src="/js/extern/jqgrid-4.6.0/js/i18n/grid.locale-kr.js" type="text/javascript"></script>
     <script src="/js/extern/jqgrid-4.6.0/js/minified/jquery.jqGrid.min.js" type="text/javascript"></script>
-    <!--
-    <script src="/html/manager/js/reports/REPT0201.js"></script>
-    -->
+    <script src="/html/manager/js/reports/REPT0202.js"></script>
     <script type="text/javascript">
-//        fn_start_page() ; 
+        fn_start_page() ; 
     </script>
 </body>
 </html>

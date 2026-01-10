@@ -17,7 +17,7 @@ var fn_start_page = () => {
             { name: "reporter", align: "center", width: "15%" }, 
             { name: "prgsrt"  , align: "center", width: "15%" }
         ]
-        , height: 500
+        , height: 400
         , rownum: 10
         , shrinkToFit: true
     }) ; 

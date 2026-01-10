@@ -70,6 +70,8 @@
     font-size: 14px;
 } 
 
+button i.bi { color:inherit ; }
+
 .dimmed {
     position: fixed ; 
     top: 0;
@@ -355,18 +357,23 @@ h3.title {
     font-style: italic;
     color: var(--hm-color-gray);
 }
+.report-wrapper .issue-table {
+    margin: 20px 0; 
+}
+.report-wrapper .issue-table,
 .report-wrapper .work-table {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     width: 100%;
 }
+.report-wrapper .issue-table table,
 .report-wrapper .work-table table {
     width: 100%; 
     border: 0;
     border-top: 2px solid var(--hm-color-dark);
 }
-
+.report-wrapper .issue-table table th,
 .report-wrapper .work-table table th {
     background-color: var(--hm-color-thead) ; 
     text-align: center ;
@@ -376,12 +383,38 @@ h3.title {
     border-left: 1px solid var(--hm-color-border) ; 
     border-bottom: 1px solid var(--hm-color-border) ; 
 }
+.report-wrapper .issue-table table td, 
 .report-wrapper .work-table table td {
     padding: 10px 15px;
     border: 0;
     border-left: 1px solid var(--hm-color-border) ; 
     border-bottom: 1px solid var(--hm-color-border) ; 
 }
+
+.report-wrapper .work-table table th.summary, 
+.report-wrapper .work-table table td.summary {
+    background-color: var(--hm-color-yellow-100) ;
+}
+.report-wrapper .work-table table td.summary .summary-wrap {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap:nowrap;
+}
+.report-wrapper .work-table table td.summary .summary-wrap .summary-label {
+    width: 100px; 
+    text-align: center;
+    font-weight: 600 ;
+}
+.report-wrapper .work-table table td.summary .summary-wrap .summary-text {
+    width: 200px; 
+    text-align: right ;
+}
+.report-wrapper .work-table table td.summary .summary-wrap .summary-text span {
+    font-weight: 600 ;
+}
+.report-wrapper .issue-table table th.last,
+.report-wrapper .issue-table table td.last,
 .report-wrapper .work-table table td.last,
 .report-wrapper .work-table table th.last {
     border-right: 1px solid var(--hm-color-border) ; 
