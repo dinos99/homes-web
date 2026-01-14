@@ -6,7 +6,7 @@ var p_data = {
 } ;
 var fn_init_popup = ( popid ) => {
     popup.id = popid ; 
-    var arcode = !!!broker.arcode ? "1171010100" : broker.arcode ; 
+    var arcode = !!!broker.arcode ? "1171011100" : broker.arcode ; /* 송파구 방이동 */ 
     $("#p_brk_arcode").val(arcode) ; 
     fn_stuff_Load({
         "contid" : "pop_stuff_cont",

@@ -439,41 +439,50 @@
     <script src="/js/common/homes-event-broker.js"></script>
     <script src="/js/common/homes-comm.js"></script>
     <script type="text/javascript">
-      $(document).ready(function() {
-        fn_page_init("T01") ;
-      }) ;
+        /* 강제 토큰 셋팅 */ 
+        var broker = '{"userno":17,"email":"broker03@homes.co.kr","usernm":"중개사03","userRole":"MBT001","userSttus":"CTF001","frstSbscrbDt":1746626092000,"lastLoginDt":1746707233000,"passwordChgDt":1746626092000,"loginFailrCo":0,"loginTy":"LGT001","ifUserId":null,"accessToken":"eyJhbGciOiJIUzI1NiJ9.eyJ1c2Vybm8iOjE3LCJlbWFpbCI6ImJyb2tlcjAzQGhvbWVzLmNvLmtyIiwicm9sZSI6Ik1CVDAwMSIsImlhdCI6MTc0NjcwNzIzMywiZXhwIjoxODMzMTA3MjMzfQ.hLnaJsKmnECt4YWBBlSyTvJHMysRSTkrH9a618qz9o4","arcode":"","mbleCttpc":null,"mobileno":"MDEwLTIyMzMtNDQ1Nw=="}' ; 
+        var token  = '{"role":"MBT001","issuedAt":1746707233000,"expiration":1833107233000,"accessToken":"eyJhbGciOiJIUzI1NiJ9.eyJ1c2Vybm8iOjE3LCJlbWFpbCI6ImJyb2tlcjAzQGhvbWVzLmNvLmtyIiwicm9sZSI6Ik1CVDAwMSIsImlhdCI6MTc0NjcwNzIzMywiZXhwIjoxODMzMTA3MjMzfQ.hLnaJsKmnECt4YWBBlSyTvJHMysRSTkrH9a618qz9o4"}' ; 
 
+        homes_comm.store.setItem("user" , JSON.parse(broker)) ;
+        homes_comm.store.setItem("token", JSON.parse(token)) ;
+        
+        $(document).ready(function() {
+            fn_page_init("T01") ;
+        }) ;
 
-      var pop_open_group_001 = () => {
-          popup.pop_open( "/complex/coplex-reg-001.html", {
-            popid: "brk-web-reg-group-001"
-          }) ; 
-      }
+        var pop_open_group_001 = () => {
+            popup.pop_open( "/complex/coplex-reg-001.html", {
+                popid: "brk-web-reg-group-001"
+            }) ; 
+        }
 
-      var pop_open_estate = () => {
-          popup.fn_comm_open( "/popup/estate/pop-estate-0200.html", {
-            popid: "pop-estategb"
-          }) ; 
-      }
-      var fn_page_onLoad = () => {
-        $("#btn_reg_group_001").click(function() {
-          /* 단지내 물건등록 */ 
-          pop_open_group_001() ;
-        }) ; 
+        var pop_open_estate = () => {
+            popup.fn_comm_open( "/popup/estate/pop-estate-0200.html", {
+                popid: "pop-estategb"
+            }) ; 
+        }
+            
+        var fn_page_onLoad = () => {
+            /*
+            $("#btn_reg_group_001").click(function() {
+                // 단지내 물건등록
+                pop_open_group_001() ;
+            }) ; 
+            $("#btn_comm_pop_estate").click(function() {
+                // 단지내-부동산구분 설정
+                pop_open_estate() ; 
+            }) ; 
+            $("#btn_comm_pop_area").click(function() {
+                homes_comm.popup.fn_comm_popopen_area({
+                    "cid": ''
+                    , "arcd": "11110"
+                    , "legcd": '00000'
+                }, ( data ) => {
 
-        $("#btn_comm_pop_estate").click(function() {
-          /* 단지내-부동산구분 설정 */ 
-          pop_open_estate() ; 
-        }) ; 
-
-        $("#btn_comm_pop_area").click(function() {
-          homes_comm.popup.fn_comm_popopen_area({
-              "cid": ''
-              , "arcd": "11110"
-              , "legcd": '00000'
-          }, ( data ) => {}) ; 
-        })
-      }
+                }) ; 
+            }) ;
+             */
+        }
     </script>
 
   </body>

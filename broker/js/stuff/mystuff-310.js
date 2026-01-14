@@ -7,9 +7,8 @@ stuff_310.ownList = [] ;
 
 stuff_310.fn_page_onLoad = ( params ) => {
     stuff_310.params = params ; 
-    console.log(stuff_310.params) ;
-    stuff_310.data.cplxno = params.cplxno ; 
-    stuff_310.data.buldno = params.buldno ; 
+    stuff_310.data.htbdno  = params.htbdno ; 
+    stuff_310.data.stuffno = params.stuffno ; 
     /* 공통코드 조회 */
     fn_get_commcode(["OWT", "TCM"]).then(data => {
         commcode = data ; 
@@ -17,10 +16,10 @@ stuff_310.fn_page_onLoad = ( params ) => {
         return stuff_310.fn_get_blockList( params ) ;         
     }).then(response => {
         /* 단지 소유주 목록 조회 */ 
-        return stuff_310.fn_get_ownerList( params ) ; 
+//        return stuff_310.fn_get_ownerList( params ) ; 
     }).then(response => {
         /* 소유주 목록 조회 */ 
-        stuff_310.fn_set_owner(response.data) ;
+//        stuff_310.fn_set_owner(response.data) ;
     }) ;
 
     $("#btn_insert_stuff").attr("disabled", "disabled") ;
@@ -72,16 +71,11 @@ stuff_310.fn_set_brkstuff = ( sfList ) => {
 stuff_310.fn_get_blockList = ( params ) => {
     return new Promise(resolve => {
         homes_comm.network.post("/stuff/blockList", {
-            "cplxno"  : params.cplxno,
+            "htbdno"  : params.htbdno,
         }).then(response => {
             $("#p_dong_List").empty() ;
             var blockList = response.data ; 
-            var buldno    = "" ; 
-            /* 여기서 관리사무소/전기실/발전실 등 걸러보자 */ 
-            /* ***********************************************
-            * 포기함 ....
-            * ***********************************************/ 
-            if ( !!blockList && blockList.length > 0) {
+            if ( homes_comm.util.fn_isNotEmpty(blockList)) {
                 var len = blockList.length ; 
                 var mod = len % 10 ; 
                 var div = ( len - mod ) / 10 ; 
@@ -97,16 +91,25 @@ stuff_310.fn_get_blockList = ( params ) => {
                     if ( i > 0 ) {
                         dv_slide = $("<div class='slide-hddn-List justify-start'></div>") ;
                     }
+                    var dnum = 1 ; 
                     dataList.forEach((blk, i) => {
-                        var dv_dnum = $("<div id='dnum_" + blk.buldno + "' class='hs-label room-number' />") ;
-                        dv_dnum.text(blk.blocknm) ;
+                        var dv_dnum = $("<div id='dnum_" + dnum + "' class='hs-label room-number' data-hbdno='" + blk.hbdno + "'/>") ;
+
+                        var dongno = blk.dongno ; 
+                        if ( dongno == '999999999999' ) {
+                            /* 동명없음 => 건물명으로 + 순서로 대신사용 */ 
+                            dongno = blk.buldnm + " " + homes_comm.util.fn_Lpad(dnum, 2, '0') ; 
+                        }
+
+                        dv_dnum.text(dongno) ;
                         dv_slide.append(dv_dnum) ; 
                         dv_dnum.click(function() {
                             $("div[id^=dnum_]").removeClass("selected") ; 
                             $(this).addClass("selected") ;
-                            stuff_310.fn_get_floor(blk.buldno) ;
+                            stuff_310.fn_get_floor(dnum, blk.hbdno) ;
                         }) ; 
-                    })
+                        dnum ++ ; 
+                    }) ;
                     if ( i == 0 ) {
                         var dv_arrow = $("<div class='slide-abs-arrow' />") ; 
                         dv_arrow.html("<img src='/images/V.png' class='arrow' alt='v'>") ;
@@ -126,33 +129,129 @@ stuff_310.fn_get_blockList = ( params ) => {
                 }) ;
 
                 /* 제일 첫번째 동 선택 */ 
-                $("div[id^=dnum_]").eq(0).addClass("selected") ; 
+                $("#dnum_1").addClass("selected") ; 
                 /* 동선택에 따른 층별정보 조회 */ 
-                buldno = $("div[id^=dnum_]").eq(0).attr("id").split("_").splice(1, 1).toString() ;
-                stuff_310.fn_get_floor(buldno) ; 
+                var hbdno = $("#dnum_1").attr("data-hbdno") ; 
+                stuff_310.fn_get_floor(1, hbdno) ; 
             }
-            resolve({data: { "buldno": buldno }}) ; 
+            resolve({data: { "dongList": blockList }}) ; 
         });
     }) ;
 }
 
-stuff_310.fn_get_floor = ( buldno ) => {
-    var dnum = $("#dnum_" + buldno).text() ;
-    $("#dv_dongnm").text(dnum) ;
+stuff_310.fn_get_floor = ( dnum, hbdno ) => {
+    var buldnm = $("#dnum_" + dnum).text() ;
+    $("#dv_dongnm").text(buldnm) ;
     homes_comm.network.post("/stuff/floorList", {
-        "buldno": buldno 
+        "hbdno": hbdno 
     }).then(response => {
-        stuff_310.data = response.data ;
-        stuff_310.data.buldno = response.data.buldno ; 
-        stuff_310.data.cplxno = response.data.cplxno 
-        $("#text_floor_co").text(stuff_310.data.floor.floorCo) ;
-        var underCo = stuff_310.data.under.floorCo ; 
+        /* 층정보 */
+        stuff_310.data.f_List = JSON.parse(JSON.stringify(response.data)) ;
+        stuff_310.data.hbdno  = response.data.hbdno ; 
+        
+        var f_List = response.data ;
+        $("#dv_buld").empty() ;
+
+        var dv_roof = $("<div class='buld-floor'/>") ; 
+        var dv_grnd = $("<div class='buld-floor'/>") ; 
+        var dv_undr = $("<div class='buld-floor'/>") ; 
+
+        var rf_table = $("<table id='tbl_rfTop'/>")
+        var gr_table = $("<table id='tbl_ground'/>")
+        var un_table = $("<table id='tbl_under'/>")
+
+        dv_roof.append(rf_table) ;
+        dv_grnd.append(gr_table) ;
+        dv_undr.append(un_table) ;
+
+        var rfno = 0 ; 
+        var grno = 0 ; 
+        var unno = 0 ; 
+        f_List.forEach(floor => {
+            var flgb = floor.flgbcd ; 
+            var tr = $("<tr/>") ; 
+            if ( flgb == '30' ) {
+                rf_table.append(tr) ; 
+                /* 옥탑은 비워져있으면 그리지 않는다 */ 
+                var mx_roomco = floor.maxRoomCo ; 
+                var td = $("<td>") ; 
+                if ( floor.hpsnos == 'EMPTY' ) {
+                    td.addClass("empty") ; 
+                    td.html("&nbsp;") ; 
+                    tr.append(td) ;
+                } else {
+                    rfno ++ ;
+                }
+            } else if ( flgb == '20' ) {
+                gr_table.append(tr) ; 
+                /* 옥탑은 비워져있으면 그리지 않는다 */ 
+                var mx_roomco = floor.maxRoomCo ; 
+                var td = $("<td/>") ; 
+                var arr_room = floor.hosilnms.split("|") ; 
+                if ( arr_room.length < mx_roomco ) {
+                    while ( arr_room.length < mx_roomco ) {
+                        arr_room.push("") ; 
+                    }
+                }
+                if ( floor.hpsnos == 'EMPTY' ) {
+                    for ( var rm = 0 ; rm < arr_room.length ; rm ++ ) {
+                        var td = $("<td/>") ; 
+                        td.addClass("empty") ; 
+                        td.html("&nbsp;") ; 
+                        tr.append(td) ;
+                    }
+                } else {
+                    for ( var rm = 0 ; rm < arr_room.length ; rm ++ ) {
+                        var room_nm = arr_room[rm] ; 
+                        room_nm = room_nm.replace("호", "") ; 
+                        var td = $("<td/>") ;
+                        td.text(room_nm) ; 
+                        tr.append(td) ; 
+                    }
+                }
+                grno ++ ;
+            } else if ( flgb == '10' ) {
+                un_table.append(tr) ; 
+                /* 옥탑은 비워져있으면 그리지 않는다 */ 
+                var mx_roomco = floor.maxRoomCo ; 
+                var td = $("<td/>") ; 
+                var arr_room = floor.hosilnms.split("|") ; 
+                if ( arr_room.length < mx_roomco ) {
+                    while ( arr_room.length < mx_roomco ) {
+                        arr_room.push("") ; 
+                    }
+                }
+                if ( floor.hpsnos == 'EMPTY' ) {
+                    for ( var rm = 0 ; rm < arr_room.length ; rm ++ ) {
+                        var td = $("<td/>") ; 
+                        td.addClass("empty") ; 
+                        td.html("&nbsp;") ; 
+                        tr.append(td) ;
+                    }
+                } else {
+                    for ( var rm = 0 ; rm < arr_room.length ; rm ++ ) {
+                        var room_nm = arr_room[rm] ; 
+                        room_nm = room_nm.replace("호", "") ; 
+                        var td = $("<td/>") ;
+                        td.text(room_nm) ; 
+                        tr.append(td) ; 
+                    }
+                    unno ++ ;  
+                } 
+            }
+        }) ; 
+        if ( rfno > 0 ) $("#dv_buld").append(dv_roof) ; 
+        if ( grno > 0 ) $("#dv_buld").append(dv_grnd) ; 
+        if ( unno > 0 ) $("#dv_buld").append(dv_undr) ; 
+        
+        $("#text_floor_co").text(grno) ;
+        var underCo = unno ; 
         if ( !!!underCo || underCo == 0) {
             $("#text_under_co").text("-") ;
         } else {
             $("#text_under_co").text(underCo + "층") ;
         }
-        stuff_310.fn_set_data() ;
+//        stuff_310.fn_set_data() ;
     }) ; 
 }
 stuff_310.fn_set_under = () => {
@@ -289,9 +388,6 @@ stuff_310.fn_set_floor = () => {
     }
 }
 stuff_310.fn_set_data = () => {
-    $("#dv_buld").empty() ;
-    stuff_310.fn_set_floor() ;
-    stuff_310.fn_set_under() ;
 
     var data = stuff_310.data ; 
     var pos_y = data.floor.floorCo * 30 ; 

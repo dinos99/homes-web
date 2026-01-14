@@ -769,7 +769,7 @@ button.btn-naver {
   left: 0; 
   right: 0; 
   bottom: 0 ; 
-  background:RGBA(0,0,0,0.7) ;
+  background:RGBA(0,0,0,0.4) ;
   display: flex ;
   justify-content: center;
   align-items: center;
@@ -1036,7 +1036,16 @@ button.btn-naver {
   background-position-x: 0;
   background-position-y: -9999px;
 }
-.dong-matrix .buld { font-size: 13px; font-weight: 400; }
+.dong-matrix .buld { font-size: 13px; font-weight: 400; width: 100%; }
+.dong-matrix .buld .buld-floor { 
+  width: 100%;
+  padding: 0 30px; 
+  display: flex;
+  justify-content: center;
+}
+.dong-matrix .buld .buld-floor table td { padding: 5px 20px; width: 100px; text-align: center ; }
+.dong-matrix .buld .buld-floor table td { background-color: #fff; border: 1px solid var(--hs-border-color) ; }
+.dong-matrix .buld .buld-floor table td.empty { background-color: #e6e6e6 !important; }
 .dong-matrix .buld .rooftop {
   display: flex; 
   align-items: center ;

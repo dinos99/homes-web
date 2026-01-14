@@ -154,18 +154,19 @@
             $(".no-item").removeClass("hidden").addClass("hidden") ; 
             $("#dv_cplxList").empty() ; 
             cplxList.forEach( data => {
-                var vwrap = $("<div id='dv_buld_" + data.buldno + "' class='vertical-wrapper white-bg bd-5'/>") ;
+                console.log( data ) ; 
+                var vwrap = $("<div id='dv_buld_" + data.stuffno + "' class='vertical-wrapper white-bg bd-5'/>") ;
                 var stitle = $("<div class='justify-between'/>") ;
                 var dv_hshld = $("<div/>") ; 
                 var span_3  = $("<span class='gray fs-13 fw-600' />") ; 
-                if ( data.estTy == 'EST113' || data.estTy == 'EST121' || data.estTy == 'EST123' ) span_3.text("호실") ; 
+                if ( data.hppscd == 'HPS113') span_3.text("호실") ; 
                 else span_3.text("세대") ; 
                 var span_4 = $("<span class='gray mx-1'/>") ; 
-                span_4.text(homes_comm.util.fn_format_number(data.hshldCo)) ;
+                span_4.text(homes_comm.util.fn_format_number(data.hshldco)) ;
                 var span_5 = $("<span class='gray'/>") ;
                 var span_6 = $("<span class='gray mx-1'/>") ;
                 span_5.text("• 단지동") ; 
-                span_6.text(homes_comm.util.fn_format_number(data.dongCo)) ; 
+                span_6.text(homes_comm.util.fn_format_number(data.buldco)) ; 
                 dv_hshld.append(span_3) ;
                 dv_hshld.append(span_4) ;
                 dv_hshld.append(span_5) ;
@@ -188,12 +189,12 @@
                 dv_Left.append(dv_cusel) ; 
                 dv_xxz.append(dv_Left) ; 
                 var sp = $("<p class='title2 fs-14 fw-600' />") ;
-                var span_1 = $("<span class='hs-badge " + data.estColor + "'/>") ;
+                var span_1 = $("<span class='hs-badge " + data.bgcolor + "'/>") ;
                 var span_2 = $("<span class='mx-1'/>") ; 
                 var imgLoc = $("<div class='img-box' />") ; 
                 imgLoc.html("<img src='/images/lock.png' alt='자물쇠' />")
                 
-                span_1.text(data.estTynm) ; 
+                span_1.text(data.hppsnm) ; 
                 span_2.text(data.buldnm) ; 
                 sp.append(span_1) ;
                 sp.append(span_2) ;
@@ -252,7 +253,7 @@
         }) ;
 
 
-//        fn_get_stuff_List() ; 
+        fn_get_stuff_List() ; 
 
     </script>
 </body>

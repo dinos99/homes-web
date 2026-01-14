@@ -2,19 +2,15 @@
 <div class="pop-area wid-900px top-70px" id="pop-complex-setting">
     <div class="pop-cont-wrap">
         <p class="title">부동산 구분</p>
-        <div class="table-box-wrap">            
+        <div class="table-box-wrap">
             <div class="table-box">
-                <div class="label">단지명</div>
-                <div class="field" id="div_cplxnm">&nbsp;</div>
-            </div>
-            <div class="table-box">
-                <div class="label">공동주택</div>
-                <div class="field" id="comm_house">
+                <div class="label">단지 명</div>
+                <div class="field" id="div_cplxnm">
                 </div>
             </div>
             <div class="table-box">
-                <div class="label">공동건물</div>
-                <div class="field" id="comm_buld">
+                <div class="label">공동주택</div>
+                <div class="field" id="div_pbhouse">
                 </div>
             </div>
             <div class="table-box">
@@ -61,39 +57,26 @@
         }
     } ; 
     
-    var fn_set_comm_house = ( dataList ) => {
-        $("#comm_house").empty() ; 
-        if ( !!dataList && dataList.length > 0 ) {
-            dataList.forEach( data => {
-                var btn = $("<button type='button' id='btn_est_" + data.commcd + "' class='hs-check-button'/>") ;
-                btn.text(data.codenm) ; 
-                $("#comm_house").append(btn) ; 
+    var fn_set_pbhouse = ( cdList ) => {
+        $("#div_pbhouse").empty() ; 
+        cdList.forEach( code => {
+            var btn = $("<button type='button' id='btn_hpps_" + code.hppscd + "' class='hs-check-button'/>") ;
+            btn.text(code.hppsnm) ; 
+            $("#div_pbhouse").append(btn) ; 
+
+            btn.click(function() {
+//                var hppscd = $(this).attr("id").replace("btn_hpps_", "") ; 
+                $("button[id^=btn_hpps_]").removeClass("active") ; 
+                $(this).addClass("active") ; 
+                $("#btn_ok").removeAttr("disabled") ; 
             }) ; 
-        }
-    }
-    var fn_set_comm_buld = ( dataList ) => {
-        $("#comm_buld").empty() ; 
-        if ( !!dataList && dataList.length > 0 ) {
-            dataList.forEach( data => {
-                var btn = $("<button type='button' id='btn_est_" + data.commcd + "' class='hs-check-button'/>") ;
-                btn.text(data.codenm) ; 
-                $("#comm_buld").append(btn) ; 
-            }) ; 
-        }
+        }) ; 
+
+        fn_get_map() ; /* 카카오맵 => 네이버맵으로 변경필요 */ 
     }
     
-    var fn_set_checkbutton = () => {
-        $("button[id^=btn_est_]").click(function() {
-            $("button[id^=btn_est_]").removeClass("active") ; 
-            $(this).addClass("active") ; 
-
-            $("#btn_ok").removeAttr("disabled") ; 
-
-        }) ;
-    }
-
     var fn_get_map = () => {
-        var addr = cpxpop.params.plotLoc + " " + cpxpop.params.buldnm ; 
+        var addr = cpxpop.params.bdaddr + " " + cpxpop.params.buldnm ; 
         var geocoder = new kakao.maps.services.Geocoder(); 
         geocoder.addressSearch(addr, (result, status) => {
             if (status === kakao.maps.services.Status.OK) {
@@ -134,43 +117,47 @@
         }) ;
     }
 
-    var fn_set_data = () => {
-//        console.log(cpxpop.params) ; 
-        var param = cpxpop.params ;
-        var cplxnm = param.cplxnm ; 
-        $("#div_cplxnm").text(cplxnm) ;
+    var fn_set_data = ( cdList ) => {
+        console.log("*** hppscd: ", cdList ) ; 
+        var param  = cpxpop.params ;
+        var buldnm = param.buldnm ; 
+        $("#div_cplxnm").text(buldnm) ;
+
+        if ( homes_comm.util.fn_isNotEmpty( cdList )) {
+            fn_set_pbhouse(cdList) ; 
+        }
     }
 
     var fn_get_complexTy = () => {
-        $("button[id^=btn_est_]").each(function() {
+        $("button[id^=btn_hpps_]").each(function() {
+            cpxpop.data.htbdno = cpxpop.params.htbdno ; 
+            cpxpop.data.buldgb = "2" ; 
+            cpxpop.data.arcd   = cpxpop.params.arcd ; 
             var is_active = $(this).hasClass("active") ; 
             if ( is_active ) {
                 cpxpop.data.cplxTy = $(this).attr("id").split("_").splice(2,1).toString() ;
                 cpxpop.data.cplxTynm = $(this).text() ; 
+                cpxpop.data.hppscd = cpxpop.data.cplxTy ;
             }
         }) ; 
     }
 
     var fn_save_complex = () => {
-        var broker = homes_comm.store.getItem("user") ; 
-        network.post("/broker/insBrkComplex", {
-            "cplxno": cpxpop.params.cplxno,
-            "brkno" : broker.userno, 
-            "cplxTy": cpxpop.data.cplxTy,
-            "arcd"  : cpxpop.params.arcd,
-            "legcd" : cpxpop.params.legcd,
-            "x"     : cpxpop.data.x,
-            "y"     : cpxpop.data.y
+        fn_get_complexTy() ; 
+        network.post("/broker/stuff/regist", {
+            "htbdno": cpxpop.data.htbdno,
+            "buldgb": cpxpop.data.buldgb, /* 집합건물 고정 */ 
+            "arcd"  : cpxpop.data.arcd,
+            "hppscd": cpxpop.data.hppscd
         }).then(response => {
             var insco = Number(response.data.insco) ; 
             if ( insco > 0 ) {
-                fn_pop_colose(response.data) ; 
+                fn_pop_close(response.data) ; 
             }
-        }).catch(error => {
         }) ; 
     }
 
-    var fn_pop_colose = ( data ) => {
+    var fn_pop_close = ( data ) => {
          homes_comm.popup.pop_data[cpxpop.popid] = data ; 
          $("#btn_hddn_close").click() ;
     }
@@ -178,17 +165,14 @@
     $(document).ready(function() {
         cpxpop.popid = homes_comm.popup.param_data.popid ; 
         cpxpop.params = homes_comm.popup.param_data[cpxpop.popid].params ; 
-        fn_get_upcode("EST110")
-        .then(response => {
-            fn_set_comm_house(response.data.EST) ;
-            return fn_get_upcode("EST120") ; 
-        }).then(response => {
-            fn_set_comm_buld(response.data.EST) ;
-            fn_set_checkbutton() ;
-        })
 
-        fn_set_data() ; 
-        fn_get_map() ; 
+        console.log("*** complex params: ", cpxpop.params) ;
+
+        homes_comm.fn_get_hppscd_List({
+            "upHppscd": "HPS110"
+        }).then(response => {
+            fn_set_data(response.data) ; 
+        }) ; 
 
         $("#btn_cancel").click(function() {
             $("#btn_hddn_close").click() ;

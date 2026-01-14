@@ -1,6 +1,7 @@
 const h_manager = {
     constants: {
         _API_BASE_URL : "http://127.0.0.1"
+//        _API_BASE_URL : "http://34.64.63.95"
         , _API_BASE_PORT: 8090
         , _API_VERSION: "v1"
         /* 프리패스 페이지 */ 

@@ -26,7 +26,6 @@ WHERE Command <> 'Sleep'
 AND USER NOT IN ('system user', 'event_scheduler')
 ORDER BY TIME DESC ; 
 
-
 -- 해당 프로세스 종료
 kill 66215;
 
@@ -42,3 +41,7 @@ TRUNCATE TABLE TB_HBD_TEMP_LEDGR_MSTR ;
 TRUNCATE TABLE TB_HBD_BASE_SUMMRY ; 
 TRUNCATE TABLE TB_HBD_LEDGR ; 
 TRUNCATE TABLE TB_HBD_LEDGR_MSTR ; 
+
+
+, MOD(REGEXP_REPLACE(A.HO_NM, '[^0-9]+', ''), 10)                  AS RN
+, MOD(FLOOR(REGEXP_REPLACE(A.HO_NM, '[^0-9]+', '') / 10), 10) * 10 AS FRN

@@ -156,6 +156,12 @@ const homes_comm = {
             date.push(dd) ; 
             return date.join(".") ; 
         }
+        , fn_isEmpty: ( data ) => {
+            return $.isEmptyObject(data) ;
+        }
+        , fn_isNotEmpty: ( data ) => {
+            return !$.isEmptyObject(data) ;
+        }
     }
     , message: {
         alert: ( message, options ) => {
@@ -1275,6 +1281,22 @@ homes_comm.fn_set_comm_help = ( params ) => {
     console.log("*** comm help data: " + help_data) ;
     */
 }
+homes_comm.fn_get_hppscd_List = ( params ) => {
+    return new Promise(resolve => {
+        var api_url = "/commcode/hppscd/" ; 
+        if (typeof(params) == "string") {
+            api_url = api_url + params ; 
+        } else if ( typeof(params) == "object" ) {
+            api_url = api_url + params.upHppscd ; 
+        }
+        homes_comm.network.get(api_url, {
+        }).then(response => {
+//            console.log("*** hppscd: ", response.data)
+            resolve({data: response.data }) ; 
+        }) ; 
+    }) ; 
+}
+
 
 /* upper_cd로 공통코드 조회 */ 
 var fn_get_upcode = ( upcd ) => {
