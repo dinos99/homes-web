@@ -17,13 +17,7 @@ stuff_210.fn_set_checkbutton = () => {
             stuff_210.fn_get_public_List() ; 
         } else {
             var sfList = [] ; 
-            if ( hppscd == "HPS114" ) { 
-                /* 빌라/연립/다세대 동시조회 */ 
-                stuff_210.data.pbList.filter(pb => (pb.officeno > 0 
-                                                    && ( pb.hppscd == "HPS114" || pb.hppscd == "HPS115" || pb.hppscd == "HPS116"))).forEach(pb => {
-                    sfList.push(pb) ;
-                }) ; 
-            } else if ( hppscd == "HPS999" ) { 
+            if ( hppscd == "HPS999" ) { 
                 /* 미분류 => 물건에 등록되지 않은 목록만 조회한다. */ 
                 stuff_210.data.pbList.filter(pb => (pb.officeno == 0)).forEach(pb => {
                     sfList.push(pb) ;

@@ -7,16 +7,47 @@ var fn_pageLoad = ( pgid ) => {
     }) ; 
 }
 
+var fn_get_memo_count = () => {
+    homes_comm.network.post("/broker/memo-count", {
+    }).then(response => {
+        var mcnt = response.data.mcnt ; 
+        $("#gv_memo_cnt").text(mcnt) ; 
+    }) ; 
+}
+
 var fn_Load_completed = ( pgid ) => {
     var pg_idx = ( pgid % 300 ) / 10 ; 
     pg_idx = pg_idx - 1 ; 
+    
+    /* 클릭이벤트 해제후 재할당 */ 
+    $("#p_tab_items").children().off("click") ; 
+    $("#p_tab_items").children().each(function(i) {
+        if ( i != pg_idx ) {
+            $(this).click(function() {
+                $("#dv_container").empty() ; 
+                var pgid = 300 + (( i + 1 ) * 10) ; 
+                fn_pageLoad(pgid)
+            }) ; 
+        }
+    }) ; 
+
+    fn_get_memo_count() ; /* 메모건수조회 */ 
+
     $("#p_tab_items").children().removeClass("active")
     $("#p_tab_items").children().eq(pg_idx).addClass("active") ;
-    pages["stuff_" + pgid] = stuff_310 ; 
     var params = parent.fn_get_param() ;
-    /* 단지물건 정보 조회 */ 
-    fn_get_complex(params)
-    fn_get_List(pgid) ;
+    
+    if ( pgid == 310 ) {
+        /* 물건등록정보 조회 */ 
+        pages["stuff_310"] = stuff_310 ; 
+        /* 단지물건 정보 조회 */ 
+        fn_get_complex(params)
+        fn_get_List(pgid) ;
+    } else if ( pgid == 340 ) {
+        /* 메모관리 */
+        pages["stuff_340"] = stuff_340 ; 
+        stuff_340.fn_page_onLoad(params) ; 
+    }
 
     /* *********************************************************************
      * 팝업클로즈(액션없음) 
@@ -72,7 +103,11 @@ var fn_set_complex = ( data ) => {
         $("#p_promise_de").text(data.prmissde + "(" + data.diffy + "년)") ; 
     }
     /* 총 세대 수 / 단지 동 */ 
-    $("#p_hshldco").text(data.hshldco + "세대 / " + data.dongco + "개동") ; 
+
+    var hshldco = homes_comm.util.fn_format_number( data.hshldco ) ;
+    var dongco  = homes_comm.util.fn_format_number( data.dongco ) ;
+
+    $("#p_hshldco").text(hshldco + "세대 / " + dongco + "개동") ; 
     /* 총 상가수/상가 동 */ 
 //    $("#p_domgco").text(data.hshldco + "호실 / " + data.dongco + "개동)") ; 
     if ( data.elvtrco > 0) {

@@ -5,6 +5,10 @@ const hsEvent = {
 const homes_comm = {
     constants: {
         _API_BASE_URL : "http://127.0.0.1"
+        , _API_DEVL_BASE_URL : "http://127.0.0.1"
+        , _API_PROD_BASE_URL : "http://34.64.63.95"
+        , _API_DEVL_IP: "127.0.0.1"
+        , _API_PROD_IP: "34.64.63.95"
         , _API_BASE_PORT: 8090
         , _API_VERSION: "v1"
         , _LOGIN_PAGE_URL: "/html/sign-in/sign-in.html"  
@@ -131,6 +135,9 @@ const homes_comm = {
         , fn_format_number: ( num ) => {
             if(!!!num) return 0;
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        , fn_format_currency: ( num ) => {
+            return homes_comm.util.fn_format_number( num ) ; 
         }
         , fn_format_date: ( str_date ) => {
             if ( !!!str_date ) return "" ; 
@@ -615,7 +622,16 @@ const homes_comm = {
         return  is_required_auth ;
     }
     , fn_get_base_url: () => {
+
+        var protocol = location.protocol ; 
+        var host = location.hostname ;
+        var port = location.port
+
         var api_base_url = homes_comm.constants._API_BASE_URL ; 
+        if ( host == homes_comm.constants._API_PROD_IP ) {
+            api_base_url = homes_comm.constants._API_PROD_BASE_URL ; 
+        }
+
         api_base_url += homes_comm.constants._API_BASE_PORT === 443 ? "" : 
                         homes_comm.constants._API_BASE_PORT === 80 ? ""
                         : ":" + homes_comm.constants._API_BASE_PORT ; 

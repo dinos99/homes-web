@@ -30,41 +30,20 @@ stuff_310.fn_page_onLoad = ( params ) => {
 
 /* 가능하면 제일 마지막에 조회할것 */ 
 stuff_310.fn_get_brkstuff = () => {
-    var buldno = stuff_310.params.buldno ; 
+    var params = stuff_310.params ; 
     homes_comm.network.post("/stuff/brker-stuff", {
-        "buldno": buldno 
+        "stuffno": params.stuffno,
+        "htbdno" : params.htbdno, 
+        /* *** 필요시 추가할것 */
+        /*
+        "hbdno"  : params.hbdno
+         */
     }).then(response => {
         stuff_310.fn_set_brkstuff(response.data) ;
     }) ; 
 }
 
 stuff_310.fn_set_brkstuff = ( sfList ) => {
-    stuff_310.data.stuffList = sfList ;
-    var psb_save = false ; 
-    sfList.forEach(stuff => {
-        var dv_stuff = $("div[id$=" + stuff.buldno + "_" + stuff.pssionno + "]") ; 
-        if ( dv_stuff.length > 0 ) {
-            dv_stuff.removeClass() ; 
-            dv_stuff.addClass("room") ;
-            dv_stuff.attr("data-stuffno", stuff.stuffno) ; 
-            dv_stuff.off("click") ; 
-            dv_stuff.hover(function() {
-                $(this).removeClass("hover").addClass("done") ;
-            }, function() {
-                $(this).removeClass("hover").addClass("done") ;
-            }); 
-            if ( stuff.sfsttus == "D") {
-                dv_stuff.removeClass("selected").addClass("done") ; 
-            } else if ( stuff.sfsttus == "T" ) {
-                dv_stuff.removeClass("selected").addClass("selected") ;
-                psb_save = true ;  
-            }
-
-            var grpid  = dv_stuff.attr("id").split("_").splice(0,3).join("_") ; 
-            var isLast = $("div[id^=" + grpid + "]").length == dv_stuff.index() ; 
-            if ( isLast ) dv_stuff.addClass("last") ; 
-        }
-    }) ; 
 }
 
 
@@ -94,11 +73,21 @@ stuff_310.fn_get_blockList = ( params ) => {
                     var dnum = 1 ; 
                     dataList.forEach((blk, i) => {
                         var dv_dnum = $("<div id='dnum_" + dnum + "' class='hs-label room-number' data-hbdno='" + blk.hbdno + "'/>") ;
-
+                        dv_dnum.attr("data-dnum", dnum) ; 
                         var dongno = blk.dongno ; 
-                        if ( dongno == '999999999999' ) {
+                        var dongnm = blk.dongnm ; 
+                        if ( dongno == "0" && !! dongnm ) {
+                            dongno = dongnm ; 
+                        } else if ( dongno == "999999999999" ) {
                             /* 동명없음 => 건물명으로 + 순서로 대신사용 */ 
                             dongno = blk.buldnm + " " + homes_comm.util.fn_Lpad(dnum, 2, '0') ; 
+                        } else {
+                            if ( !!dongnm && dongnm != '' ) {
+                                dongno = dongnm 
+                            } else {
+                                /* 동명없음 => 건물명으로 + 순서로 대신사용 */ 
+                                dongno = blk.buldnm + " " + homes_comm.util.fn_Lpad(dnum, 2, '0') ; 
+                            }
                         }
 
                         dv_dnum.text(dongno) ;
@@ -106,7 +95,8 @@ stuff_310.fn_get_blockList = ( params ) => {
                         dv_dnum.click(function() {
                             $("div[id^=dnum_]").removeClass("selected") ; 
                             $(this).addClass("selected") ;
-                            stuff_310.fn_get_floor(dnum, blk.hbdno) ;
+                            var _dnum = $(this).attr("data-dnum") ; 
+                            stuff_310.fn_get_floor(_dnum, blk.hbdno) ;
                         }) ; 
                         dnum ++ ; 
                     }) ;
@@ -187,10 +177,12 @@ stuff_310.fn_get_floor = ( dnum, hbdno ) => {
                 /* 옥탑은 비워져있으면 그리지 않는다 */ 
                 var mx_roomco = floor.maxRoomCo ; 
                 var td = $("<td/>") ; 
-                var arr_room = floor.hosilnms.split("|") ; 
+                var arr_room   = floor.hosilnms.split("|") ; 
+                var arr_hpsno  = floor.hpsnos.split("|")
+//                var stf_hpsnos = floor.stfHpsnos.split("|")
                 if ( arr_room.length < mx_roomco ) {
                     while ( arr_room.length < mx_roomco ) {
-                        arr_room.push("") ; 
+                        arr_room.push("noroom") ; 
                     }
                 }
                 if ( floor.hpsnos == 'EMPTY' ) {
@@ -202,10 +194,18 @@ stuff_310.fn_get_floor = ( dnum, hbdno ) => {
                     }
                 } else {
                     for ( var rm = 0 ; rm < arr_room.length ; rm ++ ) {
-                        var room_nm = arr_room[rm] ; 
-                        room_nm = room_nm.replace("호", "") ; 
-                        var td = $("<td/>") ;
-                        td.text(room_nm) ; 
+                        var room_nm   = arr_room[rm] ; 
+                        var hpsno     = arr_hpsno[rm] ; 
+                        if ( room_nm != "noroom" ) {
+                            room_nm = room_nm.replace("호", "") ; 
+                            var td = $("<td/>") ;
+                            td.attr("data-hpsno", arr_hpsno[rm]) ; 
+                            td.addClass("bd-room")
+                            td.text(room_nm) ; 
+                        } else {
+                            var td = $("<td/>") ;
+                            td.addClass("bd-noroom")
+                        }
                         tr.append(td) ; 
                     }
                 }
@@ -223,7 +223,7 @@ stuff_310.fn_get_floor = ( dnum, hbdno ) => {
                 }
                 if ( floor.hpsnos == 'EMPTY' ) {
                     for ( var rm = 0 ; rm < arr_room.length ; rm ++ ) {
-                        var td = $("<td/>") ; 
+                        var td = $("<td/>") ;
                         td.addClass("empty") ; 
                         td.html("&nbsp;") ; 
                         tr.append(td) ;
@@ -233,6 +233,7 @@ stuff_310.fn_get_floor = ( dnum, hbdno ) => {
                         var room_nm = arr_room[rm] ; 
                         room_nm = room_nm.replace("호", "") ; 
                         var td = $("<td/>") ;
+                        td.addClass("bd-room")
                         td.text(room_nm) ; 
                         tr.append(td) ; 
                     }
@@ -254,145 +255,19 @@ stuff_310.fn_get_floor = ( dnum, hbdno ) => {
 //        stuff_310.fn_set_data() ;
     }) ; 
 }
-stuff_310.fn_set_under = () => {
-    var data = stuff_310.data ; 
-    var under = data.under ; 
-    var room_co = data.floor.roomCo ; 
-    var dv_fbox = $("<div class='under-ground'/>") ;
-    var dv_floor = $("<div class='floor'/>") ; 
-    dv_fbox.append(dv_floor) ;
-    if ( under.floorCo == 0) {
-        dv_fbox.addClass("bottom") ;
-        dv_floor.text("B01") ;
-        for ( var i = 0; i < room_co; i ++ ) {
-            var dv_room  = $("<div class='room'/>") ;
-            dv_room.text("") ; 
-            dv_room.addClass("empty-space") ;
-            dv_fbox.append(dv_room) ;
-            if ( i > 0) dv_room.addClass("nbdl");
-            if ( i == room_co -1 ) dv_room.addClass("last") ;
-        }
-        $("#dv_buld").append(dv_fbox) ; 
-    } else {
-        for ( var f = 0; f < under.floorCo; f++ ) {
-            var flno = Number(f + 1) ;
-            var floor = under["floor" + flno]
-            dv_floor.text("B" + flno) ;
-            dv_fbox.append(dv_floor) ;
-            if ( floor.length == 0 ) {
-                dv_fbox.addClass("bottom") ;
-                dv_floor.text("B1") ;
-                for ( var i = 0; i < room_co; i ++ ) {
-                    var dv_room  = $("<div class='room'/>") ;
-                    dv_room.text("") ; 
-                    dv_room.addClass("empty-space") ;
-                    dv_fbox.append(dv_room) ;
-                    if ( i > 0) dv_room.addClass("nbdl");
-                    if ( i == room_co -1 ) dv_room.addClass("last") ;
-                }
-                $("#dv_buld").append(dv_fbox) ; 
-            } else {
-                for ( var r = 0; r < room_co; r ++ ) {
-                    if ( r < floor.length ) {
-                        var dv_room  = $("<div class='room' />") ;
-                        dv_room.text(floor[r].roomNm) ; 
-                        dv_room.attr("id", "room_" + flno + "_" + floor[r].buldno + "_" + floor[r].pssionno) ;
-                        /* under *********************************/
-                        dv_room.addClass("cursor-hand") ;
-                        dv_room.click(function() {
-                            $(this).addClass("selected") ;
-                            $(this).removeClass("cursor-hand") ; 
-                            $(this).off("click") ;
-                            stuff_310.fn_set_owndata($(this).attr("id"), "floor").then(response => {
-                                stuff_310.fn_set_owner(response.data) ;
-                                stuff_310.fn_get_brkstuff() ;
-                            }) ; 
-                        }) ;
-                        dv_fbox.append(dv_room) ;
-                    } else {
-                        var dv_room  = $("<div class='room' />") ;
-                        dv_room.text("") ; 
-                        dv_room.addClass("empty-space") ;
-                        dv_fbox.append(dv_room) ;
-                    }
-                    if ( r == room_co -1 ) dv_room.addClass("last") ;
-                }
-                $("#dv_buld").append(dv_fbox) ; 
-            }
-
-            if ( f == under.floorCo - 1 ) {
-                dv_fbox.addClass("bottom") ;
-            }
-        }
-    }
-}
-stuff_310.fn_set_floor = () => {
-    var data = stuff_310.data ; 
-    for ( var f = data.floor.floorCo; f > 0; f -- ) {
-        var flno = f ;
-        var floor = data.floor["floor" + flno] ; 
-        var dv_fbox = $("<div class='floor-box'/>") ;
-        var dv_floor = $("<div class='floor'/>") ; 
-        dv_floor.text(flno) ;
-        dv_fbox.append(dv_floor) ;
-        if ( floor.length == 0 ) {
-            for ( var r = 0; r < data.floor.roomCo; r ++ ) {
-                var dv_room  = $("<div class='room'/>") ;
-                dv_room.text("") ; 
-                dv_room.addClass("empty-space") ;
-                dv_fbox.append(dv_room) ;
-                if ( r > 0) dv_room.addClass("nbdl");
-                if ( r == data.floor.roomCo -1 ) dv_room.addClass("last") ;
-            }
-        } else {
-            for ( var r = 0; r < data.floor.roomCo; r ++ ) {
-                if ( r < floor.length ) {
-                    var dv_room  = $("<div class='room' />") ;
-                    if ( !!floor[r].roomNm ) {
-                        dv_room.attr("id", "room_" + flno + "_" + floor[r].buldno + "_" + floor[r].pssionno) ;
-                        dv_room.text(floor[r].roomNm) ; 
-                        /* floor *********************************/
-                        dv_room.addClass("cursor-hand") ;
-                        dv_room.hover(function() {
-                            $(this).addClass("hover") ;
-                        }, function() {
-                            $(this).removeClass("hover") ;
-                        }) ; 
-                        dv_room.click(function() {
-                            $(this).addClass("selected") ;
-                            $(this).removeClass("cursor-hand") ; 
-                            $(this).off("click") ;
-                            stuff_310.fn_set_owndata($(this).attr("id"), "floor").then(response => {
-                                stuff_310.fn_set_owner(response.data) ;
-                                stuff_310.fn_get_brkstuff() ;
-                            }) ; 
-                        }) ;
-                        
-                        dv_fbox.append(dv_room) ;
-                    } else {
-                        var dv_room  = $("<div class='room' />") ;
-                        dv_room.text("") ; 
-                        dv_room.addClass("empty-space") ;
-                        dv_fbox.append(dv_room) ;
-                    }
-                } else {
-                    var dv_room  = $("<div class='room' />") ;
-                    dv_room.text("") ; 
-                    dv_room.addClass("empty-space") ;
-                    dv_fbox.append(dv_room) ;
-                }
-                if ( r == data.floor.roomCo -1 ) dv_room.addClass("last") ;
-            }
-        }
-        $("#dv_buld").append(dv_fbox) ; 
-    }
-}
 stuff_310.fn_set_data = () => {
+    var f_List = stuff_310.data.f_List ; 
+    if ( homes_comm.util.fn_isNotEmpty(f_List)) {
 
-    var data = stuff_310.data ; 
-    var pos_y = data.floor.floorCo * 30 ; 
-    if ( !!!data["rftop"] || data.rftop.floorCo == 0 ) pos_y = pos_y - 30 ;
-    $(".dong-matrix").css("background-position-y", pos_y + "px") ;
+        var rfco = $("#tbl_rfTop").children().length
+        var grco = $("#tbl_ground").children().length
+        var unco = $("#tbl_under").children().length
+
+        var offset = 20 ; 
+        var pos_y = (rfco + grco + unco) * 30 ; 
+        pos_y = pos_y - offset ; 
+        $(".dong-matrix").css("background-position-y", pos_y + "px") ;
+    }
 
     /* 중개사 물건목록 조회 */ 
     stuff_310.fn_get_brkstuff() ;

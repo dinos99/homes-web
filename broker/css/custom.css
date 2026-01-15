@@ -320,6 +320,7 @@ a.ui-datepicker-prev-next {
 .pl-10 { padding-left: 10px !important; }
 .pl-20 { padding-left: 20px !important; }
 .pl-30 { padding-left: 30px !important; }
+.pl-40 { padding-left: 40px !important; }
 
 .pr-0 { padding-right: 0px !important; }
 .pr-20 { padding-right: 20px !important; }
@@ -1036,16 +1037,27 @@ button.btn-naver {
   background-position-x: 0;
   background-position-y: -9999px;
 }
-.dong-matrix .buld { font-size: 13px; font-weight: 400; width: 100%; }
-.dong-matrix .buld .buld-floor { 
-  width: 100%;
-  padding: 0 30px; 
+.dong-matrix .buld {
+  /*
   display: flex;
   justify-content: center;
+  flex-wrap: wrap ;
+  */
+  font-size: 13px;
+  font-weight: 400;
+   width: 100%;
+}
+.dong-matrix .buld .buld-floor { 
+  padding: 0 30px; 
+  display: flex;
+  justify-content: center ;
 }
 .dong-matrix .buld .buld-floor table td { padding: 5px 20px; width: 100px; text-align: center ; }
 .dong-matrix .buld .buld-floor table td { background-color: #fff; border: 1px solid var(--hs-border-color) ; }
 .dong-matrix .buld .buld-floor table td.empty { background-color: #e6e6e6 !important; }
+.dong-matrix .buld .buld-floor table td.bd-room { cursor: pointer; }
+.dong-matrix .buld .buld-floor table td.bd-room:hover{ background-color: var(--hs-hover-color-blue);}
+.dong-matrix .buld .buld-floor table td.bd-noroom { cursor: default; }
 .dong-matrix .buld .rooftop {
   display: flex; 
   align-items: center ;
