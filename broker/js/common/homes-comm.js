@@ -110,6 +110,9 @@ const homes_comm = {
         fn_Rpad: ( text, num, f_char ) => {
             return ("" + text).padEnd(num, f_char);
         },
+        fn_concat: (sep, ...text) => {
+            return text.join(sep);
+        },
         /* file size 변환 */ 
         fn_conv_filesize: (fsize, option) => {
             const unit_shot = ["KB", "MB", "GB", "TB"];
@@ -444,6 +447,7 @@ const homes_comm = {
         pop_stack: []
         , pop_data: {}
         , param_data: {}
+        , params: {}
         , pop_open: ( url, param ) => {
             var pop_url = "/html/popup" + url ; 
             var wrapid = "wrap_" + param.popid ; 
@@ -608,6 +612,56 @@ const homes_comm = {
                     
                 }) ; 
             }) ;
+        }
+        , fn_set_params: ( params ) => {
+            top.popup.params = params ; 
+        }
+        , fn_get_params: () => {
+            return top.popup.params ; 
+        }
+        , fn_pop_open: ( url, params, fn_callback ) => {
+            var pop_url = "/html/popup" + url ; 
+            top.$("#pop_dimmed").remove() ; 
+            var dimmed = $("<div id='pop_dimmed' class='pop-dimmed'/>") ;
+            var cont   = $("<div id='pop_ifrm_cont' class='popup-container'/>") ; 
+            var ifrm   = $("<iframe src='" + pop_url + "' id='pop_ifrm_" + params.popid + "' class='popup-iframe shadow h-400'/>") ; 
+            cont.append(ifrm) ;
+            top.$("body").append(dimmed) ; 
+            top.$("body").append(cont) ; 
+            if ( $.isFunction(fn_callback)) {
+                params.fn_callback = fn_callback ; 
+            }
+            homes_comm.popup.fn_set_params(params) ; 
+
+            var dw = dimmed.width() ; 
+            var dh = dimmed.height() ; 
+            var ifrm_Top  = (dh - 400) / 2 ; /* 기본높이 400, 달라지면 다시계산해야함 */ 
+            var ifrm_Left = (dw - 900) / 2 ; /* 기본넓이 900, 달라지면 다시계산해야함 */ 
+            cont.css("top" , ifrm_Top  + "px") ; 
+            cont.css("left", ifrm_Left + "px") ; 
+
+            dimmed.click(function() {
+                $(this).remove() ;
+                top.$("#pop_ifrm_cont").remove() ;
+                var _fn_callback = fn_callback ; 
+                if ( $.isFunction(_fn_callback)) {
+                    var _params = homes_comm.popup.fn_get_params() ; 
+                    _fn_callback.apply(null, [{
+                        "action"  : "pop_cancel",
+                        "params"  : _params,
+                        "pop_data": {}
+                    }]) ; 
+                }
+            })
+        }
+        , fn_pop_close: ( pop_data ) => {
+            var _params = homes_comm.popup.fn_get_params() ; 
+            var fn_callback = _params.fn_callback ; 
+            if ( $.isFunction(fn_callback)) {
+                fn_callback.apply(null, [pop_data]) ; 
+            }
+            top.$("#pop_dimmed").remove() ;
+            top.$("#pop_ifrm_cont").remove() ;
         }
     }
     , _fn_is_auth_url: () => {
@@ -1234,26 +1288,21 @@ var fn_isLogin = () => {
 
 /* 공통코드 조회 */
 var fn_get_commcode = ( grpcd ) => {
-    var commcode = {} ; 
-    var grpcds = [] ; 
-    if (!Array.isArray(grpcd)) grpcds.push(grpcd) ; 
-    else grpcds = grpcd ;
-    
-    return new Promise((resolve, reject) => {
-        homes_comm.network.post("/commcode/commCodeList", {
-            "grpcds": grpcds
-        }).then(response => {
-            grpcd.forEach(gcd => {
-                commcode[gcd] = [] ; 
-                response.data
-                .filter(code => (code.grpcd == gcd))
-                .forEach(code => {
-                    commcode[gcd].push(code) ;
-                }) ; 
-                resolve(commcode) ;
+    return new Promise(resolve => {
+        var commcode = homes_comm.store.getItem("commcode") || {} ; 
+        commcode[grpcd] = commcode[grpcd] || [] ; 
+        if ( homes_comm.util.fn_isEmpty( commcode[grpcd]) ) {
+            homes_comm.network.get("/commcode/" + grpcd, {
+            }).then(response => {
+                commcode[grpcd] = response.data ; 
+                homes_comm.store.setItem("commcode", commcode) ; 
+                resolve(response.data) ; 
             }) ; 
-        }) ; 
-    }) ;
+        } else {
+            var commcode = homes_comm.store.getItem("commcode") ; 
+            resolve(commcode[grpcd]) ; 
+        }
+    }) ; 
 }
 
 homes_comm.fn_get_ppscdList = ( param ) => {

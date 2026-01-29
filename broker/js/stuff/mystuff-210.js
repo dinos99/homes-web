@@ -79,7 +79,7 @@ stuff_210.fn_set_public_List = ( dataList ) => {
     if ( homes_comm.util.fn_isNotEmpty(dataList)) {
         dataList.forEach( data => {
             var div_cont = $("<div class='cont justify-between bg-gray'/>") ;
-            if ( data.sfsttus != "N" ) {
+            if ( data.brkno > 0 ) {
                 div_cont = $("<div class='cont justify-between bg-light-blue'/>") ;
             }
 

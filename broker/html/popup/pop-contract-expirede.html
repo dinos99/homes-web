@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="ko" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈즈프로 계약기간</title>
+    <link rel="icon" href="/images/logo_homes_pro_32.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/logo_homes_pro_32.png" type="image/x-icon">
+
+    <!-- bootstrap 5.3.5 -->    
+    <script src="/js/extern/bootstrap-5.3.5/assets/js/color-modes.js"></script>
+    <link href="/js/extern/bootstrap-5.3.5/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- kakao map api -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e23a8c880d6b5fcb0f9af25ed39b0b10&libraries=services,clusterer,drawing"></script>
+
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/variables.css">
+
+    <link rel="stylesheet" href="/css/homes.broker.style.css">
+</head>
+<body>
+    <div class="popup-dialog" id="pop-contract-expirede">
+        <div class="pop-cont-wrap">
+            <p class="title">만기일 선택</p>
+            <div class="table-box-wrap">
+                <div class="table-box">
+                    <div class="label">만기일</div>
+                    <div class="field">
+                        <span id="sp_expirede">-</span>
+                    </div>
+                    <div class="label">계약기간</div>
+                    <div class="field d-flex">
+                        <select id="sel_contract_dur" class="form-select mr-10">
+                        </select>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="chk_contract_at" class="custom-checkbox">
+                            <label for="chk_contract_at" class="checkbox-label">
+                                <span class="checkbox-icon"></span>
+                                <span class="checkbox-text">월 계약</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-box">
+                    <div class="label">연도선택</div>
+                    <div class="field" id="btn_group_expyy">
+                    </div>
+                </div>
+                <div class="table-box">
+                    <div class="label">월선택</div>
+                    <div class="field" id="btn_group_expmm">
+                    </div>
+                </div>
+                <div class="table-box">
+                    <div class="label h-80px">일선택</div>
+                    <div class="field h-80px">
+                        <div class="my-1 mt-0" id="btn_group_expdd_01">
+                        </div>
+                        <div class="my-1" id="btn_group_expdd_02">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pop-action-button">
+                <button type="button" id="btn_cancel" class="hs-button btn-white">취소</button>
+                <button type="button" id="btn_ok" class="hs-button btn-blue" disabled="disabled">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <script src="/js/common/homes-comm.js"></script>
+    <script src="/js/common/homes-ui.js"></script>
+    <script src="/js/common/homes-event-broker.js"></script>
+    <script src="/js/stuff/mystuff-003.js"></script>
+    <script type="text/javascript">
+        var arr_crtcyy = [] ; 
+        var arr_crtcmm = [] ; 
+        var pop_params = {} ; 
+        var pop_data = {
+            expyy: "", 
+            expmm: "",
+            expdd: ""
+        }
+        $(document).ready(function() {
+            fn_set_bsdata() ; 
+            fn_set_params() ; 
+            fn_set_control() ; 
+            fn_set_event() ; 
+
+            fn_set_value() ; 
+            fn_do_Validate() ; 
+        }) ; 
+
+        var fn_do_Validate = () => {
+            var exp_yy = pop_data.expyy ; 
+            var exp_mm = pop_data.expmm ; 
+            var exp_dd = pop_data.expdd ; 
+            var expde = homes_comm.util.fn_concat(".", exp_yy, exp_mm, exp_dd) ; 
+            if (homes_comm.util.fn_isNotEmpty(expde) && expde.length == 10) {
+                $("#sp_expirede").text(expde) ; 
+                /* button disabled 해제 */
+                $("#btn_ok").prop("disabled", "") ; 
+                $("#btn_ok").removeAttr("diabled") ; 
+            } else {
+                $("#sp_expirede").text("-") ; 
+                /* button disabled */
+                $("#btn_ok").prop("disabled", "disabled") ; 
+            }
+        }
+
+        var fn_set_value = () => {
+            pop_params = homes_comm.popup.fn_get_params() ; 
+            console.log(pop_params) ;
+
+            var expde = pop_params["expirede"] ;
+            if ( homes_comm.util.fn_isEmpty(expde)) {
+                /* 없으면 현재년월 기본셋팅 */ 
+                var date = new Date() ; 
+                var curr_yy = date.getFullYear() ; 
+                var curr_mm = homes_comm.util.fn_Lpad(date.getMonth() + 1, 2, "0") ;
+                var curr_dd = date.getDate() ;
+                fn_set_expire_yy(curr_yy) ; 
+                fn_set_expire_mm(curr_mm) ; 
+                fn_set_expire_days() ; 
+//                fn_set_expire_dd(curr_yy, curr_mm, "") ; 
+            } else {
+                var exp_yy = expde.substring(0, 4) ; 
+                var exp_mm = expde.substring(4, 6) ; 
+                var exp_dd = expde.substring(6, 8) ; 
+                fn_set_expire_yy(exp_yy) ; 
+                fn_set_expire_mm(exp_mm) ; 
+                fn_set_expire_days(exp_dd) ; 
+            }
+        }
+
+        var fn_set_control = () => {
+            fn_change_crtcAt() ; 
+            fn_set_btn_expire_yy() ; 
+            fn_set_btn_expire_mm() ; 
+            fn_set_btn_expire_dd() ; 
+        }
+
+        var fn_set_expire_yy = ( expyy ) => {
+            pop_data.expyy = expyy ; 
+            $("button[id^=btn_expyy_]").removeClass("btn-white").removeClass("btn-lime").addClass("btn-white"); 
+            $("#btn_expyy_" + expyy).removeClass("btn-white").removeClass("btn-lime").addClass("btn-lime") ; 
+            fn_do_Validate() ; 
+        }
+
+        var fn_set_expire_mm = ( expmm ) => {
+            pop_data.expmm = expmm ; 
+            pop_data.expdd = "" ; 
+            $("button[id^=btn_expmm_]").removeClass("btn-white").removeClass("btn-lime").addClass("btn-white"); 
+            $("#btn_expmm_" + expmm).removeClass("btn-white").removeClass("btn-lime").addClass("btn-lime") ; 
+            fn_do_Validate() ; 
+        }
+
+        var fn_set_expire_days = (expdd) => {
+            var btn_group_01 = $("#btn_group_expdd_01") ; 
+            var btn_group_02 = $("#btn_group_expdd_02") ; 
+            btn_group_01.empty() ; 
+            btn_group_02.empty() ; 
+
+            var yy = pop_data.expyy ; 
+            var mm = pop_data.expmm ;
+
+            for ( var i = 1;  i <= 15; i ++ ) {
+                var dd = homes_comm.util.fn_Lpad(i, 2, '0') ; 
+                /* 이와중에 일요일은 색을 달리표시 */
+                var date = new Date(yy, mm - 1, dd) ; 
+                var day7 = date.getDay() ; 
+                var holiday = day7 == 0 ? "holiday" : "" ; 
+                var button = $("<button type='button' id='btn_expdd_" + dd + "' class='hs-button-sm vsm-40 btn-white " + holiday + " mr-5'/>") ; 
+                button.text(i) ; 
+                btn_group_01.append(button) ; 
+            }
+            var last_dt = new Date(yy, mm, 0) ; 
+            for ( var i = 16;  i <= last_dt.getDate() ; i ++ ) {
+                var dd = homes_comm.util.fn_Lpad(i, 2, '0') ; 
+                var date = new Date(yy, mm - 1, dd) ; 
+                var day7 = date.getDay() ; 
+                var holiday = day7 == 0 ? "holiday" : "" ; 
+                var button = $("<button type='button' id='btn_expdd_" + dd + "' class='hs-button-sm vsm-40 btn-white " + holiday + " mr-5'/>") ; 
+                button.text(i) ; 
+                btn_group_02.append(button) ; 
+            }
+            
+            $("button[id^=btn_expdd_").click(function() {
+                $("button[id^=btn_expdd_]").removeClass("btn-white").removeClass("btn-lime").addClass("btn-white"); 
+                $(this).removeClass("btn-white").removeClass("btn-lime").addClass("btn-lime") ; 
+                pop_data.expdd = $(this).attr("id").split("_").splice(2, 1).toString() ; 
+                fn_do_Validate() ; 
+            }) ; 
+
+            if ( homes_comm.util.fn_isNotEmpty(expdd)) {
+                $("#btn_expdd_" + expdd).click() ;
+            }
+            fn_do_Validate() ; 
+        }
+
+
+        var fn_set_btn_expire_yy = () => {
+            var expde = pop_params.expirede ;
+            var today = new Date() ; 
+            var st_yy = today.getFullYear() ; 
+//            var expymd = homes_comm.util.fn_isNotEmpty(expde) ? expde.split(".").join("") :
+            var btn_group = $("#btn_group_expyy") ; 
+            btn_group.empty() ; 
+            for ( var i = 0;  i < 5; i ++ ) {
+                var button = $("<button type='button' id='btn_expyy_" + Number(st_yy + i) + "'  class='hs-button-sm btn-white mr-5'/>") ; 
+                button.text(Number(st_yy + i) + "년") ; 
+                btn_group.append(button) ; 
+                button.click(function() {
+                    var expyy = $(this).attr("id").split("_").splice(2, 1).toString() ; 
+                    fn_set_expire_yy(expyy) ; 
+                }) ; 
+            }
+        }
+        var fn_set_btn_expire_mm = () => {
+            var expde = pop_params.expirede ;
+            var today = new Date() ; 
+            var st_mm = today.getMonth() + 1; 
+            var btn_group = $("#btn_group_expmm") ; 
+            btn_group.empty() ; 
+            for ( var i = 0;  i < 12; i ++ ) {
+                var mm = homes_comm.util.fn_Lpad(Number(st_mm + i), 2, '0') ; 
+                var button = $("<button type='button' id='btn_expmm_" + mm + "' class='hs-button-sm vsm-50 btn-white mr-5'/>") ; 
+                button.text(Number(st_mm + i) + "월") ; 
+                btn_group.append(button) ; 
+                button.click(function() {
+                    var expmm = $(this).attr("id").split("_").splice(2, 1).toString() ; 
+                    fn_set_expire_mm(expmm) ; 
+                    fn_set_expire_days() ; 
+                }) ; 
+            }
+        }
+        var fn_set_btn_expire_dd = () => {
+            var expde = pop_params.expirede ;
+            var today = new Date() ; 
+            var st_dd = today.getDate() ;
+            var btn_group_01 = $("#btn_group_expdd_01") ; 
+            var btn_group_02 = $("#btn_group_expdd_02") ; 
+            btn_group_01.empty() ; 
+            btn_group_02.empty() ; 
+        }
+
+        var fn_change_crtcAt = () => {
+            var select = $("#sel_contract_dur") ; 
+            select.empty() ; 
+            var is_checked = $("#chk_contract_at").is(":checked") ; 
+            if (is_checked) {
+                for ( var i = 0; i < arr_crtcmm.length; i ++ ) {
+                    select.append("<option value='" + arr_crtcmm[i].val + "'>" + arr_crtcmm[i].text + "</option>") ; 
+                }
+            } else {
+                for ( var i = 0; i < arr_crtcyy.length; i ++ ) {
+                    select.append("<option value='" + arr_crtcyy[i].val + "'>" + arr_crtcyy[i].text + "</option>") ; 
+                }
+            }
+        }
+
+        var fn_set_event = () => {
+            $("#chk_contract_at").change(function() {
+                fn_change_crtcAt() ; 
+            }) ; 
+
+            $("#btn_cancel").click(function() {
+                homes_comm.popup.fn_pop_close({
+                    "popid"   : pop_params.popid,
+                    "action"  : "pop_cancel",
+                    "params"  : pop_params,
+                    "pop_data": {}
+                }) ;
+            }) ; 
+            $("#btn_ok").click(function() {
+                var expyy    = pop_data.expyy ; 
+                var expmm    = pop_data.expmm ; 
+                var expdd    = pop_data.expdd ; 
+                var expde    = homes_comm.util.fn_format_date(expyy + expmm + expdd) ; 
+                var crtcAt   = $("#chk_contract_at").is(":checked") ? "2" : "1" ; 
+                var crtcyy   = "" ; 
+                var crtcmm   = "" ; 
+                var exp_Text = expde ; 
+                if ( crtcAt == "1" ) {
+                    crtcyy = $("#sel_contract_dur").val() ; 
+                    exp_Text = exp_Text + "(" + crtcyy + "년)" ; 
+                } else{
+                    crtcmm = $("#sel_contract_dur").val() ; 
+                    exp_Text = exp_Text + "(" + crtcmm + "개월)" ; 
+                }
+                homes_comm.popup.fn_pop_close({
+                    "popid"   : pop_params.popid,
+                    "action"  : "pop_ok",
+                    "params"  : pop_params,
+                    "pop_data": {
+                        "expirede": expde,
+                        "crtcyy"  : crtcyy,
+                        "crtcmm"  : crtcmm,
+                        "crtcAt"  : crtcAt,
+                        "exp_Text": exp_Text
+                    }
+                }) ; 
+            }) ; 
+        }
+        var fn_set_bsdata = () => {
+            for ( var yy = 1; yy <= 10; yy ++ ) {
+                arr_crtcyy.push({"val": yy, "text": yy + "년"}) ; 
+            }
+            for ( var mm = 1; mm <= 24; mm ++ ) {
+                arr_crtcmm.push({"val": mm, "text": mm + "개월"}) ; 
+            }
+        } ; 
+
+        var fn_set_params = () => {
+            pop_params = homes_comm.popup.fn_get_params() ; 
+            console.log(pop_params) ;
+
+            var expde = pop_params["expirede"] ;
+            if ( homes_comm.util.fn_isNotEmpty(expde)) {
+                $("#sp_expirede").text(expde) ; 
+            } else {
+                $("#sp_expirede").text("-") ; 
+            }
+            var crtcAt = pop_params.crtcAt ; 
+            var select = $("#sel_contract_dur") ; 
+            select.empty() ; 
+            if ( !!crtcAt && crtcAt == 2 ) {
+                /* 월계약인경우 체크박스 선택 */ 
+                $("#chk_contract_at").click() ; 
+            }
+
+        } ; 
+
+    </script>
+</body>
+</html>

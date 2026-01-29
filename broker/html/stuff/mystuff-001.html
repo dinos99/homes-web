@@ -221,8 +221,9 @@
                 fn_set_cplxList( cplxList ) ; 
             }
         }
-
+        
         var fn_pop_info = ( data ) => {
+            homes_comm.store.setItem("stuff", data) ; 
             var ifrm = $("#ifrm_stuff_info") ; 
             if ( ifrm.length > 0 ) {
                 ifrm.attr("src", "/html/stuff/mystuff-003.html") ;

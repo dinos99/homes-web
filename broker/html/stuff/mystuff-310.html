@@ -1,40 +1,63 @@
 
 <section class="first" id="mystuf_310">
     <div class="title">물건등록</div>
-    <div class="cont first justify-center bg-gray">
-        <div class="hs-slide-bar">
-            <div class="d-block">
-                <div id="dv_dong_number" class="slide-title type-02">
-                    <div class="d-block" id="p_dong_List">
-                    </div>
+    <div class="cont justify-start bg-lightblue">
+        <div class="info">
+            <div class="info-label c-blue">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="p_chk_regist_stuff" class="custom-checkbox">
+                    <label for="p_chk_regist_stuff" class="checkbox-label">
+                        <span class="checkbox-icon"></span>
+                        <span class="checkbox-text">물건등록</span>
+                    </label>
                 </div>
+            </div>
+            <div class="info-text">
+                <span>물건(호실)을 등록하실경우 [물건등록]을 선택하십시오.</span>
             </div>
         </div>
     </div>
-    <div class="cont first justify-center bg-gray">
-        <div class="d-block w-100">
-            <div id="dv_dongnm" class="dong-text"></div>
-            <div class="dong-matrix">
-                <div class="buld" id="dv_buld"></div>
+    <div id="dv_info_regist_stuff" class="cont justify-start bg-gray">
+        <div class="info">
+            <div class="info-label c-red">안내</div>
+            <div class="info-text">
+                <p>
+                    <span>보유한 물건(호실)을 </span>
+                    <span class="c-red">일괄등록</span>
+                    <span>할 수 있으며, 등록된물건은</span>
+                    <span class="c-red">우측 목록에서 선택 시 하단에 표시</span>
+                    <span>됩니다.</span>
+                </p>
+                <p>
+                    <span>해당물건(호실)을 선택해</span>
+                    <span class="c-red">소유주 등록, 매물 등록등 다양한정보를 간편하게 관리</span>
+                    <span>할 수 있습니다.</span>
+                </p>
             </div>
-            <div class="box-category">
-                <div class="box-cate">
-                    <div class="cate cat-gray"></div>
-                    <div class="text">필로터 및 기타공간</div>
-                </div>
-                <div class="box-cate">
-                    <div class="cate cat-lightblue"></div>
-                    <div class="text">기타용도</div>
-                </div>
-                <div class="box-cate">
-                    <div class="cate cat-lime"></div>
-                    <div class="text">등록물건</div>
-                </div>
-                <div class="box-cate">
-                    <div class="cate cat-red"></div>
-                    <div class="text">선택물건</div>
-                </div>
+        </div>
+    </div>
+    <div id="dv_wrap_dongnms" class="cont justify-start bg-gray hidden">
+        <div class="info">
+            <div class="info-label w-90px c-blue">동 선택</div>
+            <div id="dv_cont_dongnms" class="info-text w-fixed-655 homes-radio-button">
             </div>
+        </div>
+    </div>
+    <div id="dv_wrap_hosil" class="cont justify-start bg-gray hidden">
+        <div class="info">
+            <div class="info-label w-90px c-blue">호 선택</div>
+            <div class="info-text w-fixed-655" id="dv_cont_hosil">
+
+            </div>
+        </div>
+    </div>
+    <div class="cont justify-start bg-lightblue">
+        <div class="info justify-between">
+            <div class="info-label c-blue">물건등록</div>
+            <div class="info-text w-600px">
+                상단에서 내 물건으로 등록할 호실을 <span class="c-red">모두 선택한 뒤, [물건 등록]을 클릭</span>하십시오.
+            </div>
+            <button type="button" id="btn_insert_stuff" class="hs-button btn-red" disabled="disabled">물건등록</button>
         </div>
     </div>
     <div class="cont justify-around bg-gray">
@@ -54,17 +77,29 @@
     </div>
     
     <div id="dv_ownerList">
+        <!--
+        <div class="cont justify-start bg-gray">
+            <div class="action-field w-200px">
+                <div class="action-label">
+                    <span class="c-red">301동</span> /
+                    <span class="c-red">101호</span>
+                    <button type="button" class="btn-x"></button> 
+                </div>
+            </div>
+            <div class="action-field">
+                <select class="form-select">
+                    <option value="">소유주구분</option>
+                </select>
+                <input type="text" class="w-100px" maxlength="30" placeholder="이름" />
+                <button type="button" class="hs-button btn-cyan">연락처</button> 
+                <select class="form-select">
+                    <option value="">통신사선택</option>
+                </select>
+            </div>
+        </div>
+        -->
     </div>
 
-    <div class="cont justify-start bg-lightblue">
-        <div class="info">
-            <div class="info-label c-blue">물건등록</div>
-            <div class="info-text">
-                상단에서 내 물건으로 등록할 호실을 <span class="c-red">모두 선택한 뒤, [물건 등록]을 클릭</span>하십시오.
-            </div>
-            <button type="button" id="btn_insert_stuff" class="hs-button btn-red" disabled="disabled">물건등록</button>
-        </div>
-    </div>
     <div class="cont justify-start bg-gray">
         <div class="info">
             <div class="info-label c-red">안내</div>

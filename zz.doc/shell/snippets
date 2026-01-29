@@ -45,3 +45,17 @@ TRUNCATE TABLE TB_HBD_LEDGR_MSTR ;
 
 , MOD(REGEXP_REPLACE(A.HO_NM, '[^0-9]+', ''), 10)                  AS RN
 , MOD(FLOOR(REGEXP_REPLACE(A.HO_NM, '[^0-9]+', '') / 10), 10) * 10 AS FRN
+
+
+ALTER TABLE TB_BRK_STUFF_BULD ADD COLUMN OCCPGB VARCHAR(2) COMMENT '점유_구분_코드' AFTER HPPSCD ;
+ALTER TABLE TB_BRK_STUFF_BDROOM RENAME COLUMN CUSTNO TO REQNO;
+
+  overflow-y: auto;
+  padding: 10px 15px;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: 0.3s;
+  opacity: 0;
+  
+var offset = $("#btn_v_List").offset() ; 
+$(".pop-container").animate({scrollTop: offset.top + 180 }, 500) ; 

@@ -178,11 +178,23 @@ button.hs-button:disabled {
   height: 30px;
 }
 
+
+.hs-button-sm.vsm-40 { min-width: 40px !important; }
+.hs-button-sm.vsm-45 { min-width: 45px !important; }
+.hs-button-sm.vsm-50 { min-width: 50px !important; }
+
 .hs-button-sm.btn-white, .hs-button.btn-white,
- .hs-button-big-size.btn-white, .hs-button-nosize.btn-white{
+ .hs-button-big-size.btn-white, .hs-button-nosize.btn-white {
   background-color: var(--hs-color-ffffff) !important;
   color: var(--hs-color-5f5f5f) !important;
 }
+
+.hs-button-sm.btn-white.holiday, .hs-button.btn-white.holiday,
+ .hs-button-big-size.btn-white.holiday, .hs-button-nosize.btn-white.holiday {
+  background-color: var(--hs-pink-100) !important;
+  color: var(--hs-color-red) !important;
+}
+
 
 .hs-button-sm.btn-cancel, .hs-button.btn-cancel,
 .hs-button-big-size.btn-cancel, .hs-button-nosize.btn-cancel {
@@ -664,6 +676,13 @@ select:disabled::picker-icon {
   font-size: 14px;
   color: #333;
 }
+
+.checkbox-label.w-fixed-min-80 {
+  gap: 5px;
+  margin-right: 10px;
+  min-width: 80px;
+}
+
 .checkbox-label span.checkbox-text.hide{
   display: none;
 }
@@ -3473,9 +3492,14 @@ section.right-settings  div.hr{
 .pop-section section .cont .action-field { 
   position: relative;
   display: flex;
+  /*
   width: 100%; 
   padding: 6px 10px;
+  */
   height: 60px;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: 5px;
 }
 .pop-section section .cont .action-field .action-label {
   position: relative;
@@ -3486,6 +3510,11 @@ section.right-settings  div.hr{
   line-height: 36px;
   padding: 6px 10px;
 }
+
+.pop-section section .cont .action-field .action-label.d-flex { display: flex ; align-items: center; }
+.pop-section section .cont .action-field .action-label.w-160 { width: 160px; min-width: 160px; }
+.pop-section section .cont .action-field .action-label.w-160 select { width: 80px; min-width: 80px;}
+
 .pop-section section .cont .action-field .action-label .btn-x {
   position: absolute;
   top: 16px;
@@ -3496,7 +3525,16 @@ section.right-settings  div.hr{
   width: 30px;
   height: 20px;
 }
-
+.pop-section section .cont .action-field .action-label.last::before {
+  content: '';
+  position: absolute;
+  top: -999px;
+  left: -999;
+  width: 0px;
+  height: 0px;
+  opacity: 0;
+  background-color: transparent ; 
+}
 .pop-section section .cont .action-field .action-label::before {
   content: '';
   position: absolute;
@@ -3547,7 +3585,10 @@ section.right-settings  div.hr{
 }
 
 .pop-section section .cont .info .info-text { padding-left: 15px; line-height: 40px; }
-.pop-section section .cont .info button {
+.pop-section section .cont .info .info-text.w-fixed-655 {
+  width: 655px !important;
+}
+.pop-section section .cont .info button:not(.hs-button) {
   position: absolute; 
   top: 13px;
   right: 20px;

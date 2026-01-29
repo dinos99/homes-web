@@ -1,5 +1,6 @@
 var pages = {} ; 
 var build = {} ;
+var stuff = {} ; 
 
 var fn_pageLoad = ( pgid ) => {
     $("#dv_container").load("/html/stuff/mystuff-" + pgid + ".html", () => {
@@ -16,11 +17,29 @@ var fn_get_memo_count = () => {
 }
 
 var fn_Load_completed = ( pgid ) => {
+    stuff = homes_comm.store.getItem("stuff") ; 
+    
     var pg_idx = ( pgid % 300 ) / 10 ; 
     pg_idx = pg_idx - 1 ; 
     
     /* 클릭이벤트 해제후 재할당 */ 
+    /* ***********************************************************************************
+     * 집합건물이냐 일반건물이냐 토지냐에 따라 탭메뉴구성이 또 틀려짐
+     * 이젠 말도 안나온다 ......
+     * 탭메뉴구성 나중에 하자 에휴 ......
+     * ***********************************************************************************/
+//    var params = parent.fn_get_param() ;
+    var params = JSON.parse(JSON.stringify(stuff)) ; 
+    var buldgb = params.buldgb ;
     $("#p_tab_items").children().off("click") ; 
+    if ( buldgb == 2 ) {
+        /* 집합건물 시세/실거래가 미구현 */
+//        $("#p_tab_items").children().eq(3).hide() ; 
+        /* 집합건물 메모사용안함 */
+        $("#p_tab_items").children().eq(3).hide() ; 
+    }
+
+
     $("#p_tab_items").children().each(function(i) {
         if ( i != pg_idx ) {
             $(this).click(function() {
@@ -35,14 +54,20 @@ var fn_Load_completed = ( pgid ) => {
 
     $("#p_tab_items").children().removeClass("active")
     $("#p_tab_items").children().eq(pg_idx).addClass("active") ;
-    var params = parent.fn_get_param() ;
-    
+
+    $("#btn_disp_complex").text(params.ppsNm) ; 
+
+
     if ( pgid == 310 ) {
         /* 물건등록정보 조회 */ 
         pages["stuff_310"] = stuff_310 ; 
         /* 단지물건 정보 조회 */ 
         fn_get_complex(params)
         fn_get_List(pgid) ;
+    } else if ( pgid == 320 ) {
+        /* 호실관리 */ 
+        pages["stuff_320"] = stuff_320 ; 
+        stuff_320.fn_page_onLoad(params) ; 
     } else if ( pgid == 340 ) {
         /* 메모관리 */
         pages["stuff_340"] = stuff_340 ; 
@@ -102,8 +127,8 @@ var fn_set_complex = ( data ) => {
     } else {
         $("#p_promise_de").text(data.prmissde + "(" + data.diffy + "년)") ; 
     }
+    
     /* 총 세대 수 / 단지 동 */ 
-
     var hshldco = homes_comm.util.fn_format_number( data.hshldco ) ;
     var dongco  = homes_comm.util.fn_format_number( data.dongco ) ;
 

@@ -1,46 +1,31 @@
 var codeList = {
     "cat_01": [{"cd": "SYS", "nm": "시스템"}, {"cd": "COM", "nm": "공통" }, {"cd": "HMP", "nm": "홈즈프로" }],
-    "cat_02": [{
-        "code": "SYS",
-        "cd"  : "001",
-        "nm"  : "건축물대장등록"
-    }, {
-        "code": "COM",
-        "cd"  : "001",
-        "nm"  : "로그인"
-    }, {
-        "code": "HMP",
-        "cd"  : "001",
-        "nm"  : "나의물건"
+    "cat_02": [{ "code": "SYS", "cd" : "001", "nm"  : "건축물대장등록" },
+               { "code": "COM", "cd" : "001", "nm"  : "로그인" },
+               { "code": "COM", "cd" : "002","nm"  : "고객관리" },
+               { "code": "HMP", "cd" : "001", "nm"  : "나의물건"
     }],
-    "cat_03": [{
-        "cat_01": "SYS", 
-        "cat_02": "001",
-        "code": [
+    "cat_03": [{ "cat_01": "SYS", "cat_02": "001", "code": [
                 { "cd": "001", "nm": "기본개요 등록" },
                 { "cd": "002", "nm": "총괄표제부 등록" },
                 { "cd": "003", "nm": "표제부 등록" },
                 { "cd": "004", "nm": "층별개요 등록" },
                 { "cd": "005", "nm": "전유부 등록" },
                 { "cd": "006", "nm": "전유공용면적 등록"}
-        ]
-    },{
-        "cat_01": "COM", 
-        "cat_02": "001",
-        "code": [
+              ]},{ "cat_01": "COM", "cat_02": "001", "code": [
                 { "cd": "001", "nm": "기본개요 등록" },
                 { "cd": "002", "nm": "총괄표제부 등록" },
                 { "cd": "003", "nm": "표제부 등록" },
                 { "cd": "004", "nm": "층별개요 등록" },
                 { "cd": "005", "nm": "전유부 등록" },
                 { "cd": "006", "nm": "전유공용면적 등록"}
-        ]
-    },{
-        "cat_01": "HMP", 
-        "cat_02": "001",
-        "code": [
+            ]},{ "cat_01": "COM", "cat_02": "002", "code": [
+                { "cd": "001", "nm": "고객등록/수정/삭제" }
+            ]},{ "cat_01": "HMP", "cat_02": "001","code": [
                 { "cd": "001", "nm": "지역별 단지목록조회" },
-        ]
+                { "cd": "002", "nm": "단지물건등록" },
+                { "cd": "003", "nm": "호실관리" },
+            ]
     }]
 }
 
@@ -157,7 +142,7 @@ var fn_add_data_row = ( dataList ) => {
             }) ; 
         }) ;
         /* 시작일시 */
-        var td_stde = $("<td class='tac' id='wk_stde_" + rn + "' />") ; 
+        var td_stde = $("<td class='tac' id='wk_stde_" + rn + "' autocomplete='off'/>") ; 
         if ( !!data.stde ) td_stde.text(h_manager.util.fn_format_date(data.stde)) ;
         else td_stde.html("&nbsp;") ; 
         
@@ -166,7 +151,7 @@ var fn_add_data_row = ( dataList ) => {
         if ( !!data.edde ) td_edde.text(h_manager.util.fn_format_date(data.edde)) ;
         else td_edde.html("&nbsp;") ; 
         /* 작업내역 */
-        var td_wkcont = $("<td class='tal' id='wk_cont_" + rn + "' />") ; 
+        var td_wkcont = $("<td class='tal' id='wk_cont_" + rn + "' autocomplete='off'/>") ; 
         td_wkcont.text(data.wkcont) ; 
         td_check.append(fm_check) ; 
 
@@ -234,11 +219,11 @@ var fn_add_row = () => {
 
     /* 시작일시 */
     var td_stde = $("<td class='tac' id='wk_stde_" + rn + "' />") ; 
-    var in_stde = $("<input class='form-control' id='in_stde_" + rn + "' maxlength='10'/>")
+    var in_stde = $("<input class='form-control' id='in_stde_" + rn + "' maxlength='10' autocomplete='off'/>")
     td_stde.append(in_stde) ; 
     /* 종료일시 */
     var td_edde = $("<td class='tac' id='wk_edde_" + rn + "' />") ; 
-    var in_edde = $("<input class='form-control' id='in_edde_" + rn + "' maxlength='10'/>")
+    var in_edde = $("<input class='form-control' id='in_edde_" + rn + "' maxlength='10' autocomplete='off'/>")
     td_edde.append(in_edde) ; 
 
     /* 작업내역 */

@@ -1,7 +1,10 @@
 const h_manager = {
     constants: {
         _API_BASE_URL : "http://127.0.0.1"
-//        _API_BASE_URL : "http://34.64.63.95"
+        , _API_DEVL_BASE_URL : "http://127.0.0.1"
+        , _API_PROD_BASE_URL : "http://34.64.63.95"
+        , _API_DEVL_IP: "127.0.0.1"
+        , _API_PROD_IP: "34.64.63.95"
         , _API_BASE_PORT: 8090
         , _API_VERSION: "v1"
         /* 프리패스 페이지 */ 
@@ -10,7 +13,15 @@ const h_manager = {
         ]
     }
     , fn_get_base_url: () => {
+        var protocol = location.protocol ; 
+        var host = location.hostname ;
+        var port = location.port
+
         var api_base_url = h_manager.constants._API_BASE_URL ; 
+        if ( host == h_manager.constants._API_PROD_IP ) {
+            api_base_url = h_manager.constants._API_PROD_BASE_URL ; 
+        }
+
         api_base_url += h_manager.constants._API_BASE_PORT === 443 ? "" : 
                         h_manager.constants._API_BASE_PORT === 80 ? ""
                         : ":" + h_manager.constants._API_BASE_PORT ; 
