@@ -291,7 +291,11 @@ const homes_comm = {
                 }, params).then(response => {
                     resolve({data: response.data}) ;
                 }).catch(error => {
-                    homes_comm.message.alert(error.errorMessage) ; 
+                    if ( error.name == "TypeError" && error.message == "Failed to fetch") {
+                        homes_comm.message.alert("서버와의 연결이 종료되었습니다.") ; 
+                    } else {
+                        homes_comm.message.alert(error.message) ; 
+                    }
                 }) ;
             }) ;
         }

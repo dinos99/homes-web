@@ -70,8 +70,12 @@ var fn_Load_completed = ( pgid ) => {
         stuff_320.fn_page_onLoad(params) ; 
     } else if ( pgid == 340 ) {
         /* 메모관리 */
-        pages["stuff_340"] = stuff_340 ; 
+//        pages["stuff_340"] = stuff_340 ; 
         stuff_340.fn_page_onLoad(params) ; 
+    } else if ( pgid == 350 ) {
+        /* 통합관리 */
+        pages["stuff_350"] = stuff_350 ; 
+        stuff_350.fn_page_onLoad(params) ; 
     }
 
     /* *********************************************************************

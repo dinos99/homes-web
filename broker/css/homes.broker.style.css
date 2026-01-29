@@ -730,6 +730,13 @@ select:disabled::picker-icon {
   /* cursor: not-allowed; */
 }
 
+.info-label.required::after {
+  content: " *";
+  color:#ff5050 ;
+  font-weight: 900 ;
+}
+
+
 .custom-checkbox:disabled + .checkbox-label .checkbox-icon {
   background-color: #f0f0f0;
   border-color: #e7e8e8;
@@ -3574,6 +3581,15 @@ section.right-settings  div.hr{
   text-align: center ;
   line-height: 40px;
 }
+.pop-section section .cont .info .info-label-nobar {
+  position: relative;
+  width: 120px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center ;
+  line-height: 40px;
+}
+
 .pop-section section .cont .info .info-label::before {
   content: '';
   position: absolute;
@@ -3583,11 +3599,22 @@ section.right-settings  div.hr{
   height: 20px;
   background-color: var(--hs-darker-border-color) ; 
 }
-
-.pop-section section .cont .info .info-text { padding-left: 15px; line-height: 40px; }
-.pop-section section .cont .info .info-text.w-fixed-655 {
-  width: 655px !important;
+.pop-section section .cont .info .info-text {
+  /* position: relative; */
+  position: static 
 }
+.pop-section section .cont .info .info-text.bar::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: 0;
+  width: 1px;
+  height: 20px;
+  background-color: var(--hs-darker-border-color) ; 
+}
+.pop-section section .cont .info .info-text { padding-left: 15px; line-height: 40px; }
+.pop-section section .cont .info .info-text.w-fixed-250 { width: 250px !important; }
+.pop-section section .cont .info .info-text.w-fixed-655 { width: 655px !important; }
 .pop-section section .cont .info button:not(.hs-button) {
   position: absolute; 
   top: 13px;

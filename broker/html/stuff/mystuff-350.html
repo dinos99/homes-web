@@ -1,0 +1,113 @@
+
+<section class="first" id="sec_buld_total">
+    <div class="title">통합정보</div>
+    <div class="cont first justify-start bg-gray">
+        <div class="info">
+            <div class="info-label-nobar c-gray tar">
+                <span class="mr-10">주소</span>
+            </div>
+            <div class="info-text" id="dv_bdaddr">
+
+            </div>
+        </div>
+    </div>
+    <div class="cont justify-start bg-gray">
+        <div class="info">
+            <div class="info-label-nobar c-gray tar">
+                <span class="mr-10">부동산 구분 <em class="c-red">*</em></span>
+            </div>
+            <div class="info-text">
+                <span id="sp_estcd_Text">-</span>
+                <span><img class="hbi cursor-hand" src="/images/help.png" alt="부동산구분 도움말"></span>
+            </div>
+        </div>
+    </div>
+    <div class="cont justify-start bg-gray">
+        <div class="info">
+            <div class="info-label-nobar c-gray tar">
+                <span class="mr-10">단지(건물)명</span>
+            </div>
+            <div class="info-text w-fixed-250" id="dv_buldnm"></div>
+            <div class="info-label-nobar c-gray tar">사용승인일</div>
+            <div class="info-text w-fixed-250" id="dv_confde"></div>
+        </div>
+    </div>
+    <div class="cont justify-start bg-gray">
+        <div class="info">
+            <div class="info-label-nobar c-gray tar">
+                <span class="mr-10">총 동수</span>
+            </div>
+            <div class="info-text w-fixed-250" id="dv_buldco"></div>
+            <div class="info-label-nobar c-gray tar">최저/최고층</div>
+            <div class="info-text w-fixed-250" id="dv_topunder"></div>
+        </div>
+    </div>
+    <div class="cont justify-start bg-gray">
+        <div class="info">
+            <div class="info-label-nobar c-gray tar">
+                <span class="mr-10">총 주차 수</span>
+            </div>
+            <div class="info-text w-fixed-250" id="dv_parkngco"></div>
+            <div class="info-label-nobar c-gray tar">대지면적</div>
+            <div class="info-text w-fixed-250" id="dv_platAr">
+                <span id="sp_platAr_calc"></span>
+                <span id="sp_platAr_unit"></span>
+            </div>
+        </div>
+    </div>
+    <div class="cont justify-start bg-gray">
+        <div class="info">
+            <div class="info-label c-gray tar">
+                <span class="mr-10">안내</span>
+            </div>
+            <div class="info-text">
+                <span>해당정보의 <em class="c-red">수정이 필요한경우</em>물건을 등록 후,
+                    물건의
+                    <em class="c-red">[통합관리]</em>에서
+                    <em class="c-red">[건축물정보 관리]</em>또는 
+                    <em class="c-red">[건축물정보 수정요청]</em>을 통해 수정요청하실 수 있습니다. 
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="sec_buld_info">
+    <div class="title">동(건물)정보</div>
+    <div class="cont first justify-start bg-light-blue">
+        <div class="info">
+            <div class="info-label-nobar c-gray tar">
+                <span class="mr-10">동(건물)수</span>
+            </div>
+            <div class="info-text" id="dv_buld_buldco"></div>
+        </div>
+    </div>
+    <div id="dv_buld_List">
+        <div class="cont justify-around bg-gray">
+            <div class="label-2">
+                <div class="label-01">
+                    <div class="fs-14 c-gray">동(건물)명</div>
+                    <div class="label-text fs-15">
+                    </div>
+                </div>
+                <div class="label-02">
+                    <div class="fs-14 c-gray">지상 / 지하층</div>
+                    <div class="label-text fs-15">
+                        <span id="text_floor_co">14</span>층 /
+                        <span id="text_under_co">1층</span>
+                    </div>
+                </div>
+                <div class="label-02">
+                    <div class="fs-14 c-gray">엘리베이터</div>
+                    <div class="label-text fs-15" id="text_is_elevator">없음</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="btn_v_List" class="cont justify-center bg-light-blue cursor-hand no-mgtop">
+        <div>
+            전체보기(<span class="c-red" id="sp_buldco">0</span>)
+            <span class="arrow-down"></span>
+        </div>
+    </div>
+</section>
+<script src="/js/stuff/mystuff-350.js"></script>
